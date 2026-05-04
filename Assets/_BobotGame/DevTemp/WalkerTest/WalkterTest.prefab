@@ -1,0 +1,150 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8885689736301219419
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1396960668017616389}
+  - component: {fileID: 519439916477111857}
+  - component: {fileID: 2030038226534443340}
+  - component: {fileID: 4740993586820877778}
+  - component: {fileID: 2099857194109021407}
+  - component: {fileID: 1089666508438923846}
+  - component: {fileID: 4268033231749105264}
+  m_Layer: 0
+  m_Name: WalkterTest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1396960668017616389
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8885689736301219419}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.462652, y: 4.148754, z: 4.355974}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519439916477111857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8885689736301219419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f76db9957d8246141a0014f46f086c16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HealthComponent: {fileID: 2030038226534443340}
+  InputBank: {fileID: 0}
+  CharacterBody: {fileID: 1089666508438923846}
+  Caster: {fileID: 0}
+  ManaComponent: {fileID: 0}
+  FixedMotorDriver: {fileID: 0}
+  CharacterModel: {fileID: 0}
+  StateMachineLocator: {fileID: 4740993586820877778}
+  TeamComponent: {fileID: 2099857194109021407}
+  Animator: {fileID: 0}
+  SkillController: {fileID: 0}
+--- !u!114 &2030038226534443340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8885689736301219419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17814970575387943b3129b2af1d7a17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  maxHealth: 0
+  commonComponents: {fileID: 519439916477111857}
+  deathComponent: {fileID: 0}
+--- !u!114 &4740993586820877778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8885689736301219419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd7d785d55221754e9573f9d1efacd92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  componentList:
+  - {fileID: 4268033231749105264}
+  mainStateMachine: {fileID: 4268033231749105264}
+--- !u!114 &2099857194109021407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8885689736301219419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 150d89e9dfc2e90479cb690a8cf371eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  teamIndex: 0
+--- !u!114 &1089666508438923846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8885689736301219419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a90ae9e8b12416f43b223dca1b135ed7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats:
+    BaseMaxHealth: 100
+    BaseHealthRegenPercent: 0.169
+    BaseDamage: 10
+    BaseAttackSpeed: 1
+    BaseStunFactor: 1
+    BaseKnockbackFactor: 1
+    BaseMaxMana: 100
+    BaseManaRegeneration: 1
+    BaseManaCostMultiplier: 1
+    BaseCastRange: 20
+    BaseMoveSpeed: 20
+    BaseJumpHeight: 0
+  commonComponents: {fileID: 519439916477111857}
+  dontDestroyOnLoad: 0
+--- !u!114 &4268033231749105264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8885689736301219419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d649957a92d9f0048872753b103e5597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  label: Body
+  commonComponents: {fileID: 519439916477111857}
+  DefaultState:
+    activeStateName: ActiveStates.IdleState
+  currentState: 
