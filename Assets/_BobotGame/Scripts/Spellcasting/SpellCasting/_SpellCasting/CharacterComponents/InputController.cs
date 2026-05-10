@@ -13,6 +13,11 @@ namespace SpellCasting
         protected Transform aimOriginPosition;
 
         [SerializeField]
+        protected Transform forwardDirectionTransform;
+
+        public Transform forwardDirectionReferenceTransform => forwardDirectionTransform ? forwardDirectionTransform : transform;
+
+        [SerializeField]
         protected float maxInputRange;
 
         private Vector3 _currentAimPosition;
@@ -60,7 +65,7 @@ namespace SpellCasting
 
                 SetbuttonInputs();
                 inputBank.LocalMoveDirection = GetMovementInput();
-                inputBank.GlobalMoveDirection = transform.TransformDirection(inputBank.LocalMoveDirection);
+                inputBank.GlobalMoveDirection = forwardDirectionReferenceTransform.TransformDirection(inputBank.LocalMoveDirection);
                 inputBank.AimMoveDirection = aimOriginPosition.InverseTransformDirection(inputBank.GlobalMoveDirection);
             }
         }

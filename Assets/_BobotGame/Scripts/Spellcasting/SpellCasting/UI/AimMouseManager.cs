@@ -25,6 +25,12 @@ namespace SpellCasting.UI
                 enabled = false;
             }
             Instance = this;
+            OnCursorLockUpdated += AimMouseManager_OnCursorLockUpdated;
+        }
+
+        private void AimMouseManager_OnCursorLockUpdated(bool unlocked)
+        {
+            Cursor.lockState = unlocked ? CursorLockMode.None : CursorLockMode.Locked;
         }
 
         void Update()
