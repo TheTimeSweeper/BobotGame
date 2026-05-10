@@ -30,7 +30,7 @@ namespace ActiveStates.Characters
             if (skillController && inputBank)
             {
 
-                //proto WOOPS IMMEDIATELY BREAK SOC
+                //moofa proto WOOPS IMMEDIATELY BREAK SOC
                 HandleSkill(skillController.primarySkill, inputBank.M1);
                 HandleSkill(skillController.secondarySkill, inputBank.M2);
                 HandleSkill(skillController.utilitySkill, inputBank.Space);

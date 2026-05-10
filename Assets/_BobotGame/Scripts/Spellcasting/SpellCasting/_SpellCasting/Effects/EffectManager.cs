@@ -27,6 +27,11 @@ namespace SpellCasting
             => SpawnEffect(index, position, rotation, Vector3.one, transform, genericParamter);
         public static void SpawnEffect(EffectIndex index, Vector3 position, Quaternion rotation, Vector3 scale, Transform transform = null, int genericParamter = -1)
         {
+            if(!Instance)
+            {
+                Debug.LogWarning("No effect manager");
+                return;
+            }
             EffectPooled effect = Instance.GetEffectFromPool(index).StartEffect(genericParamter);
 
             effect.transform.position = position;

@@ -110,7 +110,7 @@ namespace SpellCasting
                     //jam all attacks od the same inmpact effect yep
                     if (Damage > 0)
                     {
-                        EffectManager.SpawnEffect(EffectIndex.HITFLASH, collider.transform.position, Quaternion.identity, collider.transform);
+                        EffectManager.SpawnEffect(EffectIndex.HITFLASH, collider.transform.position + (Hitbox.transform.position - collider.transform.position).normalized * 2, Quaternion.identity, collider.transform);
                         //EffectManager.SpawnEffect(EffectIndex.SOUND_FAST, collider.transform.position, null, 10);
                     }
                 }

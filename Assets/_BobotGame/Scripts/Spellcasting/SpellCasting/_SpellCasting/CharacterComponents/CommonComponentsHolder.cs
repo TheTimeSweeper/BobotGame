@@ -23,17 +23,27 @@ namespace SpellCasting
 
         private void Reset()
         {
+            Find();
+        }
+
+        [ContextMenu("Find")]
+        private void Find()
+        {
+#if UNITY_EDITOR
+            UnityEditor.Undo.RecordObject(this, "find");
+#endif
             HealthComponent = GetComponent<HealthComponent>();
             InputBank = GetComponent<InputBank>();
             CharacterBody = GetComponent<CharacterBody>();
             Caster = GetComponent<Caster>();
             ManaComponent = GetComponent<ManaComponent>();
             FixedMotorDriver = GetComponent<FixedMotorDriver>();
-            CharacterModel = GetComponent<CharacterModel>();
+            CharacterModel = GetComponentInChildren<CharacterModel>();
             StateMachineLocator = GetComponent<StateMachineLocator>();
             TeamComponent = GetComponent<TeamComponent>();
             Animator = GetComponent<Animator>();
             SkillController = GetComponent<SkillController>();
+            InputBank = GetComponentInChildren<InputBank>();
         }
     }
 }

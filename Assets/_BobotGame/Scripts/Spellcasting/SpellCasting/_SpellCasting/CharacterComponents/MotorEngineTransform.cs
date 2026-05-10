@@ -6,7 +6,7 @@ namespace SpellCasting
     {
         public override void FixedMove(Vector3 movement)
         {
-            transform.Translate(movement);
+            transform.Translate(movement * Time.fixedDeltaTime);
         }
     }
 }

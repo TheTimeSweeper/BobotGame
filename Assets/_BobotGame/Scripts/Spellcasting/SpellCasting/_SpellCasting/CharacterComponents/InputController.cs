@@ -57,6 +57,8 @@ namespace SpellCasting
                 UpdateAimPoint();
                 UpdateGesturePosition();
                 GetGestureDelta();
+                //todo bobot figure out aimorigin i'm too tired and just want to raycast
+                inputBank.AimOrigin = GetAimOrigin();
                 inputBank.AimPoint = _currentAimPosition;
                 inputBank.AimDirection = GetAimDirection();
                 inputBank.GestureDelta = _gestureDelta;
@@ -78,6 +80,10 @@ namespace SpellCasting
         protected virtual Vector3 GetGestureDelta()
         {
             return (_currentGesturePosition - _lastGesturePosition);
+        }
+        protected virtual Vector3 GetAimOrigin()
+        {
+            return aimOriginPosition.position;
         }
 
         private void UpdateGesturePosition()

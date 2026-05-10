@@ -13,7 +13,7 @@ namespace SpellCasting
             cameraController.CameraX.Rotate(Vector3.up, Input.GetAxis("Mouse X"), Space.Self);
             cameraController.CameraY.Rotate(Vector3.right, -Input.GetAxis("Mouse Y"), Space.Self);
             //todo bobot raycast, solve the pierce bug lol
-            return cameraController.CameraPoint.position + cameraController.CameraPoint.forward * 100;
+            return cameraController.CameraPoint.position + (cameraController.CameraPoint.forward * 100);
         }
 
         protected override Vector3 GetGesturePosition()

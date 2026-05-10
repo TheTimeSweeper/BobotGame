@@ -78,14 +78,15 @@ namespace SpellCasting
             }
         }
 
+        public Vector3 AimOrigin { get; set; }
         public Vector3 AimPoint { get; set; }
         public Vector3 AimDirection { get; set; }
         public Vector3 AimOut
         {
             get
-            {
-                Vector3 result = AimPoint - transform.position;
-                result.y = 0;
+            {                                //todo bobot shouldn't this be - transform.position? also what's the difference between this and aimdirection?
+                Vector3 result = AimPoint - AimOrigin;
+                //result.y = 0; //jam this is hard-coded to top-down
                 return result.normalized;
             }
         }
@@ -93,6 +94,7 @@ namespace SpellCasting
         public Vector3 GesturePosition { get; set; }
         public Vector3 GestureDelta { get; set; }
         public float GestureDistance => Vector3.Distance(GesturePosition, _gestureLerpPosition);
+
 
         private Vector3 _gestureLerpPosition;
 
@@ -205,6 +207,11 @@ namespace SpellCasting
             {
                 _gestureBehaviors[i].ResetGesture();
             }
+        }
+
+        internal Ray GetAimRay()
+        {
+            return new Ray(AimOrigin, AimOut);
         }
     }
 }

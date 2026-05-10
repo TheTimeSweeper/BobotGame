@@ -11,14 +11,14 @@ namespace SpellCasting
         [SerializeField]
         private CommonComponentsHolder commonComponents;
 
-        public SkillSlot primarySkill;
+        public SkillSlot primarySkill;//not named for ror2, named for moonfall (which took from ror2 but shut up about that)
         public SkillSlot secondarySkill;
         public SkillSlot utilitySkill;
         public List<SkillSlot> extraSkills = new List<SkillSlot>();
 
         public UpgradePathInfo upgradePath;
 
-        //soc ree
+        //moofa proto soc ree
         private float exp;
         private float nextLevel = 40;
         public int level { get; set; } = 1;
