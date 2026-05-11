@@ -6,9 +6,11 @@ namespace SpellCasting
 {
     public abstract class InputController : MonoBehaviour
     {
+        [SerializeField, Tooltip("used to autofill the inputbank and bodyAimOriginPosition fields")]
+        protected CharacterMaster optionalMaster;
+
         [SerializeField]
         protected InputBank inputBank;
-
         [SerializeField]
         protected Transform bodyAimOriginPosition;
 
@@ -49,8 +51,14 @@ namespace SpellCasting
             _currentGesturePosition = GetGesturePosition();
             _lastGesturePosition = _currentGesturePosition;
 
+            if (optionalMaster)
+            {
+                inputBank = optionalMaster.Body.CommonComponents.InputBank;
+            }
+
             if (inputBank)
             {
+                bodyAimOriginPosition = inputBank.AimOrigin;
                 inputBank.AimOrigin = bodyAimOriginPosition;
             }
         }

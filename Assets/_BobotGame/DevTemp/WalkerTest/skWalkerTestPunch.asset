@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: skWalkerTestPunch
   m_EditorClassIdentifier: 
   displayName: punch
-  baseCooldown: 0
+  baseCooldown: -0.03
   state:
-    activeStateName: ActiveStates.Bobots.BobotPunchCombo
+    activeStateName: ActiveStates.AI.Search
   stateMachineName: Weapon
   interruptingPriority: 1
   autoCast: 0

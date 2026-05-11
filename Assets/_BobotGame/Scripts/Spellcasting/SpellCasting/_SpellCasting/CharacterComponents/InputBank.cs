@@ -77,6 +77,7 @@ namespace SpellCasting
                 }
             }
         }
+        [SerializeField]
         private Transform _aimOrigin;
         public Transform AimOrigin {
             get => _aimOrigin ?? transform;

@@ -5,6 +5,9 @@ namespace SpellCasting
     {
         [SerializeField]
         private bool dontDestroy;
+        [SerializeField]
+        private CharacterBody body;
+        public CharacterBody Body;
 
         //fine, inventory
 

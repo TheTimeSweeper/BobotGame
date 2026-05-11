@@ -51,6 +51,10 @@ namespace SpellCasting.Editor
             for (int i = 0; i < components.Length; i++)
             {
                 var comp = components[i];
+
+                if (comp.GetType() == typeof(Transform))
+                    continue;
+
                 property.objectReferenceValue = comp;
 
                 if (property.objectReferenceValue == null)
@@ -58,10 +62,7 @@ namespace SpellCasting.Editor
 
                 Undo.RecordObject(obje, "set holder");
                 property.objectReferenceValue = comp;
-                if (comp)
-                {
-                    return true;
-                }
+                return true;
             }
             return false;
         }

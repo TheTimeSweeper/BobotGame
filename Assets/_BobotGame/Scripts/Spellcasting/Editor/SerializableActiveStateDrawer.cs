@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Rendering.RenderGraphModule;
 using UnityEngine.UIElements;
 [CustomPropertyDrawer(typeof(SerializableActiveState))]
 public class SerializableActiveStateDrawer : PropertyDrawer
@@ -47,19 +48,62 @@ public class SerializableActiveStateDrawer : PropertyDrawer
 
         field = EditorGUI.TextField(contentposition, state.activeStateName);
 
-        state.activeStateName = field;
+        //ai
+        // Generate a unique ID for this property field
+        int controlID = GUIUtility.GetControlID(FocusType.Keyboard);
+
+        // Check if this property is currently focused/highlighted
+        bool isFocused = (GUIUtility.keyboardControl == controlID-1);
+
+        //state.activeStateName = field;
         found = false;
+
+        string matchList = "";
+        int matches = 0;
+        string entry = field;
         foreach (System.Type t in allStates)
         {
-            if (GetPartialMatch(t.FullName, field))
+            if (GetPartialMatch(t.FullName, entry))
             {
-                state.activeStateName = t.FullName;
-                found = true;
-                break;
+                if (!found)
+                {
+                    found = true;
+                    field = t.FullName;
+                    matchList = t.FullName.Replace("ActiveStates.", "");
+                    matches++;
+                }
+                else
+                {
+                    if (matches < 3)
+                    {
+                        matchList += "\n" + t.FullName.Replace("ActiveStates.", "");
+                        matches++;
+                    }
+                    if (matches >= 3)
+                    {
+                        break;
+                    }
+                }
             }
         }
-        property.boxedValue = state;
+        Debug.Log($"{controlID} {GUIUtility.keyboardControl}");
+        if (!isFocused)
+        {
+            state.activeStateName = field;
+            property.boxedValue = state;
+        }
+        if (matches > 0 && isFocused)
+        {
+            Rect window = position;
+            window.y -= 20 * matches;
+            window.height *= matches;
+            //window.width *= 0.7f;
+            EditorGUI.DrawRect(window, Color.gray);
 
+            var guiStyle2 = new GUIStyle(EditorStyles.label);
+            guiStyle2.normal.textColor = Color.black;
+            EditorGUI.LabelField(window, new GUIContent(matchList), guiStyle2);
+        }
         //var newLabel = new GUIContent(templabel ? labelNotFound : labelFind);
         //if (EditorGUI.ToggleLeft(contentposition, newLabel, false))
         //{
