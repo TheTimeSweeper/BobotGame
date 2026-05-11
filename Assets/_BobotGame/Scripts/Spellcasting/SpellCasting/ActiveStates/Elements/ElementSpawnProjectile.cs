@@ -27,7 +27,7 @@ namespace ActiveStates.Elements
                     Damage = characterBody.stats.Damage,
                     PreviousPosition = elementMass.SubMasses[i].transform.position,
                     StartPosition = elementMass.SubMasses[i].transform.position,
-                    AimDirection = inputBank.AimDirection,
+                    AimDirection = inputBank.AimDelta,
                     TeamIndex = characterBody.teamIndex,
                     DamageType = GetDamageType()
                 });

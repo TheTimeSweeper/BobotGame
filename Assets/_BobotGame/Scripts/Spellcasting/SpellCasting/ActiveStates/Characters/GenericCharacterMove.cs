@@ -22,8 +22,8 @@ namespace ActiveStates.Characters
 
             if (animator)
             {
-                animator.SetFloat("rightSpeed", inputBank.AimMoveDirection.x);
-                animator.SetFloat("forwardSpeed", inputBank.AimMoveDirection.z);
+                //animator.SetFloat("rightSpeed", inputBank.LocalMoveDirection.x);
+                //animator.SetFloat("forwardSpeed", inputBank.LocalMoveDirection.z);
                 //animator.SetFloat("walkSpeed", fixedMotorDriver.FinalVeolcity.magnitude);
             }
 

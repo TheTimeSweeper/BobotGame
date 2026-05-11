@@ -198,6 +198,16 @@ public static class Util
     }
     #endregion
 
+    public static bool CastHurtBox(InputBank inputbank, out RaycastHit raycastHit, float range = 100)
+    {
+        return Physics.Raycast(inputbank.GetBodyRay(), out raycastHit, range, LayerInfo.Hurtbox.layerMask.value);
+    }
+
+    public static bool CastHurtBox(Ray ray, out RaycastHit raycastHit, float range = 100)
+    {
+        return Physics.Raycast(ray, out raycastHit, range, LayerInfo.Hurtbox.layerMask.value);
+    }
+
     public static Vector3 ScreenToCanvasPosition(Vector3 inputPosition)
     {
         //jam this probably doesnt work on other resolutions
@@ -214,6 +224,16 @@ public static class Util
     public static float GetTestValue(this GameObject gob, int index)
     {
         return gob.GetComponent<TestValues>().floats[index];
+    }
+
+    public static void DebugDrawPoint(this Vector3 point) => DebugDrawPoint(point, Color.white, Vector3.up, 10);
+    public static void DebugDrawPoint(this Vector3 point, Color color) => DebugDrawPoint(point, color, Vector3.up, 10);
+    public static void DebugDrawPoint(this Vector3 point, float dist) => DebugDrawPoint(point, Color.white, Vector3.up, dist);
+    public static void DebugDrawPoint(this Vector3 point, Color color, float dist) => DebugDrawPoint(point, color, Vector3.up, dist);
+    public static void DebugDrawPoint(this Vector3 point, Vector3 direction, float dist) => DebugDrawPoint(point, Color.white, Vector3.up, dist);
+    public static void DebugDrawPoint(this Vector3 point, Color color, Vector3 direction, float dist)
+    {
+        Debug.DrawLine(point, point + direction * dist, color);
     }
 
     public static bool ShouldTargetByTeam(GameObject thisGameObject, IHasCommonComponents targetObject, TeamIndex thisTeam, TeamTargetType teamTargeting)

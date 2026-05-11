@@ -10,7 +10,7 @@ namespace SpellCasting
         protected InputBank inputBank;
 
         [SerializeField]
-        protected Transform aimOriginPosition;
+        protected Transform bodyAimOriginPosition;
 
         [SerializeField]
         protected Transform forwardDirectionTransform;
@@ -24,7 +24,7 @@ namespace SpellCasting
         private Vector3 _lastAimPosition;
 
         private Vector3 _lastUnrestrictedAimPosition;
-        private Vector3 _currentAimDirection;
+        private Vector3 _currentAimPositionDelta;
 
         private Vector3 _currentGesturePosition;
         private Vector3 _lastGesturePosition;
@@ -48,6 +48,11 @@ namespace SpellCasting
 
             _currentGesturePosition = GetGesturePosition();
             _lastGesturePosition = _currentGesturePosition;
+
+            if (inputBank)
+            {
+                inputBank.AimOrigin = bodyAimOriginPosition;
+            }
         }
 
         protected virtual void Update()
@@ -58,9 +63,9 @@ namespace SpellCasting
                 UpdateGesturePosition();
                 GetGestureDelta();
                 //todo bobot figure out aimorigin i'm too tired and just want to raycast
-                inputBank.AimOrigin = GetAimOrigin();
+                inputBank.AimOrigin = bodyAimOriginPosition;
                 inputBank.AimPoint = _currentAimPosition;
-                inputBank.AimDirection = GetAimDirection();
+                inputBank.AimDelta = GetAimDelta();
                 inputBank.GestureDelta = _gestureDelta;
                 inputBank.GesturePosition = _currentGesturePosition;
                 //UpdateDebug();
@@ -68,22 +73,18 @@ namespace SpellCasting
                 SetbuttonInputs();
                 inputBank.LocalMoveDirection = GetMovementInput();
                 inputBank.GlobalMoveDirection = forwardDirectionReferenceTransform.TransformDirection(inputBank.LocalMoveDirection);
-                inputBank.AimMoveDirection = aimOriginPosition.InverseTransformDirection(inputBank.GlobalMoveDirection);
+                inputBank.AimMoveDirection = bodyAimOriginPosition.InverseTransformDirection(inputBank.GlobalMoveDirection);
             }
         }
         //jam now it's messy
-        protected virtual Vector3 GetAimDirection()
+        protected virtual Vector3 GetAimDelta()
         {
-            return _currentAimDirection;
+            return _currentAimPositionDelta;
         }
 
         protected virtual Vector3 GetGestureDelta()
         {
             return (_currentGesturePosition - _lastGesturePosition);
-        }
-        protected virtual Vector3 GetAimOrigin()
-        {
-            return aimOriginPosition.position;
         }
 
         private void UpdateGesturePosition()
@@ -100,17 +101,20 @@ namespace SpellCasting
             _currentAimPosition = GetAimPosition();
             //_currentAimDirection = (_currentAimPosition - _lastAimPosition).normalized;
 
-            _currentAimDirection = (_currentAimPosition - _lastUnrestrictedAimPosition).normalized;
+            //todo this needs to be a rolling average of multiple differences, or not update every single frame
+            _currentAimPositionDelta = (_currentAimPosition - _lastUnrestrictedAimPosition).normalized;
             _lastUnrestrictedAimPosition = _currentAimPosition;
+
             Debug.DrawLine(_currentAimPosition, _lastUnrestrictedAimPosition);
-            Debug.DrawLine(_lastUnrestrictedAimPosition, _lastUnrestrictedAimPosition + Vector3.up * 10);
-            Debug.DrawLine(_currentAimPosition, _currentAimPosition + Vector3.up * 10);
+            Util.DebugDrawPoint(_lastUnrestrictedAimPosition, Color.red, 10);
+            Util.DebugDrawPoint(_currentAimPosition, Color.magenta, Vector3.right, 5);
+            Debug.DrawLine(_currentAimPosition, _currentAimPosition + Vector3.right * 5, Color.magenta);
 
             //jam this should probably be in input bank or caster
-            Vector3 aimDistance = _currentAimPosition - aimOriginPosition.position;
+            Vector3 aimDistance = _currentAimPosition - bodyAimOriginPosition.position;
             if (Vector3.Magnitude(aimDistance) > maxInputRange)
             {
-                _currentAimPosition = aimOriginPosition.position + aimDistance.normalized * maxInputRange;
+                _currentAimPosition = bodyAimOriginPosition.position + aimDistance.normalized * maxInputRange;
             }
             //AimMouseManager.AimMousePosition = cameraController.GetMousePointFromWorld(_currentAimPosition);
 

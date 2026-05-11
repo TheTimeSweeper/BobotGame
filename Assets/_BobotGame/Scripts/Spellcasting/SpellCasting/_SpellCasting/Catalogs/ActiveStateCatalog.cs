@@ -16,14 +16,19 @@ namespace SpellCasting
         protected override void InitOnce()
         {
             StateTypes = new Dictionary<string, Type>();
-
-            System.Reflection.Assembly assembly = System.Reflection.Assembly.GetAssembly(typeof(ActiveState));
-
-            IEnumerable<Type> types = assembly.GetTypes().Where(type => type != typeof(ActiveState) && typeof(ActiveState).IsAssignableFrom(type));
+            IEnumerable<Type> types = FindAllStateTypes();
             foreach (Type type in types)
             {
                 StateTypes.Add(type.FullName, type);
             }
+        }
+
+        public static IEnumerable<Type> FindAllStateTypes()
+        {
+            System.Reflection.Assembly assembly = System.Reflection.Assembly.GetAssembly(typeof(ActiveState));
+
+            IEnumerable<Type> types = assembly.GetTypes().Where(type => type != typeof(ActiveState) && typeof(ActiveState).IsAssignableFrom(type));
+            return types;
         }
 
         public static ActiveState InstantiateState(SerializableActiveState state) => InstantiateState<ActiveState>(state.activeStateName);

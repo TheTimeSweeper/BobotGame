@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b455bdb91be16c40b3a0aac8c624b48, type: 3}
+  m_Name: ElementEarth
+  m_EditorClassIdentifier: 
+  index: 0
+  baseElement: 0
+  DisplayName: 
+  Icon: {fileID: 0}
+  elementColor: {r: 0, g: 0, b: 0, a: 0}
+  componentElements: []
+  elementMassPrefab: {fileID: 0}
+  cursorIndicatorPrefab: {fileID: 0}
+  massGrowthMultiplier: 0
+  massBaseMass: 0
+  massVelocityMultiplier: 0
+  massOffsetDistance: 1
+  massSpawnState:
+    activeStateName: ActiveStates.Elements.BasicElementGrow
+  massLetGoState:
+    activeStateName: ActiveStates.Elements.BasicElementLetGo
+  bodyMeleeStaterino:
+    activeStateName: ActiveStates.Characters.GenericMeleeCombo
+  elementActions:
+  - gestureType: {fileID: 0}
+    gestureState:
+      activeStateName: ActiveStates.BasicTimedStateSimple
+    baseManaCost: 0
+  explosionPrefab: {fileID: 0}
+  poolPrefab: {fileID: 0}

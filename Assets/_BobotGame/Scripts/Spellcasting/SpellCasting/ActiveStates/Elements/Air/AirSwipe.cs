@@ -14,7 +14,7 @@ namespace ActiveStates.Elements.Air
 
             Object.Instantiate(((ElementTypeAir)elementType).GustBurstPrefab, 
                 characterBody.transform.position, 
-                Quaternion.LookRotation(/*elementMass.CenterPositionRaw - elementMass.CenterPosition*/inputBank.AimDirection));
+                Quaternion.LookRotation(/*elementMass.CenterPositionRaw - elementMass.CenterPosition*/inputBank.AimDelta));
         }
     }
 }

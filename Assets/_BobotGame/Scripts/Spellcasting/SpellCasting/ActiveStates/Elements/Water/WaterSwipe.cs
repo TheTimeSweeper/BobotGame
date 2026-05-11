@@ -9,7 +9,7 @@ namespace ActiveStates.Elements.Water
     {
         public override void OnEnter()
         {
-            Vector3 sideShift = Vector3.Cross(Vector3.up, inputBank.AimDirection) * (elementType as ElementTypeWater).SwipeSpawnSideDistance;
+            Vector3 sideShift = Vector3.Cross(Vector3.up, inputBank.AimDelta) * (elementType as ElementTypeWater).SwipeSpawnSideDistance;
 
             elementMass.TotalMass *= 3;
 

@@ -26,7 +26,7 @@ namespace ActiveStates.Elements
                 Vector3 relativePOsition = originalPosition - elementMass.CenterPosition;
 
                 elementMass.SubMasses[i].JAMActivateProjectile(characterBody,
-                    /*(elementMass.CenterPositionRaw - elementMass.CenterPosition).normalized*/inputBank.AimDirection * elementType.MassVelocityMultiplier,
+                    /*(elementMass.CenterPositionRaw - elementMass.CenterPosition).normalized*/inputBank.AimDelta * elementType.MassVelocityMultiplier,
                     GetPositionInlineWithDirectionPerpendicularly() + relativePOsition,
                     originalPosition,
                     GetDamageType());
@@ -43,7 +43,7 @@ namespace ActiveStates.Elements
         protected virtual Vector3 GetPositionInlineWithDirectionPerpendicularly()
         {
             return elementMass.CenterPosition; // pack it up boys we failed
-            return elementMass.CenterPositionRaw - inputBank.AimDirection * inputBank.GestureDistance * 0.1f;
+            return elementMass.CenterPositionRaw - inputBank.AimDelta * inputBank.GestureDistance * 0.1f;
             //Vector3 CMinusR = elementMass.CenterPosition - elementMass.CenterPositionRaw;
 
             //float theta = Vector3.Angle(CMinusR, inputBank.AimDirection);

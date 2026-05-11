@@ -11,9 +11,9 @@ namespace SpellCasting
         {
             if (inputBank.CurrentPrimaryInput != null && inputBank.CurrentPrimaryInput.JustPressed(this))
             {
-                _aimCenter = transform.InverseTransformPoint(aimOriginPosition.position +  GetPositionFromRightJoystick() * maxInputRange/2);
+                _aimCenter = transform.InverseTransformPoint(bodyAimOriginPosition.position +  GetPositionFromRightJoystick() * maxInputRange/2);
             }
-            return aimOriginPosition.position + _aimCenter + GetPositionFromRightJoystick() * maxInputRange/2;
+            return bodyAimOriginPosition.position + _aimCenter + GetPositionFromRightJoystick() * maxInputRange/2;
         }
 
         private static Vector3 GetPositionFromRightJoystick()
@@ -40,7 +40,7 @@ namespace SpellCasting
             return new Vector3(Input.GetAxis("RightStickX"), -Input.GetAxis("RightStickY"));
         }
 
-        protected override Vector3 GetAimDirection()
+        protected override Vector3 GetAimDelta()
         {
             return GetPositionFromRightJoystick();
         }
