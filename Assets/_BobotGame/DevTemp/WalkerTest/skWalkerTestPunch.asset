@@ -15,7 +15,7 @@ MonoBehaviour:
   displayName: punch
   baseCooldown: -0.03
   state:
-    activeStateName: ActiveStates.AI.Search
+    activeStateName: ActiveStates.Bobots.BobotPunchCombo
   stateMachineName: Weapon
   interruptingPriority: 1
   autoCast: 0

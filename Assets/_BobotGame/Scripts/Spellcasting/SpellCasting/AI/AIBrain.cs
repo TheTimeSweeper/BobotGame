@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 
 namespace SpellCasting.AI
 {
-
+    [RequireComponent(typeof(CharacterMaster))]
     public class AIBrain : MonoBehaviour
     {
         [SerializeField]
@@ -17,13 +17,16 @@ namespace SpellCasting.AI
         public AIInputController AIInputController;
 
         [SerializeField]
+        public CharacterMaster master;
+
+        [SerializeField]
         public Transform defaultAimPoint;
 
         [SerializeField]
         private TeamTargetType teamTargetType = TeamTargetType.OTHER;
 
         [SerializeField]
-        private TeamComponent teamComponent;
+        private TeamComponent teamComponent; //todo bobot bodyTeamComponent?
 
         [SerializeField]
         private float searchDistance;
@@ -60,7 +63,7 @@ namespace SpellCasting.AI
         }
 
 
-        public Vector3 CurrentTargetPosition => CurrentTargetBody != null ? CurrentTargetBody.transform.position + Vector3.up* defaultAimPoint.transform.position.y : defaultAimPoint.position;
+        public Vector3 CurrentTargetPosition => CurrentTargetBody != null ? CurrentTargetBody.transform.position + Vector3.up * defaultAimPoint.transform.position.y : defaultAimPoint.position;
 
         protected virtual void FixedUpdate()
         {
@@ -68,6 +71,7 @@ namespace SpellCasting.AI
             {
                 aiStateMachine.SetState(new Search { Brain = this });
             }
+            AIInputController.CurrentAimPosition = CurrentTargetPosition;
         }
 
         public virtual AIGestureBehavior RollGesture()

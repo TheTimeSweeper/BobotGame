@@ -33,6 +33,8 @@ public class DeathComponent : MonoBehaviour
         }
     }
 
+    public bool justDieLol = true;
+
     [SerializeField]
     private SpawnTable deathTable;
 
@@ -75,19 +77,27 @@ public class DeathComponent : MonoBehaviour
         }
 
         //EffectManager.SpawnEffect(EffectIndex.SOUND, transform.position, null, Random.Range(0, 10));
-
-        if(deathDelay > 0)
+        if (justDieLol)
         {
-            StartCoroutine(DelayedDie());
-        }else
-        {
-            Object.Destroy(gameObject);
-        }
-    }
+            if (deathDelay > 0)
+            {
+                StartCoroutine(DelayedDestroy());
+            }
+            else
+            {
+                GetDestroyedLol();
+            }
+        }    }
 
-    IEnumerator DelayedDie()
+    IEnumerator DelayedDestroy()
     {
         yield return new WaitForSeconds(deathDelay);
+        GetDestroyedLol();
+    }
+
+    private void GetDestroyedLol()
+    {
+        
         Object.Destroy(gameObject);
     }
 }

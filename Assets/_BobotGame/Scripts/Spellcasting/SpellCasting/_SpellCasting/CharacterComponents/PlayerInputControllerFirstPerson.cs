@@ -20,12 +20,23 @@ namespace SpellCasting
             if (cameraController.CameraPoint.position == lastCamPosition && cameraController.CameraPoint.rotation == lastCamRotation) {
                 return lastAimPosition;
             }
-
-            if(Physics.Raycast(cameraController.CameraPoint.position, cameraController.CameraPoint.forward, out var raycastHit, maxInputRange, LayerInfo.Hurtbox.layerMask.value))
+            if (!Util.DebugKey)
             {
+                lastCamPosition = cameraController.CameraPoint.position;
+                lastCamRotation = cameraController.CameraPoint.rotation;
+            }
+            if (Physics.Raycast(cameraController.CameraPoint.position, cameraController.CameraPoint.forward, out var raycastHit, maxInputRange, LayerInfo.Hurtbox.layerMask.value))
+            {
+                if (Util.DebugKey)
+                {
+                    Debug.DrawLine(cameraController.CameraPoint.position, raycastHit.point);
+                }
+                lastAimPosition = raycastHit.point;
                 return raycastHit.point;
             }
-            return cameraController.CameraPoint.position + (cameraController.CameraPoint.forward * maxInputRange);
+            Vector3 defaultPoint = cameraController.CameraPoint.position + (cameraController.CameraPoint.forward * maxInputRange);
+            lastAimPosition = defaultPoint;
+            return defaultPoint;
         }
 
         protected override Vector3 GetGesturePosition()

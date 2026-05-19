@@ -7,8 +7,9 @@ namespace SpellCasting
         private bool dontDestroy;
         [SerializeField]
         private CharacterBody body;
-        public CharacterBody Body;
+        public CharacterBody Body => body;
 
+        bool hadBody;
         //fine, inventory
 
         private void Awake()
@@ -19,5 +20,19 @@ namespace SpellCasting
                 Object.DontDestroyOnLoad(gameObject);
             }
         }
+        private void Update()
+        {
+            if (body)
+            {
+                hadBody = true;
+                transform.position = body.transform.position;
+            }
+            else
+            {
+                if (!hadBody)
+                {
+                    Destroy(gameObject);
+                }
+            }        }
     }
 }

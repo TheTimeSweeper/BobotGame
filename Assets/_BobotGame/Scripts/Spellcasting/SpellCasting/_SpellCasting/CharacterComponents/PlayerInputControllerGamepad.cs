@@ -2,7 +2,7 @@
 
 namespace SpellCasting
 {
-    public class PlayerControllerInputController : InputController
+    public class PlayerInputControllerGamepad : InputController
     {
         Vector3 _lastGesture;
         Vector3 _aimCenter;

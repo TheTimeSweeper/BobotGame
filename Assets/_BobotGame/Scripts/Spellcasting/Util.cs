@@ -8,6 +8,8 @@ using static System.Runtime.CompilerServices.RuntimeHelpers;
 
 public static class Util
 {
+    public static bool DebugKey => Input.GetKey(KeyCode.G);
+
     /// <summary>
     /// lerp but framerate independent. ty freya holmer https://www.youtube.com/watch?v=LSNQuFEDOyQ
     /// </summary>

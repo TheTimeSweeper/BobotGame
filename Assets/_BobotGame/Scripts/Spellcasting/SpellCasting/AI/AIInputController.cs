@@ -8,12 +8,14 @@ namespace SpellCasting
         public bool[] downInputs = new bool[4];
         public int[] inputDownFrames = new int[4];
 
+        public float aimStrength= 20;
+
         public Vector3 MoveDirection { get; set; }
 
         private Vector3 _currentFixedAimPosition;
         public Vector3 CurrentAimPosition { get => _currentFixedAimPosition;
             set {
-                _lastFixedAimPosition = _currentFixedAimPosition;
+                _lastFixedAimPosition = _currentFixedAimPosition;//todo bobot, interrogate how this _lastfixed was supposed to work ohhhhhhh the lerp was fuckinnnnnn interpolation yeah I need to fix that for wizard game might just abandon it here
                 _currentFixedAimPosition = value;
             } 
         }
@@ -31,7 +33,6 @@ namespace SpellCasting
         }
         private Vector3 _lastOverrideGesturePosition;
 
-        private float _lastFixedTime;
 
         [SerializeField]
         private float gestureSpeedMultiplier;
@@ -46,7 +47,6 @@ namespace SpellCasting
                     downInputs[i] = false;
                 }
             }
-            _lastFixedTime = Time.time;
         }
 
         public void JustPress(int input)
@@ -57,28 +57,26 @@ namespace SpellCasting
 
         protected override Vector3 GetAimPosition()
         {
-            //smooth between fixedupdates
-            float timeSinceLastDeltaTIme = Time.time - _lastFixedTime;
-
-            Vector3 lerpedPosition = Vector3.Lerp(_lastFixedAimPosition, CurrentAimPosition, timeSinceLastDeltaTIme / Time.fixedDeltaTime);
-
+            Vector3 lerpedPosition = Util.ExpDecayLerp(_lastFixedAimPosition, CurrentAimPosition, aimStrength, Time.deltaTime);
+            Util.DebugDrawPoint(lerpedPosition, Color.magenta);
             return lerpedPosition;
         }
 
         protected override Vector3 GetGesturePosition()
         {
-            Vector3 gesture;
+            Vector3 gesture = default;
             if(OverrideGesturePosition != Vector3.zero)
             {
-                float timeSinceLastDeltaTIme = Time.time - _lastFixedTime;
+                //todo bobot restore gestures if needed
+                //float timeSinceLastDeltaTIme = Time.time - _lastFixedTime;
 
-                Vector3 lerpedPosition = Vector3.Lerp(_lastOverrideGesturePosition, OverrideGesturePosition, timeSinceLastDeltaTIme / Time.fixedDeltaTime);
+                //Vector3 lerpedPosition = Vector3.Lerp(_lastOverrideGesturePosition, OverrideGesturePosition, timeSinceLastDeltaTIme / Time.fixedDeltaTime);
 
-                gesture = lerpedPosition;
+                //gesture = lerpedPosition;
             } 
             else
             {
-                gesture = transform.TransformPoint(GetAimPosition());
+                //gesture = transform.TransformPoint(GetAimPosition());
             }
 
             return new Vector3(gesture.x, gesture.z, 0) * gestureSpeedMultiplier;

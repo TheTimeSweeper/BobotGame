@@ -68,7 +68,7 @@ namespace ActiveStates
             _currentlyRunningState = newState;
 
 #if UNITY_EDITOR
-            currentState = _currentlyRunningState.GetType().ToString();
+            currentState = _currentlyRunningState != null ? _currentlyRunningState?.GetType().ToString() : "idfk lol";
 #endif
             EnterCurrentState();
         }

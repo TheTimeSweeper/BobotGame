@@ -44,7 +44,7 @@ namespace SpellCasting.AI
                     {
                         brain.AIInputController.downInputs[InfoObject.inputIndex2] = true;
                     }
-                    _position = brain.defaultAimPoint.TransformPoint(InfoObject.startPosition);
+                    _position = brain.defaultAimPoint.TransformPoint(InfoObject.startPosition);//todo bobot get rid of defaultpoint what
 
                     _throwDirection = (brain.CurrentTargetPosition - _position).normalized;
                     brain.AIInputController.CurrentAimPosition = _position;

@@ -6,7 +6,7 @@ namespace SpellCasting
 {
     public abstract class InputController : MonoBehaviour
     {
-        [SerializeField, Tooltip("used to autofill the inputbank and bodyAimOriginPosition fields")]
+        [SerializeField, Tooltip("used to autofill the inputbank and bodyAimOriginPosition fields")]//todo bobot watadahek
         protected CharacterMaster optionalMaster;
 
         [SerializeField]

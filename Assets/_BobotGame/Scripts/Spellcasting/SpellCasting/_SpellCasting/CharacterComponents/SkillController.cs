@@ -39,10 +39,6 @@ namespace SpellCasting
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.G))
-            {
-                SkillUpgradeManager.Instance.ShowUpgrades(this, primarySkill);
-            }
         }
 
         private void FixedUpdate()
