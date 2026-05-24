@@ -61,6 +61,8 @@ namespace ActiveStates
             if (newState == null)
             {
                 Debug.LogError("Tried to enter a null state", this);
+                currentState = null;
+                return;
             }
 
             ExitCurrentState(ref newState);
@@ -68,7 +70,7 @@ namespace ActiveStates
             _currentlyRunningState = newState;
 
 #if UNITY_EDITOR
-            currentState = _currentlyRunningState != null ? _currentlyRunningState?.GetType().ToString() : "idfk lol";
+            currentState = _currentlyRunningState?.GetType().ToString();
 #endif
             EnterCurrentState();
         }
@@ -85,6 +87,10 @@ namespace ActiveStates
         private void EnterCurrentState()
         {
             _currentlyRunningState.Machine = this;
+            if(commonComponents && commonComponents.stateInfoHolder && _currentlyRunningState is IHasStateInfoBase currentState)
+            {
+                currentState.SetStateInfo(commonComponents.stateInfoHolder);
+            }
             _currentlyRunningState.OnEnter();
         }
 

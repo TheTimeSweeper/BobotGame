@@ -22,6 +22,7 @@ namespace SpellCasting
         public Animator Animator;
         public SkillController SkillController;
         public ExpController expController;
+        public StateInfoHolder stateInfoHolder;
 
         private void Reset()
         {

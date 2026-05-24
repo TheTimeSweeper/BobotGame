@@ -151,6 +151,7 @@ GameObject:
   - component: {fileID: 381052597598583278}
   - component: {fileID: 3326717624124736404}
   - component: {fileID: 6447476819792104122}
+  - component: {fileID: 9036484470051490459}
   m_Layer: 0
   m_Name: WalkterTest
   m_TagString: Untagged
@@ -197,6 +198,7 @@ MonoBehaviour:
   TeamComponent: {fileID: 5165419906454591722}
   Animator: {fileID: 5632004902874295828}
   SkillController: {fileID: 127141495395204661}
+  stateInfoHolder: {fileID: 9036484470051490459}
 --- !u!114 &7568251913772495062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -402,6 +404,20 @@ MonoBehaviour:
   deathEffectPooled: {fileID: 0}
   stateMachineLocator: {fileID: 9053838663520553698}
   deathDelay: 0
+--- !u!114 &9036484470051490459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6662274689379214683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96a4f569ce471d14ca2a9652daa86dba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stateInfoList:
+  - {fileID: 11400000, guid: fafb842d1bce63844a51670f3c2e1c19, type: 2}
 --- !u!1 &7911952377910462530
 GameObject:
   m_ObjectHideFlags: 0

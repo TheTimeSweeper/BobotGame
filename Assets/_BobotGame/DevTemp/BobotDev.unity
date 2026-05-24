@@ -1403,6 +1403,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WalkterTestEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 6662274689379214683, guid: a5cb032c3d5a0fd4fb58e91dd3f3a4e5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8561579550723535323, guid: a5cb032c3d5a0fd4fb58e91dd3f3a4e5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2003,6 +2007,10 @@ PrefabInstance:
     - target: {fileID: 5638254006160183989, guid: 893ec00a40a6d19449756a56714bc2d4, type: 3}
       propertyPath: m_Name
       value: AIMaster
+      objectReference: {fileID: 0}
+    - target: {fileID: 5638254006160183989, guid: 893ec00a40a6d19449756a56714bc2d4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5638254006160183990, guid: 893ec00a40a6d19449756a56714bc2d4, type: 3}
       propertyPath: teamComponent

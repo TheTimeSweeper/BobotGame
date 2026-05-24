@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace SpellCasting
 {
-    public class ComponentLocator<T> : MonoBehaviour where T: Component
+    public class ComponentLocator<T> : MonoBehaviour where T : Object
     {
         [SerializeField]
         protected T[] componentList;
@@ -45,17 +45,17 @@ namespace SpellCasting
                 return nameToComponent[name];
             }
             Debug.LogError($"could not find child with the name {name}", this);
-            return null;
+            return default;
         }
 
-        public virtual GameObject LocateByNameGameObject(string name)
+        public virtual GameObject LocateByNameGameObject<T2>(string name) where T2 : Component, T
         {
             if (nameToComponent.ContainsKey(name))
             {
-                return nameToComponent[name].gameObject;
+                return (nameToComponent[name] as Component).gameObject;
             }
             Debug.LogError($"could not find child with the name {name}", this);
-            return null;
+            return default;
         }
     }
 }

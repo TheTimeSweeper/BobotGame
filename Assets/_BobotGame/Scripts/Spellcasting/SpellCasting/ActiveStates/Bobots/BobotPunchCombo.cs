@@ -1,21 +1,26 @@
 using UnityEngine;
 using ActiveStates.Characters;
 using SpellCasting;
+using System;
 
 namespace ActiveStates.Bobots
 {
-    public class BobotPunchCombo : GenericMeleeCombo
+    public class BobotPunchCombo : GenericMeleeCombo, IHasStateInfo<BobotGameDevStateInfo>
     {
         protected override int comboHits => 2;
         protected override string hitboxName => "PunchHitbox";
-        protected override float damageCoefficient => 1;
-        protected override float baseCastStartTimeFraction => 0.5f;
-        protected override float baseCastEndTimeFraction => 0.6f;
-        protected override float baseDuration => 1f;
-        protected override float baseOtherStateInterruptTimeFraction => 0.6f;
+        protected override float damageCoefficient => StateInfo.BPC_Damage;
+        protected override float baseCastStartTimeFraction => StateInfo.BPC_StartTimeFraction;
+        protected override float baseCastEndTimeFraction => StateInfo.BPC_EndTimeFraction;
+        protected override float baseDuration => StateInfo.BPC_Duration;
+        protected override float baseOtherStateInterruptTimeFraction => StateInfo.BPC_OtherStateInterruptTimeFraction;
         protected override float baseMovementInterruptTimeFraction => 1;
         protected override float positionShift => 0;
-        protected float dashTime => 0.4f;
+        protected float dashTime => StateInfo.BPC_DashTime;
+
+        public ActiveStateInfo AssignedStateInfo { get; set; }
+        public Type StateInfoType => typeof(BobotGameDevStateInfo);
+        public BobotGameDevStateInfo StateInfo => AssignedStateInfo as BobotGameDevStateInfo;
 
         private Vector3? goalVelocity;
 
@@ -24,7 +29,7 @@ namespace ActiveStates.Bobots
             base.OnEnter();
             fixedMotorDriver.OverrideVelocity = Vector3.zero;
             animator.Play("Punch");
-            animator.SetFloat("punch.playbackRate", (16f / 24F) / castStartTime);
+            animator.SetFloat("punch.playbackRate", StateInfo.BPC_AnimationSpeed * baseCastEndTimeFraction);
 
             if (Util.CastHurtBox(inputBank, out var raycastHit))
             {
