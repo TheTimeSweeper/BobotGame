@@ -9,13 +9,13 @@ namespace ActiveStates.Bobots
         protected override int comboHits => 2;
         protected override string hitboxName => "PunchHitbox";
         protected override float damageCoefficient => 1;
-        protected override float baseCastStartTimeFraction => 0.3f;
+        protected override float baseCastStartTimeFraction => 0.5f;
         protected override float baseCastEndTimeFraction => 0.6f;
         protected override float baseDuration => 1f;
         protected override float baseOtherStateInterruptTimeFraction => 0.6f;
         protected override float baseMovementInterruptTimeFraction => 1;
         protected override float positionShift => 0;
-        protected float dashTime => 0.2f;
+        protected float dashTime => 0.4f;
 
         private Vector3? goalVelocity;
 
@@ -23,14 +23,15 @@ namespace ActiveStates.Bobots
         {
             base.OnEnter();
             fixedMotorDriver.OverrideVelocity = Vector3.zero;
+            animator.Play("Punch");
+            animator.SetFloat("punch.playbackRate", (16f / 24F) / castStartTime);
 
-            if(Util.CastHurtBox(inputBank, out var raycastHit))
+            if (Util.CastHurtBox(inputBank, out var raycastHit))
             {
-                Vector3 goalPosition = raycastHit.point - inputBank.AimOut * 3;
+                Vector3 goalPosition = raycastHit.point - inputBank.AimOut * 4;
                 goalPosition.y = transform.position.y;
                 Vector3 goalDistance = goalPosition - transform.position;
                 goalVelocity = goalDistance / dashTime;
-                animator.Play("Dash");
             }
         }
 
@@ -55,8 +56,8 @@ namespace ActiveStates.Bobots
                 ModifyHit2();
             }
 
-            animator.Play(hits == 1 ? "Punch2" : "Punch");
-            animator.SetFloat("punch.playbackRate", 1 / castEndTime);
+            //animator.Play(hits == 1 ? "Punch2" : "Punch");
+            //animator.SetFloat("punch.playbackRate", 1 / castEndTime);
         }
 
         protected override void OnCastUpdate()

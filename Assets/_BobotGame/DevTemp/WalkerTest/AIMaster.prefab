@@ -27,6 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5638254006160183989}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -34,7 +35,6 @@ Transform:
   m_Children:
   - {fileID: 5638254006625011852}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5638254006160183993
 MonoBehaviour:
@@ -65,7 +65,7 @@ MonoBehaviour:
   gestureBehaviors:
   - {fileID: 11400000, guid: 88a37b81e9e041146808e50ba5a20ae2, type: 2}
   AIInputController: {fileID: 5638254006160183991}
-  master: {fileID: 0}
+  master: {fileID: 5638254006160183993}
   defaultAimPoint: {fileID: 5638254006625011852}
   teamTargetType: 2
   teamComponent: {fileID: 0}
@@ -96,6 +96,7 @@ MonoBehaviour:
   deltaStarts: []
   downInputs: 00000000
   inputDownFrames: 00000000000000000000000000000000
+  aimStrength: 20
   gestureSpeedMultiplier: 0
 --- !u!114 &5638254006160183988
 MonoBehaviour:
@@ -112,7 +113,7 @@ MonoBehaviour:
   label: ai
   commonComponents: {fileID: 0}
   DefaultState:
-    activeStateName: ActiveStates.Idle
+    activeStateName: ActiveStates.IdleState
   currentState: 
 --- !u!1 &5638254006625011853
 GameObject:
@@ -137,11 +138,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5638254006625011853}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 1.94}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5638254006160183992}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

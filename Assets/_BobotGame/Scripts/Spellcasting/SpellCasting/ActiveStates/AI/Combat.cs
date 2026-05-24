@@ -14,7 +14,7 @@ namespace ActiveStates.AI
                 Machine.SetStateToDefault();
                 return;
             }
-
+            
             bool ended = Gesture.OnFixedUpdate(Brain);
 
             if (ended)

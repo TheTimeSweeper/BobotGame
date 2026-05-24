@@ -22,9 +22,9 @@ namespace ActiveStates.Characters
 
             if (animator)
             {
-                //animator.SetFloat("rightSpeed", inputBank.LocalMoveDirection.x);
-                //animator.SetFloat("forwardSpeed", inputBank.LocalMoveDirection.z);
-                //animator.SetFloat("walkSpeed", fixedMotorDriver.FinalVeolcity.magnitude);
+                animator.SetFloat("rightSpeed", inputBank.LocalMoveDirection.x);
+                animator.SetFloat("forwardSpeed", inputBank.LocalMoveDirection.z);
+                animator.SetFloat("walkSpeed", fixedMotorDriver.FinalVeolcity.magnitude);
             }
 
             if (skillController && inputBank)

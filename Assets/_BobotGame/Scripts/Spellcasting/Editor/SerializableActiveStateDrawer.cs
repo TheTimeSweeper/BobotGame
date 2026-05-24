@@ -86,7 +86,6 @@ public class SerializableActiveStateDrawer : PropertyDrawer
                 }
             }
         }
-        Debug.Log($"{controlID} {GUIUtility.keyboardControl}");
         if (!isFocused)
         {
             state.activeStateName = field;
