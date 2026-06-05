@@ -47,8 +47,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 910e6ad885264c8479abf7d9bebf6b9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dontDestroy: 0
-  body: {fileID: 0}
+  dontDestroyOnLoad: 0
+  destroyOnBodyDeath: 0
+  currentBody: {fileID: 0}
 --- !u!114 &5638254006160183990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,7 +69,7 @@ MonoBehaviour:
   noTargetOverrideInterestPoint: {fileID: 0}
   teamTargetType: 2
   teamComponent: {fileID: 0}
-  searchDistance: 1000
+  searchDistance: Infinity
   searchIntervalMin: 1
   searchIntervalMax: 2
   chaseTimeMinimunm: 1

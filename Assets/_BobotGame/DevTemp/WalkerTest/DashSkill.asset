@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: DashSkill
   m_EditorClassIdentifier: 
   state:
-    activeStateName: 
+    activeStateName: ActiveStates.BasicTimedStateSimple
   stateMachine: weapon
   priority: 2

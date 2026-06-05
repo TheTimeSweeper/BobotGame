@@ -10,6 +10,9 @@ public class BobotGameDevStateInfo : ActiveStateInfo
     public float BPC_EndTimeFraction;
     public float BPC_Duration;
     public float BPC_OtherStateInterruptTimeFraction;
-    public float BPC_DashTime;
     public float BPC_AnimationSpeed;
+    public float Dash_StartTimeFraction;
+    public float Dash_Duration;
+    public float Dash_AnimationSpeed;
+    public float Dash_DashTime;
 }

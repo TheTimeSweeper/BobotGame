@@ -145,6 +145,7 @@ GameObject:
   - component: {fileID: 6886800658204874175}
   - component: {fileID: 5384333025304485294}
   - component: {fileID: 2653688710425601370}
+  - component: {fileID: 4404171414282525321}
   - component: {fileID: 875555450327082444}
   - component: {fileID: 3985952824597252732}
   - component: {fileID: 127141495395204661}
@@ -230,6 +231,7 @@ MonoBehaviour:
   componentList:
   - {fileID: 5384333025304485294}
   - {fileID: 2653688710425601370}
+  - {fileID: 4404171414282525321}
   mainStateMachine: {fileID: 5384333025304485294}
 --- !u!114 &5165419906454591722
 MonoBehaviour:
@@ -271,6 +273,8 @@ MonoBehaviour:
     BaseJumpHeight: 0
   commonComponents: {fileID: 586541723876753461}
   dontDestroyOnLoad: 0
+  corePositionHeightOffset: 0
+  overrideCorePositionTransform: {fileID: 0}
 --- !u!114 &5384333025304485294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -301,6 +305,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   label: Weapon
+  commonComponents: {fileID: 586541723876753461}
+  DefaultState:
+    activeStateName: ActiveStates.IdleState
+  currentState: 
+--- !u!114 &4404171414282525321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6662274689379214683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d649957a92d9f0048872753b103e5597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  label: Dash
   commonComponents: {fileID: 586541723876753461}
   DefaultState:
     activeStateName: ActiveStates.IdleState
@@ -350,7 +371,7 @@ MonoBehaviour:
   secondarySkill:
     skillInfo: {fileID: 0}
   utilitySkill:
-    skillInfo: {fileID: 0}
+    skillInfo: {fileID: 11400000, guid: 16a6bfeafea633c46b2b3b8ed627271c, type: 2}
   extraSkills: []
   upgradePath: {fileID: 0}
 --- !u!114 &381052597598583278
