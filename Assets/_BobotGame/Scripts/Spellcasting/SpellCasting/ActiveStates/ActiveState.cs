@@ -12,7 +12,7 @@ namespace ActiveStates
         protected Transform transform => Machine.transform;
         protected CommonComponentsHolder components => Machine.CommonComponents;
         protected CharacterBody characterBody => Machine.CommonComponents.CharacterBody;
-        protected InputBank inputBank => Machine.CommonComponents.InputBank;
+        protected SpellCasting.InputBank inputBank => Machine.CommonComponents.InputBank;
         protected HealthComponent healthComponent => Machine.CommonComponents.HealthComponent;
         protected Caster caster => Machine.CommonComponents.Caster;
         protected ManaComponent manaComponent => Machine.CommonComponents.ManaComponent;

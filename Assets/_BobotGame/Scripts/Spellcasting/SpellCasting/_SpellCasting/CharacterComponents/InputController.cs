@@ -9,16 +9,16 @@ namespace SpellCasting
         [SerializeField, Tooltip("used to autofill the inputbank and bodyAimOriginPosition fields")]//todo bobot watadahek
         protected CharacterMaster optionalMaster;
 
+        [Header("Manual (no masterm or override)")]
         [SerializeField]
         protected InputBank inputBank;
         [SerializeField]
         protected Transform bodyAimOriginPosition;
-
         [SerializeField]
         protected Transform forwardDirectionTransform;
 
         public Transform forwardDirectionReferenceTransform => forwardDirectionTransform ? forwardDirectionTransform : transform;
-
+        [Header("Parameters")]
         [SerializeField]
         protected float maxInputRange;
 
@@ -53,7 +53,9 @@ namespace SpellCasting
 
             if (optionalMaster)
             {
-                inputBank = optionalMaster.Body.CommonComponents.InputBank;
+                if(!inputBank) inputBank = optionalMaster.CurrentBody.CommonComponents.InputBank;
+                if(!bodyAimOriginPosition && inputBank) bodyAimOriginPosition = inputBank.AimOrigin;
+                if(!forwardDirectionTransform) forwardDirectionTransform = optionalMaster.CurrentBody.CommonComponents.CharacterModel.transform;
             }
 
             if (inputBank)

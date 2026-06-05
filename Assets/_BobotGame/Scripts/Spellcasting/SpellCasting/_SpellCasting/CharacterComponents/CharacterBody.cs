@@ -84,6 +84,15 @@ namespace SpellCasting
         [SerializeField]
         private bool dontDestroyOnLoad;
 
+        [SerializeField]
+        private float corePositionHeightOffset;
+        [SerializeField, Tooltip("Body's core position transform defaults to the transform of this component.")]
+        private Transform overrideCorePositionTransform;
+
+        public Vector3 corePosition => overrideCorePositionTransform
+                ? overrideCorePositionTransform.position + Vector3.up * corePositionHeightOffset
+                : transform.position + Vector3.up * corePositionHeightOffset;
+
         public TeamIndex teamIndex => commonComponents.TeamComponent.TeamIndex;
 
         public bool Ded => commonComponents.HealthComponent.Ded;

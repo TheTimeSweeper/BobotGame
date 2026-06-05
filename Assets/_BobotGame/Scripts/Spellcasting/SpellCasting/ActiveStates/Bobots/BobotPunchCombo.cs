@@ -17,7 +17,7 @@ namespace ActiveStates.Bobots
         protected override float baseMovementInterruptTimeFraction => 1;
         protected override float positionShift => 0;
         protected float dashTime => StateInfo.BPC_DashTime;
-
+        
         public ActiveStateInfo AssignedStateInfo { get; set; }
         public Type StateInfoType => typeof(BobotGameDevStateInfo);
         public BobotGameDevStateInfo StateInfo => AssignedStateInfo as BobotGameDevStateInfo;

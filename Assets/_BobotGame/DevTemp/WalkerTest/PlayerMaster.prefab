@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1910000111632444042}
+  - component: {fileID: 3853435687354860292}
   - component: {fileID: 6354766419621191687}
   - component: {fileID: 5920604674542097447}
-  - component: {fileID: 3853435687354860292}
   m_Layer: 0
   m_Name: PlayerMaster
   m_TagString: Untagged
@@ -35,6 +35,20 @@ Transform:
   - {fileID: 3761000982435256445}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3853435687354860292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522992679455064324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 910e6ad885264c8479abf7d9bebf6b9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dontDestroy: 0
+  body: {fileID: 0}
 --- !u!114 &6354766419621191687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,7 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 816902b1efc361e4e8ecb8e8241ed0bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  optionalMaster: {fileID: 0}
+  optionalMaster: {fileID: 3853435687354860292}
   inputBank: {fileID: 0}
   bodyAimOriginPosition: {fileID: 0}
   forwardDirectionTransform: {fileID: 3761000982435256445}
@@ -73,20 +87,6 @@ MonoBehaviour:
   deltaEnds: []
   deltaStarts: []
   cameraController: {fileID: 6354766419621191687}
---- !u!114 &3853435687354860292
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1522992679455064324}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 910e6ad885264c8479abf7d9bebf6b9a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dontDestroy: 0
-  body: {fileID: 0}
 --- !u!1 &6476769741860390581
 GameObject:
   m_ObjectHideFlags: 0

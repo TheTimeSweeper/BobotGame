@@ -1,38 +1,58 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 namespace SpellCasting
 {
     public class CharacterMaster : MonoBehaviour
     {
+        [Tooltip("Parameters")]
         [SerializeField]
-        private bool dontDestroy;
+        private bool dontDestroyOnLoad;
         [SerializeField]
-        private CharacterBody body;
-        public CharacterBody Body => body;
+        private bool destroyOnBodyDeath;
+        [Header("Active")]
+        [SerializeField, FormerlySerializedAs("body")]
+        private CharacterBody currentBody;
+        public CharacterBody CurrentBody => currentBody;
+
+        private CharacterBody lastBody;
 
         bool hadBody;
+        public System.Action<CharacterBody> OnBodyChanged;
+
         //fine, inventory
 
         private void Awake()
         {
-            if (dontDestroy)
+            if (dontDestroyOnLoad)
             {
                 transform.parent = null;
                 Object.DontDestroyOnLoad(gameObject);
             }
         }
-        private void Update()
+
+        private void FixedUpdate()
         {
-            if (body)
+            if(!currentBody && hadBody)
             {
-                hadBody = true;
-                transform.position = body.transform.position;
-            }
-            else
-            {
-                if (!hadBody)
-                {
+                if (destroyOnBodyDeath) {
                     Destroy(gameObject);
                 }
-            }        }
+            }
+
+            if(currentBody != lastBody)
+            {
+                OnBodyChanged(currentBody);
+            }
+            lastBody = currentBody;
+        }
+
+        private void Update()
+        {
+            if (currentBody)
+            {
+                hadBody = true;
+                transform.position = currentBody.transform.position;
+            }       
+        }
     }
 }

@@ -3,7 +3,11 @@ using UnityEngine;
 
 namespace SpellCasting.Editor
 {
+    //todo bobot make inputcontroller hide bodyaimorigin if optionalmaster is pluggedin
+    public class InputControllerEditor 
+    {
 
+    }
     [CustomPropertyDrawer(typeof(Component), true)]
     public class FindComponentDrawer : PropertyDrawer
     {

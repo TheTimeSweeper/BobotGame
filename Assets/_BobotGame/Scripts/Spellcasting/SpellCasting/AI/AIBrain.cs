@@ -20,7 +20,7 @@ namespace SpellCasting.AI
         public CharacterMaster master;
 
         [SerializeField]
-        public Transform defaultAimPoint;
+        public Transform noTargetOverrideInterestPoint;
 
         [SerializeField]
         private TeamTargetType teamTargetType = TeamTargetType.OTHER;
@@ -62,12 +62,34 @@ namespace SpellCasting.AI
             }
         }
 
+        private void Awake()
+        {
+            master.OnBodyChanged += master_OnBodyChanged;
+        }
 
-        public Vector3 CurrentTargetPosition => CurrentTargetBody != null ? CurrentTargetBody.transform.position + Vector3.up * defaultAimPoint.transform.position.y : defaultAimPoint.position;
+        void master_OnBodyChanged(CharacterBody body)
+        {
+            if (!body)
+            {
+                aiStateMachine.SetState(new IdleState());
+                return;
+            }
+            teamComponent = body.CommonComponents.TeamComponent;
+        }
+
+        //todo bobot share if this is cursed lol
+        public Vector3 CurrentTargetPosition =>
+            CurrentTargetBody != null 
+                ? CurrentTargetBody.corePosition 
+                : noTargetOverrideInterestPoint 
+                        ? noTargetOverrideInterestPoint.position 
+                        : master.CurrentBody 
+                            ? master.CurrentBody.transform.position + master.CurrentBody.transform.forward 
+                            : transform.position + transform.forward;
 
         protected virtual void FixedUpdate()
         {
-            if(aiStateMachine.CurrentState is IdleState)
+            if(master.CurrentBody &&  aiStateMachine.CurrentState is IdleState)
             {
                 aiStateMachine.SetState(new Search { Brain = this });
             }
@@ -81,7 +103,8 @@ namespace SpellCasting.AI
 
         public virtual CharacterBody SearchForTarget()
         {
-            return CharacterBodyTracker.FindBodyByTeam(gameObject, teamComponent.TeamIndex, teamTargetType, searchDistance * searchDistance);
+            var index = teamComponent? teamComponent.TeamIndex : TeamIndex.NEUTRAL;
+            return CharacterBodyTracker.FindBodyByTeam(gameObject, index, teamTargetType, searchDistance * searchDistance);
             
         }
     }
