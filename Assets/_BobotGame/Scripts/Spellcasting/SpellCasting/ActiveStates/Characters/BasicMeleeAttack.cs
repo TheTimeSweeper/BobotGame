@@ -10,12 +10,15 @@ namespace ActiveStates.Characters
     {
         protected abstract string hitboxName { get; }
         protected abstract float damageCoefficient { get; }
-        protected virtual float positionShift => 0.5f;
-        protected virtual float positionShiftDeceleration => 16;
+        protected virtual float preAttackMoveShift => 0.5f;
+        protected virtual float preAttackMoveShiftDecay => 16;
+        protected virtual float attackMoveShift => 0.5f;
+        protected virtual float attackMoveShiftDecay => 16;
 
         protected OverlapAttack attack;
 
-        private Vector3 _shift;
+        private Vector3 _preAttackShift;
+        private Vector3 _attackShift;
 
         public Vector3 aimDirection;
 
@@ -24,7 +27,7 @@ namespace ActiveStates.Characters
         {
             base.OnEnter();
 
-            _shift = inputBank.GlobalMoveDirection * positionShift * characterBody.stats.MoveSpeed;
+            _preAttackShift = inputBank.GlobalMoveDirection * preAttackMoveShift * characterBody.stats.MoveSpeed;
 
             if (aimDirection == Vector3.zero)
             {
@@ -58,13 +61,24 @@ namespace ActiveStates.Characters
                     swipeParticle.Play();
                 }
             }
+
+            _startDirection = inputBank.AimOut;
         }
 
         protected override void OnCastEnter()
         {
             base.OnCastEnter();
+            _attackShift = inputBank.GlobalMoveDirection * attackMoveShift * characterBody.stats.MoveSpeed;
+        }
 
-            _startDirection = inputBank.AimOut;
+        public override void OnFixedUpdate()
+        {
+            base.OnFixedUpdate();
+            if (!hasCasted)
+            {
+                fixedMotorDriver.AddedMotion2 = _preAttackShift;
+                _preAttackShift = Util.ExpDecayLerp(_preAttackShift, Vector3.zero, preAttackMoveShiftDecay, Time.deltaTime);
+            }
         }
 
         protected override void OnCastFixedUpdate()
@@ -73,8 +87,8 @@ namespace ActiveStates.Characters
 
             characterModel.CharacterDirection.OverrideLookDirection(_startDirection, 0.1f);
 
-            fixedMotorDriver.AddedMotion = _shift;
-            _shift = Util.ExpDecayLerp(_shift, Vector3.zero, 11, Time.fixedDeltaTime);
+            fixedMotorDriver.AddedMotion = _attackShift;
+            _attackShift = Util.ExpDecayLerp(_attackShift, Vector3.zero, attackMoveShiftDecay, Time.deltaTime);
 
             if (attack.Fire())
             {

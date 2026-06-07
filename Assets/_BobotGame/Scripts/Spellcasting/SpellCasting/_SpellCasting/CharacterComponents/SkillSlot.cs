@@ -10,6 +10,8 @@ namespace SpellCasting
         public SkillInfo skillInfo;
         public VariableNumberStat cooldownTime;
         public VariableNumberStat cooldownSpeed;
+        public SkillButton skillButton;
+        public bool autoCast;
 
         private float cooldownTimer;
         private ActiveStateMachine machine;
@@ -19,12 +21,12 @@ namespace SpellCasting
             if (skillInfo == null)
                 return;
 
-            cooldownTimer -= Time.fixedDeltaTime * cooldownSpeed;
+            cooldownTimer -= Time.deltaTime * cooldownSpeed;
             if(cooldownTimer < 0)
             {
-                if (skillInfo.autoCast)
+                if (autoCast)
                 {
-                    TryCastSkill();
+                    TryCastSkill(null);
                 }
             }
         }
@@ -39,7 +41,7 @@ namespace SpellCasting
             cooldownSpeed = new VariableNumberStat(1);
         }
 
-        public void TryCastSkill()
+        public void TryCastSkill(InputState inputState)
         {
             if (skillInfo == null)
                 return;
@@ -49,7 +51,12 @@ namespace SpellCasting
 
             cooldownTimer = cooldownTime;
 
-            machine.TryInterruptState(skillInfo.state, skillInfo.interruptingPriority);
+            if(machine.TryInterruptState(skillInfo.state, skillInfo.interruptingPriority, out ActiveState state)){
+                if (state is IStateFromInput stateFromInput)
+                {
+                    stateFromInput.input = inputState;
+                }
+            }
         }
     }
 }

@@ -24,24 +24,26 @@ namespace ActiveStates.Characters
             {
                 animator.SetFloat("rightSpeed", inputBank.LocalMoveDirection.x);
                 animator.SetFloat("forwardSpeed", inputBank.LocalMoveDirection.z);
-                animator.SetFloat("walkSpeed", fixedMotorDriver.FinalVeolcity.magnitude);
+                animator.SetFloat("walkSpeed", fixedMotorDriver.FinalVelocity.magnitude);
             }
 
             if (skillController && inputBank)
             {
 
                 //moofa proto WOOPS IMMEDIATELY BREAK SOC
-                HandleSkill(skillController.primarySkill, inputBank.M1);
-                HandleSkill(skillController.secondarySkill, inputBank.M2);
-                HandleSkill(skillController.utilitySkill, inputBank.Space);
+                HandleSkill(skillController.PrimarySkill, inputBank.M1);
+                HandleSkill(skillController.BlockSkill, inputBank.M2);
+                HandleSkill(skillController.DashSkill, inputBank.Space);
+                HandleSkill(skillController.CrouchSkill, inputBank.Shift);
+                HandleSkill(skillController.SpecialSkill, inputBank.F);
             }
         }
 
-        private void HandleSkill(SkillSlot primarySkill, InputState m1)
+        private void HandleSkill(SkillSlot primarySkill, InputState inputState)
         {
-            if (m1.Down)
+            if (inputState.Down)
             {
-                primarySkill.TryCastSkill();
+                primarySkill.TryCastSkill(inputState);
             }
         }
 

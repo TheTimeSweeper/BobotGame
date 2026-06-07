@@ -11,10 +11,13 @@ namespace SpellCasting
         [SerializeField]
         private CommonComponentsHolder commonComponents;
 
-        public SkillSlot primarySkill;//not named for ror2, named for moonfall (which took from ror2 but shut up about that)
-        public SkillSlot secondarySkill;
-        public SkillSlot utilitySkill;
-        public List<SkillSlot> extraSkills = new List<SkillSlot>();
+        public List<SkillSlot> skillSlots = new List<SkillSlot>();
+                                          //todo bobot ew;
+        public SkillSlot PrimarySkill => skillSlots.Find((slot) => slot.skillButton == SkillButton.PRIMARY);
+        public SkillSlot BlockSkill => skillSlots.Find((slot) => slot.skillButton == SkillButton.BLOCK);
+        public SkillSlot CrouchSkill => skillSlots.Find((slot) => slot.skillButton == SkillButton.CROUCH);
+        public SkillSlot DashSkill => skillSlots.Find((slot) => slot.skillButton == SkillButton.DASH);
+        public SkillSlot SpecialSkill => skillSlots.Find((slot) => slot.skillButton == SkillButton.SPECIAL);
 
         public UpgradePathInfo upgradePath;
 
@@ -26,8 +29,8 @@ namespace SpellCasting
         private List<SkillSlot> allSkills;
         private void Awake()
         {
-            allSkills = new List<SkillSlot> { primarySkill, secondarySkill, utilitySkill };
-            allSkills.AddRange(extraSkills);
+            allSkills = new List<SkillSlot> { /*m1Skill, m2Skill, spaceSkill*/ };
+            allSkills.AddRange(skillSlots);
         }
         private void Start()
         {
@@ -49,24 +52,10 @@ namespace SpellCasting
             }
         }
 
-        internal void OverrideSkill(SkillSlot primarySkill, SkillInfo skillInfo)
+        internal void OverrideSkill(SkillSlot skillSlot, SkillInfo skillInfo)
         {
-            primarySkill.skillInfo = skillInfo;
-            primarySkill.Init(commonComponents);
-        }
-
-        internal void GainExp(float amount)
-        {
-            exp += amount;
-            if (exp >= nextLevel)
-            {
-                exp -= nextLevel;
-                nextLevel *= 4f;
-                level++;
-                if (level >= 4)
-                    return;
-                SkillUpgradeManager.Instance.ShowUpgrades(this, primarySkill);
-            }
+            skillSlot.skillInfo = skillInfo;
+            skillSlot.Init(commonComponents);
         }
     }
 }

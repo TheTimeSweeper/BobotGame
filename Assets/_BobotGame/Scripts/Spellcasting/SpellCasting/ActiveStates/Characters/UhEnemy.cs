@@ -9,6 +9,6 @@
         protected override float baseDuration => 0.2f;
         protected override float baseCastEndTimeFraction => 0;
         protected override float baseCastStartTimeFraction => 0;
-        protected override float positionShift => 0;
+        protected override float attackMoveShift => 0;
     }
 }

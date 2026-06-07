@@ -16,9 +16,11 @@ MonoBehaviour:
   BPC_StartTimeFraction: 0.4
   BPC_EndTimeFraction: 0.6
   BPC_Duration: 1
-  BPC_OtherStateInterruptTimeFraction: 0.6
-  BPC_AnimationSpeed: 2
+  BPC_OtherStateInterruptTimeFraction: 0.8
+  BPC_AnimationSpeed: 2.0000005
+  BPC_positionShift: 3
   Dash_StartTimeFraction: 0
   Dash_Duration: 0.4
   Dash_AnimationSpeed: 1
   Dash_DashTime: 0.4
+  BPC_baseMovementInterruptTimeFraction: 0.8

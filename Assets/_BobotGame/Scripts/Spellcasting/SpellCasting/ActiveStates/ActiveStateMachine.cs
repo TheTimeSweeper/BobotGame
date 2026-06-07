@@ -126,13 +126,19 @@ namespace ActiveStates
         {
             _queuedStates.Enqueue(newState);
         }
-
-        public void TryInterruptState(ActiveState activeState, InterruptPriority priority)
+        public bool TryInterruptState(ActiveState activeState, InterruptPriority priority) => TryInterruptState(activeState, priority, out _);
+        public bool TryInterruptState(ActiveState activeState, InterruptPriority priority, out ActiveState state)
         {
             if(_currentlyRunningState == null || _currentlyRunningState.GetMinimumInterruptPriority() <= priority)
             {
                 SetState(activeState);
+
+                state = activeState;
+                return true;
             }
+
+            state = null;
+            return false;
         }
 
         void OnDestroy()

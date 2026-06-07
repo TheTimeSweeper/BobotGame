@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace SpellCasting
 {
+
     public class ActiveStateInfo : ScriptableObject
     {
 

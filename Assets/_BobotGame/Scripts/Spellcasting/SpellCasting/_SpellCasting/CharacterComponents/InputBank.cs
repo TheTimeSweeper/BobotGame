@@ -8,6 +8,17 @@ using UnityEngine;
 
 namespace SpellCasting
 {
+    public enum SkillButton
+    {
+        None = 0,
+        PRIMARY,//M1
+        BLOCK,//m2
+        CROUCH,//shift
+        DASH,//space
+        SPECIAL,//f
+        OTHER = 100,
+    }
+
     public class InputState
     {
         public bool Down;
@@ -57,6 +68,7 @@ namespace SpellCasting
         public InputState M2 = new InputState();
         public InputState Space = new InputState();
         public InputState Shift = new InputState();
+        public InputState F = new InputState();
         public InputState E = new InputState();
         public Vector3 LocalMoveDirection { get; set; }
         public Vector3 AimMoveDirection { get; set; }

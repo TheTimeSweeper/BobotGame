@@ -146,6 +146,7 @@ GameObject:
   - component: {fileID: 5384333025304485294}
   - component: {fileID: 2653688710425601370}
   - component: {fileID: 4404171414282525321}
+  - component: {fileID: 8976470048615218097}
   - component: {fileID: 875555450327082444}
   - component: {fileID: 3985952824597252732}
   - component: {fileID: 127141495395204661}
@@ -232,6 +233,7 @@ MonoBehaviour:
   - {fileID: 5384333025304485294}
   - {fileID: 2653688710425601370}
   - {fileID: 4404171414282525321}
+  - {fileID: 8976470048615218097}
   mainStateMachine: {fileID: 5384333025304485294}
 --- !u!114 &5165419906454591722
 MonoBehaviour:
@@ -326,6 +328,23 @@ MonoBehaviour:
   DefaultState:
     activeStateName: ActiveStates.IdleState
   currentState: 
+--- !u!114 &8976470048615218097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6662274689379214683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d649957a92d9f0048872753b103e5597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  label: Stance
+  commonComponents: {fileID: 586541723876753461}
+  DefaultState:
+    activeStateName: ActiveStates.IdleState
+  currentState: 
 --- !u!114 &875555450327082444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -366,13 +385,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   commonComponents: {fileID: 586541723876753461}
-  primarySkill:
-    skillInfo: {fileID: 11400000, guid: 50dad283fe509a84f9cf9d43a497c6a6, type: 2}
-  secondarySkill:
-    skillInfo: {fileID: 0}
-  utilitySkill:
-    skillInfo: {fileID: 11400000, guid: 16a6bfeafea633c46b2b3b8ed627271c, type: 2}
-  extraSkills: []
+  skillSlots:
+  - skillInfo: {fileID: 11400000, guid: 50dad283fe509a84f9cf9d43a497c6a6, type: 2}
+    skillButton: 1
+    autoCast: 0
+  - skillInfo: {fileID: 11400000, guid: 16a6bfeafea633c46b2b3b8ed627271c, type: 2}
+    skillButton: 4
+    autoCast: 0
+  - skillInfo: {fileID: 11400000, guid: 7414985e857d4744e8153655e52eef96, type: 2}
+    skillButton: 3
+    autoCast: 0
   upgradePath: {fileID: 0}
 --- !u!114 &381052597598583278
 MonoBehaviour:

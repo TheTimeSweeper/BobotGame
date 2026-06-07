@@ -20,8 +20,8 @@ namespace ActiveStates.Characters
         protected float castEndTime;
         protected float movementInterruptTime;
         protected float otherStateInterruptTime;
-        protected bool hasFired;
-        protected bool isFiring;
+        protected bool hasCasted;
+        protected bool isCasting;
         protected bool hasExited;
 
         public override void OnEnter()
@@ -50,17 +50,17 @@ namespace ActiveStates.Characters
 
             bool fireStarted = fixedAge >= castStartTime;
             bool fireEnded = fixedAge >= castEndTime;
-            isFiring = false;
+            isCasting = false;
 
             //to guarantee attack comes out if at high attack speed the fixedage skips past the endtime
-            if (fireStarted && !fireEnded || fireStarted && fireEnded && !hasFired)
+            if (fireStarted && !fireEnded || fireStarted && fireEnded && !hasCasted)
             {
-                isFiring = true;
+                isCasting = true;
                 OnCastFixedUpdate();
-                if (!hasFired)
+                if (!hasCasted)
                 {
                     OnCastEnter();
-                    hasFired = true;
+                    hasCasted = true;
                 }
             }
 
@@ -98,7 +98,7 @@ namespace ActiveStates.Characters
         public override void OnUpdate()
         {
             base.OnUpdate();
-            if (isFiring)
+            if (isCasting)
             {
                 OnCastUpdate();
             }

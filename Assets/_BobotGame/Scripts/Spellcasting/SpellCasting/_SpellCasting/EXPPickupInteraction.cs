@@ -39,7 +39,7 @@ namespace SpellCasting
 
         private void GrantExp()
         {
-            _foundBody.CommonComponents.SkillController.GainExp(expAmount);
+            //_foundBody.CommonComponents.SkillController.GainExp(expAmount);
             EffectManager.SpawnEffect(EffectIndex.DAMAGENUMBER, _foundBody.transform.position, null, (int)expAmount);
             Destroy(gameObject);
         }

@@ -32,7 +32,7 @@ public class DeathComponent : MonoBehaviour
             }
         }
     }
-
+    [Tooltip("Simply destroy the object.")]
     public bool justDieLol = true;
 
     [SerializeField]
@@ -87,7 +87,8 @@ public class DeathComponent : MonoBehaviour
             {
                 GetDestroyedLol();
             }
-        }    }
+        }    
+    }
 
     IEnumerator DelayedDestroy()
     {

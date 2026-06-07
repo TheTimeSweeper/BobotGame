@@ -21,8 +21,8 @@ namespace SpellCasting.Editor
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             EditorGUI.BeginProperty(position, label, property);
-            var refe = property.objectReferenceValue;
-            if (refe == null)
+            var referencedComponent = property.objectReferenceValue;
+            if (referencedComponent == null)
             {
                 Rect contentPosition = position;
                 position.xMax -= offset;
@@ -42,6 +42,10 @@ namespace SpellCasting.Editor
             }
             else
             {
+                if(referencedComponent is ILabeled labeledComponent)
+                {
+                    label.text = $"{label.text} | {labeledComponent.Label}";
+                }
                 EditorGUI.PropertyField(position, property, label);
             }
             EditorGUI.EndProperty();
