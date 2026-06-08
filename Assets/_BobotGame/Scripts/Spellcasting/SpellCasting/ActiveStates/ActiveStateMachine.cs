@@ -61,7 +61,9 @@ namespace ActiveStates
             if (newState == null)
             {
                 Debug.LogError("Tried to enter a null state", this);
+#if UNITY_EDITOR
                 currentState = null;
+#endif
                 return;
             }
 

@@ -4,20 +4,26 @@ namespace SpellCasting
 {
     public class CharacterMaster : MonoBehaviour
     {
+        [Tooltip("Setup")]
+        public CharacterBody bodyPrefab;
         [Tooltip("Parameters")]
         [SerializeField]
         private bool dontDestroyOnLoad;
         [SerializeField]
         private bool destroyOnBodyDeath;
+        [SerializeField]
+        private bool reviveOnBodyDeath;
         [Header("Active")]
         [SerializeField, FormerlySerializedAs("body")]
         private CharacterBody currentBody;
         public CharacterBody CurrentBody => currentBody;
 
+        public TeamIndex CachedTeamIndex {get; private set;}
+
         private CharacterBody lastBody;
 
         bool hadBody;
-        public System.Action<CharacterBody> OnBodyChanged;
+        public event System.Action<CharacterBody> OnBodyChanged;
 
         //fine, inventory
 
@@ -34,6 +40,12 @@ namespace SpellCasting
         {
             if(!currentBody && hadBody)
             {
+                //todo bobot make these death behaviors or something
+                if (reviveOnBodyDeath && bodyPrefab)
+                {
+                    currentBody = Instantiate(bodyPrefab);
+                    currentBody.CommonComponents.TeamComponent.TeamIndex = CachedTeamIndex;
+                }
                 if (destroyOnBodyDeath) {
                     Destroy(gameObject);
                 }
@@ -41,7 +53,8 @@ namespace SpellCasting
 
             if(currentBody != lastBody)
             {
-                OnBodyChanged(currentBody);
+                OnBodyChanged?.Invoke(currentBody);
+                CachedTeamIndex = currentBody.teamIndex;
             }
             lastBody = currentBody;
         }

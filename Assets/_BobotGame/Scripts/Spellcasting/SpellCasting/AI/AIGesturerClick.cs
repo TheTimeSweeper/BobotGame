@@ -6,6 +6,9 @@ namespace SpellCasting.AI
     [CreateAssetMenu(menuName = "SpellCasting/AIGesturer/Click", fileName = "AIGestureClick")]
     public class AIGesturerClick : AIGesture
     {
+        [Range(0,1)]
+        public float crouchChance;
+
         public override ScriptableObjectBehavior GetBehavior()
         {
             return new AIClickBehavior { infoObject = this };
@@ -35,10 +38,10 @@ namespace SpellCasting.AI
                     _inputted = true;
                     brain.AIInputController.JustPress(InfoObject.inputIndex);
 
-                    if (InfoObject.inputIndex2 != -1)
+                    if (InfoObject.inputIndex2 != -1 && Random.value < InfoObject.crouchChance)
                     {
                         //brain.AIInputController.downInputs[InfoObject.inputIndex2] = true;
-                        brain.AIInputController.JustPress(InfoObject.inputIndex2);
+                        brain.AIInputController.Toggle(InfoObject.inputIndex2);
                     }
                 }
 

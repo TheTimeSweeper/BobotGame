@@ -18,4 +18,10 @@ public class BobotGameDevStateInfo : ActiveStateInfo
     public float Dash_AnimationSpeed;
     public float Dash_DashTime;
     public float Crouch_Height;
+    public float Kick_Damage;
+    public float Kick_StartTimeFraction;
+    public float Kick_EndTimeFraction;
+    public float Kick_Duration;
+    public float Kick_OtherStateInterruptTimeFraction;
+    public float Kick_baseMovementInterruptTimeFraction;
 }

@@ -56,6 +56,7 @@ namespace SpellCasting
                 if(!inputBank) inputBank = optionalMaster.CurrentBody.CommonComponents.InputBank;
                 if(!bodyAimOriginPosition && inputBank) bodyAimOriginPosition = inputBank.AimOrigin;
                 if(!forwardDirectionTransform) forwardDirectionTransform = optionalMaster.CurrentBody.CommonComponents.CharacterModel.transform;
+                SubscribeToEvents(true);
             }
 
             if (inputBank)
@@ -63,6 +64,35 @@ namespace SpellCasting
                 bodyAimOriginPosition = inputBank.AimOrigin;
                 inputBank.AimOrigin = bodyAimOriginPosition;
             }
+        }
+        bool subscribed = false;
+        private void SubscribeToEvents(bool shouldSubscribe)
+        {
+            if(shouldSubscribe == subscribed)
+                return;
+            subscribed = shouldSubscribe;
+
+            if (optionalMaster)
+            {
+                if (shouldSubscribe)
+                {
+                    optionalMaster.OnBodyChanged += OptionalMaster_OnBodyChanged;
+                }
+                else
+                {
+                    optionalMaster.OnBodyChanged -= OptionalMaster_OnBodyChanged;
+                }
+            }
+        }
+
+        private void OnDestroy()
+        {
+            SubscribeToEvents(false);
+        }
+
+        private void OptionalMaster_OnBodyChanged(CharacterBody obj)
+        {
+            Awake();
         }
 
         protected virtual void Update()

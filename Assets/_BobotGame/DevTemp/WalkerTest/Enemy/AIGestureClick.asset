@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duration: 1
   inputIndex: 0
-  inputIndex2: -1
-  CloseDistance: 5
+  inputIndex2: 2
+  CloseDistance: 7
   StrafeWhileClose: 0
+  crouchChance: 0.297

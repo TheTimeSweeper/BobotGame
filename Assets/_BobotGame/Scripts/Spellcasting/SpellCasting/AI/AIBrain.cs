@@ -66,6 +66,10 @@ namespace SpellCasting.AI
         {
             master.OnBodyChanged += master_OnBodyChanged;
         }
+        private void OnDestroy()
+        {
+            master.OnBodyChanged -= master_OnBodyChanged;
+        }
 
         void master_OnBodyChanged(CharacterBody body)
         {

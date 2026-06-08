@@ -41,6 +41,10 @@ namespace SpellCasting
         {
             for (int i = 0; i < inputDownFrames[i]; i++)
             {
+                if (inputDownFrames[i] < 0)
+                {
+                    continue;
+                }
                 inputDownFrames[i]--;
                 if(inputDownFrames[i] == 0)
                 {
@@ -53,6 +57,16 @@ namespace SpellCasting
         {
             downInputs[input] = true;
             inputDownFrames[input] = 3;
+        }
+        public void Hold(int input, int frames = -1)
+        {
+            downInputs[input] = true;
+            inputDownFrames[input] = frames;
+        }
+        public void Toggle(int input)
+        {
+            downInputs[input] = !downInputs[input];
+            inputDownFrames[input] = downInputs[input] ? -1 : 0;
         }
 
         protected override Vector3 GetAimPosition()

@@ -8,7 +8,7 @@ namespace SpellCasting.AI
         public float duration;
 
         [SerializeField]
-        public int inputIndex;
+        public int inputIndex;//todo bobot input index not stupid
         [SerializeField]
         public int inputIndex2 = -1;
 
