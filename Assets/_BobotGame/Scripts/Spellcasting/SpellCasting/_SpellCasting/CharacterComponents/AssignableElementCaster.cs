@@ -73,8 +73,8 @@ namespace SpellCasting
             _elementInputBehaviors.Add(new ElementCursorIndicatorBehavior(commonComponents));
             _elementInputBehaviors.Add(new ElementColorBehavior(commonComponents));
 
-            AddInputElement(m1Element, inputBank.M1);
-            AddInputElement(m2Element, inputBank.M2);
+            AddInputElement(m1Element, inputBank.Primary);
+            AddInputElement(m2Element, inputBank.Block);
             AddInputElement(shiftElement, inputBank.Shift);
             AddInputElement(spaceElement, inputBank.Space);
         }

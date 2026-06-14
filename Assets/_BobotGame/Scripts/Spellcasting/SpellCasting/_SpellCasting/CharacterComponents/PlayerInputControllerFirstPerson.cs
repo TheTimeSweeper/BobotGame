@@ -46,10 +46,11 @@ namespace SpellCasting
 
         protected override void SetbuttonInputs()
         {
-            inputBank.M1.UpdateInput(Input.GetMouseButton(0));
-            inputBank.M2.UpdateInput(Input.GetMouseButton(1));
+            inputBank.Primary.UpdateInput(Input.GetMouseButton(0));
+            inputBank.Block.UpdateInput(Input.GetMouseButton(1));
             inputBank.Space.UpdateInput(Input.GetKey(KeyCode.Space));
             inputBank.Shift.UpdateInput(Input.GetKey(KeyCode.LeftShift));
+            inputBank.Heavy.UpdateInput(Input.GetKey(KeyCode.LeftControl));
             inputBank.E.UpdateInput(Input.GetKey(KeyCode.E));
         }
 

@@ -200,9 +200,9 @@ public static class Util
     }
     #endregion
 
-    public static bool CastHurtBox(SpellCasting.InputBank inputbank, out RaycastHit raycastHit, float range = 100)
+    public static bool CastHurtBox(SpellCasting.InputBank inputBank, out RaycastHit raycastHit, float range = 100)
     {
-        return Physics.Raycast(inputbank.GetBodyRay(), out raycastHit, range, LayerInfo.Hurtbox.layerMask.value);
+        return Physics.Raycast(inputBank.GetBodyRay(), out raycastHit, range, LayerInfo.Hurtbox.layerMask.value);
     }
 
     public static bool CastHurtBox(Ray ray, out RaycastHit raycastHit, float range = 100)

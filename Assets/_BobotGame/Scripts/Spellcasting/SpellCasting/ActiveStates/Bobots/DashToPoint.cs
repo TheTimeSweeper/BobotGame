@@ -7,7 +7,7 @@ namespace ActiveStates.Bobots
 {
     public class DashToPoint : BasicTimedState, IHasStateInfo<BobotGameDevStateInfo>
     {
-        protected override float baseCastStartTimeFraction => StateInfo.Dash_StartTimeFraction;
+        protected override float baseCastStartTimeFraction => 0;
         protected override float baseDuration => StateInfo.Dash_Duration;
         protected float dashTime => StateInfo.Dash_DashTime;
 
@@ -22,13 +22,16 @@ namespace ActiveStates.Bobots
             animator.Play("Dash");
             animator.SetFloat("dash.playbackRate", StateInfo.Dash_AnimationSpeed / duration);
 
-            if (Util.CastHurtBox(inputBank, out var raycastHit))
+            //if (Util.CastHurtBox(inputBank, out var raycastHit))
+            Ray bodyRay = inputBank.GetBodyRay();
+            Vector3 goalPosition = bodyRay.origin + bodyRay.direction * 100;
+            if (Physics.Raycast(bodyRay, out RaycastHit raycastHit, 100, LayerInfo.CommonMasks.WorldOrBody))
             {
-                Vector3 goalPosition = raycastHit.point - inputBank.AimOut * 4;
-                goalPosition.y = transform.position.y;
-                Vector3 goalDistance = goalPosition - transform.position;
-                goalVelocity = goalDistance / dashTime;
+                goalPosition = raycastHit.point - inputBank.AimOut * 4;
             }
+            goalPosition.y = transform.position.y;
+            Vector3 goalDistance = goalPosition - transform.position;
+            goalVelocity = goalDistance / dashTime;
         }
 
         public override void OnFixedUpdate()

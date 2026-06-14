@@ -2,6 +2,7 @@
 using UnityEngine;
 namespace SpellCasting
 {
+
     public class HealthComponent : MonoBehaviour, IHasCommonComponents
     {
         public delegate void DamageTakenEvent(GetDamagedData getDamagedInfo);
@@ -15,7 +16,7 @@ namespace SpellCasting
         public event ModifyHealCallback PreModifyHeal;
 
         [SerializeField]
-        private float health;
+        protected float health;
         public float Health { get => health; }
 
         [SerializeField]
@@ -37,7 +38,7 @@ namespace SpellCasting
             this.health = health;
         }
 
-        public void TakeDamage(DamagingData damage)
+        public virtual void TakeDamage(DamagingData damage)
         {
             CharacterBody body = null;
 
@@ -58,7 +59,7 @@ namespace SpellCasting
 
             PreModifyDamage?.Invoke(info);
 
-            health -= damage.DamageValue;
+            TakeTheDamage(ref health, info);
 
             DamageTypeCatalog.OnTakeDamageAll(info);
 
@@ -72,6 +73,12 @@ namespace SpellCasting
             {
                 deathComponent.GetRektLol();
             }
+        }
+
+        //todo bobot nooooo we are doing a takedamage now nooo
+        protected virtual void TakeTheDamage(ref float healthToHit, GetDamagedData info)
+        {
+            healthToHit -= info.DamagingInfo.DamageValue;
         }
 
         public void Heal(HealingData heal)

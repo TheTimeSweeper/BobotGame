@@ -5,10 +5,14 @@ namespace ActiveStates.Characters
 {
     public abstract class BasicTimedState : BodyState
     {
-        //total duration of the move
+        /// <summary>
+        /// total duration of the move
+        /// </summary>
         protected abstract float baseDuration { get; }
-        //0-1 time relative to duration that the skill starts
-        //for example, set 0.5 and the "cast" will happen halfway through the skill
+        /// <summary>
+        /// 0-1 time relative to duration that the skill starts
+        /// for example, set 0.5 and the "cast" will happen halfway through the skill
+        /// </summary>
         protected virtual float baseCastStartTimeFraction => 1;
         protected virtual float baseCastEndTimeFraction => 1;
         protected virtual float baseOtherStateInterruptTimeFraction => 1;

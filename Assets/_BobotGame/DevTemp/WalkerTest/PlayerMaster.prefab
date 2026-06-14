@@ -47,8 +47,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 910e6ad885264c8479abf7d9bebf6b9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dontDestroy: 0
-  body: {fileID: 0}
+  bodyPrefab: {fileID: 6886800658204874175, guid: a5cb032c3d5a0fd4fb58e91dd3f3a4e5, type: 3}
+  dontDestroyOnLoad: 0
+  destroyOnBodyDeath: 0
+  reviveOnBodyDeath: 1
+  currentBody: {fileID: 0}
 --- !u!114 &6354766419621191687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,7 +239,7 @@ Transform:
   m_GameObject: {fileID: 7635305444767779391}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.2500002, y: 5.168754, z: 0}
+  m_LocalPosition: {x: -3.2500002, y: 2.58, z: 4.09}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

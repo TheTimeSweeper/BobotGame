@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c5bbb48daf452a54a91724cf086ba2df, type: 3}
-  m_Name: skWalkerTestDash
+  m_Name: skWalkerTestKick
   m_EditorClassIdentifier: 
-  displayName: dash
+  displayName: punch
   baseCooldown: -0.03
   state:
-    activeStateName: ActiveStates.Bobots.BasicDash
-  stateMachineName: Dash
-  interruptingPriority: 1
+    activeStateName: ActiveStates.Bobots.BobotKick
+  stateMachineName: Weapon
+  interruptingPriority: 4
   autoCast: 0

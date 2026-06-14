@@ -23,8 +23,8 @@ namespace SpellCasting
 
         protected override void SetbuttonInputs()
         {
-            inputBank.M1.UpdateInput(Input.GetAxis("TriggerR") < -0.5f);
-            inputBank.M2.UpdateInput(Input.GetAxis("TriggerL") < -0.5f);
+            inputBank.Primary.UpdateInput(Input.GetAxis("TriggerR") < -0.5f);
+            inputBank.Block.UpdateInput(Input.GetAxis("TriggerL") < -0.5f);
             inputBank.Space.UpdateInput(Input.GetButton("BumperL"));
             inputBank.Shift.UpdateInput(Input.GetButton("BumperR"));
             inputBank.E.UpdateInput(Input.GetButton("X"));

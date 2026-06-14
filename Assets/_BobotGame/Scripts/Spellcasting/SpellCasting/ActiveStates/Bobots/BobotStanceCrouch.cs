@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using SpellCasting;
 using System;
+using ActiveStates.Characters;
 
 namespace ActiveStates.Bobots
 {
@@ -21,6 +22,8 @@ namespace ActiveStates.Bobots
             characterModel.transform.SetLocalPositionAndRotation(Vector3.up * height, characterModel.transform.rotation);
 
             characterBody.stats.MoveSpeed.ApplyMultiplyModifier(0.5f, "Crouch");
+            //todo: BLASPHEMY
+            gameObject.GetComponent<TEMPBobotCrouchController>().isCrouched = true;
         }
 
         public override void OnFixedUpdate()
@@ -33,9 +36,49 @@ namespace ActiveStates.Bobots
         }
         public override void OnExit(bool machineDed = false)
         {
-            base.OnExit(machineDed);
             characterBody.stats.MoveSpeed.RemoveModifier("Crouch");
             characterModel.transform.SetLocalPositionAndRotation(Vector3.zero, characterModel.transform.rotation);
+            gameObject.GetComponent<TEMPBobotCrouchController>().isCrouched = false;
+            base.OnExit(machineDed);
+        }
+    }
+    public class BobotStanceBlock : BasicTimedState, IHasStateInfo<BobotGameDevStateInfo>, IStateFromInput
+    {
+        public ActiveStateInfo AssignedStateInfo { get; set; }
+        public Type StateInfoType => typeof(BobotGameDevStateInfo);
+        public BobotGameDevStateInfo StateInfo => AssignedStateInfo as BobotGameDevStateInfo;
+
+        public float height => StateInfo.Crouch_Height;
+
+        public InputState input { get; set; }
+
+        protected override float baseDuration => StateInfo.block_duration;
+
+        public override void OnEnter()
+        {
+            base.OnEnter();
+
+            animator.Play("Block");
+            animator.SetFloat("block.playbackRate", StateInfo.block_AnimationMultiplier / duration);
+
+            characterBody.stats.MoveSpeed.ApplyMultiplyModifier(0.8f, "Block");
+            //todo: BLASPHEMY
+            gameObject.GetComponent<TEMPBobotCrouchController>().isBlocking = true;
+        }
+
+        public override void OnFixedUpdate()
+        {
+            base.OnFixedUpdate();
+            if (!input.Down)
+            {
+                EndState();
+            }
+        }
+        public override void OnExit(bool machineDed = false)
+        {
+            characterBody.stats.MoveSpeed.RemoveModifier("Block");
+            gameObject.GetComponent<TEMPBobotCrouchController>().isBlocking = false;
+            base.OnExit(machineDed);
         }
     }
 }

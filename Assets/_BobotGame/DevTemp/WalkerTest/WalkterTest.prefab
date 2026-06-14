@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4721915304203704033}
   - component: {fileID: 515496728360747049}
+  - component: {fileID: 7823297225891369425}
   m_Layer: 0
   m_Name: PunchHitbox
   m_TagString: Untagged
@@ -44,6 +45,124 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e8b6617ae5118f40bc3e4541383b788, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &7823297225891369425
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 410252740676511966}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &647127299494595413
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7214612459849170903}
+  m_Layer: 0
+  m_Name: KickEffectOrigin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7214612459849170903
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 647127299494595413}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0.98782426, w: 0.1555741}
+  m_LocalPosition: {x: 0, y: 4.41, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6774297231763159826}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -162.1}
+--- !u!1 &3997460975158027876
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3517022772120954114}
+  - component: {fileID: 4473804218696601691}
+  - component: {fileID: 1534436545473010934}
+  m_Layer: 0
+  m_Name: KickHitbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3517022772120954114
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3997460975158027876}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 3.66, z: 2.81}
+  m_LocalScale: {x: 6.2558217, y: 6.2936, z: 6.251033}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6774297231763159826}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4473804218696601691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3997460975158027876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e8b6617ae5118f40bc3e4541383b788, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &1534436545473010934
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3997460975158027876}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5031863233459187938
 GameObject:
   m_ObjectHideFlags: 0
@@ -56,6 +175,7 @@ GameObject:
   - component: {fileID: 2717654617168400845}
   - component: {fileID: 8744439952397215452}
   - component: {fileID: 2276470836230358956}
+  - component: {fileID: 3629453934118895964}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -77,9 +197,11 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4721915304203704033}
+  - {fileID: 3517022772120954114}
   - {fileID: 1785899671905465454}
   - {fileID: 720088159159999875}
   - {fileID: 8182094078899094857}
+  - {fileID: 7214612459849170903}
   m_Father: {fileID: 8561579550723535323}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2717654617168400845
@@ -98,7 +220,7 @@ MonoBehaviour:
   elementColoredParticles: []
   noElementColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   characterDirection: {fileID: 8744439952397215452}
-  childLocator: {fileID: 0}
+  childLocator: {fileID: 3629453934118895964}
   hitboxLocator: {fileID: 2276470836230358956}
   particleSystemLocator: {fileID: 0}
 --- !u!114 &8744439952397215452
@@ -129,6 +251,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   componentList:
   - {fileID: 515496728360747049}
+  - {fileID: 4473804218696601691}
+--- !u!114 &3629453934118895964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5031863233459187938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7b1d0273e64daf49bf3a17437b494ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  componentList:
+  - {fileID: 4721915304203704033}
+  - {fileID: 7214612459849170903}
 --- !u!1 &6662274689379214683
 GameObject:
   m_ObjectHideFlags: 0
@@ -394,6 +532,9 @@ MonoBehaviour:
     autoCast: 0
   - skillInfo: {fileID: 11400000, guid: 7414985e857d4744e8153655e52eef96, type: 2}
     skillButton: 3
+    autoCast: 0
+  - skillInfo: {fileID: 11400000, guid: ad191c4a3ebf80e41bca42ae90bf3cf1, type: 2}
+    skillButton: 5
     autoCast: 0
   upgradePath: {fileID: 0}
 --- !u!114 &381052597598583278

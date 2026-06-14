@@ -15,7 +15,7 @@ namespace SpellCasting
         BLOCK,//m2
         CROUCH,//shift
         DASH,//space
-        SPECIAL,//f
+        HEAVY,//f
         OTHER = 100,
     }
 
@@ -64,11 +64,11 @@ namespace SpellCasting
 
     public class InputBank : MonoBehaviour
     {
-        public InputState M1 = new InputState();
-        public InputState M2 = new InputState();
+        public InputState Primary = new InputState();
+        public InputState Block = new InputState();
         public InputState Space = new InputState();
         public InputState Shift = new InputState();
-        public InputState F = new InputState();
+        public InputState Heavy = new InputState();
         public InputState E = new InputState();
         public Vector3 LocalMoveDirection { get; set; }
         public Vector3 AimMoveDirection { get; set; }
@@ -135,7 +135,7 @@ namespace SpellCasting
             {
                 _gestureBehaviors.Add(validGestures[i].GetBehavior() as GestureBehavior);
             }
-            _allInputStates = new List<InputState> { M1, M2, Space, Shift }; 
+            _allInputStates = new List<InputState> { Primary, Block, Space, Shift }; 
             //AllInputStates.AddRange(extraInputStates);
         }
 

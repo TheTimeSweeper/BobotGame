@@ -14,4 +14,9 @@ public class LayerInfo
     public static readonly LayerInfo Default = new LayerInfo("Default");
     public static readonly LayerInfo RoomOverlap = new LayerInfo("RoomOverlap");
     public static readonly LayerInfo Hurtbox = new LayerInfo("Hurtbox");
+
+    public class CommonMasks
+    {
+        public static LayerMask WorldOrBody = Default.layerMask.value | Hurtbox.layerMask.value;
+    }
 }

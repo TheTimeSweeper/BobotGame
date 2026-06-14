@@ -9,6 +9,7 @@ namespace ActiveStates.Characters
     public abstract class BasicMeleeAttack : BasicTimedState
     {
         protected abstract string hitboxName { get; }
+        protected virtual string effectOriginName { get; }
         protected abstract float damageCoefficient { get; }
         protected virtual float preAttackMoveShift => 0.5f;
         protected virtual float preAttackMoveShiftDecay => 16;
@@ -50,17 +51,6 @@ namespace ActiveStates.Characters
 
 
             //characterModel.CharacterDirection.OverrideLookDirection(aimDirection, duration);
-
-            //jam effectcatalog when
-            //well I did it but this works so not touching it til i need to
-            if (characterModel?.particleSystemLocator)
-            {
-                ParticleSystem swipeParticle = characterModel.particleSystemLocator.LocateByName("SwipeParticle");
-                if (swipeParticle)
-                {
-                    swipeParticle.Play();
-                }
-            }
 
             _startDirection = inputBank.AimOut;
         }

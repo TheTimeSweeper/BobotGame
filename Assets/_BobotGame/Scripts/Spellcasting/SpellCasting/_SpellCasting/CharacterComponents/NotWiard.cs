@@ -17,12 +17,12 @@ namespace SpellCasting
 
         public void FixedUpdate()
         {
-            if (inputbank.M1.JustPressed(this))
+            if (inputbank.Primary.JustPressed(this))
             {
                 stateMachineLocator.LocateByName(M1Skill.stateMachine).TryInterruptState(ActiveStateCatalog.InstantiateState(M1Skill.state), M1Skill.priority);
             }
 
-            if (inputbank.M2.JustPressed(this))
+            if (inputbank.Block.JustPressed(this))
             {
                 stateMachineLocator.LocateByName(M2Skill.stateMachine).TryInterruptState(ActiveStateCatalog.InstantiateState(M2Skill.state), M2Skill.priority);
             }

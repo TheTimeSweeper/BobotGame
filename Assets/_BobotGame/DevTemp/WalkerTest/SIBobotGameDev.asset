@@ -13,15 +13,73 @@ MonoBehaviour:
   m_Name: SIBobotGameDev
   m_EditorClassIdentifier: 
   BPC_Damage: 1
-  BPC_StartTimeFraction: 0.4
-  BPC_EndTimeFraction: 0.6
+  BPC_StartTimeFraction: 0.2
+  BPC_EndTimeFraction: 0.4
   BPC_Duration: 1
-  BPC_OtherStateInterruptTimeFraction: 0.8
-  BPC_AnimationSpeed: 2.0000005
+  BPC_OtherStateInterruptTimeFraction: 0.5
+  BPC_AnimationSpeed: 6
   BPC_positionShift: 3
   BPC_baseMovementInterruptTimeFraction: 0.5
-  Dash_StartTimeFraction: 0
-  Dash_Duration: 0.4
-  Dash_AnimationSpeed: 1
-  Dash_DashTime: 0.4
+  Dash_Duration: 0.5
+  Dash_AnimationSpeed: 2
+  Dash_InterruptTime: 0.5
+  Dash_DashTime: 0.5
+  Dash_DashSpeed: 40
+  Dash_DashSpeedCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.0006866455
+      value: 0.23974228
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.052312344
+    - serializedVersion: 3
+      time: 0.23040682
+      value: 1.0016384
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.7209599
+      value: 0.30102825
+      inSlope: -2.5233088
+      outSlope: -2.5233088
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.044828363
+      outWeight: 0.24694622
+    - serializedVersion: 3
+      time: 0.8232393
+      value: 0.118584245
+      inSlope: -1.0552053
+      outSlope: -1.0552053
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.11756372
+      outWeight: 0.25530457
+    - serializedVersion: 3
+      time: 1
+      value: 0.03327942
+      inSlope: -0.0103783365
+      outSlope: -0.0103783365
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.2207068
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   Crouch_Height: -2
+  Kick_Damage: 2
+  Kick_StartTimeFraction: 0.4
+  Kick_EndTimeFraction: 0.5
+  Kick_Duration: 2
+  Kick_OtherStateInterruptTimeFraction: 0.8
+  Kick_baseMovementInterruptTimeFraction: 0.81

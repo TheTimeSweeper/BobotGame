@@ -6,7 +6,6 @@ using UnityEditor;
 
 namespace ActiveStates.Bobots
 {
-
     public class BobotPunchCombo : GenericMeleeCombo, IHasStateInfo<BobotGameDevStateInfo>
     {
         public ActiveStateInfo AssignedStateInfo { get; set; }
@@ -15,6 +14,7 @@ namespace ActiveStates.Bobots
 
         protected override int comboHits => 2;
         protected override string hitboxName => "PunchHitbox";
+        protected override string effectOriginName => "PunchHitbox";
         protected override float damageCoefficient => StateInfo.BPC_Damage;
         protected override float baseCastStartTimeFraction => StateInfo.BPC_StartTimeFraction;
         protected override float baseCastEndTimeFraction => StateInfo.BPC_EndTimeFraction;
@@ -96,7 +96,9 @@ namespace ActiveStates.Bobots
 
             EnterSwing();
             Vector3 scale = new Vector3(hits == 1 ? -1 : 1, 1, 1);
-            EffectManager.SpawnEffect(EffectIndex.SWIPE_LEFT, transform.position, Util.DirectionQuaternion(inputBank.AimOut), scale, characterModel.CharacterDirection.transform);
+            Vector3 aimOut = inputBank.AimOut;
+            aimOut.y = 0;
+            EffectManager.SpawnEffect(EffectIndex.SWIPE_LEFT, base.characterModel.ChildLocator.LocateByName(effectOriginName).transform.position, Util.DirectionQuaternion(aimOut), scale, characterModel.CharacterDirection.transform);
         }
     }
 }

@@ -103,8 +103,8 @@ namespace SpellCasting
 
         protected override void SetbuttonInputs()
         {
-            inputBank.M1.UpdateInput(downInputs[0]);
-            inputBank.M2.UpdateInput(downInputs[1]);
+            inputBank.Primary.UpdateInput(downInputs[0]);
+            inputBank.Block.UpdateInput(downInputs[1]);
             inputBank.Shift.UpdateInput(downInputs[2]);
             inputBank.Space.UpdateInput(downInputs[3]);
         }

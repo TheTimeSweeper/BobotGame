@@ -31,11 +31,11 @@ namespace ActiveStates.Characters
             {
 
                 //moofa proto WOOPS IMMEDIATELY BREAK SOC
-                HandleSkill(skillController.PrimarySkill, inputBank.M1);
-                HandleSkill(skillController.BlockSkill, inputBank.M2);
+                HandleSkill(skillController.PrimarySkill, inputBank.Primary);
+                HandleSkill(skillController.BlockSkill, inputBank.Block);
                 HandleSkill(skillController.DashSkill, inputBank.Space);
                 HandleSkill(skillController.CrouchSkill, inputBank.Shift);
-                HandleSkill(skillController.SpecialSkill, inputBank.F);
+                HandleSkill(skillController.HeavySkill, inputBank.Heavy);
             }
         }
 
