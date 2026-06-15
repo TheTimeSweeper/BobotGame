@@ -9,7 +9,7 @@ namespace SpellCasting
         [SerializeField, Tooltip("used to autofill the inputbank and bodyAimOriginPosition fields")]//todo bobot watadahek
         protected CharacterMaster optionalMaster;
 
-        [Header("Manual (no masterm or override)")]
+        [Header("Manual (no master or override)")]
         [SerializeField]
         protected InputBank inputBank;
         [SerializeField]

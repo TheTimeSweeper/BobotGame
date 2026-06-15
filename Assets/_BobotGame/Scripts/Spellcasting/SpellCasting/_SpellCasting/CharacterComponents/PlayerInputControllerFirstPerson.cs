@@ -15,9 +15,10 @@ namespace SpellCasting
         protected override Vector3 GetAimPosition()
         {
             //todo bobot lol
-            cameraController.CameraX.Rotate(Vector3.up, Input.GetAxis("Mouse X"), Space.Self);
-            cameraController.CameraY.Rotate(Vector3.right, -Input.GetAxis("Mouse Y"), Space.Self);
-            if (cameraController.CameraPoint.position == lastCamPosition && cameraController.CameraPoint.rotation == lastCamRotation) {
+            cameraController.CameraX.Rotate(Vector3.up, GetXAimAxis(), Space.Self);
+            cameraController.CameraY.Rotate(Vector3.right, GetYAimAxis(), Space.Self);
+            if (cameraController.CameraPoint.position == lastCamPosition && cameraController.CameraPoint.rotation == lastCamRotation)
+            {
                 return lastAimPosition;
             }
             if (!Util.DebugKey)
@@ -39,6 +40,16 @@ namespace SpellCasting
             return defaultPoint;
         }
 
+        protected virtual float GetYAimAxis()
+        {
+            return -Input.GetAxis("Mouse Y");
+        }
+
+        protected virtual float GetXAimAxis()
+        {
+            return Input.GetAxis("Mouse X");
+        }
+
         protected override Vector3 GetGesturePosition()
         {
             return Vector3.zero;
@@ -50,7 +61,7 @@ namespace SpellCasting
             inputBank.Block.UpdateInput(Input.GetMouseButton(1));
             inputBank.Space.UpdateInput(Input.GetKey(KeyCode.Space));
             inputBank.Shift.UpdateInput(Input.GetKey(KeyCode.LeftShift));
-            inputBank.Heavy.UpdateInput(Input.GetKey(KeyCode.LeftControl));
+            inputBank.Heavy.UpdateInput(Input.GetKey(KeyCode.F));
             inputBank.E.UpdateInput(Input.GetKey(KeyCode.E));
         }
 

@@ -22,7 +22,7 @@ namespace ActiveStates.Bobots
             characterModel.transform.SetLocalPositionAndRotation(Vector3.up * height, characterModel.transform.rotation);
 
             characterBody.stats.MoveSpeed.ApplyMultiplyModifier(0.5f, "Crouch");
-            //todo: BLASPHEMY
+            //todo bobot: BLASPHEMY
             gameObject.GetComponent<TEMPBobotCrouchController>().isCrouched = true;
         }
 
@@ -42,7 +42,7 @@ namespace ActiveStates.Bobots
             base.OnExit(machineDed);
         }
     }
-    public class BobotStanceBlock : BasicTimedState, IHasStateInfo<BobotGameDevStateInfo>, IStateFromInput
+    public class BobotStanceBlock : BasicTimedState, IHasStateInfo<BobotGameDevStateInfo>
     {
         public ActiveStateInfo AssignedStateInfo { get; set; }
         public Type StateInfoType => typeof(BobotGameDevStateInfo);
@@ -62,23 +62,27 @@ namespace ActiveStates.Bobots
             animator.SetFloat("block.playbackRate", StateInfo.block_AnimationMultiplier / duration);
 
             characterBody.stats.MoveSpeed.ApplyMultiplyModifier(0.8f, "Block");
-            //todo: BLASPHEMY
+            //todo bobot: BLASPHEMY
             gameObject.GetComponent<TEMPBobotCrouchController>().isBlocking = true;
-        }
-
-        public override void OnFixedUpdate()
-        {
-            base.OnFixedUpdate();
-            if (!input.Down)
-            {
-                EndState();
-            }
         }
         public override void OnExit(bool machineDed = false)
         {
             characterBody.stats.MoveSpeed.RemoveModifier("Block");
             gameObject.GetComponent<TEMPBobotCrouchController>().isBlocking = false;
             base.OnExit(machineDed);
+        }
+        public override void OnFixedUpdate()
+        {
+            if (fixedAge < movementInterruptTime)
+            {
+                fixedMotorDriver.OverrideVelocity = Vector3.zero;
+            }
+            base.OnFixedUpdate();
+        }
+
+        public override InterruptPriority GetMinimumInterruptPriority()
+        {
+            return InterruptPriority.STATE_MED;
         }
     }
 }

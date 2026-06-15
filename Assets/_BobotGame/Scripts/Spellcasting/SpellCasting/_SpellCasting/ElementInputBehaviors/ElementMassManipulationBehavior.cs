@@ -32,7 +32,7 @@ namespace SpellCasting
                     {
                         if (!commonComponents.CharacterBody.TrySpendMana(currentCastingElement.BaseElement, actionState.BaseManaCost))
                         {
-                            EffectManager.SpawnEffect(EffectIndex.NOMANA, caster.transform.position, Quaternion.identity, caster.transform);
+                            EffectManager.SpawnEffect(EffectIndex.MESSAGE_NOMANA, caster.transform.position, Quaternion.identity, caster.transform);
                             actionState = null;
                         }
                     }

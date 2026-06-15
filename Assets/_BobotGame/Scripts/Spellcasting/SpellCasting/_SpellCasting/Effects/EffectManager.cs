@@ -6,6 +6,7 @@ namespace SpellCasting
     public class EffectManager : Singleton<EffectManager>
     {
         [SerializeField]
+        [EnumArray(typeof(EffectIndex))]
         public EffectPooled[] effectPrefabs;
 
         private Dictionary<EffectIndex, EffectPooled> _effectPrefabMap = new Dictionary<EffectIndex, EffectPooled>();

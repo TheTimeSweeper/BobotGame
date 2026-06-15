@@ -46,11 +46,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a1a1bd508dac014b9259b445881a70d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectIndex: 0
+  effectIndex: 100
   systems:
   - {fileID: 2198801619794372404}
   - {fileID: 7242772544255951486}
   effectTime: 0.3
+  effectsWithIntParameter: []
 --- !u!1001 &5942175707313562463
 PrefabInstance:
   m_ObjectHideFlags: 0

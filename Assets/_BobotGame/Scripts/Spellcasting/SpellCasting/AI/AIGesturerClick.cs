@@ -9,6 +9,8 @@ namespace SpellCasting.AI
         [Range(0,1)]
         public float crouchChance;
 
+        public float delayAfterCrouch;
+
         public override ScriptableObjectBehavior GetBehavior()
         {
             return new AIClickBehavior { infoObject = this };
@@ -19,6 +21,16 @@ namespace SpellCasting.AI
             private Vector3 initialPosition;
 
             private bool _inputted;
+
+            public override void OnEnter(AIBrain brain)
+            {
+                base.OnEnter(brain);
+
+                if (InfoObject.inputIndex2 != -1 && Random.value < InfoObject.crouchChance)
+                {
+                    brain.AIInputController.Hold(InfoObject.inputIndex2, -1);
+                }
+            }
 
             public override bool OnFixedUpdate(AIBrain brain)
             {
@@ -31,21 +43,20 @@ namespace SpellCasting.AI
 
                 brain.AIInputController.CurrentAimPosition = brain.CurrentTargetPosition;
                 brain.AIInputController.OverrideGesturePosition = initialPosition;
-                //brain.AIInputController.downInputs[InfoObject.inputIndex] = true;
 
-                if (!_inputted)
+                if (!_inputted && fixedAge > InfoObject.delayAfterCrouch)
                 {
                     _inputted = true;
                     brain.AIInputController.JustPress(InfoObject.inputIndex);
-
-                    if (InfoObject.inputIndex2 != -1 && Random.value < InfoObject.crouchChance)
-                    {
-                        //brain.AIInputController.downInputs[InfoObject.inputIndex2] = true;
-                        brain.AIInputController.Toggle(InfoObject.inputIndex2);
-                    }
                 }
 
                 return end;
+            }
+            public override void End(AIBrain brain)
+            {
+                base.End(brain);
+                //todo bobot, ugh
+                brain.AIInputController.Hold(InfoObject.inputIndex2, 1);
             }
         }
     }

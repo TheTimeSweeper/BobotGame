@@ -8,7 +8,11 @@ namespace SpellCasting
         public float legHealth;
         public float armHealth;
 
-        protected override void TakeTheDamage(ref float healthToHit, GetDamagedData info)
+        public Transform chestPosition;
+        public Transform legsPosition;
+        public Transform armsPosition;
+
+        protected override void JudgeTheDamage(GetDamagedData info)
         {
             bool? attackerCrouched = false;
             if (info.DamagingInfo.AttackerObject.TryGetComponent<TEMPBobotCrouchController>(out var attackerCrouchcontroller))
@@ -17,7 +21,7 @@ namespace SpellCasting
             }
 
             //always true
-            if (TryGetComponent<TEMPBobotCrouchController>(out var victimCrouchController))
+            if (TryGetComponent<TEMPBobotCrouchController>(out var victimCrouchController) && victimCrouchController.isBlocking)
             {
                 bool shouldBlock = victimCrouchController.isBlocking;
                 //if incoming attack has no upper/lower specified, you can block from either position
@@ -25,29 +29,101 @@ namespace SpellCasting
                 {
                     shouldBlock = true;
                 }
-                //if it does, block it if you both have the same upper/lower value
+                //if it does,
                 //todo bobot: rename crouched to upper/lower, also probably have an enum, yeah this sucks ass but it gonna  just wo-ork
                 else
                 {
-                    shouldBlock |= attackerCrouched.Value == victimCrouchController.isCrouched;
+                    //both bots are at the same height, block
+                    if (attackerCrouched.Value == victimCrouchController.isCrouched)
+                    {
+                        shouldBlock = true;
+                    }
+                    //if not
+                    else
+                    {
+                        //we were crouched, they were not, whiff
+                        if (victimCrouchController.isCrouched)
+                        {
+                            //whiff
+                            return;
+                        }
+                        //we were up, they were crouched, do not block
+                        else
+                        {
+                            shouldBlock = false;
+                            //leave
+                        }
+                    }
                 }
 
                 if (shouldBlock && armHealth > 0)//todo bobot: can early out of all this logic if we didn't have arm health anyways. // well maybe not because we can have blocking still be detected for something
                 {
+                    info.DamagingInfo.DamageValue /= 2;
                     TakeTheDamage(ref armHealth, info);
+                    SpawnEffect(info, 2, armHealth < 0);
+                    if (armHealth < 0)
+                    {
+                        Debug.LogWarning("BROKE ARMS!");
+                    }
                     return;
                 }
             }
-            //no blocking. if damage is unspecified, or enemy is not crouched, we take "core" health damage
-            if (!attackerCrouched.HasValue || attackerCrouched.Value == false)
+            //no blocking. if damage is unspecified, or enemy is at same level as us, we take "core" health damage
+            if (!attackerCrouched.HasValue || attackerCrouched.Value == victimCrouchController.isCrouched)
             {
-                base.TakeTheDamage(ref health, info);
+                TakeTheDamage(ref health, info);
+                SpawnEffect(info, 0, health < 0);
+                if (health < 0)
+                {
+                    Debug.LogWarning("BROKE HEALTH!");
+                }
             }
-            //no blocking. if the enemy was crouched, we take leg damage
+            //no blocking. enemy at different vertical level
             else
             {
-                base.TakeTheDamage(ref legHealth, info);
+                //we were crouched, they were high, whiff
+                if (victimCrouchController.isCrouched)
+                {
+                    //whiff
+                }
+                //we were not crouched, they were crouched, take leg damage
+                else
+                {
+                    TakeTheDamage(ref legHealth, info);
+                    SpawnEffect(info, 1, legHealth < 0);
+                    if (legHealth < 0)
+                    {
+                        Debug.LogWarning("BROKE LEGS!");
+                    }
+                }
             }
+        }
+
+        private void SpawnEffect(GetDamagedData info, int place, bool dunGotBroked)
+        {
+            EffectIndex effect = info.DamagingInfo.AttackerBody.teamIndex == TeamIndex.MONSTER ? EffectIndex.DAMAGENUMBER_FROMENEMY : EffectIndex.DAMAGENUMBER;
+            if (dunGotBroked)
+            {
+                effect = EffectIndex.BREAK;
+
+            }
+            Transform positionTransform;
+            switch (place)
+            {
+                default://health
+                case 0:
+                    positionTransform = chestPosition;
+                    break;
+                case 1://legs
+                    positionTransform = legsPosition;
+                    break;
+                case 2://arms
+                    positionTransform = armsPosition;
+                    effect = EffectIndex.DAMAGENUMBER_KILL;
+                    break;
+            }
+
+            EffectManager.SpawnEffect(effect, positionTransform.position, null, (int)info.DamagingInfo.DamageValue);
         }
     }
 }

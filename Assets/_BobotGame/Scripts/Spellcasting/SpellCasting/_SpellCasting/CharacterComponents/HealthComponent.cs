@@ -1,4 +1,6 @@
 ﻿using JetBrains.Annotations;
+using System;
+using System.Globalization;
 using UnityEngine;
 namespace SpellCasting
 {
@@ -24,7 +26,7 @@ namespace SpellCasting
         public float MaxHealth { get => maxHealth; }
 
         [SerializeField]
-        private CommonComponentsHolder commonComponents;
+        protected CommonComponentsHolder commonComponents;
         public CommonComponentsHolder CommonComponents => commonComponents;
 
         [SerializeField]
@@ -59,15 +61,11 @@ namespace SpellCasting
 
             PreModifyDamage?.Invoke(info);
 
-            TakeTheDamage(ref health, info);
+            JudgeTheDamage(info);
 
             DamageTypeCatalog.OnTakeDamageAll(info);
 
             OnDamageTaken?.Invoke(info);
-
-            EffectIndex effect = info.DamagingInfo.AttackerBody.teamIndex == TeamIndex.MONSTER ? EffectIndex.DAMAGENUMBER_FROMENEMY : EffectIndex.DAMAGENUMBER;
-
-            EffectManager.SpawnEffect(effect, transform.position, null, (int)info.DamagingInfo.DamageValue);
 
             if (Ded && deathComponent != null)
             {
@@ -75,10 +73,23 @@ namespace SpellCasting
             }
         }
 
+        protected virtual void JudgeTheDamage(GetDamagedData info)
+        {
+            TakeTheDamage(ref health, info);
+            SpawnEffect(info);
+        }
+
         //todo bobot nooooo we are doing a takedamage now nooo
         protected virtual void TakeTheDamage(ref float healthToHit, GetDamagedData info)
         {
             healthToHit -= info.DamagingInfo.DamageValue;
+        }
+
+        private void SpawnEffect(GetDamagedData info)
+        {
+            EffectIndex effect = info.DamagingInfo.AttackerBody.teamIndex == TeamIndex.MONSTER ? EffectIndex.DAMAGENUMBER_FROMENEMY : EffectIndex.DAMAGENUMBER;
+
+            EffectManager.SpawnEffect(effect, transform.position, null, (int)info.DamagingInfo.DamageValue);
         }
 
         public void Heal(HealingData heal)

@@ -14,7 +14,7 @@ namespace ActiveStates.Bobots
 
         protected override int comboHits => 2;
         protected override string hitboxName => "PunchHitbox";
-        protected override string effectOriginName => "PunchHitbox";
+        protected override string effectOriginName => "PunchEffectOrigin";
         protected override float damageCoefficient => StateInfo.BPC_Damage;
         protected override float baseCastStartTimeFraction => StateInfo.BPC_StartTimeFraction;
         protected override float baseCastEndTimeFraction => StateInfo.BPC_EndTimeFraction;
@@ -43,6 +43,7 @@ namespace ActiveStates.Bobots
             //animator.SetFloat("punch.playbackRate", 1 / castEndTime);
         }
 
+        //todo bobot: just move this to body and separate the concerns of movement and input like you were already planning you buffoon
         public override void OnFixedUpdate()
         {
             if (fixedAge < movementInterruptTime)
@@ -95,10 +96,10 @@ namespace ActiveStates.Bobots
             base.OnCastEnter();
 
             EnterSwing();
-            Vector3 scale = new Vector3(hits == 1 ? -1 : 1, 1, 1);
             Vector3 aimOut = inputBank.AimOut;
             aimOut.y = 0;
-            EffectManager.SpawnEffect(EffectIndex.SWIPE_LEFT, base.characterModel.ChildLocator.LocateByName(effectOriginName).transform.position, Util.DirectionQuaternion(aimOut), scale, characterModel.CharacterDirection.transform);
+            Transform effectOriginTransform = base.characterModel.ChildLocator.LocateByName(effectOriginName).transform;
+            EffectManager.SpawnEffect(EffectIndex.SWIPE_LEFT, effectOriginTransform.position, Util.DirectionQuaternion(aimOut), effectOriginTransform.lossyScale, characterModel.CharacterDirection.transform);
         }
     }
 }

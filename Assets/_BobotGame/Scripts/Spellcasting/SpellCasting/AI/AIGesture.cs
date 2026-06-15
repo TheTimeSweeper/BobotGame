@@ -8,9 +8,12 @@ namespace SpellCasting.AI
         public float duration;
 
         [SerializeField]
-        public int inputIndex;//todo bobot input index not stupid
+        private SkillButton skillButton;//todo bobot input index not stupid
         [SerializeField]
-        public int inputIndex2 = -1;
+        private SkillButton skillButton2 = SkillButton.None;
+
+        public int inputIndex => (int)skillButton;//todo bobot input index not stupid
+        public int inputIndex2 => (int)skillButton2;
 
         [SerializeField]
         public float CloseDistance;

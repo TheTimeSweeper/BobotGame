@@ -47,8 +47,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 910e6ad885264c8479abf7d9bebf6b9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bodyPrefab: {fileID: 6886800658204874175, guid: a5cb032c3d5a0fd4fb58e91dd3f3a4e5, type: 3}
   dontDestroyOnLoad: 0
   destroyOnBodyDeath: 0
+  reviveOnBodyDeath: 1
   currentBody: {fileID: 0}
 --- !u!114 &5638254006160183990
 MonoBehaviour:
@@ -64,6 +66,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gestureBehaviors:
   - {fileID: 11400000, guid: 88a37b81e9e041146808e50ba5a20ae2, type: 2}
+  - {fileID: 11400000, guid: ed0645a0b5249a349a950318a3d5efb5, type: 2}
+  - {fileID: 11400000, guid: f6a5e85d7feedae41a666f808ea77eb9, type: 2}
   AIInputController: {fileID: 5638254006160183991}
   master: {fileID: 5638254006160183993}
   noTargetOverrideInterestPoint: {fileID: 0}
@@ -72,7 +76,7 @@ MonoBehaviour:
   searchDistance: Infinity
   searchIntervalMin: 1
   searchIntervalMax: 2
-  chaseTimeMinimunm: 1
+  chaseTimeMinimunm: 0.5
   aiStateMachine: {fileID: 5638254006160183988}
 --- !u!114 &5638254006160183991
 MonoBehaviour:
@@ -94,8 +98,8 @@ MonoBehaviour:
   debug: 0
   deltaEnds: []
   deltaStarts: []
-  downInputs: 00000000
-  inputDownFrames: 00000000000000000000000000000000
+  downInputs: 00000000000000
+  inputDownFrames: 00000000000000000000000000000000000000000000000000000000
   aimStrength: 20
   gestureSpeedMultiplier: 0
 --- !u!114 &5638254006160183988

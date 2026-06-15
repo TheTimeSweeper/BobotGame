@@ -46,11 +46,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a1a1bd508dac014b9259b445881a70d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectIndex: 7
+  effectIndex: 500
   systems:
   - {fileID: 2822537845901004291}
   - {fileID: 23657298430142364}
   effectTime: 0.8
+  effectsWithIntParameter: []
 --- !u!1 &8063667176395291916
 GameObject:
   m_ObjectHideFlags: 0

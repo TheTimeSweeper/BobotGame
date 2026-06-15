@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
-using UnityEngine.Windows;
 
 namespace SpellCasting
 {
     public class AIInputController : InputController
     {
+        [EnumArray(typeof(SkillButton))]
         public bool[] downInputs = new bool[4];
+        [EnumArray(typeof(SkillButton))]
         public int[] inputDownFrames = new int[4];
 
         public float aimStrength= 20;
@@ -39,7 +40,7 @@ namespace SpellCasting
 
         private void FixedUpdate()
         {
-            for (int i = 0; i < inputDownFrames[i]; i++)
+            for (int i = 0; i < inputDownFrames.Length; i++)
             {
                 if (inputDownFrames[i] < 0)
                 {
@@ -98,15 +99,16 @@ namespace SpellCasting
 
         protected override Vector3 GetMovementInput()
         {
-            return transform.InverseTransformDirection(MoveDirection);
+            return forwardDirectionTransform.InverseTransformDirection(MoveDirection);
         }
 
         protected override void SetbuttonInputs()
         {
-            inputBank.Primary.UpdateInput(downInputs[0]);
-            inputBank.Block.UpdateInput(downInputs[1]);
-            inputBank.Shift.UpdateInput(downInputs[2]);
-            inputBank.Space.UpdateInput(downInputs[3]);
+            inputBank.Primary.UpdateInput(downInputs[(int)SkillButton.PRIMARY]);
+            inputBank.Block.UpdateInput(downInputs[(int)SkillButton.BLOCK]);
+            inputBank.Space.UpdateInput(downInputs[(int)SkillButton.DASH]);
+            inputBank.Heavy.UpdateInput(downInputs[(int)SkillButton.HEAVY]);
+            inputBank.Shift.UpdateInput(downInputs[(int)SkillButton.CROUCH]);
         }
     }
 }
