@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace SpellCasting
 {
+
     public class StateMachineLocator : ComponentLocator<ActiveStateMachine>
     {
         [SerializeField]

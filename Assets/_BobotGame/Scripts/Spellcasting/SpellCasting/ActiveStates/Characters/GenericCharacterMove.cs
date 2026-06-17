@@ -8,7 +8,7 @@ namespace ActiveStates.Characters
         public override void OnFixedUpdate()
         {
             base.OnFixedUpdate();
-            fixedMotorDriver.Direction = inputBank.GlobalMoveDirection;
+            fixedMotorDriver.DesiredDirection = inputBank.GlobalMoveDirection;
             fixedMotorDriver.DesiredSpeed = characterBody.stats.MoveSpeed;
 
             if (inputBank.AimOut != default)
@@ -17,7 +17,7 @@ namespace ActiveStates.Characters
             }
             else
             {
-                characterModel.CharacterDirection.DesiredDirection = fixedMotorDriver.Direction;
+                characterModel.CharacterDirection.DesiredDirection = fixedMotorDriver.DesiredDirection;
             }
 
             if (animator)
@@ -50,7 +50,7 @@ namespace ActiveStates.Characters
         public override void OnExit(bool machineDed = false)
         {
             base.OnExit(machineDed);
-            fixedMotorDriver.Direction = UnityEngine.Vector3.zero;
+            fixedMotorDriver.DesiredDirection = UnityEngine.Vector3.zero;
         }
     }
 }

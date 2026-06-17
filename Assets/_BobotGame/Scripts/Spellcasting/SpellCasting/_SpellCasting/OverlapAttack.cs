@@ -49,6 +49,7 @@ namespace SpellCasting
             for (int i = 0; i < colliders.Length; i++)
             {
                 Collider collider = colliders[i];
+                //the singular getcomponent
                 HurtBox hurtbox = collider.GetComponent<HurtBox>();
                 if (hurtbox != null)
                 {

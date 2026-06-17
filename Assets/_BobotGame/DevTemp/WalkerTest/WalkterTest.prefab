@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4721915304203704033}
   - component: {fileID: 515496728360747049}
-  - component: {fileID: 7823297225891369425}
   m_Layer: 0
   m_Name: PunchHitbox
   m_TagString: Untagged
@@ -45,27 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e8b6617ae5118f40bc3e4541383b788, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!65 &7823297225891369425
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 410252740676511966}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &647127299494595413
 GameObject:
   m_ObjectHideFlags: 0
@@ -138,7 +116,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3517022772120954114}
   - component: {fileID: 4473804218696601691}
-  - component: {fileID: 1534436545473010934}
   m_Layer: 0
   m_Name: KickHitbox
   m_TagString: Untagged
@@ -173,27 +150,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e8b6617ae5118f40bc3e4541383b788, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!65 &1534436545473010934
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3997460975158027876}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5031863233459187938
 GameObject:
   m_ObjectHideFlags: 0
@@ -326,6 +282,8 @@ GameObject:
   - component: {fileID: 6447476819792104122}
   - component: {fileID: 9036484470051490459}
   - component: {fileID: 6486320182789022237}
+  - component: {fileID: 4088083360257713007}
+  - component: {fileID: 2398248412024188298}
   m_Layer: 0
   m_Name: WalkterTest
   m_TagString: Untagged
@@ -369,6 +327,7 @@ MonoBehaviour:
   FixedMotorDriver: {fileID: 875555450327082444}
   CharacterModel: {fileID: 2717654617168400845}
   StateMachineLocator: {fileID: 9053838663520553698}
+  HurtBoxLocator: {fileID: 2398248412024188298}
   TeamComponent: {fileID: 5165419906454591722}
   Animator: {fileID: 5632004902874295828}
   SkillController: {fileID: 127141495395204661}
@@ -453,7 +412,7 @@ MonoBehaviour:
   commonComponents: {fileID: 586541723876753461}
   dontDestroyOnLoad: 0
   corePositionHeightOffset: 0
-  overrideCorePositionTransform: {fileID: 0}
+  overrideCorePositionTransform: {fileID: 4703705933820143015}
 --- !u!114 &5384333025304485294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -563,10 +522,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   commonComponents: {fileID: 586541723876753461}
   skillSlots:
-  - skillInfo: {fileID: 11400000, guid: 50dad283fe509a84f9cf9d43a497c6a6, type: 2}
+  - skillInfo: {fileID: 11400000, guid: 97790971175498048adb3679099a75d4, type: 2}
     skillButton: 1
     autoCast: 0
-  - skillInfo: {fileID: 11400000, guid: 16a6bfeafea633c46b2b3b8ed627271c, type: 2}
+  - skillInfo: {fileID: 11400000, guid: c93191e17dd902445b29563dac9530cc, type: 2}
     skillButton: 4
     autoCast: 0
   - skillInfo: {fileID: 11400000, guid: 7414985e857d4744e8153655e52eef96, type: 2}
@@ -658,6 +617,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isCrouched: 0
   isBlocking: 0
+--- !u!114 &4088083360257713007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6662274689379214683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e5e249429e99b54eb65cf94ea6c7b31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  commonComponents: {fileID: 586541723876753461}
+  knockbackRespectThreshold: 5
+  hitStunThreshold: 80
+  hitMoveThreshold: 160
+--- !u!114 &2398248412024188298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6662274689379214683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62578a8615c1abe41ab7fe44dc2350c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  componentList:
+  - {fileID: 330996669607548157}
 --- !u!1 &7911952377910462530
 GameObject:
   m_ObjectHideFlags: 0
@@ -758,6 +747,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthcomponent: {fileID: 7568251913772495062}
+  collider: {fileID: 4595569518287327300}
 --- !u!1001 &2252489445357130629
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4524,6 +4514,11 @@ Transform:
 --- !u!4 &1820296859008749653 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8790870968232983600, guid: 3c2d78e6fa3b33c49b6ce175c2728449, type: 3}
+  m_PrefabInstance: {fileID: 2252489445357130629}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4703705933820143015 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6774707514919040546, guid: 3c2d78e6fa3b33c49b6ce175c2728449, type: 3}
   m_PrefabInstance: {fileID: 2252489445357130629}
   m_PrefabAsset: {fileID: 0}
 --- !u!95 &5632004902874295828 stripped

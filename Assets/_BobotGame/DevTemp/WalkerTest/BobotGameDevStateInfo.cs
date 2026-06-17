@@ -1,4 +1,5 @@
 using SpellCasting;
+using SpellCasting.Projectiles;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "SIBobotGameDev", menuName = "BobotGame/BobotGameStateInfo")]
@@ -32,4 +33,17 @@ public class BobotGameDevStateInfo : ActiveStateInfo
     public float Kick_AnimationSpeed;
     public float Kick_OtherStateInterruptTimeFraction;
     public float Kick_baseMovementInterruptTimeFraction;
+    [Header("Deadlift punch")]
+    public float CPunch_chargeTime;
+    public float CPunch_holdGiveupTime;
+    public float CPunch_StartTimeFraction;
+    public float CPunch_EndTimeFraction;
+    public float CPunch_Duration;
+    public float CPunch_damageMin;
+    public float CPunch_damageMax;
+    public float CPunch_knockbackMin;
+    public float CPunch_knockbackMax;
+    [Header("Deadlift grapple")]
+    public ProjectileController Grap_Prefab;
+    public float Grap_Speed;
 }

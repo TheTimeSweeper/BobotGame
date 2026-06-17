@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c5bbb48daf452a54a91724cf086ba2df, type: 3}
-  m_Name: skWalkerTestDash
+  m_Name: skDeadliftChargePunch
   m_EditorClassIdentifier: 
-  displayName: dash
+  displayName: deadliftpunch
   baseCooldown: -0.03
   state:
-    activeStateName: ActiveStates.Bobots.BasicDash
+    activeStateName: ActiveStates.Bobots.DeadliftChargedPunchChargeUp
   stateMachineName: Weapon
-  interruptingPriority: 1
+  interruptingPriority: 2
   autoCast: 0

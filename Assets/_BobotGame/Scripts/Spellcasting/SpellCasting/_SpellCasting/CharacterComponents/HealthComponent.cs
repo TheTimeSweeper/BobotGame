@@ -65,8 +65,6 @@ namespace SpellCasting
 
             DamageTypeCatalog.OnTakeDamageAll(info);
 
-            OnDamageTaken?.Invoke(info);
-
             if (Ded && deathComponent != null)
             {
                 deathComponent.GetRektLol();
@@ -80,9 +78,11 @@ namespace SpellCasting
         }
 
         //todo bobot nooooo we are doing a takedamage now nooo
-        protected virtual void TakeTheDamage(ref float healthToHit, GetDamagedData info)
+        protected virtual void TakeTheDamage(ref float healthToHit, GetDamagedData info, bool callEvent = true)
         {
             healthToHit -= info.DamagingInfo.DamageValue;
+
+            OnDamageTaken?.Invoke(info);
         }
 
         private void SpawnEffect(GetDamagedData info)

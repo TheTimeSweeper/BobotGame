@@ -86,3 +86,14 @@ MonoBehaviour:
   Kick_AnimationSpeed: 3
   Kick_OtherStateInterruptTimeFraction: 0.8
   Kick_baseMovementInterruptTimeFraction: 0.9
+  CPunch_chargeTime: 0.3
+  CPunch_holdGiveupTime: 3
+  CPunch_StartTimeFraction: 0
+  CPunch_EndTimeFraction: 0.3
+  CPunch_Duration: 0.3
+  CPunch_damageMin: 0
+  CPunch_damageMax: 1
+  CPunch_knockbackMin: 30
+  CPunch_knockbackMax: 200
+  Grap_Prefab: {fileID: 7053902361285992279, guid: a76134462c4a57f49801cd3795749171, type: 3}
+  Grap_Speed: 10

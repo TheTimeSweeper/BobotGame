@@ -57,5 +57,10 @@ namespace SpellCasting
             Debug.LogError($"could not find child with the name {name}", this);
             return default;
         }
+
+        public virtual T[] GetAll()
+        {
+            return componentList;
+        }
     }
 }

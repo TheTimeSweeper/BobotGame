@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace SpellCasting.Projectiles
 {
+
     public class ProjectileController : MonoBehaviour
     {
         [SerializeField]

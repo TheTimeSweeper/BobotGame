@@ -25,7 +25,11 @@ namespace ActiveStates.Bobots
         public override void OnEnter()
         {
             base.OnEnter();
+            PlayKickAnimation();
+        }
 
+        private void PlayKickAnimation()
+        {
             animator.Play("Kick", 0, 0);
             animator.SetFloat("kick.playbackRate", StateInfo.Kick_AnimationSpeed * baseCastEndTimeFraction);
         }

@@ -1,9 +1,10 @@
-﻿using Unity.VisualScripting;
+﻿using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace SpellCasting
 {
-    public class FixedMotorDriver : MonoBehaviour
+    public class FixedMotorDriver : MonoBehaviour/*, IHasCommonComponents*/
     {
         [SerializeField]
         public MotorEngine engine;
@@ -12,9 +13,24 @@ namespace SpellCasting
         private float controlledAcceleration= 100;
 
         [SerializeField]
-        private float idleInertia= 10;
+        private float idleInertia = 10;
 
-        public Vector3 Direction { get; set; }
+        //[Header("Knockback")]
+        //[SerializeField]
+        //private CommonComponentsHolder optionalCommonComponents;
+        //public CommonComponentsHolder CommonComponents => optionalCommonComponents;
+
+        public Vector3 DesiredVelocity
+        {
+            get => DesiredDirection.normalized * DesiredSpeed;
+            set
+            {
+                DesiredDirection = value.normalized;
+                DesiredSpeed = value.magnitude;
+            }
+        }
+        
+        public Vector3 DesiredDirection { get; set; }
         public float DesiredSpeed { get; set; }
         public Vector3 AddedMotion { get; set; }
         public Vector3 AddedMotion2 { get; set; }
@@ -27,12 +43,50 @@ namespace SpellCasting
 
         private Vector3 _lastPosition;
 
+        //private bool _subscribedToTakeDamage;
+
+        //private void Awake()
+        //{
+        //    if (optionalCommonComponents && optionalCommonComponents.HealthComponent)
+        //    {
+        //        SubscribeToTakeDamage(true);
+        //    }
+        //}
+
+        //void SubscribeToTakeDamage(bool shouldSubscribe)
+        //{
+        //    if(shouldSubscribe == _subscribedToTakeDamage)
+        //    {
+        //        return;
+        //    }
+        //    _subscribedToTakeDamage = shouldSubscribe;
+
+        //    if(optionalCommonComponents && optionalCommonComponents.HealthComponent)
+        //    {
+        //        if (shouldSubscribe)
+        //        {
+        //            optionalCommonComponents.HealthComponent.OnDamageTaken += OnTakeDamage_KnockBack;
+        //        } 
+        //        else
+        //        {
+        //            optionalCommonComponents.HealthComponent.OnDamageTaken -= OnTakeDamage_KnockBack;
+        //        }
+        //    }
+        //}
+
+        //private void OnTakeDamage_KnockBack(GetDamagedData getDamagedInfo)
+        //{
+        //    //set stunned state
+        //    //apply velocity
+        //    //wait I already did this
+        //}
+
         void FixedUpdate()
         {
             _deltaPosition = transform.position - _lastPosition;
-            if (Direction.sqrMagnitude > 1) Direction = Direction.normalized;
-            _desiredVelocity = Direction * DesiredSpeed;
-            float lerpValue = Direction == Vector3.zero ? idleInertia : controlledAcceleration;
+            if (DesiredDirection.sqrMagnitude > 1) DesiredDirection = DesiredDirection.normalized;
+            _desiredVelocity = DesiredDirection * DesiredSpeed;
+            float lerpValue = DesiredDirection == Vector3.zero ? idleInertia : controlledAcceleration;
             _currentVelocity = Util.ExpDecayLerp(_currentVelocity, _desiredVelocity, lerpValue, Time.fixedDeltaTime);
 
             //jam faster deceleration value for fuckin uhh stopping and moving opposite direction

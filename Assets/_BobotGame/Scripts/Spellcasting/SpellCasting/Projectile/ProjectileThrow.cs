@@ -9,6 +9,9 @@ namespace SpellCasting.Projectiles
         [SerializeField]
         private Rigidbody rigidBody;
 
+        [SerializeField]
+        private float speed;
+
         void Reset()
         {
             rigidBody = GetComponent<Rigidbody>();
@@ -19,7 +22,7 @@ namespace SpellCasting.Projectiles
             transform.position = ProjectileData.StartPosition;
             transform.rotation = Quaternion.LookRotation(ProjectileData.AimDirection, Vector3.up);
             rigidBody.isKinematic = false;
-            rigidBody.linearVelocity = ProjectileData.AimDirection;
+            rigidBody.linearVelocity = ProjectileData.AimDirection * speed;
         }
     }
 }

@@ -11,6 +11,7 @@ namespace ActiveStates.Characters
         protected abstract string hitboxName { get; }
         protected virtual string effectOriginName { get; }
         protected abstract float damageCoefficient { get; }
+        protected virtual float knockbackCoefficient => 0;
         protected virtual float preAttackMoveShift => 0.5f;
         protected virtual float preAttackMoveShiftDecay => 16;
         protected virtual float attackMoveShift => 0.5f;
@@ -43,8 +44,8 @@ namespace ActiveStates.Characters
                 OwnerGameObject = gameObject,
                 OwnerBody = characterBody,
                 Team = teamComponent.TeamIndex,
-                //OverrideKnockbackDirection = characterModel.transform.forward,
-                //KnockbackForce = 0.4f
+                OverrideKnockbackDirection = characterModel.transform.forward,
+                KnockbackForce = knockbackCoefficient
             };
 
             //EffectManager.SpawnEffect(EffectIndex.SOUND_FAST, transform.position, null, 11);

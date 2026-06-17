@@ -61,7 +61,7 @@ namespace SpellCasting
             inputBank.Block.UpdateInput(Input.GetMouseButton(1));
             inputBank.Space.UpdateInput(Input.GetKey(KeyCode.Space));
             inputBank.Shift.UpdateInput(Input.GetKey(KeyCode.LeftShift));
-            inputBank.Heavy.UpdateInput(Input.GetKey(KeyCode.F));
+            inputBank.Heavy.UpdateInput(Input.GetKey(KeyCode.LeftControl));
             inputBank.E.UpdateInput(Input.GetKey(KeyCode.E));
         }
 

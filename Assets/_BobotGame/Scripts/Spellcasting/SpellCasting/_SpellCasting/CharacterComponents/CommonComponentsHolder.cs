@@ -18,6 +18,7 @@ namespace SpellCasting
         public FixedMotorDriver FixedMotorDriver;
         public CharacterModel CharacterModel;
         public StateMachineLocator StateMachineLocator;
+        public HurtBoxLocator HurtBoxLocator;
         public TeamComponent TeamComponent;
         public Animator Animator;
         public SkillController SkillController;
@@ -47,6 +48,7 @@ namespace SpellCasting
             Animator = GetComponent<Animator>();
             SkillController = GetComponent<SkillController>();
             InputBank = GetComponentInChildren<InputBank>();
+            HurtBoxLocator = GetComponent<HurtBoxLocator>();
         }
     }
 }
