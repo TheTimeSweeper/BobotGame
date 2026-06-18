@@ -9,10 +9,11 @@ using UnityEngine.UIElements;
 [CustomPropertyDrawer(typeof(SerializableActiveState))]
 public class SerializableActiveStateDrawer : PropertyDrawer
 {
-    string field;
-
     public static IEnumerable<System.Type> allStates;
-
+    
+    string field;
+    bool wasFocused;
+    
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
         EditorGUI.BeginProperty(position, label, property);
@@ -23,22 +24,22 @@ public class SerializableActiveStateDrawer : PropertyDrawer
         allStates = ActiveStateCatalog.FindAllStateTypes();
 
         //todo bobot probably don't use reflection and two giant foreach loops every single ongui
-        bool found = false;
+        bool preFind = false;
         string foundName = "";
         foreach (System.Type t in allStates)
         {
             if (state.activeStateName == t.FullName)
             {
                 foundName = t.Name;
-                found = true; 
+                preFind = true; 
                 break;
             }
         }
 
-        label.text = found ? $"{label.text} ({foundName})" : $"{label.text} (Invalid)";
+        label.text = preFind ? $"{label.text} ({foundName})" : $"{label.text} (Invalid)";
         
         var guiStyle = new GUIStyle(EditorStyles.label);
-        if (!found)
+        if (!preFind)
         {
             guiStyle.normal.textColor = Color.red;
         }
@@ -46,31 +47,47 @@ public class SerializableActiveStateDrawer : PropertyDrawer
         //add a label and get the position to start the grid
         Rect contentposition = EditorGUI.PrefixLabel(position, GUIUtility.GetControlID(FocusType.Keyboard), label, guiStyle);
 
-        field = EditorGUI.TextField(contentposition, state.activeStateName);
+        //ai 3
+        string myControlName = "MyTextField_" + property.propertyPath;
+        GUI.SetNextControlName(myControlName);
 
-        //ai
-        // Generate a unique ID for this property field
-        int controlID = GUIUtility.GetControlID(FocusType.Keyboard);
+        if (wasFocused)
+        {
+            field = EditorGUI.TextField(contentposition, field);
+        } 
+        else
+        {
+            field = EditorGUI.TextField(contentposition, state.activeStateName);
+        }
 
-        // Check if this property is currently focused/highlighted
-        bool isFocused = (GUIUtility.keyboardControl == controlID-1);
+        ////ai -- didn't work
+        //// Generate a unique ID for this property field
+        //int controlID = GUIUtility.GetControlID(FocusType.Keyboard);
 
-        //state.activeStateName = field;
-        found = false;
+        //// Check if this property is currently focused/highlighted
+        //bool isFocused = (GUIUtility.keyboardControl == controlID-1);
+        ////ai 2 -- didn't work
+        //bool isFocused = EditorGUIUtility.editingTextField;
+        //ai 3
+        bool isFocused = GUI.GetNameOfFocusedControl() == myControlName;
+        wasFocused = isFocused;
 
+
+        bool found = false;
+        
+        string newField = "";
         string matchList = "";
         int matches = 0;
-        string entry = field;
         foreach (System.Type t in allStates)
         {
-            if (GetPartialMatch(t.FullName, entry))
+            if (GetPartialMatch(t.FullName, field))
             {
                 if (!found)
                 {
                     found = true;
-                    field = t.FullName;
-                    matchList = t.FullName.Replace("ActiveStates.", "");
-                    matches++;
+                    newField = t.FullName;
+                    matchList = $"-->{t.FullName.Replace("ActiveStates.", "")}";
+                    matches = 1;
                 }
                 else
                 {
@@ -86,11 +103,12 @@ public class SerializableActiveStateDrawer : PropertyDrawer
                 }
             }
         }
-        if (!isFocused)
+        if (!found)
         {
-            state.activeStateName = field;
+            state.activeStateName = newField;
             property.boxedValue = state;
         }
+
         if (matches > 0 && isFocused)
         {
             Rect window = position;
@@ -102,6 +120,11 @@ public class SerializableActiveStateDrawer : PropertyDrawer
             var guiStyle2 = new GUIStyle(EditorStyles.label);
             guiStyle2.normal.textColor = Color.black;
             EditorGUI.LabelField(window, new GUIContent(matchList), guiStyle2);
+        }
+        if (!isFocused)
+        {
+            state.activeStateName = newField;
+            property.boxedValue = state;
         }
         //var newLabel = new GUIContent(templabel ? labelNotFound : labelFind);
         //if (EditorGUI.ToggleLeft(contentposition, newLabel, false))
