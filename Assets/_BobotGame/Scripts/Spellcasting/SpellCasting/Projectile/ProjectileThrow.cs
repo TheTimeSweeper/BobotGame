@@ -2,7 +2,7 @@
 
 namespace SpellCasting.Projectiles
 {
-    public class ProjectileThrow : MonoBehaviour, IProjectileSubComponent, IProjectileDormant
+    public class ProjectileThrow : MonoBehaviour, IProjectileSubComponent, IProjectileInitialized
     {
         public FireProjectileData ProjectileData { get; set; }
 

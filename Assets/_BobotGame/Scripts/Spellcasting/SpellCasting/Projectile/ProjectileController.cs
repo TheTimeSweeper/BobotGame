@@ -39,7 +39,7 @@ namespace SpellCasting.Projectiles
                 }
             }
 
-            IProjectileDormant[] attachedDormantComponents = GetComponents<IProjectileDormant>();
+            IProjectileInitialized[] attachedDormantComponents = GetComponents<IProjectileInitialized>();
             for (int i = 0; i < attachedDormantComponents.Length; ++i)
             {
                 if(!dormantComponents.Contains((MonoBehaviour)attachedDormantComponents[i]))
@@ -68,7 +68,7 @@ namespace SpellCasting.Projectiles
 
             for (int i = 0; i < dormantComponents.Count; i++)
             {
-                IProjectileDormant initializedComponent = dormantComponents[i] as IProjectileDormant;
+                IProjectileInitialized initializedComponent = dormantComponents[i] as IProjectileInitialized;
                 if (initializedComponent != null)
                 {
                     initializedComponent.ProjectileWake();

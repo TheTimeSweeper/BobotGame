@@ -2,7 +2,7 @@
 
 namespace SpellCasting.Projectiles
 {
-    public class ProjectileOverlapKnockback : ProjectileOverlap, IProjectileDormant
+    public class ProjectileOverlapKnockback : ProjectileOverlap, IProjectileInitialized
     {
         [SerializeField]
         private float force = 10;

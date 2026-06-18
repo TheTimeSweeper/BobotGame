@@ -3,7 +3,7 @@
 namespace SpellCasting.Projectiles
 {
     [RequireComponent(typeof(ProjectileController))]
-    public class ProjectileDisableCollisionsWithOwner : MonoBehaviour, IProjectileSubComponent, IProjectileDormant
+    public class ProjectileDisableCollisionsWithOwner : MonoBehaviour, IProjectileSubComponent, IProjectileInitialized
     {
         public FireProjectileData ProjectileData { get; set; }
 

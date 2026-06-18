@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 namespace SpellCasting.Projectiles
 {
-    public class ProjectileOverlapAttack : ProjectileOverlap, IProjectileDormant
+    public class ProjectileOverlapAttack : ProjectileOverlap, IProjectileInitialized
     {
         [SerializeField]
         private float damageCoefficient = 1;

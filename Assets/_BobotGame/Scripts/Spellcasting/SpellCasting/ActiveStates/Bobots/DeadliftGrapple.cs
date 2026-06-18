@@ -1,6 +1,7 @@
 ﻿using SpellCasting;
 using SpellCasting.Projectiles;
 using System;
+using UnityEngine;
 
 namespace ActiveStates.Bobots
 {
@@ -14,6 +15,9 @@ namespace ActiveStates.Bobots
 
         private ProjectileController projectile;
 
+        private GameObject armMeshTransform;
+        private GameObject handMeshTransform;
+
         public override void OnEnter()
         {
             base.OnEnter();
@@ -26,6 +30,18 @@ namespace ActiveStates.Bobots
             };
             projectile = UnityEngine.Object.Instantiate<ProjectileController>(StateInfo.Grap_Prefab);
             projectile.Init(projectileInfo);
+
+            armMeshTransform = characterModel.ChildLocator.LocateByName("DeadliftMeshArmWires")?.gameObject;
+            handMeshTransform = characterModel.ChildLocator.LocateByName("DeadliftMesh.hand")?.gameObject;
+
+            if (armMeshTransform)
+            {
+                armMeshTransform.SetActive(false);
+            }
+            if (handMeshTransform)
+            {
+                handMeshTransform.SetActive(false);
+            }
         }
 
         public override void OnFixedUpdate()
@@ -44,6 +60,15 @@ namespace ActiveStates.Bobots
             if (projectile)
             {
                 UnityEngine.Object.Destroy(projectile.gameObject);
+            }
+
+            if (armMeshTransform)
+            {
+                armMeshTransform.SetActive(true);
+            }
+            if (handMeshTransform)
+            {
+                handMeshTransform.SetActive(true);
             }
         }
 

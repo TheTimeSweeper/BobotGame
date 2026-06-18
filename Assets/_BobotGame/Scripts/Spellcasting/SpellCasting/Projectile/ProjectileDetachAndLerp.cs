@@ -2,7 +2,7 @@
 
 namespace SpellCasting.Projectiles
 {
-    public class ProjectileDetachAndLerp : MonoBehaviour, IProjectileDormant, IProjectileSubComponent
+    public class ProjectileDetachAndLerp : MonoBehaviour, IProjectileInitialized, IProjectileSubComponent
     {
         [SerializeField]
         private Transform lerpedView;

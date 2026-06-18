@@ -1,6 +1,6 @@
 ﻿namespace SpellCasting.Projectiles
 {
-    public interface IProjectileDormant
+    public interface IProjectileInitialized
     {
         void ProjectileWake();
     }

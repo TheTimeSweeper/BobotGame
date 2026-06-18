@@ -2,7 +2,7 @@
 
 namespace SpellCasting.Projectiles
 {
-    public class ProjectileOverlapPusher : ProjectileOverlap, IProjectileDormant
+    public class ProjectileOverlapPusher : ProjectileOverlap, IProjectileInitialized
     {
         [SerializeField]
         private Rigidbody rigidBody;

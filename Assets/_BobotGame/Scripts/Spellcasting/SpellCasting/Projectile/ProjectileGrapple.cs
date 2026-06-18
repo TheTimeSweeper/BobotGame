@@ -2,17 +2,39 @@
 
 namespace SpellCasting.Projectiles
 {
-    public class ProjectileGrapple : MonoBehaviour, IProjectileSubComponent
+    public class ProjectileGrapple : MonoBehaviour, IProjectileSubComponent, IProjectileInitialized
     {
         public FireProjectileData ProjectileData { get ; set ; }
 
         [SerializeField]
         private Rigidbody selfRigidBody;
+        [SerializeField]
+        private bool ignoreY;
+
+        [SerializeField]
+        private Transform ReelStretcher;
+        [SerializeField]
+        private string ReelPointVisualChildName;
 
         public float pullForce;
 
         private FixedMotorDriver targetMotor;
         private Transform pullPoint;
+        private Transform reelPointVisualChild;
+
+        public void ProjectileWake()
+        {
+            reelPointVisualChild = ProjectileData.OwnerBody.CommonComponents.CharacterModel.ChildLocator.LocateByName(ReelPointVisualChildName);
+        }
+
+        void LateUpdate()
+        {
+            if (!reelPointVisualChild || !ReelStretcher)
+                return;
+            var difference = reelPointVisualChild.position - transform.position;
+            ReelStretcher.rotation = Util.DirectionQuaternion(difference);
+            ReelStretcher.localScale = new Vector3(1, 1, difference.magnitude);
+        }
 
         private void OnCollisionEnter(Collision collision)
         {
@@ -39,7 +61,12 @@ namespace SpellCasting.Projectiles
         {
             if (targetMotor)
             {
-                targetMotor.OverrideVelocity = (pullPoint.transform.position - targetMotor.transform.position).normalized * pullForce;
+                Vector3 difference = (pullPoint.transform.position - targetMotor.transform.position);
+                if (ignoreY)
+                {
+                    difference.y = 0;
+                }
+                targetMotor.OverrideVelocity = difference.normalized * pullForce;
             }
         }
     }
