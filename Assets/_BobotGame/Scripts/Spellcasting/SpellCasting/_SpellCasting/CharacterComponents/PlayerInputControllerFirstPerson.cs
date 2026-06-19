@@ -21,14 +21,14 @@ namespace SpellCasting
             {
                 return lastAimPosition;
             }
-            if (!Util.DebugKey)
+            if (!Util.DebugKeyG)
             {
                 lastCamPosition = cameraController.CameraPoint.position;
                 lastCamRotation = cameraController.CameraPoint.rotation;
             }
             if (Physics.Raycast(cameraController.CameraPoint.position, cameraController.CameraPoint.forward, out var raycastHit, maxInputRange, LayerInfo.Hurtbox.layerMask.value))
             {
-                if (Util.DebugKey)
+                if (Util.DebugKeyG)
                 {
                     Debug.DrawLine(cameraController.CameraPoint.position, raycastHit.point);
                 }
@@ -61,7 +61,7 @@ namespace SpellCasting
             inputBank.Block.UpdateInput(Input.GetMouseButton(1));
             inputBank.Space.UpdateInput(Input.GetKey(KeyCode.Space));
             inputBank.Shift.UpdateInput(Input.GetKey(KeyCode.LeftShift));
-            inputBank.Heavy.UpdateInput(Input.GetKey(KeyCode.LeftControl));
+            inputBank.Heavy.UpdateInput(Input.GetKey(KeyCode.F));
             inputBank.E.UpdateInput(Input.GetKey(KeyCode.E));
         }
 

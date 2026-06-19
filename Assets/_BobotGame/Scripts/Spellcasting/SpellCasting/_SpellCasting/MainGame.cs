@@ -1,15 +1,10 @@
-﻿using SpellCasting.World;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace SpellCasting
 {
     public class MainGame : MonoBehaviour
     {
-        [SerializeField]
-        private RoomCatalog TEMPRoomCatalog;
 
-        [SerializeField]
-        private ElementCatalog TEMPElementCatalog;
 
         public static MainGame Instance { get; private set; }
 
@@ -31,11 +26,8 @@ namespace SpellCasting
 
         public void InitializeGame()
         {
-            TEMPElementCatalog.InitWithMainGame();
 
             SavedData = SavedData.LoadOrCreate();
-
-            TEMPRoomCatalog.InitWithMainGame();
         }
 
         private void Update()

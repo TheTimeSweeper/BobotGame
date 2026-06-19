@@ -12,7 +12,7 @@ namespace ActiveStates.Heroes.Mars
         }
         public override void ModifyNextState(ref ActiveState state)
         {
-            if (hits == 1)
+            if (currentComboHit == 1)
             {
                 state = new MarsSpin();
             }
@@ -70,7 +70,7 @@ namespace ActiveStates.Heroes.Mars
         }
         public override void ModifyNextState(ref ActiveState state)
         {
-            if (hits == 1)
+            if (currentComboHit == 1)
             {
                 state = new MarsBigSpin();
             }
@@ -99,7 +99,7 @@ namespace ActiveStates.Heroes.Mars
         }
         public override void ModifyNextState(ref ActiveState state)
         {
-            if (hits == 1)
+            if (currentComboHit == 1)
             {
                 state = new MarsDoubleSpin();
             }

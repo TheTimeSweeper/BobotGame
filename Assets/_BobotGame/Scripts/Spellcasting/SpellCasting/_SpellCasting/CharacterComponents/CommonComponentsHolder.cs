@@ -13,8 +13,7 @@ namespace SpellCasting
         public HealthComponent HealthComponent;
         public InputBank InputBank;
         public CharacterBody CharacterBody;
-        public Caster Caster;
-        public ManaComponent ManaComponent;
+        public StaminaComponent StaminaComponent;
         public FixedMotorDriver FixedMotorDriver;
         public CharacterModel CharacterModel;
         public StateMachineLocator StateMachineLocator;
@@ -24,6 +23,9 @@ namespace SpellCasting
         public SkillController SkillController;
         public ExpController expController;
         public StateInfoHolder stateInfoHolder;
+
+        [HideInInspector]
+        public ManaComponent ManaComponent;
 
         private void Reset()
         {
@@ -39,8 +41,7 @@ namespace SpellCasting
             HealthComponent = GetComponent<HealthComponent>();
             InputBank = GetComponent<InputBank>();
             CharacterBody = GetComponent<CharacterBody>();
-            Caster = GetComponent<Caster>();
-            ManaComponent = GetComponent<ManaComponent>();
+            StaminaComponent = GetComponent<StaminaComponent>();
             FixedMotorDriver = GetComponent<FixedMotorDriver>();
             CharacterModel = GetComponentInChildren<CharacterModel>();
             StateMachineLocator = GetComponent<StateMachineLocator>();

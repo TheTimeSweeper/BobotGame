@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 namespace SpellCasting
 {
@@ -48,6 +49,7 @@ namespace SpellCasting
         }
     }
 
+    [System.Serializable]
     public class VariableNumberStat : VariableStat<float>
     {
         public VariableNumberStat(float baseValue) : base(baseValue) { }
@@ -68,6 +70,16 @@ namespace SpellCasting
         {
             base.ApplyOverrideModifier(value, id, priority);
             Modifiers.Add(new OverrideStatModifier(value, id, priority));
+        }
+
+        public static implicit operator VariableNumberStat(float value)
+        {
+            return new VariableNumberStat(value);
+        }
+
+        public static implicit operator VariableNumberStat(int value)
+        {
+            return new VariableNumberStat(value);
         }
 
         public static implicit operator float(VariableNumberStat stat)
@@ -97,10 +109,8 @@ namespace SpellCasting
         }
     }
 
-    [System.Serializable]
     public abstract class VariableStat
     {
-        //jam wait i am not spending game jam time writing a custom property drawer like an idiot
     }
 
     public abstract class VariableStat<T> : VariableStat
@@ -112,12 +122,17 @@ namespace SpellCasting
         protected VariableStat(T baseValue)
         {
             _baseValue = baseValue;
+            _modifiers = new List<VariableStatModifier<T>>();
+            dirty = true;
+            UpdateValueWithModifiers();
         }
 
         protected bool dirty = true;
 
+        [SerializeField]
         private T _baseValue;
-        private T _lastValue;
+        [SerializeField]
+        private T _lastModifiedValue;
         public T Value
         {
             get
@@ -125,32 +140,64 @@ namespace SpellCasting
                 if (dirty)
                 {
                     dirty = false;
-                    Modifiers.Sort((mod1, mod2) =>
-                    {
-                        if (mod1.priority > mod2.priority)
-                            return -1;
-                        if (mod1.priority < mod2.priority)
-                            return 1;
-                        return 0;
-                    });
-
-                    T modifiedValue = _baseValue;
-                    for (int i = 0; i < Modifiers.Count; i++)
-                    {
-                        Modifiers[i].ModifyStat(ref modifiedValue);
-                    }
-                    _lastValue = modifiedValue;
+                    _lastModifiedValue = UpdateValueWithModifiers();
                 }
-                return _lastValue;
-            }
-            set
-            {
-                _baseValue = value;
-                dirty = true;
+                return _lastModifiedValue;
             }
         }
 
-        public List<VariableStatModifier<T>> Modifiers = new List<VariableStatModifier<T>>();
+        private T UpdateValueWithModifiers()
+        {
+            Modifiers.Sort((mod1, mod2) =>
+            {
+                if (mod1.priority > mod2.priority)
+                    return -1;
+                if (mod1.priority < mod2.priority)
+                    return 1;
+                return 0;
+            });
+
+            T modifiedValue = _baseValue;
+            for (int i = 0; i < Modifiers.Count; i++)
+            {
+                Modifiers[i].ModifyStat(ref modifiedValue);
+            }
+            onValueChanged?.Invoke(modifiedValue);
+            return modifiedValue;
+        }
+
+        public event Action<T> onValueChanged;
+
+        public V Clone<V>() where V : VariableStat<T>, new()
+        {
+            V newStat = new V();
+            newStat._baseValue = _baseValue;
+            newStat._modifiers = Modifiers;
+            return newStat;
+        }
+
+        private List<VariableStatModifier<T>> _modifiers;
+        public List<VariableStatModifier<T>> Modifiers
+        {
+            get
+            {
+                if (_modifiers == null)
+                {
+                    _modifiers = new List<VariableStatModifier<T>>();
+                }
+                return _modifiers;
+            }
+        }
+
+        public void DebugOverrideBaseValue(T value)
+        {
+            _baseValue = value;
+            dirty = true;
+        }
+        public T DebugGetBaseValue()
+        {
+            return _baseValue;
+        }
 
         public virtual void ApplyAddModifier(T value, string id, float priority = BASE_ADD_PRIORITY)
         {

@@ -21,9 +21,7 @@ namespace SpellCasting
         protected float health;
         public float Health { get => health; }
 
-        [SerializeField]
-        private float maxHealth;
-        public float MaxHealth { get => maxHealth; }
+        public float MaxHealth => commonComponents.CharacterBody.stats.MaxHealth;
 
         [SerializeField]
         protected CommonComponentsHolder commonComponents;
@@ -36,7 +34,6 @@ namespace SpellCasting
 
         public void Init(float health)
         {
-            maxHealth = health;
             this.health = health;
         }
 
@@ -96,14 +93,14 @@ namespace SpellCasting
         {
             PreModifyHeal?.Invoke(heal);
 
-            health = Mathf.Clamp(health + heal.HealValue, 0, maxHealth);
+            health = Mathf.Clamp(health + heal.HealValue, 0, MaxHealth);
             OnHealTaken?.Invoke(heal.HealValue);
         }
 
         public void UpdateMaxHealth(float newMaxHealth, bool heal)
         {
-            float maxHealthDelta = newMaxHealth - maxHealth;
-            maxHealth = newMaxHealth;
+            float maxHealthDelta = newMaxHealth - MaxHealth;
+            commonComponents.CharacterBody.stats.MaxHealth = newMaxHealth;
             if (heal)
             {
                 health += maxHealthDelta;
@@ -116,7 +113,7 @@ namespace SpellCasting
             {
                 float regenPerSecond = commonComponents.CharacterBody.stats.HealthRegenPercent * commonComponents.CharacterBody.stats.MaxHealth;
 
-                health = Mathf.Clamp(health + regenPerSecond * Time.fixedDeltaTime, 0, maxHealth);
+                health = Mathf.Clamp(health + regenPerSecond * Time.fixedDeltaTime, 0, MaxHealth);
             }
         }
     }

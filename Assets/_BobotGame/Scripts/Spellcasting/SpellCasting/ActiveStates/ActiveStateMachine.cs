@@ -21,7 +21,7 @@ namespace ActiveStates
 
 #if UNITY_EDITOR
         [SerializeField]
-        private string currentState;
+        private string debug_currentState;
 #endif
         public bool Destroyed { get; set; }
 
@@ -62,7 +62,7 @@ namespace ActiveStates
             {
                 Debug.LogError("Tried to enter a null state", this);
 #if UNITY_EDITOR
-                currentState = null;
+                debug_currentState = null;
 #endif
                 return;
             }
@@ -72,7 +72,7 @@ namespace ActiveStates
             _currentlyRunningState = newState;
 
 #if UNITY_EDITOR
-            currentState = _currentlyRunningState?.GetType().ToString();
+            debug_currentState = _currentlyRunningState?.GetType().ToString();
 #endif
             EnterCurrentState();
         }

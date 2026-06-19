@@ -23,12 +23,12 @@ namespace ActiveStates.Heroes.Mars
 
         private void EnterSwing()
         {
-            if (hits == 1)
+            if (currentComboHit == 1)
             {
                 ModifyHit2();
             }
 
-            animator.Play(hits == 1 ? "Swing2" : "Swing1");
+            animator.Play(currentComboHit == 1 ? "Swing2" : "Swing1");
         }
 
         protected virtual void ModifyHit2()
@@ -40,7 +40,7 @@ namespace ActiveStates.Heroes.Mars
         protected override void OnCastEnter()
         {
             base.OnCastEnter();
-            Vector3 scale = new Vector3(hits == 1 ? -1 : 1, 1, 1);
+            Vector3 scale = new Vector3(currentComboHit == 1 ? -1 : 1, 1, 1);
             EffectManager.SpawnEffect(EffectIndex.SWIPE_LEFT, transform.position, Util.DirectionQuaternion(inputBank.AimOut), scale, characterModel.CharacterDirection.transform);
         }
     }

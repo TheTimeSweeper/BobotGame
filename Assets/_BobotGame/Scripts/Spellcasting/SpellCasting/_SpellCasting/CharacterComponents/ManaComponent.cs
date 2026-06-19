@@ -22,18 +22,18 @@ namespace SpellCasting
         void FixedUpdate()
         {
             //jam resource pool class
-            FireMana = Mathf.Clamp(FireMana + stats.ManaRegeneration * Time.fixedDeltaTime, 0, stats.MaxFireMana);
-            EarthMana = Mathf.Clamp(EarthMana + stats.ManaRegeneration * Time.fixedDeltaTime, 0, stats.MaxEarthMana);
-            AirMana = Mathf.Clamp(AirMana + stats.ManaRegeneration * Time.fixedDeltaTime, 0, stats.MaxAirMana);
-            WaterMana = Mathf.Clamp(WaterMana + stats.ManaRegeneration * Time.fixedDeltaTime, 0, stats.MaxWaterMana);
+            //FireMana = Mathf.Clamp(FireMana + stats.ManaRegeneration * Time.fixedDeltaTime, 0, stats.MaxFireMana);
+            //EarthMana = Mathf.Clamp(EarthMana + stats.ManaRegeneration * Time.fixedDeltaTime, 0, stats.MaxEarthMana);
+            //AirMana = Mathf.Clamp(AirMana + stats.ManaRegeneration * Time.fixedDeltaTime, 0, stats.MaxAirMana);
+            //WaterMana = Mathf.Clamp(WaterMana + stats.ManaRegeneration * Time.fixedDeltaTime, 0, stats.MaxWaterMana);
         }
 
         internal void SiphonMana()
         {
-            FireMana = Mathf.Clamp(FireMana + manaReturnedOnMelee, 0, stats.MaxFireMana);
-            EarthMana = Mathf.Clamp(EarthMana + manaReturnedOnMelee, 0, stats.MaxEarthMana);
-            AirMana = Mathf.Clamp(AirMana + manaReturnedOnMelee, 0, stats.MaxAirMana);
-            WaterMana = Mathf.Clamp(WaterMana + manaReturnedOnMelee, 0, stats.MaxWaterMana);
+            //FireMana = Mathf.Clamp(FireMana + manaReturnedOnMelee, 0, stats.MaxFireMana);
+            //EarthMana = Mathf.Clamp(EarthMana + manaReturnedOnMelee, 0, stats.MaxEarthMana);
+            //AirMana = Mathf.Clamp(AirMana + manaReturnedOnMelee, 0, stats.MaxAirMana);
+            //WaterMana = Mathf.Clamp(WaterMana + manaReturnedOnMelee, 0, stats.MaxWaterMana);
         }
     }
 }

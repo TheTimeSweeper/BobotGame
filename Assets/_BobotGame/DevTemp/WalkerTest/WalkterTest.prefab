@@ -303,8 +303,8 @@ GameObject:
   - component: {fileID: 5165419906454591722}
   - component: {fileID: 6886800658204874175}
   - component: {fileID: 5384333025304485294}
+  - component: {fileID: 3239765180326134875}
   - component: {fileID: 2653688710425601370}
-  - component: {fileID: 4404171414282525321}
   - component: {fileID: 8976470048615218097}
   - component: {fileID: 875555450327082444}
   - component: {fileID: 3985952824597252732}
@@ -316,6 +316,7 @@ GameObject:
   - component: {fileID: 6486320182789022237}
   - component: {fileID: 4088083360257713007}
   - component: {fileID: 2398248412024188298}
+  - component: {fileID: 6434058732418504846}
   m_Layer: 0
   m_Name: WalkterTest
   m_TagString: Untagged
@@ -354,8 +355,7 @@ MonoBehaviour:
   HealthComponent: {fileID: 7568251913772495062}
   InputBank: {fileID: 381052597598583278}
   CharacterBody: {fileID: 6886800658204874175}
-  Caster: {fileID: 0}
-  ManaComponent: {fileID: 0}
+  StaminaComponent: {fileID: 0}
   FixedMotorDriver: {fileID: 875555450327082444}
   CharacterModel: {fileID: 2717654617168400845}
   StateMachineLocator: {fileID: 9053838663520553698}
@@ -364,6 +364,7 @@ MonoBehaviour:
   Animator: {fileID: 5632004902874295828}
   SkillController: {fileID: 127141495395204661}
   stateInfoHolder: {fileID: 9036484470051490459}
+  ManaComponent: {fileID: 0}
 --- !u!114 &7568251913772495062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -377,7 +378,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
-  maxHealth: 0
   commonComponents: {fileID: 586541723876753461}
   deathComponent: {fileID: 6447476819792104122}
   legHealth: 100
@@ -399,8 +399,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   componentList:
   - {fileID: 5384333025304485294}
+  - {fileID: 3239765180326134875}
   - {fileID: 2653688710425601370}
-  - {fileID: 4404171414282525321}
   - {fileID: 8976470048615218097}
   mainStateMachine: {fileID: 5384333025304485294}
 --- !u!114 &5165419906454591722
@@ -429,18 +429,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats:
-    BaseMaxHealth: 100
-    BaseHealthRegenPercent: 0
-    BaseDamage: 40
-    BaseAttackSpeed: 1
-    BaseStunFactor: 1
-    BaseKnockbackFactor: 1
-    BaseMaxMana: 100
-    BaseManaRegeneration: 1
-    BaseManaCostMultiplier: 1
-    BaseCastRange: 20
-    BaseMoveSpeed: 15
-    BaseJumpHeight: 0
+    MaxHealth:
+      _baseValue: 100
+      _lastModifiedValue: 100
+    HealthRegenPercent:
+      _baseValue: 0
+      _lastModifiedValue: 0
+    Damage:
+      _baseValue: 40
+      _lastModifiedValue: 40
+    AttackSpeed:
+      _baseValue: 1
+      _lastModifiedValue: 1
+    StunFactor:
+      _baseValue: 1
+      _lastModifiedValue: 1
+    KnockbackFactor:
+      _baseValue: 1
+      _lastModifiedValue: 1
+    MaxStamina:
+      _baseValue: 100
+      _lastModifiedValue: 100
+    StaminaRegen:
+      _baseValue: 50
+      _lastModifiedValue: 50
+    CooldownSpeed:
+      _baseValue: 1
+      _lastModifiedValue: 1
+    CastRange:
+      _baseValue: 20
+      _lastModifiedValue: 20
+    MoveSpeed:
+      _baseValue: 15
+      _lastModifiedValue: 15
+    JumpHeight:
+      _baseValue: 0
+      _lastModifiedValue: 0
   commonComponents: {fileID: 586541723876753461}
   dontDestroyOnLoad: 0
   corePositionHeightOffset: 0
@@ -461,7 +485,24 @@ MonoBehaviour:
   commonComponents: {fileID: 586541723876753461}
   DefaultState:
     activeStateName: ActiveStates.Characters.GenericCharacterMove
-  currentState: 
+  debug_currentState: 
+--- !u!114 &3239765180326134875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6662274689379214683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d649957a92d9f0048872753b103e5597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  label: Input
+  commonComponents: {fileID: 586541723876753461}
+  DefaultState:
+    activeStateName: ActiveStates.Characters.GenericCharacterInput
+  debug_currentState: 
 --- !u!114 &2653688710425601370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -478,24 +519,7 @@ MonoBehaviour:
   commonComponents: {fileID: 586541723876753461}
   DefaultState:
     activeStateName: ActiveStates.IdleState
-  currentState: 
---- !u!114 &4404171414282525321
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6662274689379214683}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d649957a92d9f0048872753b103e5597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  label: Dash
-  commonComponents: {fileID: 586541723876753461}
-  DefaultState:
-    activeStateName: ActiveStates.IdleState
-  currentState: 
+  debug_currentState: 
 --- !u!114 &8976470048615218097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -512,7 +536,7 @@ MonoBehaviour:
   commonComponents: {fileID: 586541723876753461}
   DefaultState:
     activeStateName: ActiveStates.IdleState
-  currentState: 
+  debug_currentState: 
 --- !u!114 &875555450327082444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -569,7 +593,6 @@ MonoBehaviour:
   - skillInfo: {fileID: 11400000, guid: 64c466aa3198af8459d6c5339669311c, type: 2}
     skillButton: 2
     autoCast: 0
-  upgradePath: {fileID: 0}
 --- !u!114 &381052597598583278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -679,6 +702,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   componentList:
   - {fileID: 330996669607548157}
+--- !u!114 &6434058732418504846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6662274689379214683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4176c77f0da35646866523512b45fdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  teamComponent: {fileID: 5165419906454591722}
+  body: {fileID: 6886800658204874175}
 --- !u!1 &7911952377910462530
 GameObject:
   m_ObjectHideFlags: 0

@@ -23,38 +23,25 @@ namespace SpellCasting
                 EffectManager.SpawnEffect(pooledEffect.effectIndex, body.transform.position, Quaternion.identity, body.transform);
             }
 
-            if (statsToChange.BaseMaxHealth > 0)
+            if (statsToChange.MaxHealth > 0)
             {
-                body.stats.MaxHealth.ApplyMultiplyModifier(statsToChange.BaseMaxHealth, buffID);
+                body.stats.MaxHealth.ApplyMultiplyModifier(statsToChange.MaxHealth, buffID);
                 body.CommonComponents.HealthComponent.UpdateMaxHealth(body.stats.MaxHealth, true);
             }
 
-            if (statsToChange.BaseDamage > 0)
+            if (statsToChange.Damage > 0)
             {
-                body.stats.Damage.ApplyMultiplyModifier(statsToChange.BaseDamage, buffID);
+                body.stats.Damage.ApplyMultiplyModifier(statsToChange.Damage, buffID);
             }
 
-            if (statsToChange.BaseMoveSpeed > 0)
+            if (statsToChange.MoveSpeed > 0)
             {
-                body.stats.MoveSpeed.ApplyMultiplyModifier(statsToChange.BaseMoveSpeed, buffID);
+                body.stats.MoveSpeed.ApplyMultiplyModifier(statsToChange.MoveSpeed, buffID);
             }
 
-            if (statsToChange.BaseMaxMana > 0)
+            if (statsToChange.HealthRegenPercent > 0)
             {
-                body.stats.MaxFireMana.ApplyMultiplyModifier(statsToChange.BaseMaxMana, buffID);
-                body.stats.MaxEarthMana.ApplyMultiplyModifier(statsToChange.BaseMaxMana, buffID);
-                body.stats.MaxWaterMana.ApplyMultiplyModifier(statsToChange.BaseMaxMana, buffID);
-                body.stats.MaxAirMana.ApplyMultiplyModifier(statsToChange.BaseMaxMana, buffID);
-            }
-
-            if (statsToChange.BaseManaRegeneration > 0)
-            {
-                body.stats.ManaRegeneration.ApplyMultiplyModifier(statsToChange.BaseManaRegeneration, buffID);
-            }
-
-            if (statsToChange.BaseHealthRegenPercent > 0)
-            {
-                body.stats.HealthRegenPercent.ApplyMultiplyModifier(statsToChange.BaseHealthRegenPercent, buffID);
+                body.stats.HealthRegenPercent.ApplyMultiplyModifier(statsToChange.HealthRegenPercent, buffID);
             }
 
             //jam and so on and so forth
@@ -62,31 +49,7 @@ namespace SpellCasting
 
         public virtual void OnUnapply(CharacterBody body)
         {
-            if (statsToChange.BaseMaxHealth > 0)
-            {
-                body.stats.MaxHealth.RemoveModifier(buffID);
-                body.CommonComponents.HealthComponent.UpdateMaxHealth(body.stats.MaxHealth, false);
-            }
-
-            if (statsToChange.BaseDamage > 0)
-            {
-                body.stats.Damage.RemoveModifier(buffID);
-            }
-
-            if (statsToChange.BaseMoveSpeed > 0)
-            {
-                body.stats.MoveSpeed.RemoveModifier(buffID);
-            }
-
-            if (statsToChange.BaseManaRegeneration > 0)
-            {
-                body.stats.ManaRegeneration.RemoveModifier(buffID);
-            }
-
-            if (statsToChange.BaseHealthRegenPercent > 0)
-            {
-                body.stats.HealthRegenPercent.RemoveModifier(buffID);
-            }
+            //todo bobot buffs back?
         }
     }
 }

@@ -14,8 +14,6 @@ namespace ActiveStates
         protected CharacterBody characterBody => Machine.CommonComponents.CharacterBody;
         protected SpellCasting.InputBank inputBank => Machine.CommonComponents.InputBank;
         protected HealthComponent healthComponent => Machine.CommonComponents.HealthComponent;
-        protected Caster caster => Machine.CommonComponents.Caster;
-        protected ManaComponent manaComponent => Machine.CommonComponents.ManaComponent;
         protected FixedMotorDriver fixedMotorDriver => Machine.CommonComponents.FixedMotorDriver;
         protected CharacterModel characterModel => Machine.CommonComponents.CharacterModel;
         protected StateMachineLocator stateMachineLocator => Machine.CommonComponents.StateMachineLocator;

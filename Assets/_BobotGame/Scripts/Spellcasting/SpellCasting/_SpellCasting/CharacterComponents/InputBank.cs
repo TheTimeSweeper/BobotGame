@@ -18,7 +18,13 @@ namespace SpellCasting
         HEAVY,//f
         OTHER = 100,
     }
+    [RequireComponent(typeof(InputBank))]
+    public class PassiveTargeting : MonoBehaviour
+    {
+        public InputBank InputBank;
 
+
+    }
     public class InputState
     {
         public bool Down;
@@ -214,19 +220,19 @@ namespace SpellCasting
             _qualifiedGestures.Sort();
         }
 
-        public ElementActionState GetFirstQualifiedElementAction(List<ElementActionState> availableGestures)
-        {
-            for (int i = 0; i < _qualifiedGestures.Count; i++)
-            {
-                AimGesture gesture = _qualifiedGestures[i];
-                ElementActionState actionState = availableGestures.Find((action) => { return action.GestureType == gesture; });
-                if (actionState != null)
-                {
-                    return actionState;
-                }
-            }
-            return null;
-        }
+        //public ElementActionState GetFirstQualifiedElementAction(List<ElementActionState> availableGestures)
+        //{
+        //    for (int i = 0; i < _qualifiedGestures.Count; i++)
+        //    {
+        //        AimGesture gesture = _qualifiedGestures[i];
+        //        ElementActionState actionState = availableGestures.Find((action) => { return action.GestureType == gesture; });
+        //        if (actionState != null)
+        //        {
+        //            return actionState;
+        //        }
+        //    }
+        //    return null;
+        //}
         public void ResetGestures()
         {
             for (int i = 0; i < _gestureBehaviors.Count; i++)

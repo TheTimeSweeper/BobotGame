@@ -5,8 +5,8 @@ namespace SpellCasting.UI
 
     public class PlayerHud : MonoBehaviour
     {
-        [SerializeField]
-        private ElementHud[] elementHuds;
+        //[SerializeField]
+        //private ElementHud[] elementHuds;
         [SerializeField]
         private HealthBar healthBar;
 

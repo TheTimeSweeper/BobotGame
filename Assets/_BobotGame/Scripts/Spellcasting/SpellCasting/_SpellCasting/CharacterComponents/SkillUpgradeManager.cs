@@ -20,14 +20,14 @@ namespace SpellCasting.UI
             baseSkillIcon.Init(skillToUpgrade.skillInfo, () => { menu.SetActive(false); });
 
             List<SkillInfo> upgradedSkills = new List<SkillInfo>();
-            for (int i = 0; i < skillController.upgradePath.branches.Length; i++)
-            {
-                var branch = skillController.upgradePath.branches[i];
-                if (branch.baseSKill == skillToUpgrade.skillInfo)
-                {
-                    upgradedSkills.AddRange(branch.upgrades);
-                }
-            }
+            //for (int i = 0; i < skillController.upgradePath.branches.Length; i++)
+            //{
+            //    var branch = skillController.upgradePath.branches[i];
+            //    if (branch.baseSKill == skillToUpgrade.skillInfo)
+            //    {
+            //        upgradedSkills.AddRange(branch.upgrades);
+            //    }
+            //}
             int iter = 0;
             for (; iter < upgradedSkills.Count; iter++)
             {

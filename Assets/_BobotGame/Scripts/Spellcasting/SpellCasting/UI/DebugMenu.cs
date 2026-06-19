@@ -45,11 +45,6 @@ namespace SpellCasting.UI
             joystickToggle.onValueChanged.AddListener(ToggleJoystick);
 
             AddFunnyButton("God Mode", GodMode);
-
-            foreach (ElementType element in ElementCatalog.Instance.ElementTypesMap.Values)
-            {
-                AddToggleElementButton(element);
-            }
         }
 
         private void ToggleJoystick(bool toggleValue)
@@ -82,27 +77,27 @@ namespace SpellCasting.UI
             GameObject.FindWithTag("Player").GetComponent<FixedMotorDriver>().engine.Teleport(GameObject.FindWithTag("Level").transform.position + Vector3.up * 10);
         }
 
-        private void AddToggleElementButton(ElementType value)
-        {
-            string toggleTitle = $"unlock {value.name}";
-            bool toggleEnabled = MainGame.Instance.SavedData.UnlockedElements.Contains(value);
+        //private void AddToggleElementButton(ElementType value)
+        //{
+        //    string toggleTitle = $"unlock {value.name}";
+        //    bool toggleEnabled = MainGame.Instance.SavedData.UnlockedElements.Contains(value);
 
-            Toggle newToggle = AddFunnyToggle(toggleTitle, toggleEnabled);
+        //    Toggle newToggle = AddFunnyToggle(toggleTitle, toggleEnabled);
 
-            newToggle.onValueChanged.AddListener(ToggleElement);
+        //    newToggle.onValueChanged.AddListener(ToggleElement);
 
-            void ToggleElement(bool toggled)
-            {
-                if (toggled)
-                {
-                    MainGame.Instance.SavedData.AddElement(value);
-                }
-                else
-                {
-                    MainGame.Instance.SavedData.RemoveElement(value);
-                }
-            }
-        }
+        //    void ToggleElement(bool toggled)
+        //    {
+        //        if (toggled)
+        //        {
+        //            MainGame.Instance.SavedData.AddElement(value);
+        //        }
+        //        else
+        //        {
+        //            MainGame.Instance.SavedData.RemoveElement(value);
+        //        }
+        //    }
+        //}
 
         private Toggle AddFunnyToggle(string toggleTitle, bool toggleEnabled)
         {

@@ -14,7 +14,7 @@ namespace ActiveStates.Characters
         protected override float baseOtherStateInterruptTimeFraction => 0.5f;
         protected override float baseMovementInterruptTimeFraction => 0.6f;
 
-        public int hits;
+        public int currentComboHit;
 
         public override void OnEnter()
         {
@@ -34,10 +34,6 @@ namespace ActiveStates.Characters
         protected override void OnHitEnemyAuthority()
         {
             base.OnHitEnemyAuthority();
-            if(manaComponent != null)
-            {
-                manaComponent.SiphonMana();
-            }
         }
 
         //protected override void SetNextState()
@@ -70,10 +66,9 @@ namespace ActiveStates.Characters
         {
             base.ModifyNextState(ref state);
 
-            GenericMeleeCombo comboState;
-            if((comboState = state as GenericMeleeCombo) != null)
+            if(state is GenericMeleeCombo comboState)
             {
-                comboState.hits = (hits + 1) % comboHits;
+                comboState.currentComboHit = (currentComboHit + 1) % comboHits;
                 comboState.aimDirection = aimDirection; 
             }
 

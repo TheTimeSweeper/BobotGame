@@ -12,29 +12,49 @@ namespace ActiveStates.Bobots
         public Type StateInfoType => typeof(BobotGameDevStateInfo);
         public BobotGameDevStateInfo StateInfo => AssignedStateInfo as BobotGameDevStateInfo;
 
-        protected override int comboHits => 2;
+        protected override int comboHits => 3;
         protected override string hitboxName => "PunchHitbox";
         protected override string effectOriginName => "PunchEffectOrigin";
         protected override float damageCoefficient => StateInfo.BPC_Damage;
         protected override float baseCastStartTimeFraction => StateInfo.BPC_StartTimeFraction;
         protected override float baseCastEndTimeFraction => StateInfo.BPC_EndTimeFraction;
-        protected override float baseDuration => StateInfo.BPC_Duration;
+        protected override float baseDuration
+        {
+            get
+            {
+                switch (currentComboHit)
+                {
+
+                    default:
+                    case 0: return StateInfo.BPC_Duration;
+                    case 1: return StateInfo.BPC_Duration2;
+                    case 2: return StateInfo.BPC_Duration3;
+                }
+            }
+        }
+        protected override float baseExtraEndDelayFraction =>
+            currentComboHit < comboHits - 1
+                ? 0
+                : StateInfo.BPC_EndDuration3;
         protected override float baseOtherStateInterruptTimeFraction => StateInfo.BPC_OtherStateInterruptTimeFraction;
         protected override float baseMovementInterruptTimeFraction => StateInfo.BPC_baseMovementInterruptTimeFraction;
         protected override float attackMoveShift => 0;
-        protected override float preAttackMoveShift => StateInfo.BPC_positionShift;
+        protected override float preAttackMoveShift => 
+            currentComboHit < 1 
+            ? StateInfo.BPC_positionShift
+            : StateInfo.BPC_positionShift2;
 
         public override void OnEnter()
         {
             base.OnEnter();
             fixedMotorDriver.OverrideVelocity = Vector3.zero;
-            animator.Play("Punch", 0, 0);
-            animator.SetFloat("punch.playbackRate", StateInfo.BPC_AnimationSpeed * baseCastEndTimeFraction);
+            animator.Play(currentComboHit < 1 ? "Punch" : "Punch2", 0, 0);
+            animator.SetFloat("punch.playbackRate", StateInfo.BPC_AnimationSpeed / castEndTime);
         }
 
         private void EnterSwing()
         {
-            if (hits == 1)
+            if (currentComboHit == 1)
             {
                 ModifyHit2();
             }
@@ -99,7 +119,7 @@ namespace ActiveStates.Bobots
             Vector3 aimOut = inputBank.AimOut;
             aimOut.y = 0;
             Transform effectOriginTransform = base.characterModel.ChildLocator.LocateByName(effectOriginName).transform;
-            EffectManager.SpawnEffect(EffectIndex.SWIPE_LEFT, effectOriginTransform.position, Util.DirectionQuaternion(aimOut), effectOriginTransform.lossyScale, characterModel.CharacterDirection.transform);
+            EffectManager.SpawnEffect(EffectIndex.SWIPE_RIGHT, effectOriginTransform.position, Util.DirectionQuaternion(aimOut), effectOriginTransform.lossyScale, characterModel.CharacterDirection.transform);
         }
     }
 }

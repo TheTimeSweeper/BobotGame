@@ -1,5 +1,4 @@
 ﻿using System;
-using SpellCasting;
 
 namespace ActiveStates.Characters
 {
@@ -25,25 +24,6 @@ namespace ActiveStates.Characters
                 animator.SetFloat("rightSpeed", inputBank.LocalMoveDirection.x);
                 animator.SetFloat("forwardSpeed", inputBank.LocalMoveDirection.z);
                 animator.SetFloat("walkSpeed", fixedMotorDriver.FinalVelocity.magnitude);
-            }
-
-            if (skillController && inputBank)
-            {
-
-                //moofa proto WOOPS IMMEDIATELY BREAK SOC
-                HandleSkill(skillController.PrimarySkill, inputBank.Primary);
-                HandleSkill(skillController.BlockSkill, inputBank.Block);
-                HandleSkill(skillController.DashSkill, inputBank.Space);
-                HandleSkill(skillController.CrouchSkill, inputBank.Shift);
-                HandleSkill(skillController.HeavySkill, inputBank.Heavy);
-            }
-        }
-
-        private void HandleSkill(SkillSlot primarySkill, InputState inputState)
-        {
-            if (inputState.Down)
-            {
-                primarySkill.TryCastSkill(inputState);
             }
         }
 

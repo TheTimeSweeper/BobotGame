@@ -13,7 +13,7 @@ namespace ActiveStates.Heroes.Mars
         }
         public override void ModifyNextState(ref ActiveState state)
         {
-            if (hits == 1)
+            if (currentComboHit == 1)
             {
                 state = new MarsStab();
             }
@@ -60,7 +60,7 @@ namespace ActiveStates.Heroes.Mars
         }
         public override void ModifyNextState(ref ActiveState state)
         {
-            if (hits == 1)
+            if (currentComboHit == 1)
             {
                 state = new MarsStabProjectile();
             }
@@ -95,7 +95,7 @@ namespace ActiveStates.Heroes.Mars
         }
         public override void ModifyNextState(ref ActiveState state)
         {
-            if (hits == 1)
+            if (currentComboHit == 1)
             {
                 state = new MarsStabVolley();
             }

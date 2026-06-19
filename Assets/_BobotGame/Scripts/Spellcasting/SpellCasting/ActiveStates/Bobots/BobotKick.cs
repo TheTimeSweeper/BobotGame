@@ -61,7 +61,7 @@ namespace ActiveStates.Bobots
             base.OnCastEnter();
             //todo bobot what is this mess. it just cost me like 20 minutes
             //EnterSwing();
-            Vector3 scale = new Vector3(hits == 1 ? -1 : 1, 1, 1);
+            Vector3 scale = new Vector3(currentComboHit == 1 ? -1 : 1, 1, 1);
             Vector3 aimOut = inputBank.AimOut;
             aimOut.y = 0;
             EffectManager.SpawnEffect(EffectIndex.SWIPE_LEFT, base.characterModel.ChildLocator.LocateByName(effectOriginName).transform.position, Util.DirectionQuaternion(aimOut), scale, characterModel.CharacterDirection.transform);

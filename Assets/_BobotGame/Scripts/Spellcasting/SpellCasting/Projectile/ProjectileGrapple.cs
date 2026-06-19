@@ -66,7 +66,7 @@ namespace SpellCasting.Projectiles
                 {
                     difference.y = 0;
                 }
-                targetMotor.OverrideVelocity = difference.normalized * pullForce;
+                targetMotor.AddedMotion = difference.normalized * pullForce ;
             }
         }
     }

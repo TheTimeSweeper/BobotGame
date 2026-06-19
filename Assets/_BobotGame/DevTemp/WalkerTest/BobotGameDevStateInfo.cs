@@ -6,13 +6,17 @@ using UnityEngine;
 public class BobotGameDevStateInfo : ActiveStateInfo
 {
     [Header("BobotPunchCombo")]
+    public float BPC_Duration;
+    public float BPC_Duration2;
+    public float BPC_Duration3;
+    public float BPC_EndDuration3;
     public float BPC_Damage = 1;
     public float BPC_StartTimeFraction;
     public float BPC_EndTimeFraction;
-    public float BPC_Duration;
     public float BPC_OtherStateInterruptTimeFraction;
     public float BPC_AnimationSpeed;
     public float BPC_positionShift;
+    public float BPC_positionShift2;
     public float BPC_baseMovementInterruptTimeFraction;
     [Header("Dash")]
     public float Dash_Duration;

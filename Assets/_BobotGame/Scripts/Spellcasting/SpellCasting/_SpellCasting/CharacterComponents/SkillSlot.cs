@@ -8,13 +8,15 @@ namespace SpellCasting
     public class SkillSlot
     {
         public SkillInfo skillInfo;
-        public VariableNumberStat cooldownTime;
-        public VariableNumberStat cooldownSpeed;
+        private VariableNumberStat cooldownTime;                                  //todo bobot asvalidornull
+        private VariableNumberStat cooldownSpeed => commonComponents.CharacterBody ? commonComponents.CharacterBody.stats.CooldownSpeed : 0;
         public SkillButton skillButton;
         public bool autoCast;
 
         private float cooldownTimer;
         private ActiveStateMachine machine;
+
+        private CommonComponentsHolder commonComponents;
 
         public void Recharge()
         {
@@ -33,12 +35,17 @@ namespace SpellCasting
 
         public void Init(CommonComponentsHolder commonComponents)
         {
+            this.commonComponents = commonComponents;
+            InitSkillInfo();
+        }
+
+        private void InitSkillInfo()
+        {
             if (skillInfo == null)
                 return;
 
-            machine = commonComponents.StateMachineLocator.LocateByName(skillInfo.stateMachineName);
-            cooldownTime = new VariableNumberStat(skillInfo.baseCooldown);
-            cooldownSpeed = new VariableNumberStat(1);
+            machine = this.commonComponents.StateMachineLocator.LocateByName(skillInfo.stateMachineName);
+            cooldownTime = skillInfo.baseCooldown;
         }
 
         public void TryCastSkill(InputState inputState)

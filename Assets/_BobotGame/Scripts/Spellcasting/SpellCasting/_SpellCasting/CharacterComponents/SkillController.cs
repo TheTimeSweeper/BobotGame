@@ -19,36 +19,22 @@ namespace SpellCasting
         public SkillSlot DashSkill => skillSlots.Find((slot) => slot.skillButton == SkillButton.DASH);
         public SkillSlot HeavySkill => skillSlots.Find((slot) => slot.skillButton == SkillButton.HEAVY);
 
-        public UpgradePathInfo upgradePath;
-
-        //moofa proto soc ree
-        private float exp;
-        private float nextLevel = 40;
-        public int level { get; set; } = 1;
-
-        private List<SkillSlot> allSkills;
         private void Awake()
         {
-            allSkills = new List<SkillSlot> { /*m1Skill, m2Skill, spaceSkill*/ };
-            allSkills.AddRange(skillSlots);
         }
         private void Start()
         {
-            for (int i = 0; i < allSkills.Count; i++)
+            for (int i = 0; i < skillSlots.Count; i++)
             {
-                allSkills[i].Init(commonComponents);
+                skillSlots[i].Init(commonComponents);
             }
-        }
-
-        private void Update()
-        {
         }
 
         private void FixedUpdate()
         {
-            for (int i = 0; i < allSkills.Count; i++)
+            for (int i = 0; i < skillSlots.Count; i++)
             {
-                allSkills[i].Recharge();
+                skillSlots[i].Recharge();
             }
         }
 

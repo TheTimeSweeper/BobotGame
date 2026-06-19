@@ -17,6 +17,7 @@ namespace ActiveStates.Characters
         protected virtual float baseCastEndTimeFraction => 1;
         protected virtual float baseOtherStateInterruptTimeFraction => 1;
         protected virtual float baseMovementInterruptTimeFraction => 1;
+        protected virtual float baseExtraEndDelayFraction => 0;
         protected virtual bool attackSpeedAffected => true;
 
         protected float duration;
@@ -39,8 +40,8 @@ namespace ActiveStates.Characters
             duration = baseDuration / (attackSpeedAffected? characterBody.stats.AttackSpeed : 1);
             castStartTime = baseCastStartTimeFraction * duration;
             castEndTime = baseCastEndTimeFraction * duration;
-            otherStateInterruptTime = baseOtherStateInterruptTimeFraction * duration;
-            movementInterruptTime = baseMovementInterruptTimeFraction * duration;
+            otherStateInterruptTime = baseOtherStateInterruptTimeFraction * duration * ( 1 + baseExtraEndDelayFraction);
+            movementInterruptTime = baseMovementInterruptTimeFraction * duration * (1 + baseExtraEndDelayFraction);
         }
 
         protected virtual void OnCastEnter() { }
@@ -74,7 +75,7 @@ namespace ActiveStates.Characters
                 OnCastExit();
             }
 
-            if (fixedAge > duration)
+            if (fixedAge > duration  + duration * baseExtraEndDelayFraction)
             {
                 SetNextState();
                 return;
