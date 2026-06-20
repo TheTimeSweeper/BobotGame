@@ -24,7 +24,7 @@ MonoBehaviour:
     effectOriginName: PunchEffectOrigin
     damageCoefficient: 1
     knockbackCoefficient: 0
-    preAttackMoveShift: 1
+    preAttackMoveShift: 2
     preAttackMoveShiftDecay: 16
     attackMoveShift: 0
     attackMoveShiftDecay: 16
@@ -40,7 +40,7 @@ MonoBehaviour:
     effectOriginName: PunchEffectOrigin
     damageCoefficient: 1
     knockbackCoefficient: 0
-    preAttackMoveShift: 0
+    preAttackMoveShift: 0.5
     preAttackMoveShiftDecay: 16
     attackMoveShift: 0
     attackMoveShiftDecay: 16
@@ -56,7 +56,7 @@ MonoBehaviour:
     effectOriginName: PunchEffectOrigin
     damageCoefficient: 1
     knockbackCoefficient: 0
-    preAttackMoveShift: 0
+    preAttackMoveShift: 0.5
     preAttackMoveShiftDecay: 16
     attackMoveShift: 0
     attackMoveShiftDecay: 16
@@ -137,7 +137,7 @@ MonoBehaviour:
     effectOriginName: KickEffectOrigin
     damageCoefficient: 1
     knockbackCoefficient: 100
-    preAttackMoveShift: 0.2
+    preAttackMoveShift: 3
     preAttackMoveShiftDecay: 16
     attackMoveShift: 0
     attackMoveShiftDecay: 16
