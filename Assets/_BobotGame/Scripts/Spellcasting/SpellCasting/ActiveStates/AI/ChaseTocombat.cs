@@ -11,7 +11,7 @@ namespace ActiveStates.AI
         public override void OnEnter()
         {
             base.OnEnter();
-            Gesture = Brain.RollGesture();
+            CurrentGesture = Brain.RollGesture();
 
             Vector3 difference = Brain.CurrentTargetBody.transform.position - transform.position;
 
@@ -30,7 +30,7 @@ namespace ActiveStates.AI
 
             Vector3 difference = Brain.CurrentTargetBody.transform.position - transform.position;
 
-            if (difference.magnitude >= Gesture.CloseDistasnce)
+            if (difference.magnitude >= CurrentGesture.CloseDistasnce)
             {
                 Brain.AIInputController.MoveDirection = difference;
             } 
@@ -40,7 +40,7 @@ namespace ActiveStates.AI
 
                 if (fixedAge > ChaseTime)
                 {
-                    Machine.SetState(new Combat { Brain = Brain, Gesture = Gesture });
+                    Machine.SetState(new Combat { Brain = Brain, CurrentGesture = CurrentGesture });
                 }
             }
         }

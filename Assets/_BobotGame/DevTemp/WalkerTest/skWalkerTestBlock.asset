@@ -16,6 +16,8 @@ MonoBehaviour:
   baseCooldown: -0.03
   state:
     activeStateName: ActiveStates.Bobots.BobotStanceBlock
-  stateMachineName: Weapon
-  interruptingPriority: 2
+  stateMachineName: Body
+  interruptingPriority: 4
+  bufferTime: 0
+  justPress: 1
   autoCast: 0

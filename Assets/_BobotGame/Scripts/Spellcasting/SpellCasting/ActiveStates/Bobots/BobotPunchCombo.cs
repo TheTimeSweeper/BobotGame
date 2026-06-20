@@ -40,37 +40,22 @@ namespace ActiveStates.Bobots
         protected override float baseMovementInterruptTimeFraction => StateInfo.BPC_baseMovementInterruptTimeFraction;
         protected override float attackMoveShift => 0;
         protected override float preAttackMoveShift => 
-            currentComboHit < 1 
-            ? StateInfo.BPC_positionShift
-            : StateInfo.BPC_positionShift2;
+            currentComboHit < 1
+                ? StateInfo.BPC_positionShift
+                : StateInfo.BPC_positionShift2;
 
         public override void OnEnter()
         {
             base.OnEnter();
-            fixedMotorDriver.OverrideVelocity = Vector3.zero;
+            //fixedMotorDriver.OverrideVelocity = Vector3.zero;
             animator.Play(currentComboHit < 1 ? "Punch" : "Punch2", 0, 0);
             animator.SetFloat("punch.playbackRate", StateInfo.BPC_AnimationSpeed / castEndTime);
         }
 
         private void EnterSwing()
         {
-            if (currentComboHit == 1)
-            {
-                ModifyHit2();
-            }
-
             //animator.Play(hits == 1 ? "Punch2" : "Punch");
             //animator.SetFloat("punch.playbackRate", 1 / castEndTime);
-        }
-
-        //todo bobot: just move this to body and separate the concerns of movement and input like you were already planning you buffoon
-        public override void OnFixedUpdate()
-        {
-            if (fixedAge < movementInterruptTime)
-            {
-                fixedMotorDriver.OverrideVelocity = Vector3.zero;
-            }
-            base.OnFixedUpdate();
         }
 
         protected override void OnCastUpdate()
@@ -86,29 +71,17 @@ namespace ActiveStates.Bobots
             base.OnCastExit();
         }
 
-        protected override void OnMovementInterrupt()
-        {
-            //don't change states. we're using the movement interrupt to just  move lol
-        }
-
         public override InterruptPriority GetMinimumInterruptPriority()
         {
-            //if (fixedAge >= movementInterruptTime)
-            //{
-            //    return InterruptPriority.MOVEMENT;
-            //}
+            if (fixedAge >= movementInterruptTime)
+            {
+                return InterruptPriority.MOVEMENT;
+            }
             if (fixedAge >= otherStateInterruptTime)
             {
                 return InterruptPriority.STATE_ANY;
             }
             return InterruptPriority.STATE_LOW;
-        }
-
-
-        protected virtual void ModifyHit2()
-        {
-            duration *= 1.2f;
-            otherStateInterruptTime *= 1.2f;
         }
 
         protected override void OnCastEnter()

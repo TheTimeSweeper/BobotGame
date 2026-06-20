@@ -47,15 +47,6 @@ namespace ActiveStates.Bobots
             return InterruptPriority.STATE_MED;
         }
 
-        public override void OnFixedUpdate()
-        {
-            if (fixedAge < movementInterruptTime)
-            {
-                fixedMotorDriver.OverrideVelocity = Vector3.zero;
-            }
-            base.OnFixedUpdate();
-        }
-
         protected override void OnCastEnter()
         {
             base.OnCastEnter();

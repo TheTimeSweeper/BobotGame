@@ -34,7 +34,7 @@ namespace SpellCasting
         {
             for (int i = 0; i < skillSlots.Count; i++)
             {
-                skillSlots[i].Recharge();
+                skillSlots[i].FixedUpdate();
             }
         }
 

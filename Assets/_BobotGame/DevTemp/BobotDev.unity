@@ -3572,11 +3572,11 @@ PrefabInstance:
     - target: {fileID: 1061077373659344595, guid: 69bd7a7b2524e9744acc32e3d3c28e80, type: 3}
       propertyPath: bodyPrefab
       value: 
-      objectReference: {fileID: 1206648635}
+      objectReference: {fileID: 6886800658204874175, guid: a5cb032c3d5a0fd4fb58e91dd3f3a4e5, type: 3}
     - target: {fileID: 1061077373659344595, guid: 69bd7a7b2524e9744acc32e3d3c28e80, type: 3}
       propertyPath: currentBody
       value: 
-      objectReference: {fileID: 2017009457}
+      objectReference: {fileID: 1206648635}
     - target: {fileID: 6613014393439674693, guid: 69bd7a7b2524e9744acc32e3d3c28e80, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

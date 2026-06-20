@@ -20,10 +20,7 @@ namespace ActiveStates.Characters
 
         private void HandleSkill(SkillSlot primarySkill, InputState inputState)
         {
-            if (inputState.Down)
-            {
-                primarySkill.TryCastSkill(inputState);
-            }
+            primarySkill.InputSkill(inputState);
         }
     }
 }

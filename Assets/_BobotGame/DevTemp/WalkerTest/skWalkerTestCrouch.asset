@@ -18,4 +18,6 @@ MonoBehaviour:
     activeStateName: ActiveStates.Bobots.BobotStanceCrouch
   stateMachineName: Stance
   interruptingPriority: 1
+  bufferTime: 0.3
+  justPress: 0
   autoCast: 0

@@ -16,6 +16,8 @@ MonoBehaviour:
   baseCooldown: -0.03
   state:
     activeStateName: ActiveStates.Bobots.BobotPunchCombo
-  stateMachineName: Weapon
+  stateMachineName: Body
   interruptingPriority: 1
+  bufferTime: 0.3
+  justPress: 1
   autoCast: 0

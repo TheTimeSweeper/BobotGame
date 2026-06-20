@@ -1,6 +1,7 @@
 ﻿using System;
 using ActiveStates;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace SpellCasting
 {
@@ -16,19 +17,36 @@ namespace SpellCasting
         private float cooldownTimer;
         private ActiveStateMachine machine;
 
+        private float bufferTimer = -1;
+        private InputState bufferedState;
+
         private CommonComponentsHolder commonComponents;
 
-        public void Recharge()
+        public void FixedUpdate()
         {
             if (skillInfo == null)
                 return;
+            UpdateBuffer();
+            RechargeCooldown();
+        }
 
+        private void UpdateBuffer()
+        {
+            if(bufferTimer >= 0 && bufferedState != null)
+            {
+                bufferTimer -= Time.deltaTime;
+                TryCastSkill(bufferedState);
+            }
+        }
+
+        private void RechargeCooldown()
+        {
             cooldownTimer -= Time.deltaTime * cooldownSpeed;
-            if(cooldownTimer < 0)
+            if (cooldownTimer < 0)
             {
                 if (autoCast)
                 {
-                    TryCastSkill(null);
+                    InputSkill(null);
                 }
             }
         }
@@ -48,13 +66,22 @@ namespace SpellCasting
             cooldownTime = skillInfo.baseCooldown;
         }
 
-        public void TryCastSkill(InputState inputState)
+        public void InputSkill(InputState inputState)
+        {
+            if((!skillInfo.justPress && inputState.Down) || (skillInfo.justPress && inputState.JustPressed(this)))
+            {
+                bufferedState = inputState;
+                bufferTimer = skillInfo.bufferTime;
+            }
+        }
+
+        public bool TryCastSkill(InputState inputState)
         {
             if (skillInfo == null)
-                return;
+                return false;
 
             if (cooldownTimer > 0)
-                return;
+                return false;
 
             cooldownTimer = cooldownTime;
 
@@ -63,7 +90,12 @@ namespace SpellCasting
                 {
                     stateFromInput.input = inputState;
                 }
+                bufferTimer = 0;
+                bufferedState = null;
+                return true;
             }
+
+            return false;
         }
     }
 }

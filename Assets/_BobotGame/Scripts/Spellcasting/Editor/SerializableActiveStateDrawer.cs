@@ -13,6 +13,7 @@ public class SerializableActiveStateDrawer : PropertyDrawer
     
     string field;
     bool wasFocused;
+    object lastFocusedProperty;
     
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {

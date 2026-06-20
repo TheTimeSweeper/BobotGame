@@ -11,6 +11,8 @@ namespace SpellCasting
         public SerializableActiveState state;
         public string stateMachineName;
         public InterruptPriority interruptingPriority;
+        public float bufferTime = 0.3f;
+        public bool justPress;
         public bool autoCast;
 
     }

@@ -1,13 +1,17 @@
-﻿using JetBrains.Annotations;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace SpellCasting.AI
 {
     [CreateAssetMenu(menuName = "SpellCasting/AIGesturer/Click", fileName = "AIGestureClick")]
-    public class AIGesturerClick : AIGesture
+    public class AIGesturerClickCombo : AIGesture
     {
-        [Range(0,1)]
+        [Range(0, 1)]
         public float crouchChance;
+
+        [SerializeField]
+        public float interval;
+        [SerializeField]
+        public int clicks;
 
         [SerializeField]
         public float delayAfterCrouch;
@@ -17,8 +21,10 @@ namespace SpellCasting.AI
             return new AIClickBehavior { infoObject = this };
         }
 
-        public class AIClickBehavior : AIGestureBehavior<AIGesturerClick>
+        public class AIClickBehavior : AIGestureBehavior<AIGesturerClickCombo>
         {
+            private float intervalTimer;
+            private int doneClicks;
             private Vector3 initialPosition;
 
             private bool _inputted;
@@ -48,7 +54,14 @@ namespace SpellCasting.AI
                 if (!_inputted && fixedAge > InfoObject.delayAfterCrouch)
                 {
                     _inputted = true;
+                    doneClicks++;
+                    intervalTimer = InfoObject.interval;
                     brain.AIInputController.JustPress(InfoObject.inputIndex);
+                }
+                intervalTimer -= Time.deltaTime;
+                if (intervalTimer < 0 && doneClicks < InfoObject.clicks)
+                {
+                    _inputted = false;
                 }
 
                 return end;

@@ -2,6 +2,7 @@
 
 namespace SpellCasting
 {
+    //todo bobot make this an ai, silly
     public class PlayerInputControllerFirstDemo : InputController
     {
         protected override Vector3 GetAimPosition()
@@ -25,8 +26,8 @@ namespace SpellCasting
 
         protected override void SetbuttonInputs()
         {
-            inputBank.Block.UpdateInput(Input.GetKeyDown(KeyCode.G));
-            inputBank.Shift.UpdateInput(Input.GetKeyDown(KeyCode.T));
+            inputBank.Block.UpdateInput(Input.GetKey(KeyCode.G));
+            inputBank.Shift.UpdateInput(Input.GetKey(KeyCode.T));
             inputBank.Primary.UpdateInput(false);
             inputBank.Heavy.UpdateInput(false);
             inputBank.Space.UpdateInput(false);

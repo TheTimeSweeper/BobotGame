@@ -30,6 +30,17 @@ namespace SpellCasting
             }
         }
         
+        public Vector3 desiredVelocity
+        {
+            get => DesiredDirection* DesiredSpeed;
+            set
+            {
+                {
+                    DesiredDirection = value.normalized;
+                    DesiredSpeed = value.magnitude;
+                }
+            }
+        }
         public Vector3 DesiredDirection { get; set; }
         public float DesiredSpeed { get; set; }
         public Vector3 AddedMotion { get; set; }

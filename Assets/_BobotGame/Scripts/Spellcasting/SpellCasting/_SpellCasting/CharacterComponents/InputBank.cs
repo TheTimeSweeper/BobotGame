@@ -18,13 +18,6 @@ namespace SpellCasting
         HEAVY,//f
         OTHER = 100,
     }
-    [RequireComponent(typeof(InputBank))]
-    public class PassiveTargeting : MonoBehaviour
-    {
-        public InputBank InputBank;
-
-
-    }
     public class InputState
     {
         public bool Down;

@@ -15,7 +15,7 @@ namespace ActiveStates.AI
                 return;
             }
             
-            bool ended = Gesture.OnFixedUpdate(Brain);
+            bool ended = CurrentGesture.OnFixedUpdate(Brain);
 
             if (ended)
             {
@@ -33,7 +33,7 @@ namespace ActiveStates.AI
         public override void OnExit(bool machineDed = false)
         {
             base.OnExit(machineDed);
-            Gesture.End(Brain);
+            CurrentGesture.End(Brain);
         }
     }
 }
