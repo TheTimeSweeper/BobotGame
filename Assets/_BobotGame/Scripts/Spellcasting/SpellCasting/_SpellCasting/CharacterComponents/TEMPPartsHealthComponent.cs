@@ -24,35 +24,24 @@ namespace SpellCasting
             if (TryGetComponent<TEMPBobotCrouchController>(out var victimCrouchController) && victimCrouchController.isBlocking)
             {
                 bool shouldBlock = victimCrouchController.isBlocking;
-                //if incoming attack has no upper/lower specified, you can block from either position
+                //if incoming attack has no elevation specified, you can block from either position
                 if (!attackerCrouched.HasValue)
                 {
                     shouldBlock = true;
                 }
-                //if it does,
+                //if it does elevation specified
                 //todo bobot: rename crouched to upper/lower, also probably have an enum, yeah this sucks ass but it gonna  just wo-ork
                 else
                 {
-                    //both bots are at the same height, block
+                    //both bots are at the same elevation, block
                     if (attackerCrouched.Value == victimCrouchController.isCrouched)
                     {
                         shouldBlock = true;
                     }
-                    //if not
+                    //we blocked the wrong elevation, take damage
                     else
                     {
-                        //we were crouched, they were not, whiff
-                        if (victimCrouchController.isCrouched)
-                        {
-                            //whiff
-                            return;
-                        }
-                        //we were up, they were crouched, do not block
-                        else
-                        {
-                            shouldBlock = false;
-                            //leave
-                        }
+                        shouldBlock = false;
                     }
                 }
 
@@ -81,19 +70,24 @@ namespace SpellCasting
             //no blocking. enemy at different vertical level
             else
             {
-                //we were crouched, they were high, whiff
-                if (victimCrouchController.isCrouched)
-                {
-                    //whiff
-                }
-                //we were not crouched, they were crouched, take leg damage
-                else
+                //we were not crouched, they were attacking crouched, take leg damage
+                if (!victimCrouchController.isCrouched)
                 {
                     TakeTheDamage(ref legHealth, info, false);
                     SpawnEffect(info, 1, legHealth < 0);
                     if (legHealth < 0)
                     {
                         Debug.LogWarning("BROKE LEGS!");
+                    }
+                }
+                //we were crouched, they were attacking normal height, still hit our core
+                else
+                {
+                    TakeTheDamage(ref health, info, true);
+                    SpawnEffect(info, 0, health < 0);
+                    if (health < 0)
+                    {
+                        Debug.LogWarning("BROKE HEALTH!");
                     }
                 }
             }

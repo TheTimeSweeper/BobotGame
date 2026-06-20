@@ -27,10 +27,10 @@ namespace SpellCasting
         protected override void SetbuttonInputs()
         {
             inputBank.Block.UpdateInput(Input.GetKey(KeyCode.G));
-            inputBank.Shift.UpdateInput(Input.GetKey(KeyCode.T));
+            inputBank.Crouch.UpdateInput(Input.GetKey(KeyCode.T));
             inputBank.Primary.UpdateInput(false);
-            inputBank.Heavy.UpdateInput(false);
-            inputBank.Space.UpdateInput(false);
+            inputBank.Ability.UpdateInput(false);
+            inputBank.Dash.UpdateInput(false);
         }
     }
 }

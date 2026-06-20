@@ -17,7 +17,7 @@ namespace SpellCasting
         public SkillSlot BlockSkill => skillSlots.Find((slot) => slot.skillButton == SkillButton.BLOCK);
         public SkillSlot CrouchSkill => skillSlots.Find((slot) => slot.skillButton == SkillButton.CROUCH);
         public SkillSlot DashSkill => skillSlots.Find((slot) => slot.skillButton == SkillButton.DASH);
-        public SkillSlot HeavySkill => skillSlots.Find((slot) => slot.skillButton == SkillButton.HEAVY);
+        public SkillSlot AbilitySkill => skillSlots.Find((slot) => slot.skillButton == SkillButton.ABILITY);
 
         private void Awake()
         {

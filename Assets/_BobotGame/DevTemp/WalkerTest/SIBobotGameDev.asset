@@ -12,29 +12,71 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60bdbb4f0ce220f488dd0c569020caa9, type: 3}
   m_Name: siBobotGameDev
   m_EditorClassIdentifier: 
-  BPC_Duration: 1.2
-  BPC_Duration2: 0.8
-  BPC_Duration3: 0.8
-  BPC_EndDuration3: 0
-  BPC_Damage: 1
-  BPC_StartTimeFraction: 0.2
-  BPC_EndTimeFraction: 0.4
-  BPC_OtherStateInterruptTimeFraction: 0.5
+  BPC_HitParams:
+    baseDuration: 1.2
+    baseExtraEndDelayFraction: 0
+    baseCastStartTimeFraction: 0.3
+    baseCastEndTimeFraction: 0.4
+    baseOtherStateInterruptTimeFraction: 0.5
+    baseMovementInterruptTimeFraction: 0.6
+    attackSpeedAffected: 1
+    hitboxName: PunchHitbox
+    effectOriginName: PunchEffectOrigin
+    damageCoefficient: 1
+    knockbackCoefficient: 0
+    preAttackMoveShift: 1
+    preAttackMoveShiftDecay: 16
+    attackMoveShift: 0
+    attackMoveShiftDecay: 16
+  BPC_HitParams2:
+    baseDuration: 1
+    baseExtraEndDelayFraction: 0
+    baseCastStartTimeFraction: 0.36363637
+    baseCastEndTimeFraction: 0.43
+    baseOtherStateInterruptTimeFraction: 0.5
+    baseMovementInterruptTimeFraction: 0.6
+    attackSpeedAffected: 1
+    hitboxName: PunchHitbox
+    effectOriginName: PunchEffectOrigin
+    damageCoefficient: 1
+    knockbackCoefficient: 0
+    preAttackMoveShift: 0
+    preAttackMoveShiftDecay: 16
+    attackMoveShift: 0
+    attackMoveShiftDecay: 16
+  BPC_HitParams3:
+    baseDuration: 0.8
+    baseExtraEndDelayFraction: 0
+    baseCastStartTimeFraction: 0.3
+    baseCastEndTimeFraction: 0.4
+    baseOtherStateInterruptTimeFraction: 0.5
+    baseMovementInterruptTimeFraction: 0.6
+    attackSpeedAffected: 1
+    hitboxName: PunchHitbox
+    effectOriginName: PunchEffectOrigin
+    damageCoefficient: 1
+    knockbackCoefficient: 0
+    preAttackMoveShift: 0
+    preAttackMoveShiftDecay: 16
+    attackMoveShift: 0
+    attackMoveShiftDecay: 16
   BPC_AnimationSpeed: 1
-  BPC_positionShift: 1
-  BPC_positionShift2: 0
-  BPC_baseMovementInterruptTimeFraction: 0.6
-  Dash_Duration: 0.5
+  DASH_params:
+    baseDuration: 0.5
+    baseExtraEndDelayFraction: 0
+    baseCastStartTimeFraction: 0
+    baseCastEndTimeFraction: 0.5
+    baseOtherStateInterruptTimeFraction: 0.5
+    baseMovementInterruptTimeFraction: 0.5
+    attackSpeedAffected: 0
   Dash_AnimationSpeed: 2
-  Dash_InterruptTime: 0.5
-  Dash_DashTime: 0.5
   Dash_DashSpeed: 40
   Dash_DashSpeedCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0.0006866455
-      value: 0.23974228
+      value: 0.83553696
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -83,13 +125,23 @@ MonoBehaviour:
   Crouch_Height: -2
   block_duration: 0.4
   block_AnimationMultiplier: 1
-  Kick_Damage: 2
-  Kick_StartTimeFraction: 0.4
-  Kick_EndTimeFraction: 0.5
-  Kick_Duration: 0.8
+  Kick_params:
+    baseDuration: 0.8
+    baseExtraEndDelayFraction: 0
+    baseCastStartTimeFraction: 0.4
+    baseCastEndTimeFraction: 0.5
+    baseOtherStateInterruptTimeFraction: 0.8
+    baseMovementInterruptTimeFraction: 0.9
+    attackSpeedAffected: 1
+    hitboxName: KickHitbox
+    effectOriginName: KickEffectOrigin
+    damageCoefficient: 1
+    knockbackCoefficient: 100
+    preAttackMoveShift: 0.2
+    preAttackMoveShiftDecay: 16
+    attackMoveShift: 0
+    attackMoveShiftDecay: 16
   Kick_AnimationSpeed: 3
-  Kick_OtherStateInterruptTimeFraction: 0.8
-  Kick_baseMovementInterruptTimeFraction: 0.9
   CPunch_chargeTime: 0.3
   CPunch_holdGiveupTime: 3
   CPunch_StartTimeFraction: 0

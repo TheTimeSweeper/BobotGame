@@ -12,9 +12,9 @@ namespace ActiveStates.Characters
             {
                 HandleSkill(skillController.PrimarySkill, inputBank.Primary);
                 HandleSkill(skillController.BlockSkill, inputBank.Block);
-                HandleSkill(skillController.DashSkill, inputBank.Space);
-                HandleSkill(skillController.CrouchSkill, inputBank.Shift);
-                HandleSkill(skillController.HeavySkill, inputBank.Heavy);
+                HandleSkill(skillController.DashSkill, inputBank.Dash);
+                HandleSkill(skillController.CrouchSkill, inputBank.Crouch);
+                HandleSkill(skillController.AbilitySkill, inputBank.Ability);
             }
         }
 

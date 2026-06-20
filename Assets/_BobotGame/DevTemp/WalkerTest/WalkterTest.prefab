@@ -581,17 +581,17 @@ MonoBehaviour:
   - skillInfo: {fileID: 11400000, guid: 50dad283fe509a84f9cf9d43a497c6a6, type: 2}
     skillButton: 1
     autoCast: 0
+  - skillInfo: {fileID: 11400000, guid: 64c466aa3198af8459d6c5339669311c, type: 2}
+    skillButton: 2
+    autoCast: 0
+  - skillInfo: {fileID: 11400000, guid: ad191c4a3ebf80e41bca42ae90bf3cf1, type: 2}
+    skillButton: 3
+    autoCast: 0
   - skillInfo: {fileID: 11400000, guid: 16a6bfeafea633c46b2b3b8ed627271c, type: 2}
     skillButton: 4
     autoCast: 0
   - skillInfo: {fileID: 11400000, guid: 7414985e857d4744e8153655e52eef96, type: 2}
-    skillButton: 3
-    autoCast: 0
-  - skillInfo: {fileID: 11400000, guid: ad191c4a3ebf80e41bca42ae90bf3cf1, type: 2}
     skillButton: 5
-    autoCast: 0
-  - skillInfo: {fileID: 11400000, guid: 64c466aa3198af8459d6c5339669311c, type: 2}
-    skillButton: 2
     autoCast: 0
 --- !u!114 &381052597598583278
 MonoBehaviour:

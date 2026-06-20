@@ -17,7 +17,7 @@ MonoBehaviour:
   state:
     activeStateName: ActiveStates.Bobots.BasicDash
   stateMachineName: Body
-  interruptingPriority: 1
+  interruptingPriority: 4
   bufferTime: 0.3
   justPress: 0
   autoCast: 0

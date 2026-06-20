@@ -20,8 +20,8 @@ namespace SpellCasting
         {
             inputBank.Primary.UpdateInput(Input.GetMouseButton(0));
             inputBank.Block.UpdateInput(Input.GetMouseButton(1));
-            inputBank.Space.UpdateInput(Input.GetKey(KeyCode.Space));
-            inputBank.Shift.UpdateInput(Input.GetKey(KeyCode.LeftShift));
+            inputBank.Dash.UpdateInput(Input.GetKey(KeyCode.Space));
+            inputBank.Crouch.UpdateInput(Input.GetKey(KeyCode.LeftShift));
             inputBank.E.UpdateInput(Input.GetKey(KeyCode.E));
         }
 

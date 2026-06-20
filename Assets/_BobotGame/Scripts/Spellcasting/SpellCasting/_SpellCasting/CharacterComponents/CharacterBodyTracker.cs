@@ -49,7 +49,7 @@ namespace SpellCasting
             return null;
         }
 
-        public static CharacterBody FindBodyByTeam(GameObject searchingObject, TeamIndex searchingTeamIndex, TeamTargetType teamTargeting, float maxSqrDistance)
+        public static CharacterBody FindBodyByTeam(GameObject searchingObject, TeamIndex searchingTeamIndex, ValidTarget teamTargeting, float maxSqrDistance)
         {
             foreach (var TeamIndex in teamsBodies.Keys)
             {

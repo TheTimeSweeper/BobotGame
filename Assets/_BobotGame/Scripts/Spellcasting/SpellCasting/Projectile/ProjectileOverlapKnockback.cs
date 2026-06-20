@@ -11,7 +11,7 @@ namespace SpellCasting.Projectiles
         private float succCloseLimit = 3;
 
         [SerializeField]
-        private TeamTargetType teamTargeting = TeamTargetType.OTHER;
+        private ValidTarget teamTargeting = ValidTarget.OTHERTEAM;
 
         private Vector3 _center;
 

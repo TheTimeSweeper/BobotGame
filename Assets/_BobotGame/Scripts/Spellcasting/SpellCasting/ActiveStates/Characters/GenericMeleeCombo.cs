@@ -1,66 +1,14 @@
 ﻿using SpellCasting;
 using Unity.VisualScripting;
+using UnityEngine;
 
 namespace ActiveStates.Characters
 {
-    public class GenericMeleeCombo : BasicMeleeAttack
+    //todo bobot skilldefbehaviors
+    public abstract class GenericMeleeCombo : BasicMeleeAttack, IComboState
     {
-        protected virtual int comboHits => 1;
-        protected override string hitboxName => "BasicHitbox";
-        protected override float damageCoefficient => 0.5f;
-        protected override float baseDuration => 0.5f;
-        protected override float baseCastStartTimeFraction => 0.1f;
-        protected override float baseCastEndTimeFraction => 0.4f;
-        protected override float baseOtherStateInterruptTimeFraction => 0.5f;
-        protected override float baseMovementInterruptTimeFraction => 0.6f;
-
-        public int currentComboHit;
-
-        public override void OnEnter()
-        {
-            base.OnEnter();
-        }
-
-        public override void OnFixedUpdate()
-        {
-            base.OnFixedUpdate();
-
-            //if(fixedAge > otherStateInterruptTime)
-            //{
-            //    SetNextState();
-            //}
-        }
-
-        protected override void OnHitEnemyAuthority()
-        {
-            base.OnHitEnemyAuthority();
-        }
-
-        //protected override void SetNextState()
-        //{
-        //    if (hits < comboHits)
-        //    {
-        //        //jam ugly
-        //        Machine.SetState(ActiveStateCatalog.InstantiateState(this.GetType().ToString()));
-        //    }
-        //    else
-        //    {
-        //        base.SetNextState();
-        //    }
-        //}
-
-        //protected override void OnMovementInterrupt()
-        //{
-        //    if (hits < comboHits)
-        //    {
-        //        //jam ugly
-        //        Machine.SetState(ActiveStateCatalog.InstantiateState(this.GetType().ToString()));
-        //    }
-        //    else
-        //    {
-        //        base.OnMovementInterrupt();
-        //    }
-        //}
+        public abstract int ComboHits { get; }
+        public int CurrentComboHit { get ; set ; }
 
         public override void ModifyNextState(ref ActiveState state)
         {
@@ -68,10 +16,19 @@ namespace ActiveStates.Characters
 
             if(state is GenericMeleeCombo comboState)
             {
-                comboState.currentComboHit = (currentComboHit + 1) % comboHits;
+                comboState.CurrentComboHit = (CurrentComboHit + 1) % ComboHits;
                 comboState.aimDirection = aimDirection; 
             }
+        }
 
+        protected override void OnCastEnter()
+        {
+            base.OnCastEnter();
+
+            Vector3 aimOut = inputBank.AimOut;
+            aimOut.y = 0;
+            Transform effectOriginTransform = base.characterModel.ChildLocator.LocateByName(meleeParams.effectOriginName).transform;
+            EffectManager.SpawnEffect(EffectIndex.SWIPE_RIGHT, effectOriginTransform.position, Util.DirectionQuaternion(aimOut), effectOriginTransform.lossyScale, characterModel.CharacterDirection.transform);
         }
     }
 }

@@ -11,11 +11,8 @@ namespace ActiveStates.Bobots
         public Type StateInfoType => typeof(BobotGameDevStateInfo);
         public BobotGameDevStateInfo StateInfo => AssignedStateInfo as BobotGameDevStateInfo;
 
-        protected override float baseCastStartTimeFraction => 0;
-        protected override float baseCastEndTimeFraction => 1;
-        protected override float baseOtherStateInterruptTimeFraction => StateInfo.Dash_InterruptTime;
-        protected override float baseDuration => StateInfo.Dash_Duration;
-        protected float dashTime => StateInfo.Dash_DashTime;
+        //todo basicdashaparameters
+        protected override TimedStateParams timedStateParams => StateInfo.DASH_params;
         protected AnimationCurve curve => StateInfo.Dash_DashSpeedCurve;
 
         protected Vector3 direction;
@@ -36,12 +33,12 @@ namespace ActiveStates.Bobots
         {
             base.OnCastFixedUpdate();
 
-            fixedMotorDriver.OverrideVelocity = direction * curve.Evaluate(fixedAge / dashTime) * StateInfo.Dash_DashSpeed;
+            fixedMotorDriver.OverrideVelocity = direction * curve.Evaluate(fixedAge / timedStateParams.baseCastEndTimeFraction) * StateInfo.Dash_DashSpeed;
         }
 
-        public override InterruptPriority GetMinimumInterruptPriority()
-        {
-            return InterruptPriority.STATE_LOW;
-        }
+        //public override InterruptPriority GetMinimumInterruptPriority()
+        //{
+        //    return InterruptPriority.STATE_LOW;
+        //}
     }
 }

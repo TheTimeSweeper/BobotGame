@@ -7,34 +7,48 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 [CustomPropertyDrawer(typeof(VariableNumberStat))]
-public class VariableStatDrawer : PropertyDrawer
+public class VariableStatDrawer : DoubleFloatPropertyDrawer
 {
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
-        EditorGUI.BeginProperty(position, label, property);
-        //EditorGUI.indentLevel = 0;
         var stat = property.boxedValue;
-        if(stat == null)
+        if (stat == null)
         {
             property.boxedValue = new VariableNumberStat(0);
         }
+
+        base.OnGUI(position, property, label);
+    }
+
+    protected override float GetFirstValue(SerializedProperty property)
+    {
+        //get our value
         VariableNumberStat numberStat = (VariableNumberStat)property.boxedValue;
 
-        //add a label and get the position to start the grid
-        Rect contentposition = EditorGUI.PrefixLabel(position, GUIUtility.GetControlID(FocusType.Keyboard), label);
-        Rect firstHalfRect = contentposition;
-        firstHalfRect.width *= 0.5f;
-        //firstHalfRect.x -= firstHalfRect.width * 0.5f;
-        Rect secondHalfRect = firstHalfRect;
-        secondHalfRect.x += secondHalfRect.width;
+        return numberStat.DebugGetBaseValue();
+    }
 
-        var value = EditorGUI.FloatField(firstHalfRect, numberStat.DebugGetBaseValue());
-        if (value != numberStat.DebugGetBaseValue())
+    protected override float GetSecondValue(SerializedProperty property)
+    {
+        //get our value
+        VariableNumberStat numberStat = (VariableNumberStat)property.boxedValue;
+
+        return numberStat.UpdateValueWithModifiers();
+    }
+
+    public override float DrawFirstRect(Rect contentPosition, SerializedProperty property)
+    {
+        float drawnValue = base.DrawFirstRect(contentPosition, property);
+
+        //get our value
+        VariableNumberStat numberStat = (VariableNumberStat)property.boxedValue;
+
+        if (drawnValue != numberStat.DebugGetBaseValue())
         {
-            numberStat.DebugOverrideBaseValue(value);
+            numberStat.DebugOverrideBaseValue(drawnValue);
         }
-        EditorGUI.FloatField(secondHalfRect, numberStat.Value);
         property.boxedValue = numberStat;
-        EditorGUI.EndProperty();
+
+        return drawnValue;
     }
 }

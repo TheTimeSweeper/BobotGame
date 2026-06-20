@@ -16,6 +16,8 @@ MonoBehaviour:
   baseCooldown: -0.03
   state:
     activeStateName: ActiveStates.Bobots.DeadliftChargedPunchChargeUp
-  stateMachineName: Weapon
-  interruptingPriority: 2
+  stateMachineName: Weapon2
+  interruptingPriority: 1
+  bufferTime: 0.2
+  justPress: 1
   autoCast: 0

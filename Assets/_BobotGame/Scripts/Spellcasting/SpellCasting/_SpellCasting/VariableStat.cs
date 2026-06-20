@@ -146,7 +146,7 @@ namespace SpellCasting
             }
         }
 
-        private T UpdateValueWithModifiers()
+        public T UpdateValueWithModifiers()
         {
             Modifiers.Sort((mod1, mod2) =>
             {

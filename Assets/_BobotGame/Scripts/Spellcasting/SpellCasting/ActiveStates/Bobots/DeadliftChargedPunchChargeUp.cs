@@ -14,10 +14,12 @@ namespace ActiveStates.Bobots
 
         public InputState input { get ; set ; }
 
-        protected override float baseDuration => StateInfo.CPunch_holdGiveupTime;
-        protected override float baseCastStartTimeFraction => 0;
-        protected override float baseCastEndTimeFraction => (StateInfo.CPunch_damageMax / StateInfo.CPunch_holdGiveupTime) / characterBody.stats.AttackSpeed;
-        protected override bool attackSpeedAffected => false;
+        //protected override float baseDuration => StateInfo.CPunch_holdGiveupTime;
+        //protected override float baseCastStartTimeFraction => 0;
+        //protected override float baseCastEndTimeFraction => (StateInfo.CPunch_damageMax / StateInfo.CPunch_holdGiveupTime) / characterBody.stats.AttackSpeed;
+        //protected override bool attackSpeedAffected => false;
+
+        protected override TimedStateParams timedStateParams => throw new NotImplementedException();
 
         protected override void OnCastEnter()
         {
@@ -64,23 +66,25 @@ namespace ActiveStates.Bobots
         }
     }
 
-    public class DeadliftChargedPunchRelease : GenericMeleeCombo, IHasStateInfo<BobotGameDevStateInfo>
+    public class DeadliftChargedPunchRelease : BasicMeleeAttack, IHasStateInfo<BobotGameDevStateInfo>
     {
         public ActiveStateInfo AssignedStateInfo { get; set; }
         public Type StateInfoType => typeof(BobotGameDevStateInfo);
         public BobotGameDevStateInfo StateInfo => AssignedStateInfo as BobotGameDevStateInfo;
 
-        protected override string hitboxName => "KickHitbox";
-        protected override string effectOriginName => "PunchEffectOrigin";
-        protected override float baseDuration => StateInfo.CPunch_Duration;
-        protected override float baseCastStartTimeFraction => StateInfo.CPunch_StartTimeFraction;
-        protected override float baseCastEndTimeFraction => StateInfo.CPunch_EndTimeFraction;
-        protected override float damageCoefficient => Mathf.Lerp(StateInfo.CPunch_damageMin, StateInfo.CPunch_damageMax, chargeAmount);
-        protected override float baseOtherStateInterruptTimeFraction => StateInfo.Kick_OtherStateInterruptTimeFraction;
-        protected override float baseMovementInterruptTimeFraction => StateInfo.Kick_baseMovementInterruptTimeFraction;
-        protected override float knockbackCoefficient => Mathf.Lerp(StateInfo.CPunch_knockbackMin, StateInfo.CPunch_knockbackMax, chargeAmount);
+        protected override TimedStateParams timedStateParams => throw new NotImplementedException();
 
-        protected override float preAttackMoveShift => StateInfo.BPC_positionShift;
+        //protected override string hitboxName => "KickHitbox";
+        //protected override string effectOriginName => "PunchEffectOrigin";
+        //protected override float baseDuration => StateInfo.CPunch_Duration;
+        //protected override float baseCastStartTimeFraction => StateInfo.CPunch_StartTimeFraction;
+        //protected override float baseCastEndTimeFraction => StateInfo.CPunch_EndTimeFraction;
+        //protected override float damageCoefficient => Mathf.Lerp(StateInfo.CPunch_damageMin, StateInfo.CPunch_damageMax, chargeAmount);
+        //protected override float baseOtherStateInterruptTimeFraction => StateInfo.Kick_OtherStateInterruptTimeFraction;
+        //protected override float baseMovementInterruptTimeFraction => StateInfo.Kick_baseMovementInterruptTimeFraction;
+        //protected override float knockbackCoefficient => Mathf.Lerp(StateInfo.CPunch_knockbackMin, StateInfo.CPunch_knockbackMax, chargeAmount);
+
+        //protected override float preAttackMoveShift => StateInfo.BPC_positionShift;
 
         public float chargeAmount = 0.5f;
 
@@ -132,10 +136,10 @@ namespace ActiveStates.Bobots
             base.OnCastEnter();
             //todo bobot what is this mess. it just cost me like 20 minutes
             //EnterSwing();
-            Vector3 scale = new Vector3(currentComboHit == 1 ? -1 : 1, 1, 1);
-            Vector3 aimOut = inputBank.AimOut;
-            aimOut.y = 0;
-            EffectManager.SpawnEffect(EffectIndex.SWIPE_LEFT, base.characterModel.ChildLocator.LocateByName(effectOriginName).transform.position, Util.DirectionQuaternion(aimOut), scale, characterModel.CharacterDirection.transform);
+            //Vector3 scale = new Vector3( == 1 ? -1 : 1, 1, 1);
+            //Vector3 aimOut = inputBank.AimOut;
+            //aimOut.y = 0;
+            //EffectManager.SpawnEffect(EffectIndex.SWIPE_LEFT, base.characterModel.ChildLocator.LocateByName(effectOriginName).transform.position, Util.DirectionQuaternion(aimOut), scale, characterModel.CharacterDirection.transform);
         }
     }
 }

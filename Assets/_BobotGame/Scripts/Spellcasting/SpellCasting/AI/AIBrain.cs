@@ -23,7 +23,7 @@ namespace SpellCasting.AI
         public Transform noTargetOverrideInterestPoint;
 
         [SerializeField]
-        private TeamTargetType teamTargetType = TeamTargetType.OTHER;
+        private ValidTarget teamTargetType = ValidTarget.OTHERTEAM;
 
         [SerializeField]
         private TeamComponent teamComponent; //todo bobot bodyTeamComponent?

@@ -5,24 +5,64 @@ namespace ActiveStates.Characters
 {
     public abstract class BasicTimedState : BodyState
     {
-        /// <summary>
-        /// total duration of the move
-        /// </summary>
-        protected abstract float baseDuration { get; }
-        /// <summary>
-        /// 0-1 time relative to duration that the skill starts
-        /// for example, set 0.5 and the "cast" will happen halfway through the skill
-        /// </summary>
-        protected virtual float baseCastStartTimeFraction => 1;
-        protected virtual float baseCastEndTimeFraction => 1;
-        protected virtual float baseOtherStateInterruptTimeFraction => 1;
-        protected virtual float baseMovementInterruptTimeFraction => 1;
-        protected virtual float baseExtraEndDelayFraction => 0;
-        protected virtual bool attackSpeedAffected => true;
+        [System.Serializable]
+        public class TimedStateParams
+        {
+            /// <summary>
+            /// total duration of the move
+            /// </summary>
+            [ShowMultiplyResult(addToMultipliers = "baseExtraEndDelayFraction")]
+            public float baseDuration = 1;
+            /// <summary>
+            /// easy way to extend the end time of an attack without having to affect previous timings
+            /// </summary>
+            public float baseExtraEndDelayFraction = 0;
+            /// <summary>
+            /// 0-1 time relative to duration that the skill starts
+            /// for example, set 0.5 and the "cast" will happen halfway through the skill
+            /// </summary>
+            [ShowMultiplyResult("baseDuration")]
+            public float baseCastStartTimeFraction = 1;
+            [ShowMultiplyResult("baseDuration")]
+            public float baseCastEndTimeFraction = 1;
+            [ShowMultiplyResult("baseDuration", addToMultipliers = "baseExtraEndDelayFraction")]
+            public float baseOtherStateInterruptTimeFraction = 1;
+            [ShowMultiplyResult("baseDuration", addToMultipliers = "baseExtraEndDelayFraction")]
+            public float baseMovementInterruptTimeFraction = 1;
+            public bool attackSpeedAffected = true;
+
+            public TimedStateParams() { }
+            public TimedStateParams(float baseDuration)
+            {
+                this.baseDuration = baseDuration;
+            }
+            public TimedStateParams(float? overrideBaseDuration, float? overrideBaseCastStartTime, float? overrideBaseCastEndTime)
+            {
+                if (overrideBaseDuration.HasValue)
+                {
+                    baseDuration = overrideBaseDuration.Value;
+                }
+                if (overrideBaseCastStartTime.HasValue)
+                {
+                    baseCastStartTimeFraction = overrideBaseCastStartTime.Value;
+                }
+                if (overrideBaseCastEndTime.HasValue)
+                {
+                    baseCastEndTimeFraction = overrideBaseCastEndTime.Value;
+                }
+            }
+        }
+
+        public virtual float? simpleOverrideBaseDuration => 1;
+        public virtual float? simpleOverrideBaseCastStartTimeFraction => null;
+        public virtual float? simpleOverrideBaseCastEndTimeFraction => null;
+
+        protected virtual TimedStateParams timedStateParams { get; private set; }
 
         protected float duration;
         protected float castStartTime;
         protected float castEndTime;
+        protected float stateEndTime;
         protected float movementInterruptTime;
         protected float otherStateInterruptTime;
         protected bool hasCasted;
@@ -37,11 +77,16 @@ namespace ActiveStates.Characters
 
         protected virtual void InitDurationValues()
         {
-            duration = baseDuration / (attackSpeedAffected? characterBody.stats.AttackSpeed : 1);
-            castStartTime = baseCastStartTimeFraction * duration;
-            castEndTime = baseCastEndTimeFraction * duration;
-            otherStateInterruptTime = baseOtherStateInterruptTimeFraction * duration * ( 1 + baseExtraEndDelayFraction);
-            movementInterruptTime = baseMovementInterruptTimeFraction * duration * (1 + baseExtraEndDelayFraction);
+            if(timedStateParams == null)
+            {
+                timedStateParams = new TimedStateParams(simpleOverrideBaseDuration, simpleOverrideBaseCastStartTimeFraction, simpleOverrideBaseCastEndTimeFraction);
+            }
+            duration = timedStateParams.baseDuration / (timedStateParams.attackSpeedAffected? characterBody.stats.AttackSpeed : 1);
+            castStartTime = timedStateParams.baseCastStartTimeFraction * duration;
+            castEndTime = timedStateParams.baseCastEndTimeFraction * duration;
+            otherStateInterruptTime = timedStateParams.baseOtherStateInterruptTimeFraction * duration * ( 1 + timedStateParams.baseExtraEndDelayFraction);
+            movementInterruptTime = timedStateParams.baseMovementInterruptTimeFraction * duration * (1 + timedStateParams.baseExtraEndDelayFraction);
+            stateEndTime = duration * (1 + timedStateParams.baseExtraEndDelayFraction);
         }
 
         protected virtual void OnCastEnter() { }
@@ -75,7 +120,7 @@ namespace ActiveStates.Characters
                 OnCastExit();
             }
 
-            if (fixedAge > duration  + duration * baseExtraEndDelayFraction)
+            if (fixedAge > stateEndTime)
             {
                 SetNextState();
                 return;

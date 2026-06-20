@@ -25,8 +25,8 @@ namespace SpellCasting
         {
             inputBank.Primary.UpdateInput(Input.GetAxis("TriggerR") < -0.5f);
             inputBank.Block.UpdateInput(Input.GetAxis("TriggerL") < -0.5f);
-            inputBank.Space.UpdateInput(Input.GetButton("BumperL"));
-            inputBank.Shift.UpdateInput(Input.GetButton("BumperR"));
+            inputBank.Dash.UpdateInput(Input.GetButton("BumperL"));
+            inputBank.Crouch.UpdateInput(Input.GetButton("BumperR"));
             inputBank.E.UpdateInput(Input.GetButton("X"));
         }
 

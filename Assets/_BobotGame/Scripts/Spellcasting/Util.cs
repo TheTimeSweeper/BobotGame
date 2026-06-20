@@ -238,29 +238,41 @@ public static class Util
         Debug.DrawLine(point, point + direction * dist, color);
     }
 
-    public static bool ShouldTargetByTeam(GameObject thisGameObject, IHasCommonComponents targetObject, TeamIndex thisTeam, TeamTargetType teamTargeting)
+    public static bool ShouldTargetByTeam(GameObject thisGameObject, IHasCommonComponents targetObject, TeamIndex thisTeam, ValidTarget teamTargeting)
     {
         bool validHit = false;
         TeamIndex targetTeamIndex = Util.GetTeamIndex(targetObject);
-        switch (teamTargeting)
+
+        //if targeting self, check self
+        if (teamTargeting.HasFlag(ValidTarget.SELF))
         {
-            case var targeting when teamTargeting.HasFlag(TeamTargetType.SELF):
-                if (targetObject.CommonComponents != null && targetObject.CommonComponents.gameObject == thisGameObject)
-                    validHit = true;
-                break;
-
-            //JAM friendlyfiremanager?
-            case var targeting when teamTargeting.HasFlag(TeamTargetType.OTHER):
-                if (targetTeamIndex != thisTeam)
-                    validHit = true;
-                break;
-
-            case var targeting when teamTargeting.HasFlag(TeamTargetType.ALLY):
-                if (targetTeamIndex == thisTeam)
-                    validHit = true;
-                break;
+            if (IsSelf())
+            {
+                validHit |= true;
+            }
         }
-
+        //jam friendlyfiremanager?
+        //if targeting other, check if target is not on any of our teams
+        if (teamTargeting.HasFlag(ValidTarget.OTHERTEAM))
+        {
+            if ((targetTeamIndex & thisTeam) == 0)
+            {
+                validHit |= true;
+            }
+        }
+        //if targeting ally team, check if target is on any of our teams
+          // but don't include self, that is decided by the SELF flag
+        if (teamTargeting.HasFlag(ValidTarget.ALLYTEAM))
+        {
+            if ((targetTeamIndex & thisTeam) != 0 && !IsSelf())
+            {
+                validHit |= true;
+            }
+        }
+        bool IsSelf()
+        {
+            return targetObject.CommonComponents != null && targetObject.CommonComponents.gameObject == thisGameObject;
+        }
         return validHit;
     }
 }

@@ -1,3 +1,4 @@
+using ActiveStates.Characters;
 using SpellCasting;
 using SpellCasting.Projectiles;
 using UnityEngine;
@@ -6,23 +7,15 @@ using UnityEngine;
 public class BobotGameDevStateInfo : ActiveStateInfo
 {
     [Header("BobotPunchCombo")]
-    public float BPC_Duration;
-    public float BPC_Duration2;
-    public float BPC_Duration3;
-    public float BPC_EndDuration3;
-    public float BPC_Damage = 1;
-    public float BPC_StartTimeFraction;
-    public float BPC_EndTimeFraction;
-    public float BPC_OtherStateInterruptTimeFraction;
+    public BasicMeleeAttack.BasicMeleeParams BPC_HitParams = new BasicMeleeAttack.BasicMeleeParams();
+    public BasicMeleeAttack.BasicMeleeParams BPC_HitParams2 = new BasicMeleeAttack.BasicMeleeParams();
+    public BasicMeleeAttack.BasicMeleeParams BPC_HitParams3 = new BasicMeleeAttack.BasicMeleeParams();
+
     public float BPC_AnimationSpeed;
-    public float BPC_positionShift;
-    public float BPC_positionShift2;
-    public float BPC_baseMovementInterruptTimeFraction;
     [Header("Dash")]
-    public float Dash_Duration;
+
+    public BasicTimedState.TimedStateParams DASH_params = new BasicTimedState.TimedStateParams();
     public float Dash_AnimationSpeed;
-    public float Dash_InterruptTime;
-    public float Dash_DashTime;
     public float Dash_DashSpeed;
     public AnimationCurve Dash_DashSpeedCurve;
     [Header("Stance")]
@@ -30,13 +23,8 @@ public class BobotGameDevStateInfo : ActiveStateInfo
     public float block_duration;
     public float block_AnimationMultiplier;
     [Header("Kick")]
-    public float Kick_Damage;
-    public float Kick_StartTimeFraction;
-    public float Kick_EndTimeFraction;
-    public float Kick_Duration;
+    public BasicMeleeAttack.BasicMeleeParams Kick_params = new BasicMeleeAttack.BasicMeleeParams();
     public float Kick_AnimationSpeed;
-    public float Kick_OtherStateInterruptTimeFraction;
-    public float Kick_baseMovementInterruptTimeFraction;
     [Header("Deadlift punch")]
     public float CPunch_chargeTime;
     public float CPunch_holdGiveupTime;

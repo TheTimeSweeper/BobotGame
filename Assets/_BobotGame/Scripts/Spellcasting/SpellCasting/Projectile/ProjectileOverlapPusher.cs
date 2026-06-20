@@ -8,7 +8,7 @@ namespace SpellCasting.Projectiles
         private Rigidbody rigidBody;
 
         [SerializeField]
-        private TeamTargetType teamTargeting = TeamTargetType.OTHER;
+        private ValidTarget teamTargeting = ValidTarget.OTHERTEAM;
 
         public void ProjectileWake()
         {

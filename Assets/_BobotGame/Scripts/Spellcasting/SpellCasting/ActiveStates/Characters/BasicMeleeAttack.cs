@@ -1,4 +1,5 @@
 ﻿using SpellCasting;
+using System;
 using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -8,16 +9,30 @@ namespace ActiveStates.Characters
 {
     public abstract class BasicMeleeAttack : BasicTimedState
     {
-        protected abstract string hitboxName { get; }
-        protected virtual string effectOriginName { get; }
-        protected abstract float damageCoefficient { get; }
-        protected virtual float knockbackCoefficient => 0;
-        protected virtual float preAttackMoveShift => 0.5f;
-        protected virtual float preAttackMoveShiftDecay => 16;
-        protected virtual float attackMoveShift => 0.5f;
-        protected virtual float attackMoveShiftDecay => 16;
+        [System.Serializable]
+        public class BasicMeleeParams : TimedStateParams
+        {
+            [Header("Melee")]
+            public string hitboxName;
+            public string effectOriginName = "";
+            public float damageCoefficient = 1;
+            public float knockbackCoefficient = 0;
+            public float preAttackMoveShift = 0.5f;
+            public float preAttackMoveShiftDecay = 16;
+            public float attackMoveShift = 0.5f;
+            public float attackMoveShiftDecay = 16;
+            public BasicMeleeParams() : base()
+            {
 
-        protected OverlapAttack attack;
+            }
+            public BasicMeleeParams(float baseDuration) : base(baseDuration)
+            {
+            }
+        }
+
+        protected BasicMeleeParams meleeParams => timedStateParams as BasicMeleeParams;
+
+        protected OverlapAttack overlapAttack;
 
         private Vector3 _preAttackShift;
         private Vector3 _attackShift;
@@ -29,7 +44,7 @@ namespace ActiveStates.Characters
         {
             base.OnEnter();
 
-            _preAttackShift = inputBank.GlobalMoveDirection * preAttackMoveShift * characterBody.stats.MoveSpeed;
+            _preAttackShift = inputBank.GlobalMoveDirection * meleeParams.preAttackMoveShift * characterBody.stats.MoveSpeed;
 
             if (aimDirection == Vector3.zero)
             {
@@ -37,16 +52,17 @@ namespace ActiveStates.Characters
                 //aimDirection = inputBank.GlobalMoveDirection;
             }
 
-            attack = new OverlapAttack
+            overlapAttack = new OverlapAttack
             {
-                Damage = damageCoefficient * characterBody.stats.Damage,
-                Hitbox = characterModel.HitboxLocator.LocateByName(hitboxName),
+                Damage = meleeParams.damageCoefficient * characterBody.stats.Damage,
+                Hitbox = characterModel.HitboxLocator.LocateByName(meleeParams.hitboxName),
                 OwnerGameObject = gameObject,
                 OwnerBody = characterBody,
                 Team = teamComponent.TeamIndex,
                 OverrideKnockbackDirection = characterModel.transform.forward,
-                KnockbackForce = knockbackCoefficient
+                KnockbackForce = meleeParams.knockbackCoefficient
             };
+            ModifyOverlapAttack(overlapAttack);
 
             //EffectManager.SpawnEffect(EffectIndex.SOUND_FAST, transform.position, null, 11);
 
@@ -56,10 +72,15 @@ namespace ActiveStates.Characters
             _startDirection = inputBank.AimOut;
         }
 
+        protected virtual void ModifyOverlapAttack(OverlapAttack overlapAttack)
+        {
+
+        }
+
         protected override void OnCastEnter()
         {
             base.OnCastEnter();
-            _attackShift = inputBank.GlobalMoveDirection * attackMoveShift * characterBody.stats.MoveSpeed;
+            _attackShift = inputBank.GlobalMoveDirection * meleeParams.attackMoveShift * characterBody.stats.MoveSpeed;
         }
 
         public override void OnFixedUpdate()
@@ -68,7 +89,7 @@ namespace ActiveStates.Characters
             if (!hasCasted)
             {
                 fixedMotorDriver.AddedMotion2 = _preAttackShift;
-                _preAttackShift = Util.ExpDecayLerp(_preAttackShift, Vector3.zero, preAttackMoveShiftDecay, Time.deltaTime);
+                _preAttackShift = Util.ExpDecayLerp(_preAttackShift, Vector3.zero, meleeParams.preAttackMoveShiftDecay, Time.deltaTime);
             }
         }
 
@@ -79,9 +100,9 @@ namespace ActiveStates.Characters
             characterModel.CharacterDirection.OverrideLookDirection(_startDirection, 0.1f);
 
             fixedMotorDriver.AddedMotion = _attackShift;
-            _attackShift = Util.ExpDecayLerp(_attackShift, Vector3.zero, attackMoveShiftDecay, Time.deltaTime);
+            _attackShift = Util.ExpDecayLerp(_attackShift, Vector3.zero, meleeParams.attackMoveShiftDecay, Time.deltaTime);
 
-            if (attack.Fire())
+            if (overlapAttack.Fire())
             {
                 OnHitEnemyAuthority();
             }

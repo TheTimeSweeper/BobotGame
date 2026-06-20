@@ -106,9 +106,9 @@ namespace SpellCasting
         {
             inputBank.Primary.UpdateInput(downInputs[(int)SkillButton.PRIMARY]);
             inputBank.Block.UpdateInput(downInputs[(int)SkillButton.BLOCK]);
-            inputBank.Space.UpdateInput(downInputs[(int)SkillButton.DASH]);
-            inputBank.Heavy.UpdateInput(downInputs[(int)SkillButton.HEAVY]);
-            inputBank.Shift.UpdateInput(downInputs[(int)SkillButton.CROUCH]);
+            inputBank.Dash.UpdateInput(downInputs[(int)SkillButton.DASH]);
+            inputBank.Ability.UpdateInput(downInputs[(int)SkillButton.ABILITY]);
+            inputBank.Crouch.UpdateInput(downInputs[(int)SkillButton.CROUCH]);
         }
     }
 }

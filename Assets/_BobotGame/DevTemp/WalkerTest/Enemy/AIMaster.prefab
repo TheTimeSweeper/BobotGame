@@ -69,6 +69,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ed0645a0b5249a349a950318a3d5efb5, type: 2}
   - {fileID: 11400000, guid: f6a5e85d7feedae41a666f808ea77eb9, type: 2}
   - {fileID: 11400000, guid: a6e749db2f5297e45821d2c501e7ca98, type: 2}
+  - {fileID: 11400000, guid: 6e398286a5b92974ba9bb08a24892b96, type: 2}
   AIInputController: {fileID: 5638254006160183991}
   master: {fileID: 5638254006160183993}
   noTargetOverrideInterestPoint: {fileID: 0}

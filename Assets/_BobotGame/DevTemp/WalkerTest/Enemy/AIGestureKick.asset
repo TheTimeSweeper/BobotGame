@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: AIGestureKick
   m_EditorClassIdentifier: 
   duration: 0.84
-  skillButton: 5
-  skillButton2: 3
+  skillButton: 3
+  skillButton2: 5
   CloseDistance: 12
   StrafeWhileClose: 0
   crouchChance: 0.297

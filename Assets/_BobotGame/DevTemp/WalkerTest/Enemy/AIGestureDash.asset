@@ -9,15 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b09b822c22edbe143a9fa7e17de53b4f, type: 3}
-  m_Name: AIGesturePunchCombo
+  m_Script: {fileID: 11500000, guid: a37eacff17d00e64e88ceb903d8f11bc, type: 3}
+  m_Name: AIGestureDash
   m_EditorClassIdentifier: 
-  duration: 2
-  skillButton: 1
+  duration: 0.84
+  skillButton: 4
   skillButton2: 5
-  CloseDistance: 4
+  CloseDistance: 20
   StrafeWhileClose: 0
-  crouchChance: 0.297
-  interval: 0.5
-  clicks: 3
-  delayAfterCrouch: 0.2
+  crouchChance: 0
+  delayAfterCrouch: 0

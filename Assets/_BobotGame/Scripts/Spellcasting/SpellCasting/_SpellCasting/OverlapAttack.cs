@@ -13,7 +13,7 @@ namespace SpellCasting
         public float Damage { get; set; }
         public DamageTypeIndex DamageType { get; set; }
         public TeamIndex Team { get; set; }
-        public TeamTargetType TeamTargeting { get; set; } = TeamTargetType.OTHER;
+        public ValidTarget TeamTargeting { get; set; } = ValidTarget.ALLYTEAM | ValidTarget.OTHERTEAM;
         public DamagingData DamageInfo { get; set; }
         public Vector3 OverrideKnockbackDirection { get; set; }
         public Vector3 KnockbackCenter { get;  set; }
@@ -66,7 +66,7 @@ namespace SpellCasting
 
                         GameObject thisGameObject = OwnerGameObject;
                         IHasCommonComponents targetObject = healthComponent;
-                        TeamTargetType teamTargeting = TeamTargeting;
+                        ValidTarget teamTargeting = TeamTargeting;
                         bool validHit = Util.ShouldTargetByTeam(thisGameObject, targetObject, Team, teamTargeting);
                         if (!validHit)
                         {

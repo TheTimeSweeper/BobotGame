@@ -4,12 +4,13 @@ using UnityEngine;
 namespace SpellCasting
 {
     [Flags]
-    public enum TeamTargetType : uint
+    public enum ValidTarget : byte
     {
-        NONE = 0u,
-        SELF = 1u,
-        OTHER= 2u,
-        ALLY= 4u,
+        NONE = 0,
+        SELF = 1,
+        OTHERTEAM= 2,
+        ALLYTEAM= 4,
+        ANYTEAM= 6,
     }
     [Flags]
     public enum TeamIndex : uint

@@ -17,9 +17,9 @@ namespace SpellCasting
         {
             inputBank.Primary.UpdateInput(Input.GetAxis("TriggerR") < -0.5f);
             inputBank.Block.UpdateInput(Input.GetAxis("TriggerL") < -0.5f);
-            inputBank.Space.UpdateInput(Input.GetButton("BumperL"));
-            inputBank.Heavy.UpdateInput(Input.GetButton("BumperR"));
-            inputBank.Shift.UpdateInput(Input.GetButton("X"));
+            inputBank.Dash.UpdateInput(Input.GetButton("BumperL"));
+            inputBank.Ability.UpdateInput(Input.GetButton("BumperR"));
+            inputBank.Crouch.UpdateInput(Input.GetButton("X"));
         }
 
         protected override Vector3 GetMovementInput()

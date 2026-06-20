@@ -7,13 +7,11 @@ namespace ActiveStates.Bobots
 {
     public class DashToPoint : BasicTimedState, IHasStateInfo<BobotGameDevStateInfo>
     {
-        protected override float baseCastStartTimeFraction => 0;
-        protected override float baseDuration => StateInfo.Dash_Duration;
-        protected float dashTime => StateInfo.Dash_DashTime;
-
         public ActiveStateInfo AssignedStateInfo { get; set; }
         public Type StateInfoType => typeof(BobotGameDevStateInfo);
         public BobotGameDevStateInfo StateInfo => AssignedStateInfo as BobotGameDevStateInfo;
+
+        protected override TimedStateParams timedStateParams => StateInfo.DASH_params;
 
         private Vector3? goalVelocity;
         public override void OnEnter()
@@ -31,14 +29,14 @@ namespace ActiveStates.Bobots
             }
             goalPosition.y = transform.position.y;
             Vector3 goalDistance = goalPosition - transform.position;
-            goalVelocity = goalDistance / dashTime;
+            goalVelocity = goalDistance / castEndTime;
         }
 
         public override void OnFixedUpdate()
         {
             base.OnFixedUpdate();
 
-            if (fixedAge < dashTime)
+            if (fixedAge < castEndTime)
             {
                 fixedMotorDriver.OverrideVelocity = goalVelocity;
             }

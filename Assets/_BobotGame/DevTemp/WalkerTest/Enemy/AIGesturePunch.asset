@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duration: 0.7
   skillButton: 1
-  skillButton2: 3
+  skillButton2: 5
   CloseDistance: 4
   StrafeWhileClose: 0
   crouchChance: 0.297

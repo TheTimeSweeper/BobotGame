@@ -10,11 +10,9 @@ namespace ActiveStates.Bobots
         public Type StateInfoType => typeof(BobotGameDevStateInfo);
         public BobotGameDevStateInfo StateInfo => AssignedStateInfo as BobotGameDevStateInfo;
 
-        public float height => StateInfo.Crouch_Height;
+        public override float? simpleOverrideBaseDuration => StateInfo.block_duration;
 
         public InputState input { get; set; }
-
-        protected override float baseDuration => StateInfo.block_duration;
 
         public override void OnEnter()
         {

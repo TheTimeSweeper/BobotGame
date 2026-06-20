@@ -26,11 +26,11 @@ namespace SpellCasting
             {
                 stateMachineLocator.LocateByName(M2Skill.stateMachine).TryInterruptState(ActiveStateCatalog.InstantiateState(M2Skill.state), M2Skill.priority);
             }
-            if (inputbank.Shift.JustPressed(this))
+            if (inputbank.Crouch.JustPressed(this))
             {
                 stateMachineLocator.LocateByName(ShiftSkill.stateMachine).TryInterruptState(ActiveStateCatalog.InstantiateState(ShiftSkill.state), ShiftSkill.priority);
             }
-            if (inputbank.Space.JustPressed(this))
+            if (inputbank.Dash.JustPressed(this))
             {
                 stateMachineLocator.LocateByName(SpaceSkill.stateMachine).TryInterruptState(ActiveStateCatalog.InstantiateState(SpaceSkill.state), SpaceSkill.priority);
             }
