@@ -17,8 +17,9 @@ namespace ActiveStates.Bobots
         public override void OnEnter()
         {
             base.OnEnter();
-            animator.Play("Dash");
-            animator.SetFloat("dash.playbackRate", StateInfo.Dash_AnimationSpeed / duration);
+            PlayTimedAnimation();
+            //animator.Play("Dash");
+            //animator.SetFloat("dash.playbackRate", StateInfo.Dash_AnimationSpeed / duration);
 
             //if (Util.CastHurtBox(inputBank, out var raycastHit))
             Ray bodyRay = inputBank.GetBodyRay();

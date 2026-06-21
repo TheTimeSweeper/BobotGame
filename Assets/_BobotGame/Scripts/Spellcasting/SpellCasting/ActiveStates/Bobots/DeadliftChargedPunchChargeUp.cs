@@ -34,7 +34,8 @@ namespace ActiveStates.Bobots
         protected override void OnCastEnter()
         {
             base.OnCastEnter();
-            animator.Play("ChargePunch");
+            PlayTimedAnimation();
+            //PlayAnimation("YayGesture", "ChargePunch", "punch.playbackRate", duration);
         }
 
         public override void OnFixedUpdate()
@@ -66,7 +67,7 @@ namespace ActiveStates.Bobots
             if(state is not DeadliftChargedPunchRelease)
             {
                 //todo bobot really need that playanimation system, man
-                animator.Play("BufferEmpty", 1);
+                animator.SetTrigger("cancel");
             }
         }
 
@@ -83,12 +84,15 @@ namespace ActiveStates.Bobots
         public BobotGameDevStateInfo StateInfo => AssignedStateInfo as BobotGameDevStateInfo;
 
         protected override TimedStateParams stateParams => StateInfo.CPunch_ReleaseParams;
+        protected override BasicMeleeParams meleeParams => StateInfo.CPunch_meleeReleaseParams;
 
         //todo bobot bring back the easy fuclkin properties...
-            //guess I'll fuckin just add simpleoverride conditionals for each of these like i did the baseduration etc
+        //guess I'll fuckin just add simpleoverride conditionals for each of these like i did the baseduration etc
         protected float chargedDamageCoefficient => Mathf.Lerp(StateInfo.CPunch_damageMin, StateInfo.CPunch_damageMax, chargeAmount);
         //protected override float damageCoefficient => Mathf.Lerp(StateInfo.CPunch_damageMin, StateInfo.CPunch_damageMax, chargeAmount);
         protected float chargedknockbackCoefficient => Mathf.Lerp(StateInfo.CPunch_knockbackMin, StateInfo.CPunch_knockbackMax, chargeAmount);
+
+
         //protected override float knockbackCoefficient => Mathf.Lerp(StateInfo.CPunch_knockbackMin, StateInfo.CPunch_knockbackMax, chargeAmount);
 
         //protected override float preAttackMoveShift => StateInfo.BPC_positionShift;
@@ -118,7 +122,7 @@ namespace ActiveStates.Bobots
 
         private void PlayKickAnimation()
         {
-            animator.Play("ThrowPunch", 1, 0);
+            PlayTimedAnimation();// "ThrowPunch", 1, 0);
         }
 
         public override InterruptPriority GetMinimumInterruptPriority()

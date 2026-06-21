@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices.WindowsRuntime;
+using UnityEngine;
 
 namespace ActiveStates.Characters
 {
@@ -166,13 +167,13 @@ namespace ActiveStates.Characters
             }
         }
 
-        public void PlayAnimation()
+        public void PlayTimedAnimation()
         {
-            PlayAnimation(stateParams.animationLayerName, stateParams.animationStateName, stateParams.animationPlaybackRateParam, stateParams.animationPlayTimeFraction * stateParams.baseDuration);
+            PlayAnimation(stateParams.animationLayerName, stateParams.animationStateName, stateParams.animationPlaybackRateParam, stateParams.animationPlayTimeFraction * duration);
         }
-        public override void PlayAnimation(AnimationStateStringOrInt animationState)
+        public void PlayTimedAnimation(AnimationStateStringOrInt animationState)
         {
-            PlayAnimation(stateParams.animationLayerName, animationState, stateParams.animationPlaybackRateParam, stateParams.animationPlayTimeFraction * stateParams.baseDuration);
+            PlayAnimation(stateParams.animationLayerName, animationState, stateParams.animationPlaybackRateParam, stateParams.animationPlayTimeFraction * duration);
         }
     }
 }

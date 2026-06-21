@@ -6,7 +6,7 @@ using UnityEngine;
 namespace SpellCasting
 {
     [RequireComponent(typeof(CharacterBody))]
-    public class GenericHurtReaction : MonoBehaviour, IHasCommonComponents, IUIBarProvider
+    public class GenericHurtReaction : MonoBehaviour, IHasCommonComponents, IUIBarProvider, IUIBehindBarProvider
     {
         [SerializeField]
         private CommonComponentsHolder commonComponents;
@@ -21,12 +21,13 @@ namespace SpellCasting
 
         private float _lastStunTimer;
         private float _currentStunTimer;
-        private float _totalTimeStunned;
+        private float _currentStunResistance;
         public float CurrentStunTime => _currentStunTimer;
         //public float stunDecayTime = 1;
         [Tooltip("The amount of stun time gathered before the curve x value should reach 1. I cannot think of a better name or maybe setup for this.")]
         public float stunResistanceMaxTime = 1;
         public AnimationCurve stunResistanceCurve = AnimationCurve.Linear(0, 0, 1, 1);
+        public float stunResistanceDecay = 3;
 
         private float _knockbackTime;
         private Vector3 _knockback;
@@ -82,11 +83,11 @@ namespace SpellCasting
             _currentStunTimer = Mathf.Max(0, _currentStunTimer - Time.deltaTime);
             if(_currentStunTimer > 0)
             {
-                _totalTimeStunned += Time.deltaTime;
+                _currentStunResistance += Time.deltaTime;
             }
             else
             {
-                _totalTimeStunned = 0;
+                _currentStunResistance = Util.ExpDecayLerp(_currentStunResistance, 0, stunResistanceDecay, Time.deltaTime);
             }
         }
         private void HealthComponent_OnDamageTaken(GetDamagedData damagedInfo)
@@ -120,10 +121,10 @@ namespace SpellCasting
 
         private float AddNewStunValue(float stunValueToAdd)
         {
-            float currentStunResistance = stunResistanceCurve.Evaluate(_totalTimeStunned / stunResistanceMaxTime);
+            float currentStunResistance = stunResistanceCurve.Evaluate(_currentStunResistance / stunResistanceMaxTime);
             float finalStunToAdd = (1 - currentStunResistance) * stunValueToAdd;
             _currentStunTimer += finalStunToAdd;
-            Debug.Log($"finalStunToAdd {finalStunToAdd.ToString("0.00")}. resistance {currentStunResistance.ToString("0.00")}. total Stun {_totalTimeStunned.ToString("0.00")}. ");
+            Debug.Log($"finalStunToAdd {finalStunToAdd.ToString("0.00")}. resistance {currentStunResistance.ToString("0.00")}. total Stun {_currentStunResistance.ToString("0.00")}. ");
             return finalStunToAdd;
         }
 
@@ -134,7 +135,7 @@ namespace SpellCasting
                 {
                     StunTime = newStunTime,
                 },
-                InterruptPriority.HITSTUN,
+                InterruptPriority.STUN,
                 true,
                 all);
         }
@@ -152,6 +153,16 @@ namespace SpellCasting
         public bool GetUIShouldShow()
         {
             return _currentStunTimer > 0;
+        }
+
+        public float GetUIBehindCurrentValue()
+        {
+            return _currentStunResistance;
+        }
+
+        public float GetUIBehindMaxValue()
+        {
+            return stunResistanceMaxTime;
         }
     }
 }

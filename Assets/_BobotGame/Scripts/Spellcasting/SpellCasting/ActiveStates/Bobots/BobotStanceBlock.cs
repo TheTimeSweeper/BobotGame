@@ -20,9 +20,7 @@ namespace ActiveStates.Bobots
         {
             base.OnEnter();
 
-            this.PlayAnimation("Block");
-            
-            animator.SetFloat("block.playbackRate", StateInfo.block_AnimationMultiplier / baseDuration);
+            PlayAnimation("Body", "Block", "block.playbackRate", baseDuration);            
 
             characterBody.stats.MoveSpeed.ApplyMultiplyModifier(0.8f, "Block");
             //todo bobot: BLASPHEMY

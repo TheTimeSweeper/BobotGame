@@ -12,18 +12,19 @@ namespace ActiveStates.Bobots
         public BobotGameDevStateInfo StateInfo => AssignedStateInfo as BobotGameDevStateInfo;
 
         protected override TimedStateParams stateParams => StateInfo.Kick_params;
+        protected override BasicMeleeParams meleeParams => StateInfo.Kick_meleeParams;
 
         public override void OnEnter()
         {
             base.OnEnter();
-            PlayKickAnimation();
+            PlayTimedAnimation();
         }
 
-        private void PlayKickAnimation()
-        {
-            animator.Play("Kick", 0, 0);
-            animator.SetFloat("kick.playbackRate", StateInfo.Kick_AnimationSpeed * stateParams.baseCastEndTimeFraction);
-        }
+        //private void PlayKickAnimation()
+        //{
+        //    animator.Play("Kick", 0, 0);
+        //    animator.SetFloat("kick.playbackRate", StateInfo.Kick_AnimationSpeed * stateParams.baseCastEndTimeFraction);
+        //}
 
         public override InterruptPriority GetMinimumInterruptPriority()
         {

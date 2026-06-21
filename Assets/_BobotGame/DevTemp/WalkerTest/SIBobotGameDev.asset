@@ -22,13 +22,18 @@ MonoBehaviour:
     baseInterruptPriority: 2
     otherInterruptableInterruptPriority: 1
     movementInterruptPriority: 0
+    animationPlayTimeFraction: 0.6
+    animationStateName: PunchDash
+    animationLayerName: Body
+    animationPlaybackRateParam: punch.playbackRate
     attackSpeedAffected: 1
+  BPC_MeleeParams1:
     hitboxName: PunchHitbox
     effectOriginName: PunchEffectOrigin
     damageCoefficient: 0.3
-    stunTime: 0.5
-    knockbackCoefficient: 0
-    preAttackMoveShift: 2
+    stunTime: 0.55
+    knockbackCoefficient: 2
+    preAttackMoveShift: 0.5
     preAttackMoveShiftDecay: 16
     attackMoveShift: 0
     attackMoveShiftDecay: 16
@@ -43,11 +48,16 @@ MonoBehaviour:
     baseInterruptPriority: 2
     otherInterruptableInterruptPriority: 1
     movementInterruptPriority: 0
+    animationPlayTimeFraction: 0.6
+    animationStateName: Punch2
+    animationLayerName: Body
+    animationPlaybackRateParam: punch.playbackRate
     attackSpeedAffected: 1
+  BPC_MeleeParams2:
     hitboxName: PunchHitbox
     effectOriginName: PunchEffectOrigin
     damageCoefficient: 0.3
-    stunTime: 0.5
+    stunTime: 0.55
     knockbackCoefficient: 0
     preAttackMoveShift: 0.5
     preAttackMoveShiftDecay: 16
@@ -56,7 +66,7 @@ MonoBehaviour:
     staminaRecoveryOnHit: 10
   BPC_HitParams3:
     baseDuration: 0.8
-    baseExtraEndDelayFraction: 0
+    baseExtraEndDelayFraction: 0.51
     baseCastStartTimeFraction: 0.3
     baseCastEndTimeFraction: 0.4
     baseOtherStateInterruptTimeFraction: 0.5
@@ -64,18 +74,22 @@ MonoBehaviour:
     baseInterruptPriority: 2
     otherInterruptableInterruptPriority: 1
     movementInterruptPriority: 0
+    animationPlayTimeFraction: 0.6
+    animationStateName: Punch2
+    animationLayerName: Body
+    animationPlaybackRateParam: punch.playbackRate
     attackSpeedAffected: 1
+  BPC_MeleeParams3:
     hitboxName: PunchHitbox
     effectOriginName: PunchEffectOrigin
     damageCoefficient: 0.3
-    stunTime: 0.5
+    stunTime: 0.55
     knockbackCoefficient: 0
     preAttackMoveShift: 0.5
     preAttackMoveShiftDecay: 16
     attackMoveShift: 0
     attackMoveShiftDecay: 16
     staminaRecoveryOnHit: 10
-  BPC_AnimationSpeed: 1
   DASH_params:
     baseDuration: 0.5
     baseExtraEndDelayFraction: 0
@@ -86,8 +100,11 @@ MonoBehaviour:
     baseInterruptPriority: 4
     otherInterruptableInterruptPriority: 1
     movementInterruptPriority: 0
+    animationPlayTimeFraction: 0.6
+    animationStateName: Dash
+    animationLayerName: Body
+    animationPlaybackRateParam: dash.playbackRate
     attackSpeedAffected: 0
-  Dash_AnimationSpeed: 2
   Dash_DashSpeed: 40
   Dash_DashSpeedCurve:
     serializedVersion: 2
@@ -142,7 +159,6 @@ MonoBehaviour:
     m_RotationOrder: 4
   Crouch_Height: -2
   block_duration: 0.4
-  block_AnimationMultiplier: 1
   Kick_params:
     baseDuration: 0.8
     baseExtraEndDelayFraction: 0
@@ -153,7 +169,12 @@ MonoBehaviour:
     baseInterruptPriority: 2
     otherInterruptableInterruptPriority: 1
     movementInterruptPriority: 0
+    animationPlayTimeFraction: 1
+    animationStateName: Kick
+    animationLayerName: Body
+    animationPlaybackRateParam: kick.playbackRate
     attackSpeedAffected: 1
+  Kick_meleeParams:
     hitboxName: KickHitbox
     effectOriginName: KickEffectOrigin
     damageCoefficient: 1
@@ -164,7 +185,6 @@ MonoBehaviour:
     attackMoveShift: 0
     attackMoveShiftDecay: 16
     staminaRecoveryOnHit: 10
-  Kick_AnimationSpeed: 3
   CPunch_chargeTime: 3
   CPunch_holdGiveupTime: 100
   CPunch_ReleaseParams:
@@ -177,13 +197,18 @@ MonoBehaviour:
     baseInterruptPriority: 2
     otherInterruptableInterruptPriority: 1
     movementInterruptPriority: 0
+    animationPlayTimeFraction: 0.3
+    animationStateName: ChargePunch
+    animationLayerName: YayGesture
+    animationPlaybackRateParam: punch.playbackRate
     attackSpeedAffected: 1
+  CPunch_meleeReleaseParams:
     hitboxName: KickHitbox
     effectOriginName: PunchEffectOrigin
     damageCoefficient: 0.5
     stunTime: 1
     knockbackCoefficient: 150
-    preAttackMoveShift: 0
+    preAttackMoveShift: 0.5
     preAttackMoveShiftDecay: 16
     attackMoveShift: 1
     attackMoveShiftDecay: 16

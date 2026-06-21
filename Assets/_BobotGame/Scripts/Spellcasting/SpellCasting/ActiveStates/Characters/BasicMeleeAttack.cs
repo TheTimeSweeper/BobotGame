@@ -10,9 +10,8 @@ namespace ActiveStates.Characters
     public abstract class BasicMeleeAttack : GenericTimedState
     {
         [System.Serializable]
-        public class BasicMeleeParams : TimedStateParams
+        public class BasicMeleeParams
         {
-            [Header("Melee")]
             public string hitboxName;
             public string effectOriginName = "";
             public float damageCoefficient = 1;
@@ -26,14 +25,10 @@ namespace ActiveStates.Characters
 
             public BasicMeleeParams() : base()
             {
-
-            }
-            public BasicMeleeParams(float baseDuration) : base(baseDuration)
-            {
             }
         }
 
-        protected BasicMeleeParams meleeParams => stateParams as BasicMeleeParams;
+        protected abstract BasicMeleeParams meleeParams{ get; }
 
         protected OverlapAttack overlapAttack;
 

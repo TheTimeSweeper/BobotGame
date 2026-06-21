@@ -26,11 +26,16 @@ namespace SpellCasting.UI
         [SerializeField]
         private bool displayMax;
 
-        private TComponent _component;
+        protected TComponent _component;
+        protected IUIBehindBarProvider _behindComponent;
 
         public void Init(TComponent component_)
         {
             _component = component_;
+            if(_component is IUIBehindBarProvider)
+            {
+                _behindComponent = _component as IUIBehindBarProvider;
+            }
             currentAnchor.SetActive(true);
         }
 
@@ -50,17 +55,28 @@ namespace SpellCasting.UI
                 return;
             }
             currentAnchor.SetActive(_component.GetUIShouldShow());
+            UpdateBar();
+        }
 
-            if (healthSlider )
+        protected virtual void UpdateBar()
+        {
+            if (healthSlider)
             {
                 healthSlider.value = _component.GetUICurrentValue() / _component.GetUIMaxValue();
 
-                if (delayedSlider )
+            }
+            if (delayedSlider)
+            {
+                if (_component is IUIBehindBarProvider behindBarComponent)
+                {
+                    delayedSlider.fillAmount = behindBarComponent.GetUIBehindCurrentValue() / behindBarComponent.GetUIBehindMaxValue();
+                }
+                else
                 {
                     delayedSlider.fillAmount = Util.ExpDecayLerp(delayedSlider.fillAmount, healthSlider.value, 3, Time.deltaTime);
                 }
             }
-            if (healthText )
+            if (healthText)
             {
                 if (displayMax)
                 {

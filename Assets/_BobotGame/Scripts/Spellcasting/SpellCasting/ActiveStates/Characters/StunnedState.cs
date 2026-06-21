@@ -46,7 +46,7 @@ namespace ActiveStates.Characters
             {
                 Object.Destroy(_effectObject);
             }
-            animator.Play("Run");
+            animator.SetTrigger("cancel");
         }
 
         public override InterruptPriority GetMinimumInterruptPriority()

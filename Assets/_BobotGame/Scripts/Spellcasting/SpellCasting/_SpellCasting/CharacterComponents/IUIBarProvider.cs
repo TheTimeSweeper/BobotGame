@@ -6,4 +6,10 @@
         float GetUIMaxValue();
         bool GetUIShouldShow();
     }
+    
+    public interface IUIBehindBarProvider
+    {
+        float GetUIBehindCurrentValue();
+        float GetUIBehindMaxValue();
+    }
 }

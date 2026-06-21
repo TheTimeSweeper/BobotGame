@@ -20,8 +20,9 @@ namespace ActiveStates.Bobots
         public override void OnEnter()
         {
             base.OnEnter();
-            animator.Play("Dash");
-            animator.SetFloat("dash.playbackRate", StateInfo.Dash_AnimationSpeed / duration);
+            PlayTimedAnimation();
+            //animator.Play("Dash");
+            //animator.SetFloat("dash.playbackRate", StateInfo.Dash_AnimationSpeed / duration);
             direction = inputBank.GlobalMoveDirection;
             if(inputBank.GlobalMoveDirection.sqrMagnitude <= Mathf.Epsilon)
             {
