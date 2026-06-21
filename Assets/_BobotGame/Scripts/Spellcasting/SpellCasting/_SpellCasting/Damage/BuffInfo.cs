@@ -13,7 +13,7 @@ namespace SpellCasting
         [SerializeField]
         private Sprite icon;
 
-        [SerializeField, Tooltip("currently only maxhealth, damage, basemovespeed, maxMana, manaRegen, healthRegen")]
+        [SerializeField, Tooltip("currently only maxhealth, damage, basemovespeed, maxMana, manaRegen, healthRegen, staminaRegen")]
         public CharacterStats statsToChange;
 
         public virtual void OnApply(CharacterBody body)
@@ -42,6 +42,18 @@ namespace SpellCasting
             if (statsToChange.HealthRegenPercent > 0)
             {
                 body.stats.HealthRegenPercent.ApplyMultiplyModifier(statsToChange.HealthRegenPercent, buffID);
+            }
+            //todo the rest above
+            TryUpdateStat(statsToChange.StaminaRegen, body.stats.StaminaRegen);
+
+            bool TryUpdateStat(VariableNumberStat vari, VariableNumberStat vari2)
+            {
+                if (vari > 0)
+                {
+                    vari2.ApplyMultiplyModifier(vari, buffID);
+                    return true;
+                }
+                return false;
             }
 
             //jam and so on and so forth

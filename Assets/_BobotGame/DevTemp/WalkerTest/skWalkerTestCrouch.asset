@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayName: crouch
   baseCooldown: -0.03
+  baseStaminaCost: 0
   state:
     activeStateName: ActiveStates.Bobots.BobotStanceCrouch
   stateMachineName: Stance

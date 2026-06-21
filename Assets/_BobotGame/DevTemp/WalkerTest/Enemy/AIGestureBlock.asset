@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a37eacff17d00e64e88ceb903d8f11bc, type: 3}
   m_Name: AIGestureBlock
   m_EditorClassIdentifier: 
-  duration: 0.5
+  duration: 0.4
   skillButton: 2
   skillButton2: 5
   CloseDistance: 4

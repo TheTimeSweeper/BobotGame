@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: skWalkerTestDash
   m_EditorClassIdentifier: 
   displayName: dash
-  baseCooldown: -0.03
+  baseCooldown: 1
+  baseStaminaCost: 20
   state:
     activeStateName: ActiveStates.Bobots.BasicDash
   stateMachineName: Body
-  interruptingPriority: 4
-  bufferTime: 0.3
+  interruptingPriority: 2
+  bufferTime: 0.1
   justPress: 0
   autoCast: 0

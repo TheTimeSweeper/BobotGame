@@ -1,5 +1,6 @@
-﻿using System;
-using ActiveStates;
+﻿using ActiveStates;
+using ActiveStates.Characters;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,18 +10,24 @@ namespace SpellCasting
     public class SkillSlot
     {
         public SkillInfo skillInfo;
-        private VariableNumberStat cooldownTime;                                  //todo bobot asvalidornull
-        private VariableNumberStat cooldownSpeed => commonComponents.CharacterBody ? commonComponents.CharacterBody.stats.CooldownSpeed : 0;
         public SkillButton skillButton;
         public bool autoCast;
 
+        //skill info decided
+        private float cooldownTime;
+        private float cooldownSpeed => bodyStats?.CooldownSpeed ?? 1;
+
         private float cooldownTimer;
         private ActiveStateMachine machine;
+        private float staminaCost => skillInfo.baseStaminaCost * (bodyStats?.StaminaCostCoeff ?? 0);
 
+        //buffer
         private float bufferTimer = -1;
         private InputState bufferedState;
 
+        //current
         private CommonComponentsHolder commonComponents;
+        private CharacterStats bodyStats;
 
         public void FixedUpdate()
         {
@@ -44,7 +51,7 @@ namespace SpellCasting
             cooldownTimer -= Time.deltaTime * cooldownSpeed;
             if (cooldownTimer < 0)
             {
-                if (autoCast)
+                if (autoCast || skillInfo.autoCast)
                 {
                     InputSkill(null);
                 }
@@ -54,6 +61,7 @@ namespace SpellCasting
         public void Init(CommonComponentsHolder commonComponents)
         {
             this.commonComponents = commonComponents;
+            bodyStats = commonComponents.CharacterBody.stats;
             InitSkillInfo();
         }
 
@@ -83,15 +91,26 @@ namespace SpellCasting
             if (cooldownTimer > 0)
                 return false;
 
-            cooldownTimer = cooldownTime;
+            if(staminaCost > 0 && staminaCost > commonComponents.StaminaComponent.currentStamina)
+            {
+                return false;
+            }
 
             if(machine.TryInterruptState(skillInfo.state, skillInfo.interruptingPriority, out ActiveState state)){
+                //success
                 if (state is IStateFromInput stateFromInput)
                 {
                     stateFromInput.input = inputState;
                 }
                 bufferTimer = 0;
                 bufferedState = null;
+
+                cooldownTimer = cooldownTime;
+
+                if (staminaCost > 0)
+                {
+                    commonComponents.StaminaComponent.ConsumeStamina(staminaCost);
+                }
                 return true;
             }
 

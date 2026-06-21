@@ -5,13 +5,13 @@ using System;
 
 namespace ActiveStates.Bobots
 {
-    public class DashToPoint : BasicTimedState, IHasStateInfo<BobotGameDevStateInfo>
+    public class DashToPoint : GenericTimedState, IHasStateInfo<BobotGameDevStateInfo>
     {
         public ActiveStateInfo AssignedStateInfo { get; set; }
         public Type StateInfoType => typeof(BobotGameDevStateInfo);
         public BobotGameDevStateInfo StateInfo => AssignedStateInfo as BobotGameDevStateInfo;
 
-        protected override TimedStateParams timedStateParams => StateInfo.DASH_params;
+        protected override TimedStateParams stateParams => StateInfo.DASH_params;
 
         private Vector3? goalVelocity;
         public override void OnEnter()

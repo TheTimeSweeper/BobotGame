@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -11,13 +12,15 @@ namespace SpellCasting
         public CharacterBody OwnerBody { get; set; }
         public Hitbox Hitbox { get; set; }
         public float Damage { get; set; }
+        public float StunTime { get; set; }
         public DamageTypeIndex DamageType { get; set; }
         public TeamIndex Team { get; set; }
         public ValidTarget TeamTargeting { get; set; } = ValidTarget.ALLYTEAM | ValidTarget.OTHERTEAM;
         public DamagingData DamageInfo { get; set; }
         public Vector3 OverrideKnockbackDirection { get; set; }
         public Vector3 KnockbackCenter { get;  set; }
-        public float KnockbackForce { get; set; }
+        public float KnockbackForceCoefficient { get; set; }
+        public event HealthComponent.DamageTakenEvent DamageTakenEvent = null;
 
         private List<HealthComponent> _alreadyHitTargets = new List<HealthComponent>();
         public List<HealthComponent> HitTargets => _alreadyHitTargets;
@@ -90,24 +93,26 @@ namespace SpellCasting
                             AttackerBody = OwnerBody,
                             DamageValue = Damage,
                             DamageTypeIndex = DamageType,
+                            StunTime = StunTime
                         };
                     }
 
                     if (OverrideKnockbackDirection != Vector3.zero)
                     {
-                        DamageInfo.Knockback = OverrideKnockbackDirection * KnockbackForce;
+                        DamageInfo.Knockback = OverrideKnockbackDirection * KnockbackForceCoefficient;
                     }
                     else
                     {
-                        if (KnockbackForce > 0)
+                        if (KnockbackForceCoefficient > 0)
                         {
                             Vector3 knock = collider.transform.position - KnockbackCenter;
                             knock.y = 0;
-                            DamageInfo.Knockback = knock.normalized * KnockbackForce;
+                            DamageInfo.Knockback = knock.normalized * KnockbackForceCoefficient;
                         }
                     }
-
+                    healthComponent.OnDamageTaken += CallMyFuckinEvents;
                     healthComponent.TakeDamage(DamageInfo);
+                    healthComponent.OnDamageTaken -= CallMyFuckinEvents;//wait I thought this 
                     //jam all attacks od the same inmpact effect yep
                     if (Damage > 0)
                     {
@@ -118,6 +123,11 @@ namespace SpellCasting
             }
 
             return hit;
+        }
+
+        private void CallMyFuckinEvents(GetDamagedData getDamagedInfo)
+        {
+            DamageTakenEvent?.Invoke(getDamagedInfo);
         }
 
         public void ResetHits()

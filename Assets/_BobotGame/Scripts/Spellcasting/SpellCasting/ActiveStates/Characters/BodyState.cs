@@ -25,5 +25,37 @@ namespace ActiveStates.Characters
         {
             Machine.SetStateToDefault();
         }
+
+        protected void ResetAnimationMovementFloats()
+        {
+            if (animator)
+            {
+                animator.SetFloat("rightSpeed", 0);
+                animator.SetFloat("forwardSpeed", 0);
+                animator.SetFloat("walkSpeed", 0);
+            }
+        }
+
+        protected void SetAnimationMovementFloats()
+        {
+            if (animator)
+            {
+                animator.SetFloat("rightSpeed", inputBank.LocalMoveDirection.x);
+                animator.SetFloat("forwardSpeed", inputBank.LocalMoveDirection.z);
+                animator.SetFloat("walkSpeed", fixedMotorDriver.FinalVelocity.magnitude);
+            }
+        }
+
+        protected void SetAimForward()
+        {
+            if (inputBank.AimOut != default)
+            {
+                characterModel.CharacterDirection.DesiredDirection = inputBank.AimOut;
+            }
+            else
+            {
+                characterModel.CharacterDirection.DesiredDirection = fixedMotorDriver.DesiredDirection;
+            }
+        }
     }
 }

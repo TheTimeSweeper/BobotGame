@@ -1,8 +1,5 @@
-﻿using System;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.GraphicsBuffer;
 
 namespace SpellCasting.UI
 {
@@ -18,9 +15,9 @@ namespace SpellCasting.UI
 
         private void Awake()
         {
-            titleButton.onClick.AddListener(titleClick);
-            quitButton.onClick.AddListener(quitClick);
-            menuObject.SetActive(false);
+            titleButton?.onClick.AddListener(titleClick);
+            quitButton?.onClick.AddListener(quitClick);
+            menuObject?.SetActive(false);
         }
 
         private void quitClick()

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b09b822c22edbe143a9fa7e17de53b4f, type: 3}
   m_Name: AIGesturePunchCombo
   m_EditorClassIdentifier: 
-  duration: 2
+  duration: 1.4
   skillButton: 1
   skillButton2: 5
   CloseDistance: 4

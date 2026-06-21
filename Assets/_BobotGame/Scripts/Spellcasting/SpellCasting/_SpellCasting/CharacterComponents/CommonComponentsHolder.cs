@@ -10,9 +10,9 @@ namespace SpellCasting
     {
         //if a class is added here, make sure to add the shorthand to ActiveState.cs
         //if this is jank please let me know why c:
-        public HealthComponent HealthComponent;
-        public InputBank InputBank;
         public CharacterBody CharacterBody;
+        public InputBank InputBank;
+        public HealthComponent HealthComponent;
         public StaminaComponent StaminaComponent;
         public FixedMotorDriver FixedMotorDriver;
         public CharacterModel CharacterModel;
@@ -21,35 +21,7 @@ namespace SpellCasting
         public TeamComponent TeamComponent;
         public Animator Animator;
         public SkillController SkillController;
-        public ExpController expController;
-        public StateInfoHolder stateInfoHolder;
-
-        [HideInInspector]
-        public ManaComponent ManaComponent;
-
-        private void Reset()
-        {
-            Find();
-        }
-
-        [ContextMenu("Find")]
-        private void Find()
-        {
-#if UNITY_EDITOR
-            UnityEditor.Undo.RecordObject(this, "find");
-#endif
-            HealthComponent = GetComponent<HealthComponent>();
-            InputBank = GetComponent<InputBank>();
-            CharacterBody = GetComponent<CharacterBody>();
-            StaminaComponent = GetComponent<StaminaComponent>();
-            FixedMotorDriver = GetComponent<FixedMotorDriver>();
-            CharacterModel = GetComponentInChildren<CharacterModel>();
-            StateMachineLocator = GetComponent<StateMachineLocator>();
-            TeamComponent = GetComponent<TeamComponent>();
-            Animator = GetComponent<Animator>();
-            SkillController = GetComponent<SkillController>();
-            InputBank = GetComponentInChildren<InputBank>();
-            HurtBoxLocator = GetComponent<HurtBoxLocator>();
-        }
+        public StateInfoHolder StateInfoHolder;
+        public GenericHurtReaction GenericHurtReaction;
     }
 }

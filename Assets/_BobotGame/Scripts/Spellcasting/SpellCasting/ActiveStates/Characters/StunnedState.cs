@@ -2,14 +2,13 @@
 
 namespace ActiveStates.Characters
 {
-    public class StunnedState : BasicTimedStateSimple
+    public class StunnedState : BodyState
     {
         public float StunTime;
 
         public GameObject EffectPrefab;
         private GameObject _effectObject;
-        protected override float baseDuration => StunTime;
-
+        private float countDown;
         public override void OnEnter()
         {
             base.OnEnter();
@@ -17,6 +16,26 @@ namespace ActiveStates.Characters
             if (EffectPrefab != null)
             {
                 _effectObject = Object.Instantiate(EffectPrefab, transform.position, Quaternion.identity, transform);
+            }
+            countDown = StunTime;
+
+            animator.Play("Stunned");
+        }
+
+        public override void OnFixedUpdate()
+        {
+            base.OnFixedUpdate();
+
+            countDown -= Time.deltaTime;
+
+            if (genericHurtReaction)
+            {
+                countDown = genericHurtReaction.CurrentStunTime;
+            }
+
+            if (countDown <= 0)
+            {
+                EndState();
             }
         }
 
@@ -27,6 +46,7 @@ namespace ActiveStates.Characters
             {
                 Object.Destroy(_effectObject);
             }
+            animator.Play("Run");
         }
 
         public override InterruptPriority GetMinimumInterruptPriority()

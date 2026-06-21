@@ -5,10 +5,10 @@ namespace SpellCasting.UI
 
     public class PlayerHud : MonoBehaviour
     {
-        //[SerializeField]
-        //private ElementHud[] elementHuds;
         [SerializeField]
         private HealthBar healthBar;
+        [SerializeField]
+        private StaminaBar staminaBar;
 
         //[SerializeField]
         //private InventoryHud inventoryHud;
@@ -29,12 +29,8 @@ namespace SpellCasting.UI
 
         private void InitHuds()
         {
-            //elementHuds[0].Init(_currentBody.CommonComponents, _currentBody.CommonComponents.InputBank.M1);
-            //elementHuds[1].Init(_currentBody.CommonComponents, _currentBody.CommonComponents.InputBank.M2);
-            //elementHuds[2].Init(_currentBody.CommonComponents, _currentBody.CommonComponents.InputBank.Space);
-            //elementHuds[3].Init(_currentBody.CommonComponents, _currentBody.CommonComponents.InputBank.Shift);
-
             healthBar.Init(_currentBody.CommonComponents.HealthComponent);
+            staminaBar.Init(_currentBody.CommonComponents.StaminaComponent);
         }
     }
 }

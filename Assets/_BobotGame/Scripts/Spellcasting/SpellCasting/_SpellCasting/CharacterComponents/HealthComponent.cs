@@ -5,17 +5,17 @@ using UnityEngine;
 namespace SpellCasting
 {
 
-    public class HealthComponent : MonoBehaviour, IHasCommonComponents
+    public class HealthComponent : MonoBehaviour, IHasCommonComponents, IUIBarProvider
     {
-        public delegate void DamageTakenEvent(GetDamagedData getDamagedInfo);
-        public event DamageTakenEvent OnDamageTaken;
         public delegate void ModifyDamageCallback(GetDamagedData getDamagedInfo);
         public event ModifyDamageCallback PreModifyDamage;
+        public delegate void DamageTakenEvent(GetDamagedData getDamagedInfo);
+        public event DamageTakenEvent OnDamageTaken;
 
-        public delegate void HealTakenEvenet(float healAmount);
-        public event HealTakenEvenet OnHealTaken;
         public delegate void ModifyHealCallback(HealingData damage);
         public event ModifyHealCallback PreModifyHeal;
+        public delegate void HealTakenEvenet(float healAmount);
+        public event HealTakenEvenet OnHealTaken;
 
         [SerializeField]
         protected float health;
@@ -35,6 +35,9 @@ namespace SpellCasting
         public void Init(float health)
         {
             this.health = health;
+
+            //todo bobot not healing
+            //commonComponents.CharacterBody.stats.MaxHealth.onValueChanged += MaxHealth_onValueChanged;
         }
 
         public virtual void TakeDamage(DamagingData damage)
@@ -75,7 +78,7 @@ namespace SpellCasting
         }
 
         //todo bobot nooooo we are doing a takedamage now nooo
-        protected virtual void TakeTheDamage(ref float healthToHit, GetDamagedData info, bool callEvent = true)
+        protected virtual void TakeTheDamage(ref float healthToHit, GetDamagedData info)
         {
             healthToHit -= info.DamagingInfo.DamageValue;
 
@@ -97,15 +100,21 @@ namespace SpellCasting
             OnHealTaken?.Invoke(heal.HealValue);
         }
 
+        //todo bobot not healing
         public void UpdateMaxHealth(float newMaxHealth, bool heal)
         {
             float maxHealthDelta = newMaxHealth - MaxHealth;
-            commonComponents.CharacterBody.stats.MaxHealth = newMaxHealth;
+            //commonComponents.CharacterBody.stats.MaxHealth = newMaxHealth;
             if (heal)
             {
                 health += maxHealthDelta;
             }
         }
+
+        //private void MaxHealth_onValueChanged(float oldValue, float newValue)
+        //{
+
+        //}
 
         void FixedUpdate()
         {
@@ -115,6 +124,21 @@ namespace SpellCasting
 
                 health = Mathf.Clamp(health + regenPerSecond * Time.fixedDeltaTime, 0, MaxHealth);
             }
+        }
+
+        public float GetUICurrentValue()
+        {
+            return health;
+        }
+
+        public float GetUIMaxValue()
+        {
+            return MaxHealth;
+        }
+
+        public bool GetUIShouldShow()
+        {
+            return !Ded;
         }
     }
 }

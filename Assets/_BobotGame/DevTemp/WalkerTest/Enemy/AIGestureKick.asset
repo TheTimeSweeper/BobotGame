@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a37eacff17d00e64e88ceb903d8f11bc, type: 3}
   m_Name: AIGestureKick
   m_EditorClassIdentifier: 
-  duration: 0.84
+  duration: 0.6
   skillButton: 3
   skillButton2: 5
-  CloseDistance: 12
+  CloseDistance: 6
   StrafeWhileClose: 0
   crouchChance: 0.297
   delayAfterCrouch: 0.2

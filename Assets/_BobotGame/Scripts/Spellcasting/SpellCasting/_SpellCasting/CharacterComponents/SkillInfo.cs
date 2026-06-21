@@ -8,12 +8,12 @@ namespace SpellCasting
     {
         public string displayName;
         public float baseCooldown;
+        public float baseStaminaCost;
         public SerializableActiveState state;
         public string stateMachineName;
         public InterruptPriority interruptingPriority;
         public float bufferTime = 0.3f;
         public bool justPress;
         public bool autoCast;
-
     }
 }

@@ -13,8 +13,16 @@ namespace SpellCasting
 
         [SerializeField]
         private CharacterBody body;
-
+        private void Awake()
+        {
+            teamComponent.OnTeamChanged += ResetTeam;
+        }
         void OnEnable()
+        {
+            ResetTeam();
+        }
+
+        private void ResetTeam()
         {
             if (!teamsBodies.ContainsKey(teamComponent.TeamIndex))
             {
@@ -26,6 +34,7 @@ namespace SpellCasting
                 teamsBodies[teamComponent.TeamIndex].Add(this);
             }
         }
+
         void OnDisable()
         {
             foreach (var bodyList in teamsBodies)

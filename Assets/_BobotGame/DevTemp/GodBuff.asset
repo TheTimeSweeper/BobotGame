@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b073dcf703446694491b27c3a60469e8, type: 3}
+  m_Name: GodBuff
+  m_EditorClassIdentifier: 
+  buffID: 
+  pooledEffect: {fileID: 0}
+  icon: {fileID: 0}
+  statsToChange:
+    MaxHealth:
+      _baseValue: 1111
+      _lastModifiedValue: 1111
+    HealthRegenPercent:
+      _baseValue: 0
+      _lastModifiedValue: 0
+    Damage:
+      _baseValue: 0
+      _lastModifiedValue: 0
+    AttackSpeed:
+      _baseValue: 0
+      _lastModifiedValue: 0
+    StunFactor:
+      _baseValue: 0
+      _lastModifiedValue: 0
+    KnockbackFactor:
+      _baseValue: 0
+      _lastModifiedValue: 0
+    MaxStamina:
+      _baseValue: 0
+      _lastModifiedValue: 0
+    StaminaRegen:
+      _baseValue: 1111
+      _lastModifiedValue: 1111
+    StaminaCostCoeff:
+      _baseValue: 0
+      _lastModifiedValue: 0
+    CooldownSpeed:
+      _baseValue: 0
+      _lastModifiedValue: 0
+    CastRange:
+      _baseValue: 0
+      _lastModifiedValue: 0
+    MoveSpeed:
+      _baseValue: 0
+      _lastModifiedValue: 0
+    JumpHeight:
+      _baseValue: 0
+      _lastModifiedValue: 0

@@ -89,9 +89,9 @@ namespace ActiveStates
         private void EnterCurrentState()
         {
             _currentlyRunningState.Machine = this;
-            if(commonComponents && commonComponents.stateInfoHolder && _currentlyRunningState is IHasStateInfoBase currentState)
+            if(commonComponents && commonComponents.StateInfoHolder && _currentlyRunningState is IHasStateInfoBase currentState)
             {
-                currentState.SetStateInfo(commonComponents.stateInfoHolder);
+                currentState.SetStateInfo(commonComponents.StateInfoHolder);
             }
             _currentlyRunningState.OnEnter();
         }

@@ -44,7 +44,7 @@ namespace SpellCasting.Projectiles
                 Team = ProjectileData.TeamIndex,
                 OverrideKnockbackDirection = knockbackDirectionRigidbody ? knockbackDirectionRigidbody.linearVelocity.normalized : Vector3.zero,
                 KnockbackCenter = transform.position,
-                KnockbackForce = KnockbackForce
+                KnockbackForceCoefficient = KnockbackForce
             };
             _repeatTim = resetInterval;
         }

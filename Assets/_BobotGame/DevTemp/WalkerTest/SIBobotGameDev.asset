@@ -19,31 +19,41 @@ MonoBehaviour:
     baseCastEndTimeFraction: 0.4
     baseOtherStateInterruptTimeFraction: 0.5
     baseMovementInterruptTimeFraction: 0.6
+    baseInterruptPriority: 2
+    otherInterruptableInterruptPriority: 1
+    movementInterruptPriority: 0
     attackSpeedAffected: 1
     hitboxName: PunchHitbox
     effectOriginName: PunchEffectOrigin
-    damageCoefficient: 1
+    damageCoefficient: 0.3
+    stunTime: 0.5
     knockbackCoefficient: 0
     preAttackMoveShift: 2
     preAttackMoveShiftDecay: 16
     attackMoveShift: 0
     attackMoveShiftDecay: 16
+    staminaRecoveryOnHit: 10
   BPC_HitParams2:
-    baseDuration: 1
+    baseDuration: 0.8
     baseExtraEndDelayFraction: 0
     baseCastStartTimeFraction: 0.36363637
     baseCastEndTimeFraction: 0.43
     baseOtherStateInterruptTimeFraction: 0.5
     baseMovementInterruptTimeFraction: 0.6
+    baseInterruptPriority: 2
+    otherInterruptableInterruptPriority: 1
+    movementInterruptPriority: 0
     attackSpeedAffected: 1
     hitboxName: PunchHitbox
     effectOriginName: PunchEffectOrigin
-    damageCoefficient: 1
+    damageCoefficient: 0.3
+    stunTime: 0.5
     knockbackCoefficient: 0
     preAttackMoveShift: 0.5
     preAttackMoveShiftDecay: 16
     attackMoveShift: 0
     attackMoveShiftDecay: 16
+    staminaRecoveryOnHit: 10
   BPC_HitParams3:
     baseDuration: 0.8
     baseExtraEndDelayFraction: 0
@@ -51,23 +61,31 @@ MonoBehaviour:
     baseCastEndTimeFraction: 0.4
     baseOtherStateInterruptTimeFraction: 0.5
     baseMovementInterruptTimeFraction: 0.6
+    baseInterruptPriority: 2
+    otherInterruptableInterruptPriority: 1
+    movementInterruptPriority: 0
     attackSpeedAffected: 1
     hitboxName: PunchHitbox
     effectOriginName: PunchEffectOrigin
-    damageCoefficient: 1
+    damageCoefficient: 0.3
+    stunTime: 0.5
     knockbackCoefficient: 0
     preAttackMoveShift: 0.5
     preAttackMoveShiftDecay: 16
     attackMoveShift: 0
     attackMoveShiftDecay: 16
+    staminaRecoveryOnHit: 10
   BPC_AnimationSpeed: 1
   DASH_params:
     baseDuration: 0.5
     baseExtraEndDelayFraction: 0
     baseCastStartTimeFraction: 0
-    baseCastEndTimeFraction: 0.5
-    baseOtherStateInterruptTimeFraction: 0.5
-    baseMovementInterruptTimeFraction: 0.5
+    baseCastEndTimeFraction: 0.6
+    baseOtherStateInterruptTimeFraction: 0.6
+    baseMovementInterruptTimeFraction: 0.6
+    baseInterruptPriority: 4
+    otherInterruptableInterruptPriority: 1
+    movementInterruptPriority: 0
     attackSpeedAffected: 0
   Dash_AnimationSpeed: 2
   Dash_DashSpeed: 40
@@ -132,21 +150,44 @@ MonoBehaviour:
     baseCastEndTimeFraction: 0.5
     baseOtherStateInterruptTimeFraction: 0.8
     baseMovementInterruptTimeFraction: 0.9
+    baseInterruptPriority: 2
+    otherInterruptableInterruptPriority: 1
+    movementInterruptPriority: 0
     attackSpeedAffected: 1
     hitboxName: KickHitbox
     effectOriginName: KickEffectOrigin
     damageCoefficient: 1
+    stunTime: 0.5
     knockbackCoefficient: 100
     preAttackMoveShift: 3
     preAttackMoveShiftDecay: 16
     attackMoveShift: 0
     attackMoveShiftDecay: 16
+    staminaRecoveryOnHit: 10
   Kick_AnimationSpeed: 3
-  CPunch_chargeTime: 0.3
-  CPunch_holdGiveupTime: 3
-  CPunch_StartTimeFraction: 0
-  CPunch_EndTimeFraction: 0.3
-  CPunch_Duration: 0.3
+  CPunch_chargeTime: 3
+  CPunch_holdGiveupTime: 100
+  CPunch_ReleaseParams:
+    baseDuration: 0.3
+    baseExtraEndDelayFraction: 0
+    baseCastStartTimeFraction: 0
+    baseCastEndTimeFraction: 0.3
+    baseOtherStateInterruptTimeFraction: 1
+    baseMovementInterruptTimeFraction: 1
+    baseInterruptPriority: 2
+    otherInterruptableInterruptPriority: 1
+    movementInterruptPriority: 0
+    attackSpeedAffected: 1
+    hitboxName: KickHitbox
+    effectOriginName: PunchEffectOrigin
+    damageCoefficient: 0.5
+    stunTime: 1
+    knockbackCoefficient: 150
+    preAttackMoveShift: 0
+    preAttackMoveShiftDecay: 16
+    attackMoveShift: 1
+    attackMoveShiftDecay: 16
+    staminaRecoveryOnHit: 10
   CPunch_damageMin: 0
   CPunch_damageMax: 1
   CPunch_knockbackMin: 100

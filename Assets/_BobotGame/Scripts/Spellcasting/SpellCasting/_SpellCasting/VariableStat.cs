@@ -140,6 +140,8 @@ namespace SpellCasting
                 if (dirty)
                 {
                     dirty = false;
+                    T newValue = UpdateValueWithModifiers();
+                    onValueChanged?.Invoke(_lastModifiedValue, newValue);
                     _lastModifiedValue = UpdateValueWithModifiers();
                 }
                 return _lastModifiedValue;
@@ -162,11 +164,11 @@ namespace SpellCasting
             {
                 Modifiers[i].ModifyStat(ref modifiedValue);
             }
-            onValueChanged?.Invoke(modifiedValue);
             return modifiedValue;
         }
 
-        public event Action<T> onValueChanged;
+        public delegate void OnValueChangedEvent(T oldValue, T newValue);
+        public event OnValueChangedEvent onValueChanged;
 
         public V Clone<V>() where V : VariableStat<T>, new()
         {

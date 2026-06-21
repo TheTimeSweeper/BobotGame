@@ -15,7 +15,7 @@ namespace ActiveStates.Bobots
         public override int ComboHits => 3;
 
 #pragma warning disable CS8509 // The switch expression does not handle all possible values of its input type (it is not exhaustive).
-        protected override TimedStateParams timedStateParams => CurrentComboHit switch
+        protected override TimedStateParams stateParams => CurrentComboHit switch
         {
             0 => StateInfo.BPC_HitParams,
             1 => StateInfo.BPC_HitParams2,

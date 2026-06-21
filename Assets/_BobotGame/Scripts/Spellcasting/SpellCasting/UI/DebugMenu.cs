@@ -29,8 +29,8 @@ namespace SpellCasting.UI
 
         private void Start()
         {
-            jango.gameObject.SetActive(false);
-            jangoToggle.gameObject.SetActive(false);
+            jango?.gameObject.SetActive(false);
+            jangoToggle?.gameObject.SetActive(false);
 
             timeScaleSlider.onValueChanged.AddListener(OnTimeScaleSliderChanged);
 
@@ -39,10 +39,10 @@ namespace SpellCasting.UI
 
             AddFunnyButton("Funny Respawn", FunnyRespawn);
 
-            AddFunnyButton("Skip Level", LevelProgressionManager.Instance.NextLevel);
+            //AddFunnyButton("Skip Level", LevelProgressionManager.Instance.NextLevel);
 
-            Toggle joystickToggle = AddFunnyToggle("Controller", PlayerInputDecider.IsJoystick);
-            joystickToggle.onValueChanged.AddListener(ToggleJoystick);
+            //Toggle joystickToggle = AddFunnyToggle("Controller", PlayerInputDecider.IsJoystick);
+            //joystickToggle.onValueChanged.AddListener(ToggleJoystick);
 
             AddFunnyButton("God Mode", GodMode);
         }
@@ -74,7 +74,7 @@ namespace SpellCasting.UI
 
         private void FunnyRespawn()
         {
-            GameObject.FindWithTag("Player").GetComponent<FixedMotorDriver>().engine.Teleport(GameObject.FindWithTag("Level").transform.position + Vector3.up * 10);
+            GameObject.FindWithTag("Player").GetComponent<FixedMotorDriver>().engine.Teleport(Vector3.up * 10);
         }
 
         //private void AddToggleElementButton(ElementType value)

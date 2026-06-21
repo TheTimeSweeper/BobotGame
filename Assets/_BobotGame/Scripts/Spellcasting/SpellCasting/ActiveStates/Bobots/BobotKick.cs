@@ -7,11 +7,11 @@ namespace ActiveStates.Bobots
 {
     public class BobotKick : BasicMeleeAttack, IHasStateInfo<BobotGameDevStateInfo>
     {
-        public ActiveStateInfo AssignedStateInfo { get; set; }
+        public ActiveStateInfo AssignedStateInfo { get; set; }  
         public Type StateInfoType => typeof(BobotGameDevStateInfo);
         public BobotGameDevStateInfo StateInfo => AssignedStateInfo as BobotGameDevStateInfo;
 
-        protected override TimedStateParams timedStateParams => StateInfo.Kick_params;
+        protected override TimedStateParams stateParams => StateInfo.Kick_params;
 
         public override void OnEnter()
         {
@@ -22,7 +22,7 @@ namespace ActiveStates.Bobots
         private void PlayKickAnimation()
         {
             animator.Play("Kick", 0, 0);
-            animator.SetFloat("kick.playbackRate", StateInfo.Kick_AnimationSpeed * timedStateParams.baseCastEndTimeFraction);
+            animator.SetFloat("kick.playbackRate", StateInfo.Kick_AnimationSpeed * stateParams.baseCastEndTimeFraction);
         }
 
         public override InterruptPriority GetMinimumInterruptPriority()

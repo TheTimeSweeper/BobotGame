@@ -14,12 +14,32 @@ namespace SpellCasting
 
         public VariableNumberStat MaxStamina = 100;
         public VariableNumberStat StaminaRegen = 100;
+        public VariableNumberStat StaminaCostCoeff = 1;
         public VariableNumberStat CooldownSpeed = 1;
 
         public VariableNumberStat CastRange;
 
         public VariableNumberStat MoveSpeed = 20;
         public VariableNumberStat JumpHeight;
+
+        public CharacterStats() { }
+
+        public CharacterStats(float defaultAll)
+        {
+            MaxHealth = defaultAll;
+            HealthRegenPercent = defaultAll;
+            Damage = defaultAll;
+            AttackSpeed = defaultAll;
+            StunFactor = defaultAll;
+            KnockbackFactor = defaultAll;
+            MaxStamina = defaultAll;
+            StaminaRegen = defaultAll;
+            StaminaCostCoeff = defaultAll;
+            CooldownSpeed = defaultAll;
+            CastRange = defaultAll;
+            MoveSpeed = defaultAll;
+            JumpHeight = defaultAll;
+        }
     }
 
     [RequireComponent(typeof(CommonComponentsHolder))]

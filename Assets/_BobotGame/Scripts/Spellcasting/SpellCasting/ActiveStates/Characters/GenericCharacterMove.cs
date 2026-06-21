@@ -2,7 +2,7 @@
 
 namespace ActiveStates.Characters
 {
-    public class GenericCharacterMove : ActiveState
+    public class GenericCharacterMove : BodyState
     {
         public override void OnFixedUpdate()
         {
@@ -10,26 +10,15 @@ namespace ActiveStates.Characters
             fixedMotorDriver.DesiredDirection = inputBank.GlobalMoveDirection;
             fixedMotorDriver.DesiredSpeed = characterBody.stats.MoveSpeed;
 
-            if (inputBank.AimOut != default)
-            {
-                characterModel.CharacterDirection.DesiredDirection = inputBank.AimOut;
-            }
-            else
-            {
-                characterModel.CharacterDirection.DesiredDirection = fixedMotorDriver.DesiredDirection;
-            }
+            SetAimForward();
 
-            if (animator)
-            {
-                animator.SetFloat("rightSpeed", inputBank.LocalMoveDirection.x);
-                animator.SetFloat("forwardSpeed", inputBank.LocalMoveDirection.z);
-                animator.SetFloat("walkSpeed", fixedMotorDriver.FinalVelocity.magnitude);
-            }
+            SetAnimationMovementFloats();
         }
 
         public override void OnExit(bool machineDed = false)
         {
             base.OnExit(machineDed);
+            ResetAnimationMovementFloats();
             fixedMotorDriver.DesiredDirection = UnityEngine.Vector3.zero;
         }
     }

@@ -48,7 +48,8 @@ namespace SpellCasting
                 if (shouldBlock && armHealth > 0)//todo bobot: can early out of all this logic if we didn't have arm health anyways. // well maybe not because we can have blocking still be detected for something
                 {
                     info.DamagingInfo.DamageValue /= 2;
-                    TakeTheDamage(ref armHealth, info, false);
+                    info.DamagingInfo.wasBlocked = true;
+                    TakeTheDamage(ref armHealth, info);
                     SpawnEffect(info, 2, armHealth < 0);
                     if (armHealth < 0)
                     {
@@ -60,7 +61,7 @@ namespace SpellCasting
             //no blocking. if damage is unspecified, or enemy is at same level as us, we take "core" health damage
             if (!attackerCrouched.HasValue || attackerCrouched.Value == victimCrouchController.isCrouched)
             {
-                TakeTheDamage(ref health, info, true);
+                TakeTheDamage(ref health, info);
                 SpawnEffect(info, 0, health < 0);
                 if (health < 0)
                 {
@@ -73,7 +74,7 @@ namespace SpellCasting
                 //we were not crouched, they were attacking crouched, take leg damage
                 if (!victimCrouchController.isCrouched)
                 {
-                    TakeTheDamage(ref legHealth, info, false);
+                    TakeTheDamage(ref legHealth, info);
                     SpawnEffect(info, 1, legHealth < 0);
                     if (legHealth < 0)
                     {
@@ -83,7 +84,7 @@ namespace SpellCasting
                 //we were crouched, they were attacking normal height, still hit our core
                 else
                 {
-                    TakeTheDamage(ref health, info, true);
+                    TakeTheDamage(ref health, info);
                     SpawnEffect(info, 0, health < 0);
                     if (health < 0)
                     {

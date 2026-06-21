@@ -3,7 +3,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace ActiveStates.Characters
 {
-    public abstract class BasicTimedState : BodyState
+    public abstract class GenericTimedState : BodyState
     {
         [System.Serializable]
         public class TimedStateParams
@@ -29,6 +29,18 @@ namespace ActiveStates.Characters
             public float baseOtherStateInterruptTimeFraction = 1;
             [ShowMultiplyResult("baseDuration", addToMultipliers = "baseExtraEndDelayFraction")]
             public float baseMovementInterruptTimeFraction = 1;
+
+            public InterruptPriority baseInterruptPriority = InterruptPriority.STATE_LOW;
+            public InterruptPriority otherInterruptableInterruptPriority = InterruptPriority.STATE_ANY;
+            public InterruptPriority movementInterruptPriority = InterruptPriority.MOVEMENT;
+
+
+            [ShowMultiplyResult("baseDuration")]
+            public float animationPlayTimeFraction = 1;
+            public string animationStateName;
+            public string animationLayerName;
+            public string animationPlaybackRateParam;
+
             public bool attackSpeedAffected = true;
 
             public TimedStateParams() { }
@@ -57,7 +69,7 @@ namespace ActiveStates.Characters
         public virtual float? simpleOverrideBaseCastStartTimeFraction => null;
         public virtual float? simpleOverrideBaseCastEndTimeFraction => null;
 
-        protected virtual TimedStateParams timedStateParams { get; private set; }
+        protected virtual TimedStateParams stateParams { get; private set; }
 
         protected float duration;
         protected float castStartTime;
@@ -77,16 +89,16 @@ namespace ActiveStates.Characters
 
         protected virtual void InitDurationValues()
         {
-            if(timedStateParams == null)
+            if(stateParams == null)
             {
-                timedStateParams = new TimedStateParams(simpleOverrideBaseDuration, simpleOverrideBaseCastStartTimeFraction, simpleOverrideBaseCastEndTimeFraction);
+                stateParams = new TimedStateParams(simpleOverrideBaseDuration, simpleOverrideBaseCastStartTimeFraction, simpleOverrideBaseCastEndTimeFraction);
             }
-            duration = timedStateParams.baseDuration / (timedStateParams.attackSpeedAffected? characterBody.stats.AttackSpeed : 1);
-            castStartTime = timedStateParams.baseCastStartTimeFraction * duration;
-            castEndTime = timedStateParams.baseCastEndTimeFraction * duration;
-            otherStateInterruptTime = timedStateParams.baseOtherStateInterruptTimeFraction * duration * ( 1 + timedStateParams.baseExtraEndDelayFraction);
-            movementInterruptTime = timedStateParams.baseMovementInterruptTimeFraction * duration * (1 + timedStateParams.baseExtraEndDelayFraction);
-            stateEndTime = duration * (1 + timedStateParams.baseExtraEndDelayFraction);
+            duration = stateParams.baseDuration / (stateParams.attackSpeedAffected? characterBody.stats.AttackSpeed : 1);
+            castStartTime = stateParams.baseCastStartTimeFraction * duration;
+            castEndTime = stateParams.baseCastEndTimeFraction * duration;
+            otherStateInterruptTime = stateParams.baseOtherStateInterruptTimeFraction * duration * ( 1 + stateParams.baseExtraEndDelayFraction);
+            movementInterruptTime = stateParams.baseMovementInterruptTimeFraction * duration * (1 + stateParams.baseExtraEndDelayFraction);
+            stateEndTime = duration * (1 + stateParams.baseExtraEndDelayFraction);
         }
 
         protected virtual void OnCastEnter() { }
@@ -131,13 +143,13 @@ namespace ActiveStates.Characters
         {
             if (fixedAge >= movementInterruptTime)
             {
-                return InterruptPriority.MOVEMENT;
+                return stateParams.movementInterruptPriority;
             }
             if (fixedAge >= otherStateInterruptTime)
             {
-                return InterruptPriority.STATE_ANY;
+                return stateParams.otherInterruptableInterruptPriority;
             }
-            return InterruptPriority.STATE_LOW;
+            return stateParams.baseInterruptPriority;
         }
 
         protected virtual void SetNextState()
@@ -152,6 +164,15 @@ namespace ActiveStates.Characters
             {
                 OnCastUpdate();
             }
+        }
+
+        public void PlayAnimation()
+        {
+            PlayAnimation(stateParams.animationLayerName, stateParams.animationStateName, stateParams.animationPlaybackRateParam, stateParams.animationPlayTimeFraction * stateParams.baseDuration);
+        }
+        public override void PlayAnimation(AnimationStateStringOrInt animationState)
+        {
+            PlayAnimation(stateParams.animationLayerName, animationState, stateParams.animationPlaybackRateParam, stateParams.animationPlayTimeFraction * stateParams.baseDuration);
         }
     }
 }

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayName: kick
   baseCooldown: -0.03
+  baseStaminaCost: 20
   state:
     activeStateName: ActiveStates.Bobots.BobotKick
   stateMachineName: Body

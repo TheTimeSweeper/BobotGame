@@ -24,7 +24,7 @@ namespace ActiveStates.Characters
                 OwnerBody = characterBody,
                 Team = teamComponent.TeamIndex,
                 OverrideKnockbackDirection = characterModel.transform.forward,
-                KnockbackForce = 0.4f
+                KnockbackForceCoefficient = 0.4f
             };
         }
 

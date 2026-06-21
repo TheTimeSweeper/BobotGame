@@ -5,14 +5,14 @@ using System;
 
 namespace ActiveStates.Bobots
 {
-    public class BasicDash : BasicTimedState, IHasStateInfo<BobotGameDevStateInfo>
+    public class BasicDash : GenericTimedState, IHasStateInfo<BobotGameDevStateInfo>
     {
         public ActiveStateInfo AssignedStateInfo { get; set; }
         public Type StateInfoType => typeof(BobotGameDevStateInfo);
         public BobotGameDevStateInfo StateInfo => AssignedStateInfo as BobotGameDevStateInfo;
 
         //todo basicdashaparameters
-        protected override TimedStateParams timedStateParams => StateInfo.DASH_params;
+        protected override TimedStateParams stateParams => StateInfo.DASH_params;
         protected AnimationCurve curve => StateInfo.Dash_DashSpeedCurve;
 
         protected Vector3 direction;
@@ -33,7 +33,7 @@ namespace ActiveStates.Bobots
         {
             base.OnCastFixedUpdate();
 
-            fixedMotorDriver.OverrideVelocity = direction * curve.Evaluate(fixedAge / timedStateParams.baseCastEndTimeFraction) * StateInfo.Dash_DashSpeed;
+            fixedMotorDriver.OverrideVelocity = direction * curve.Evaluate(fixedAge / stateParams.baseCastEndTimeFraction) * StateInfo.Dash_DashSpeed;
         }
 
         //public override InterruptPriority GetMinimumInterruptPriority()

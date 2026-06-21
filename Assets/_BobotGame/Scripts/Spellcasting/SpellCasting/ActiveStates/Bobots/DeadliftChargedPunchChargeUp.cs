@@ -1,12 +1,14 @@
 ﻿using ActiveStates.Characters;
 using SpellCasting;
 using System;
+using System.Data;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 namespace ActiveStates.Bobots
 {
 
-    public class DeadliftChargedPunchChargeUp : BasicTimedState, IHasStateInfo<BobotGameDevStateInfo>, IStateFromInput
+    public class DeadliftChargedPunchChargeUp : GenericTimedState, IHasStateInfo<BobotGameDevStateInfo>, IStateFromInput
     {
         public ActiveStateInfo AssignedStateInfo { get; set; }
         public Type StateInfoType => typeof(BobotGameDevStateInfo);
@@ -14,13 +16,21 @@ namespace ActiveStates.Bobots
 
         public InputState input { get ; set ; }
 
-        //protected override float baseDuration => StateInfo.CPunch_holdGiveupTime;
-        //protected override float baseCastStartTimeFraction => 0;
-        //protected override float baseCastEndTimeFraction => (StateInfo.CPunch_damageMax / StateInfo.CPunch_holdGiveupTime) / characterBody.stats.AttackSpeed;
+        public override float? simpleOverrideBaseDuration => 1;
+        public override float? simpleOverrideBaseCastStartTimeFraction => 0;
+        public override float? simpleOverrideBaseCastEndTimeFraction => StateInfo.CPunch_chargeTime / characterBody.stats.AttackSpeed;
+        //todo bobot one step forward two steps back
         //protected override bool attackSpeedAffected => false;
+        protected TimedStateParams timedStateParamse;
+        protected override TimedStateParams stateParams => timedStateParamse;
+        protected override void InitDurationValues()
+        {
+            timedStateParamse = new TimedStateParams(simpleOverrideBaseDuration, simpleOverrideBaseCastStartTimeFraction, simpleOverrideBaseCastEndTimeFraction);
+            timedStateParamse.attackSpeedAffected = false;
+            timedStateParamse.baseExtraEndDelayFraction = StateInfo.CPunch_holdGiveupTime;
 
-        protected override TimedStateParams timedStateParams => throw new NotImplementedException();
-
+            base.InitDurationValues();
+        }
         protected override void OnCastEnter()
         {
             base.OnCastEnter();
@@ -72,16 +82,13 @@ namespace ActiveStates.Bobots
         public Type StateInfoType => typeof(BobotGameDevStateInfo);
         public BobotGameDevStateInfo StateInfo => AssignedStateInfo as BobotGameDevStateInfo;
 
-        protected override TimedStateParams timedStateParams => throw new NotImplementedException();
+        protected override TimedStateParams stateParams => StateInfo.CPunch_ReleaseParams;
 
-        //protected override string hitboxName => "KickHitbox";
-        //protected override string effectOriginName => "PunchEffectOrigin";
-        //protected override float baseDuration => StateInfo.CPunch_Duration;
-        //protected override float baseCastStartTimeFraction => StateInfo.CPunch_StartTimeFraction;
-        //protected override float baseCastEndTimeFraction => StateInfo.CPunch_EndTimeFraction;
+        //todo bobot bring back the easy fuclkin properties...
+            //guess I'll fuckin just add simpleoverride conditionals for each of these like i did the baseduration etc
+        protected float chargedDamageCoefficient => Mathf.Lerp(StateInfo.CPunch_damageMin, StateInfo.CPunch_damageMax, chargeAmount);
         //protected override float damageCoefficient => Mathf.Lerp(StateInfo.CPunch_damageMin, StateInfo.CPunch_damageMax, chargeAmount);
-        //protected override float baseOtherStateInterruptTimeFraction => StateInfo.Kick_OtherStateInterruptTimeFraction;
-        //protected override float baseMovementInterruptTimeFraction => StateInfo.Kick_baseMovementInterruptTimeFraction;
+        protected float chargedknockbackCoefficient => Mathf.Lerp(StateInfo.CPunch_knockbackMin, StateInfo.CPunch_knockbackMax, chargeAmount);
         //protected override float knockbackCoefficient => Mathf.Lerp(StateInfo.CPunch_knockbackMin, StateInfo.CPunch_knockbackMax, chargeAmount);
 
         //protected override float preAttackMoveShift => StateInfo.BPC_positionShift;
@@ -101,12 +108,17 @@ namespace ActiveStates.Bobots
             base.OnEnter();
             PlayKickAnimation();
         }
+        protected override void ModifyOverlapAttack(OverlapAttack overlapAttack)
+        {
+            base.ModifyOverlapAttack(overlapAttack);
+            overlapAttack.Damage = chargedDamageCoefficient * characterBody.stats.Damage;
+            //the fact that I had to look at the base class assignment of this find out what to put here is a big fuckin problem
+            overlapAttack.KnockbackForceCoefficient = chargedknockbackCoefficient;
+        }
 
         private void PlayKickAnimation()
         {
-            animator.Play("ThrowPunch");
-            //    animator.Play("Kick", 0, 0);
-            //    animator.SetFloat("kick.playbackRate", StateInfo.Kick_AnimationSpeed * baseCastEndTimeFraction);
+            animator.Play("ThrowPunch", 1, 0);
         }
 
         public override InterruptPriority GetMinimumInterruptPriority()

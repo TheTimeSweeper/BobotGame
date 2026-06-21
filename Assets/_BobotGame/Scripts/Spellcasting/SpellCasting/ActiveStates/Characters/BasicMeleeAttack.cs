@@ -7,7 +7,7 @@ using UnityEngine.Windows;
 
 namespace ActiveStates.Characters
 {
-    public abstract class BasicMeleeAttack : BasicTimedState
+    public abstract class BasicMeleeAttack : GenericTimedState
     {
         [System.Serializable]
         public class BasicMeleeParams : TimedStateParams
@@ -16,11 +16,14 @@ namespace ActiveStates.Characters
             public string hitboxName;
             public string effectOriginName = "";
             public float damageCoefficient = 1;
+            public float stunTime = 0;
             public float knockbackCoefficient = 0;
             public float preAttackMoveShift = 0.5f;
             public float preAttackMoveShiftDecay = 16;
             public float attackMoveShift = 0.5f;
             public float attackMoveShiftDecay = 16;
+            public float staminaRecoveryOnHit = 10;
+
             public BasicMeleeParams() : base()
             {
 
@@ -30,7 +33,7 @@ namespace ActiveStates.Characters
             }
         }
 
-        protected BasicMeleeParams meleeParams => timedStateParams as BasicMeleeParams;
+        protected BasicMeleeParams meleeParams => stateParams as BasicMeleeParams;
 
         protected OverlapAttack overlapAttack;
 
@@ -52,6 +55,8 @@ namespace ActiveStates.Characters
                 //aimDirection = inputBank.GlobalMoveDirection;
             }
 
+            SetAimForward();
+
             overlapAttack = new OverlapAttack
             {
                 Damage = meleeParams.damageCoefficient * characterBody.stats.Damage,
@@ -60,7 +65,8 @@ namespace ActiveStates.Characters
                 OwnerBody = characterBody,
                 Team = teamComponent.TeamIndex,
                 OverrideKnockbackDirection = characterModel.transform.forward,
-                KnockbackForce = meleeParams.knockbackCoefficient
+                KnockbackForceCoefficient = meleeParams.knockbackCoefficient,
+                StunTime = meleeParams.stunTime
             };
             ModifyOverlapAttack(overlapAttack);
 
