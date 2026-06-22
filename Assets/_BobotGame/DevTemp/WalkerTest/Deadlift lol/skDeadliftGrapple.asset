@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayName: Grapple
   baseCooldown: -0.03
+  baseStaminaCost: 0
   state:
     activeStateName: ActiveStates.Bobots.DeadliftGrapple
   stateMachineName: Weapon

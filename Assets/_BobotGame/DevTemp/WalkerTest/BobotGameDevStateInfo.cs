@@ -22,6 +22,8 @@ public class BobotGameDevStateInfo : ActiveStateInfo
     [Header("Stance")]
     public float Crouch_Height;
     public float block_duration;
+    [ShowMultiplyResult("block_duration")]
+    public float block_duration_blocking_fraction;
     [Header("Kick")]
     public GenericTimedState.TimedStateParams Kick_params = new GenericTimedState.TimedStateParams();
     public BasicMeleeAttack.BasicMeleeParams Kick_meleeParams = new BasicMeleeAttack.BasicMeleeParams();
@@ -31,6 +33,8 @@ public class BobotGameDevStateInfo : ActiveStateInfo
     [Space]
     public GenericTimedState.TimedStateParams CPunch_ReleaseParams = new GenericTimedState.TimedStateParams();
     public BasicMeleeAttack.BasicMeleeParams CPunch_meleeReleaseParams = new BasicMeleeAttack.BasicMeleeParams();
+    public BasicMeleeAttack.BasicMeleeParams CPunch_meleeReleaseParamsMaxCharge = new BasicMeleeAttack.BasicMeleeParams();
+    public float CPunch_InstantPunchCharge = 0.2f;
     public float CPunch_damageMin;
     public float CPunch_damageMax;
     public float CPunch_knockbackMin;

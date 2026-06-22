@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: skWalkerTestBlock
   m_EditorClassIdentifier: 
   displayName: block
-  baseCooldown: -0.03
+  baseCooldown: 0
   baseStaminaCost: 5
   state:
     activeStateName: ActiveStates.Bobots.BobotStanceBlock

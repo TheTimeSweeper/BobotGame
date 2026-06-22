@@ -18,6 +18,9 @@ namespace SpellCasting.UI
         [SerializeField]
         private TMP_Text healthText;
 
+        [SerializeField]
+        private TEMPFaceCamera cameraFacer;
+
 
         [SerializeField, Tooltip("the gameobject to be disabled if the bar provider decides to be hidden. leave null to autofill this gameobject")]
         private GameObject optionalAnchorGameObject;
@@ -35,6 +38,14 @@ namespace SpellCasting.UI
             if(_component is IUIBehindBarProvider)
             {
                 _behindComponent = _component as IUIBehindBarProvider;
+            }
+            if (cameraFacer)
+            {
+                var cameraTransform = CameraControllerTracker.FindByCurrentBody(_component.gameObject)?.cameraController.CameraPoint.transform;
+                if (cameraTransform)
+                {
+                    cameraFacer.cameraPosition = cameraTransform;
+                }
             }
             currentAnchor.SetActive(true);
         }

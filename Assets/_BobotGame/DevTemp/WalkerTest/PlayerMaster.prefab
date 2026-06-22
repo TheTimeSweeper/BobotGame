@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3853435687354860292}
   - component: {fileID: 6354766419621191687}
   - component: {fileID: 5920604674542097447}
+  - component: {fileID: 2710260517407462347}
   m_Layer: 0
   m_Name: PlayerMaster
   m_TagString: Untagged
@@ -51,7 +52,9 @@ MonoBehaviour:
   dontDestroyOnLoad: 0
   destroyOnBodyDeath: 0
   reviveOnBodyDeath: 1
+  isPlayerControlled: 1
   currentBody: {fileID: 0}
+  TEMPPlayerIndex: 1
 --- !u!114 &6354766419621191687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,6 +93,20 @@ MonoBehaviour:
   deltaEnds: []
   deltaStarts: []
   cameraController: {fileID: 6354766419621191687}
+--- !u!114 &2710260517407462347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522992679455064324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c276b36ba47cbec4da108c7ca4696489, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraController: {fileID: 6354766419621191687}
+  characterMaster: {fileID: 3853435687354860292}
 --- !u!1 &6476769741860390581
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,7 +301,7 @@ Transform:
   m_GameObject: {fileID: 7635305444767779391}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.2500002, y: 2.58, z: 4.09}
+  m_LocalPosition: {x: -2.61, y: 2.16, z: 5.03}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

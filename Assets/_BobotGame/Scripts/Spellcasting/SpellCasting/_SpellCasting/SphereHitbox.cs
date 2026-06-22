@@ -8,7 +8,7 @@ namespace SpellCasting
         {
             DebugShow();
 
-            return Physics.OverlapSphere(transform.position, transform.lossyScale.x * 0.5f, LayerInfo.Hurtbox.layerMask);
+            return Physics.OverlapSphere(transform.position, transform.lossyScale.x * 0.5f, LayerInfo.CommonMasks.Hittable);
         }
     }
 }

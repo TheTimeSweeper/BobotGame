@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayName: deadliftpunch
   baseCooldown: -0.03
+  baseStaminaCost: 20
   state:
     activeStateName: ActiveStates.Bobots.DeadliftChargedPunchChargeUp
   stateMachineName: Weapon2
   interruptingPriority: 1
   bufferTime: 0.2
-  justPress: 1
+  justPress: 0
   autoCast: 0

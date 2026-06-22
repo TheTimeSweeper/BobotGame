@@ -78,6 +78,7 @@ namespace SpellCasting
                     SpawnEffect(info, 1, legHealth < 0);
                     if (legHealth < 0)
                     {
+                        health = 0;
                         Debug.LogWarning("BROKE LEGS!");
                     }
                 }

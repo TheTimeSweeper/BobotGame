@@ -24,20 +24,6 @@ namespace ActiveStates.Characters
         protected override void ModifyOverlapAttack(OverlapAttack overlapAttack)
         {
             base.ModifyOverlapAttack(overlapAttack);
-            if (meleeParams.staminaRecoveryOnHit > 0)
-            {
-                overlapAttack.DamageTakenEvent += OverlapAttack_DamageTakenEvent;
-            }
-        }
-
-        private void OverlapAttack_DamageTakenEvent(GetDamagedData getDamagedInfo)
-        {
-            StaminaComponent staminaComponent = getDamagedInfo.DamagingInfo.AttackerBody?.CommonComponents.StaminaComponent;
-            if (staminaComponent)
-            {
-                //todo bobot stamina modification stat
-                staminaComponent.RefreshStamina(meleeParams.staminaRecoveryOnHit);
-            }
         }
 
         protected override void OnCastEnter()

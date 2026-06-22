@@ -34,8 +34,7 @@ namespace ActiveStates.Bobots
         protected override void OnCastEnter()
         {
             base.OnCastEnter();
-            PlayTimedAnimation();
-            //PlayAnimation("YayGesture", "ChargePunch", "punch.playbackRate", duration);
+            PlayAnimation("YayGesture", "ChargePunch", "punch.playbackRate", castEndTime);
         }
 
         public override void OnFixedUpdate()
@@ -84,20 +83,17 @@ namespace ActiveStates.Bobots
         public BobotGameDevStateInfo StateInfo => AssignedStateInfo as BobotGameDevStateInfo;
 
         protected override TimedStateParams stateParams => StateInfo.CPunch_ReleaseParams;
-        protected override BasicMeleeParams meleeParams => StateInfo.CPunch_meleeReleaseParams;
-
-        //todo bobot bring back the easy fuclkin properties...
-        //guess I'll fuckin just add simpleoverride conditionals for each of these like i did the baseduration etc
-        protected float chargedDamageCoefficient => Mathf.Lerp(StateInfo.CPunch_damageMin, StateInfo.CPunch_damageMax, chargeAmount);
-        //protected override float damageCoefficient => Mathf.Lerp(StateInfo.CPunch_damageMin, StateInfo.CPunch_damageMax, chargeAmount);
-        protected float chargedknockbackCoefficient => Mathf.Lerp(StateInfo.CPunch_knockbackMin, StateInfo.CPunch_knockbackMax, chargeAmount);
+        protected override BasicMeleeParams meleeParams => finalMeleeParams;
+        protected BasicMeleeParams finalMeleeParams;
+        protected BasicMeleeParams meleeParams1 => StateInfo.CPunch_meleeReleaseParams;
+        protected BasicMeleeParams meleeParams2 => StateInfo.CPunch_meleeReleaseParamsMaxCharge;
 
 
         //protected override float knockbackCoefficient => Mathf.Lerp(StateInfo.CPunch_knockbackMin, StateInfo.CPunch_knockbackMax, chargeAmount);
 
         //protected override float preAttackMoveShift => StateInfo.BPC_positionShift;
 
-        public float chargeAmount = 0.5f;
+        public float chargeAmount = -1;
 
         public DeadliftChargedPunchRelease()
         {
@@ -109,20 +105,44 @@ namespace ActiveStates.Bobots
 
         public override void OnEnter()
         {
+            if (chargeAmount < 0)
+            {
+                chargeAmount = StateInfo.CPunch_InstantPunchCharge;
+            }
+            if (chargeAmount < 1)
+            {
+                stateParams.baseExtraEndDelayFraction = 0;
+            }
+            else
+            {
+                stateParams.baseExtraEndDelayFraction = 2;
+            }
+            BlendMeleeParams();
+
             base.OnEnter();
-            PlayKickAnimation();
+            PlayTimedAnimation();
         }
+
+        private void BlendMeleeParams()
+        {
+            finalMeleeParams = new BasicMeleeParams
+            {
+                hitboxName = chargeAmount < 1 ? meleeParams1.hitboxName : meleeParams2.hitboxName,
+                effectOriginName = chargeAmount < 1 ? meleeParams1.effectOriginName : meleeParams2.effectOriginName,
+                damageCoefficient = Mathf.Lerp(meleeParams1.damageCoefficient, meleeParams2.damageCoefficient, chargeAmount),
+                stunTime = Mathf.Lerp(meleeParams1.stunTime, meleeParams2.stunTime, chargeAmount),
+                knockbackCoefficient = Mathf.Lerp(meleeParams1.knockbackCoefficient, meleeParams2.knockbackCoefficient, chargeAmount),
+                preAttackMoveShift = Mathf.Lerp(meleeParams1.preAttackMoveShift, meleeParams2.preAttackMoveShift, chargeAmount),
+                preAttackMoveShiftDecay = Mathf.Lerp(meleeParams1.preAttackMoveShiftDecay, meleeParams2.preAttackMoveShiftDecay, chargeAmount),
+                attackMoveShift = Mathf.Lerp(meleeParams1.attackMoveShift, meleeParams2.attackMoveShift, chargeAmount),
+                attackMoveShiftDecay = Mathf.Lerp(meleeParams1.attackMoveShiftDecay, meleeParams2.attackMoveShiftDecay, chargeAmount),
+                staminaRecoveryOnHit = Mathf.Lerp(meleeParams1.staminaRecoveryOnHit, meleeParams2.staminaRecoveryOnHit, chargeAmount),
+            };
+        }
+
         protected override void ModifyOverlapAttack(OverlapAttack overlapAttack)
         {
             base.ModifyOverlapAttack(overlapAttack);
-            overlapAttack.Damage = chargedDamageCoefficient * characterBody.stats.Damage;
-            //the fact that I had to look at the base class assignment of this find out what to put here is a big fuckin problem
-            overlapAttack.KnockbackForceCoefficient = chargedknockbackCoefficient;
-        }
-
-        private void PlayKickAnimation()
-        {
-            PlayTimedAnimation();// "ThrowPunch", 1, 0);
         }
 
         public override InterruptPriority GetMinimumInterruptPriority()

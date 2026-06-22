@@ -75,7 +75,7 @@ MonoBehaviour:
   noTargetOverrideInterestPoint: {fileID: 0}
   teamTargetType: 2
   teamComponent: {fileID: 0}
-  searchDistance: Infinity
+  searchDistance: 50
   searchIntervalMin: 1
   searchIntervalMax: 2
   chaseTimeMinimunm: 0.5

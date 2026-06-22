@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayName: deadliftpunch2
   baseCooldown: -0.03
+  baseStaminaCost: 0
   state:
     activeStateName: ActiveStates.Bobots.DeadliftChargedPunchRelease
   stateMachineName: Body
   interruptingPriority: 2
-  bufferTime: 0.3
-  justPress: 0
+  bufferTime: 0.1
+  justPress: 1
   autoCast: 0

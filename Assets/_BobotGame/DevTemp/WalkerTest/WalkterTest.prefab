@@ -319,6 +319,8 @@ GameObject:
   - component: {fileID: 6434058732418504846}
   - component: {fileID: 4432391582001812149}
   - component: {fileID: 2085640227709203979}
+  - component: {fileID: 6616064624414588058}
+  - component: {fileID: 5552076051270154681}
   m_Layer: 0
   m_Name: WalkterTest
   m_TagString: Untagged
@@ -715,6 +717,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  stunResistanceDecay: 3
 --- !u!114 &2398248412024188298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -770,6 +773,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 2329120319086190538, guid: 4c8452d1d86436b4b998cdb2c2806866, type: 3}
   providerComponent: {fileID: 4088083360257713007}
+--- !u!114 &6616064624414588058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6662274689379214683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f584474bf6f71744e84cde0b9a5fd2ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 1428157399008160528, guid: 5de3d2cb8c172ce4bac3e7a41e495aeb, type: 3}
+  providerComponent: {fileID: 7568251913772495062}
+--- !u!114 &5552076051270154681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6662274689379214683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5501e3b52f561d49b35923732122109, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 2079511131688986912, guid: 045fa5dafdbfc4e4bad00af6ed39b290, type: 3}
+  providerComponent: {fileID: 4432391582001812149}
 --- !u!1 &7911952377910462530
 GameObject:
   m_ObjectHideFlags: 0
@@ -828,7 +859,7 @@ Transform:
   m_GameObject: {fileID: 8161202670084724029}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.4, z: 0}
+  m_LocalPosition: {x: 0, y: 3.4, z: -0.23}
   m_LocalScale: {x: 1.567, y: 3.0053, z: 1.4849}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -853,7 +884,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.62
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}

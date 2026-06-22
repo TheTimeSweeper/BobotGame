@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.Timeline;
 namespace SpellCasting
 {
     public class CharacterMaster : MonoBehaviour
@@ -13,6 +14,8 @@ namespace SpellCasting
         private bool destroyOnBodyDeath;
         [SerializeField]
         private bool reviveOnBodyDeath;
+        [SerializeField]
+        public bool isPlayerControlled;
         [Header("Active")]
         [SerializeField, FormerlySerializedAs("body")]
         private CharacterBody currentBody;
@@ -23,6 +26,8 @@ namespace SpellCasting
         private CharacterBody lastBody;
 
         bool hadBody;
+        public int TEMPPlayerIndex;
+
         public event System.Action<CharacterBody> OnBodyChanged;
 
         //fine, inventory
@@ -55,6 +60,7 @@ namespace SpellCasting
             {
                 OnBodyChanged?.Invoke(currentBody);
                 CachedTeamIndex = currentBody.teamIndex;
+                currentBody.Master = this;
             }
             lastBody = currentBody;
         }

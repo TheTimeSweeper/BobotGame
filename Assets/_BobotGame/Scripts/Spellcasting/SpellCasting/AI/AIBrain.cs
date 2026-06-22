@@ -81,7 +81,7 @@ namespace SpellCasting.AI
             teamComponent = body.CommonComponents.TeamComponent;
         }
 
-        //todo bobot share if this is cursed lol
+        //todo bobot share with the class and ask if this is cursed lol
         public Vector3 CurrentTargetPosition =>
             CurrentTargetBody != null 
                 ? CurrentTargetBody.corePosition 

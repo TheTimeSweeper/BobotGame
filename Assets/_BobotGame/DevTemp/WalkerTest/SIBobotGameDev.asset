@@ -23,14 +23,14 @@ MonoBehaviour:
     otherInterruptableInterruptPriority: 1
     movementInterruptPriority: 0
     animationPlayTimeFraction: 0.6
-    animationStateName: PunchDash
     animationLayerName: Body
+    animationStateName: PunchDash
     animationPlaybackRateParam: punch.playbackRate
     attackSpeedAffected: 1
   BPC_MeleeParams1:
     hitboxName: PunchHitbox
     effectOriginName: PunchEffectOrigin
-    damageCoefficient: 0.3
+    damageCoefficient: 0.5
     stunTime: 0.55
     knockbackCoefficient: 2
     preAttackMoveShift: 0.5
@@ -49,14 +49,14 @@ MonoBehaviour:
     otherInterruptableInterruptPriority: 1
     movementInterruptPriority: 0
     animationPlayTimeFraction: 0.6
-    animationStateName: Punch2
     animationLayerName: Body
+    animationStateName: Punch2
     animationPlaybackRateParam: punch.playbackRate
     attackSpeedAffected: 1
   BPC_MeleeParams2:
     hitboxName: PunchHitbox
     effectOriginName: PunchEffectOrigin
-    damageCoefficient: 0.3
+    damageCoefficient: 0.5
     stunTime: 0.55
     knockbackCoefficient: 0
     preAttackMoveShift: 0.5
@@ -75,14 +75,14 @@ MonoBehaviour:
     otherInterruptableInterruptPriority: 1
     movementInterruptPriority: 0
     animationPlayTimeFraction: 0.6
-    animationStateName: Punch2
     animationLayerName: Body
+    animationStateName: Punch2
     animationPlaybackRateParam: punch.playbackRate
     attackSpeedAffected: 1
   BPC_MeleeParams3:
     hitboxName: PunchHitbox
     effectOriginName: PunchEffectOrigin
-    damageCoefficient: 0.3
+    damageCoefficient: 0.5
     stunTime: 0.55
     knockbackCoefficient: 0
     preAttackMoveShift: 0.5
@@ -101,8 +101,8 @@ MonoBehaviour:
     otherInterruptableInterruptPriority: 1
     movementInterruptPriority: 0
     animationPlayTimeFraction: 0.6
-    animationStateName: Dash
     animationLayerName: Body
+    animationStateName: Dash
     animationPlaybackRateParam: dash.playbackRate
     attackSpeedAffected: 0
   Dash_DashSpeed: 40
@@ -157,8 +157,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  Crouch_Height: -2
-  block_duration: 0.4
+  Crouch_Height: -1.5
+  block_duration: 0.6
+  block_duration_blocking_fraction: 0.7
   Kick_params:
     baseDuration: 0.8
     baseExtraEndDelayFraction: 0
@@ -170,8 +171,8 @@ MonoBehaviour:
     otherInterruptableInterruptPriority: 1
     movementInterruptPriority: 0
     animationPlayTimeFraction: 1
-    animationStateName: Kick
     animationLayerName: Body
+    animationStateName: Kick
     animationPlaybackRateParam: kick.playbackRate
     attackSpeedAffected: 1
   Kick_meleeParams:
@@ -185,37 +186,49 @@ MonoBehaviour:
     attackMoveShift: 0
     attackMoveShiftDecay: 16
     staminaRecoveryOnHit: 10
-  CPunch_chargeTime: 3
+  CPunch_chargeTime: 1.5
   CPunch_holdGiveupTime: 100
   CPunch_ReleaseParams:
     baseDuration: 0.3
     baseExtraEndDelayFraction: 0
     baseCastStartTimeFraction: 0
-    baseCastEndTimeFraction: 0.3
+    baseCastEndTimeFraction: 1
     baseOtherStateInterruptTimeFraction: 1
     baseMovementInterruptTimeFraction: 1
     baseInterruptPriority: 2
     otherInterruptableInterruptPriority: 1
     movementInterruptPriority: 0
     animationPlayTimeFraction: 0.3
-    animationStateName: ChargePunch
     animationLayerName: YayGesture
+    animationStateName: ThrowPunch
     animationPlaybackRateParam: punch.playbackRate
     attackSpeedAffected: 1
   CPunch_meleeReleaseParams:
     hitboxName: KickHitbox
     effectOriginName: PunchEffectOrigin
-    damageCoefficient: 0.5
-    stunTime: 1
+    damageCoefficient: 0.2
+    stunTime: 0.4
     knockbackCoefficient: 150
-    preAttackMoveShift: 0.5
+    preAttackMoveShift: 0
     preAttackMoveShiftDecay: 16
     attackMoveShift: 1
     attackMoveShiftDecay: 16
     staminaRecoveryOnHit: 10
-  CPunch_damageMin: 0
-  CPunch_damageMax: 1
-  CPunch_knockbackMin: 100
-  CPunch_knockbackMax: 200
+  CPunch_meleeReleaseParamsMaxCharge:
+    hitboxName: KickHitbox
+    effectOriginName: PunchEffectOrigin
+    damageCoefficient: 1.5
+    stunTime: 1
+    knockbackCoefficient: 300
+    preAttackMoveShift: 0
+    preAttackMoveShiftDecay: 16
+    attackMoveShift: 2
+    attackMoveShiftDecay: 16
+    staminaRecoveryOnHit: 10
+  CPunch_InstantPunchCharge: 0
+  CPunch_damageMin: 0.2
+  CPunch_damageMax: 1.5
+  CPunch_knockbackMin: 150
+  CPunch_knockbackMax: 300
   Grap_Prefab: {fileID: 7053902361285992279, guid: a76134462c4a57f49801cd3795749171, type: 3}
-  Grap_Speed: 10
+  Grap_Speed: 6

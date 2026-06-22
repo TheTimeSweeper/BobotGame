@@ -74,6 +74,9 @@ namespace SpellCasting
 
         public bool Ded => commonComponents.HealthComponent.Ded;
 
+        public CharacterMaster Master { get; set; }
+        public bool isPlayerControlled => Master ? Master.isPlayerControlled : false;
+
         [ContextMenu("ReInitStats")]
         void Awake()
         {

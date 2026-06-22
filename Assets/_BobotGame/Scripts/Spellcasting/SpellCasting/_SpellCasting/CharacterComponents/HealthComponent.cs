@@ -140,5 +140,11 @@ namespace SpellCasting
         {
             return !Ded;
         }
+
+        internal void Kill()
+        {
+            health = 0;
+            deathComponent.GetRektLol();
+        }
     }
 }

@@ -13,7 +13,7 @@ namespace SpellCasting
             {
                 Debug.LogError("Error in Overlapbox. Hitbox scale is negative", this);
             }
-            return Physics.OverlapBox(transform.position, transform.lossyScale * 0.5f, transform.rotation, LayerInfo.Hurtbox.layerMask);
+            return Physics.OverlapBox(transform.position, transform.lossyScale * 0.5f, transform.rotation, LayerInfo.CommonMasks.Hittable);
         }
     }
 }

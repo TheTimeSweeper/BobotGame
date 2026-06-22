@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace SpellCasting.UI
@@ -9,13 +10,12 @@ namespace SpellCasting.UI
         private GameObject menuObject;
 
         [SerializeField]
-        private Button titleButton;
+        private Button buttonPrefab;
         [SerializeField]
         private Button quitButton;
 
         private void Awake()
         {
-            titleButton?.onClick.AddListener(titleClick);
             quitButton?.onClick.AddListener(quitClick);
             menuObject?.SetActive(false);
         }

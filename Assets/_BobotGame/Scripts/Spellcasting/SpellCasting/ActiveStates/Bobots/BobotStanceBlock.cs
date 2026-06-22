@@ -15,6 +15,7 @@ namespace ActiveStates.Bobots
         public InputState input { get; set; }
 
         bool blocked;
+        bool unsubscribed;
 
         public override void OnEnter()
         {
@@ -30,6 +31,25 @@ namespace ActiveStates.Bobots
             characterBody.stats.KnockbackFactor.ApplyMultiplyModifier(0.2f, "block");
         }
 
+        public override void OnFixedUpdate()
+        {
+            base.OnFixedUpdate();
+            if(fixedAge > StateInfo.block_duration_blocking_fraction * baseDuration)
+            {
+                Unsubscribe();
+            }
+        }
+
+        private void Unsubscribe()
+        {
+            if (unsubscribed)
+            {
+                return;
+            }
+            unsubscribed = true;
+            healthComponent.OnDamageTaken -= HealthComponent_OnDamageTaken;
+        }
+
         private void HealthComponent_OnDamageTaken(GetDamagedData getDamagedInfo)
         {
             blocked = true;
@@ -37,8 +57,8 @@ namespace ActiveStates.Bobots
 
         public override void OnExit(bool machineDed = false)
         {
+            Unsubscribe();
             characterBody.stats.KnockbackFactor.RemoveModifier("block");
-            healthComponent.OnDamageTaken -= HealthComponent_OnDamageTaken;
             characterBody.stats.MoveSpeed.RemoveModifier("Block");
             gameObject.GetComponent<TEMPBobotCrouchController>().isBlocking = false;
             base.OnExit(machineDed);

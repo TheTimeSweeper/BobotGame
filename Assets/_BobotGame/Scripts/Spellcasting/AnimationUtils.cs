@@ -60,6 +60,10 @@ public struct AnimationStateStringOrInt
     }
     private static int GetOrCreateCachedHash(string animationStateString)
     {
+        if(string.IsNullOrEmpty(animationStateString))
+        {
+            return -1;
+        }
         if (!cachedHashes.ContainsKey(animationStateString))
         {
             cachedHashes[animationStateString] = Animator.StringToHash(animationStateString);

@@ -38,8 +38,8 @@ namespace ActiveStates.Characters
 
             [ShowMultiplyResult("baseDuration")]
             public float animationPlayTimeFraction = 1;
-            public string animationStateName;
             public string animationLayerName;
+            public string animationStateName;
             public string animationPlaybackRateParam;
 
             public bool attackSpeedAffected = true;

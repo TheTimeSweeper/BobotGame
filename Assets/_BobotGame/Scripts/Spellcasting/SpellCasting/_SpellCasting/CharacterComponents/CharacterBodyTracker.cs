@@ -24,6 +24,7 @@ namespace SpellCasting
 
         private void ResetTeam()
         {
+            //todo bobot this works but is fucked up
             if (!teamsBodies.ContainsKey(teamComponent.TeamIndex))
             {
                 teamsBodies.Add(teamComponent.TeamIndex, new List<CharacterBodyTracker>());
@@ -83,6 +84,21 @@ namespace SpellCasting
                 if (Vector3.SqrMagnitude(teamsBodies[teamIndex][i].transform.position - centerPosition) < sqrDistance)
                 {
                     return teamsBodies[teamIndex][i].body;
+                }
+            }
+            return null;
+        }
+
+        public static CharacterBody FindBodyByFilter(Func<CharacterBody, bool> passesFilter)
+        {
+            foreach (var TeamIndex in teamsBodies.Keys)
+            {
+                for (int i = 0; i < teamsBodies[TeamIndex].Count; i++)
+                {
+                    if (passesFilter(teamsBodies[TeamIndex][i].body))
+                    {
+                        return teamsBodies[TeamIndex][i].body;
+                    }
                 }
             }
             return null;

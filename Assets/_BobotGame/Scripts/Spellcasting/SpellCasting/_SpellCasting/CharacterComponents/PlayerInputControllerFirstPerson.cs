@@ -26,15 +26,15 @@ namespace SpellCasting
                 lastCamPosition = cameraController.CameraPoint.position;
                 lastCamRotation = cameraController.CameraPoint.rotation;
             }
-            //if (Physics.Raycast(cameraController.CameraPoint.position, cameraController.CameraPoint.forward, out var raycastHit, maxInputRange, LayerInfo.Hurtbox.layerMask.value))
-            //{
-            //    if (Util.DebugKeyG)
-            //    {
-            //        Debug.DrawLine(cameraController.CameraPoint.position, raycastHit.point);
-            //    }
-            //    lastAimPosition = raycastHit.point;
-            //    return raycastHit.point;
-            //}
+            if (Physics.Raycast(cameraController.CameraPoint.position, cameraController.CameraPoint.forward, out var raycastHit, maxInputRange, LayerInfo.Hurtbox.layerMask.value))
+            {
+                if (Util.DebugKeyG)
+                {
+                    Debug.DrawLine(cameraController.CameraPoint.position, raycastHit.point);
+                }
+                lastAimPosition = raycastHit.point;
+                return raycastHit.point;
+            }
             Vector3 defaultPoint = cameraController.CameraPoint.position + (cameraController.CameraPoint.forward * maxInputRange);
             lastAimPosition = defaultPoint;
             return defaultPoint;
@@ -60,7 +60,7 @@ namespace SpellCasting
             inputBank.Primary.UpdateInput(Input.GetMouseButton(0));
             inputBank.Block.UpdateInput(Input.GetMouseButton(1));
             inputBank.Dash.UpdateInput(Input.GetKey(KeyCode.Space));
-            inputBank.Crouch.UpdateInput(Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.V));
+            inputBank.Crouch.UpdateInput(Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.V));
             inputBank.Ability.UpdateInput(Input.GetKey(KeyCode.LeftShift));
             inputBank.E.UpdateInput(Input.GetKey(KeyCode.E));
         }

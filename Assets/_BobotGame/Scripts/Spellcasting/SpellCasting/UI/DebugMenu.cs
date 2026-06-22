@@ -29,8 +29,8 @@ namespace SpellCasting.UI
 
         private void Start()
         {
-            jango?.gameObject.SetActive(false);
-            jangoToggle?.gameObject.SetActive(false);
+            //jango?.gameObject.SetActive(false);
+            //jangoToggle?.gameObject.SetActive(false);
 
             timeScaleSlider.onValueChanged.AddListener(OnTimeScaleSliderChanged);
 
