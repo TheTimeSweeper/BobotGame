@@ -720,7 +720,7 @@ MonoBehaviour:
   ignoreY: 1
   ReelStretcher: {fileID: 5853829518265667733}
   ReelPointVisualChildName: ShoulderR
-  pullForce: 40
+  pullForce: 20
 --- !u!114 &3243974517586708142
 MonoBehaviour:
   m_ObjectHideFlags: 0

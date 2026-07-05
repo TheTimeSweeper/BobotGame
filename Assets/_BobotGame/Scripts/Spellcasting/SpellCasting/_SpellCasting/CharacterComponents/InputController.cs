@@ -53,10 +53,13 @@ namespace SpellCasting
 
             if (optionalMaster)
             {
-                if(!inputBank) inputBank = optionalMaster.CurrentBody.CommonComponents.InputBank;
-                if(!bodyAimOriginPosition && inputBank) bodyAimOriginPosition = inputBank.AimOrigin;
-                if(!forwardDirectionTransform) forwardDirectionTransform = optionalMaster.CurrentBody.CommonComponents.CharacterModel.transform;
                 SubscribeToEvents(true);
+                if (optionalMaster.CurrentBody)
+                {
+                    if (!inputBank) inputBank = optionalMaster.CurrentBody.CommonComponents.InputBank;
+                    if (!bodyAimOriginPosition && inputBank) bodyAimOriginPosition = inputBank.AimOrigin;
+                    if (!forwardDirectionTransform) forwardDirectionTransform = optionalMaster.CurrentBody.CommonComponents.CharacterModel.transform;
+                }
             }
 
             if (inputBank)

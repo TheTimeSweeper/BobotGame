@@ -161,9 +161,9 @@ MonoBehaviour:
   block_duration: 0.6
   block_duration_blocking_fraction: 0.7
   Kick_params:
-    baseDuration: 0.8
+    baseDuration: 1.2
     baseExtraEndDelayFraction: 0
-    baseCastStartTimeFraction: 0.4
+    baseCastStartTimeFraction: 0.32
     baseCastEndTimeFraction: 0.5
     baseOtherStateInterruptTimeFraction: 0.8
     baseMovementInterruptTimeFraction: 0.9
@@ -231,4 +231,4 @@ MonoBehaviour:
   CPunch_knockbackMin: 150
   CPunch_knockbackMax: 300
   Grap_Prefab: {fileID: 7053902361285992279, guid: a76134462c4a57f49801cd3795749171, type: 3}
-  Grap_Speed: 6
+  Grap_Speed: 10

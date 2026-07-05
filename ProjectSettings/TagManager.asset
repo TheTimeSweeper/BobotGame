@@ -13,11 +13,11 @@ TagManager:
   - UI
   - Hurtbox
   - Projectile
-  - ProjectileHitboxOnly
+  - ProjectileHurtboxOnly
   - ProjectileWorldOnly
   - Destructible
-  - 
-  - 
+  - World(Unused. Use Default)
+  - Motor
   - 
   - 
   - 

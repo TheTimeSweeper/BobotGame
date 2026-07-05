@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b5b15aa41f01e34ba9617535590e118, type: 3}
+  m_Name: TableMasters
+  m_EditorClassIdentifier: 
+  spawnItems:
+  - {fileID: 5638254006160183993, guid: 893ec00a40a6d19449756a56714bc2d4, type: 3}
+  weights:
+  - 1

@@ -16,12 +16,14 @@ namespace SpellCasting
         private bool reviveOnBodyDeath;
         [SerializeField]
         public bool isPlayerControlled;
+        [SerializeField]
+        public bool spawnBodyOnStart;
         [Header("Active")]
         [SerializeField, FormerlySerializedAs("body")]
         private CharacterBody currentBody;
         public CharacterBody CurrentBody => currentBody;
 
-        public TeamIndex CachedTeamIndex {get; private set;}
+        public TeamIndex CachedTeamIndex;
 
         private CharacterBody lastBody;
 
@@ -40,6 +42,13 @@ namespace SpellCasting
                 Object.DontDestroyOnLoad(gameObject);
             }
         }
+        private void Start()
+        {
+            if (spawnBodyOnStart && !currentBody)
+            {
+                SpawnBody();
+            }
+        }
 
         private void FixedUpdate()
         {
@@ -48,8 +57,7 @@ namespace SpellCasting
                 //todo bobot make these death behaviors or something
                 if (reviveOnBodyDeath && bodyPrefab)
                 {
-                    currentBody = Instantiate(bodyPrefab);
-                    currentBody.CommonComponents.TeamComponent.TeamIndex = CachedTeamIndex;
+                    SpawnBody();
                 }
                 if (destroyOnBodyDeath) {
                     Destroy(gameObject);
@@ -59,10 +67,19 @@ namespace SpellCasting
             if(currentBody != lastBody)
             {
                 OnBodyChanged?.Invoke(currentBody);
-                CachedTeamIndex = currentBody.teamIndex;
+                if (CachedTeamIndex == TeamIndex.None)
+                {
+                    CachedTeamIndex = currentBody.teamIndex;
+                }
                 currentBody.Master = this;
             }
             lastBody = currentBody;
+        }
+
+        private void SpawnBody()
+        {
+            currentBody = Instantiate(bodyPrefab, transform.position, transform.rotation);
+            currentBody.CommonComponents.TeamComponent.TeamIndex = CachedTeamIndex;
         }
 
         private void Update()

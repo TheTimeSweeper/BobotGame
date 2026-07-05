@@ -15,6 +15,7 @@ public class LayerInfo
     public static readonly LayerInfo RoomOverlap = new LayerInfo("RoomOverlap");
     public static readonly LayerInfo Hurtbox = new LayerInfo("Hurtbox");
     public static readonly LayerInfo Destructible = new LayerInfo("Destructible");
+    public static readonly LayerInfo Motor = new LayerInfo("Motor");
 
     public class CommonMasks
     {

@@ -10,8 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5846597750206457019}
   - component: {fileID: 8188382691697233017}
+  - component: {fileID: 4469078700778233400}
+  - component: {fileID: 870951254981767497}
   m_Layer: 0
-  m_Name: EffectManage
+  m_Name: Singletons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -54,3 +56,27 @@ MonoBehaviour:
   - {fileID: 8914938037818433137, guid: c037850cf6d66674fb274be292aa42a7, type: 3}
   - {fileID: 3794419652429346061, guid: 935fbdb0ae8846345bdb443e520334ab, type: 3}
   - {fileID: 8122355101269563477, guid: adee1443a67eefc4da0a76b7099f7af8, type: 3}
+--- !u!114 &4469078700778233400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4795705366545712735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b0f7ff95c193f34b875d9b6edd7e0e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &870951254981767497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4795705366545712735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d80f43ad8c03e974fbf57d316606fa6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -51,7 +51,10 @@ MonoBehaviour:
   dontDestroyOnLoad: 0
   destroyOnBodyDeath: 0
   reviveOnBodyDeath: 1
+  isPlayerControlled: 0
+  spawnBodyOnStart: 1
   currentBody: {fileID: 0}
+  TEMPPlayerIndex: 0
 --- !u!114 &5638254006160183990
 MonoBehaviour:
   m_ObjectHideFlags: 0

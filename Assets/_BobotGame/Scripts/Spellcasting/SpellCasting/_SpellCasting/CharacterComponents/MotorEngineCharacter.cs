@@ -37,7 +37,7 @@ namespace SpellCasting
 
         public override void FixedMove(Vector3 movement)
         {
-            characterController.Move(movement + Vector3.up * _ySpeed);
+            characterController.Move((movement * Time.fixedDeltaTime) + Vector3.up * _ySpeed);
         }
 
         public override void Teleport(Vector3 destination)
