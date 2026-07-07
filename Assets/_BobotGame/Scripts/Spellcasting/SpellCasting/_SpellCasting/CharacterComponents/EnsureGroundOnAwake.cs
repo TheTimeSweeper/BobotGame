@@ -12,6 +12,7 @@ namespace SpellCasting
         public float checkHeight;
         public Prefer prefer = Prefer.HIGHEST;
 
+        [ContextMenu("doit")]
         private void Awake()
         {
             float highestY = float.NegativeInfinity;

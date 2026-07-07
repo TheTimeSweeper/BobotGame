@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayName: punch
   baseCooldown: -0.03
-  baseStaminaCost: 0
+  baseStaminaCost: 10
   state:
     activeStateName: ActiveStates.Bobots.BobotPunchCombo
   stateMachineName: Body

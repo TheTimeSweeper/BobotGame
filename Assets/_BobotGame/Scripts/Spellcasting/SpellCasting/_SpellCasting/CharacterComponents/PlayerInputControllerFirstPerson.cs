@@ -7,6 +7,9 @@ namespace SpellCasting
         [SerializeField]
         private CameraController cameraController;
 
+        [SerializeField]
+        protected bool GamePad;
+
         private Quaternion lastCamRotation;
         private Vector3 lastCamPosition;
 
@@ -42,12 +45,26 @@ namespace SpellCasting
 
         protected virtual float GetYAimAxis()
         {
-            return -Input.GetAxis("Mouse Y");
+            if (!GamePad)
+            {
+                return -Input.GetAxis("Mouse Y");
+            }
+            else
+            {
+                return Input.GetAxis("RightStickY");
+            }
         }
 
         protected virtual float GetXAimAxis()
         {
-            return Input.GetAxis("Mouse X");
+            if (!GamePad)
+            {
+                return Input.GetAxis("Mouse X");
+            }
+            else
+            {
+                return Input.GetAxis("RightStickX");
+            }
         }
 
         protected override Vector3 GetGesturePosition()
@@ -57,6 +74,18 @@ namespace SpellCasting
 
         protected override void SetbuttonInputs()
         {
+            if (!GamePad)
+            {
+                SetbuttonInputsKBM();
+            }
+            else
+            {
+                SetbuttonInputsGamePad();
+            }
+        }
+
+        protected void SetbuttonInputsKBM()
+        {
             inputBank.Primary.UpdateInput(Input.GetMouseButton(0));
             inputBank.Block.UpdateInput(Input.GetMouseButton(1));
             inputBank.Dash.UpdateInput(Input.GetKey(KeyCode.Space));
@@ -65,9 +94,25 @@ namespace SpellCasting
             inputBank.E.UpdateInput(Input.GetKey(KeyCode.E));
         }
 
+        protected void SetbuttonInputsGamePad()
+        {
+            inputBank.Primary.UpdateInput(Input.GetAxis("TriggerR") < -0.5f);
+            inputBank.Block.UpdateInput(Input.GetAxis("TriggerL") < -0.5f);
+            inputBank.Dash.UpdateInput(Input.GetButton("BumperL"));
+            inputBank.Ability.UpdateInput(Input.GetButton("BumperR"));
+            inputBank.Crouch.UpdateInput(Input.GetButton("X"));
+        }
+
         protected override Vector3 GetMovementInput()
         {
-            return new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            if (GamePad)
+            {
+                return new Vector3(Input.GetAxis("HorizontalJoy"), 0, -Input.GetAxis("VerticalJoy"));
+            } 
+            else
+            {
+                return new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            }
         }
     }
 }

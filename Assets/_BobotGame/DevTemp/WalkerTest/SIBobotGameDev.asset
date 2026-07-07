@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: siBobotGameDev
   m_EditorClassIdentifier: 
   BPC_HitParams:
-    baseDuration: 1.2
+    baseDuration: 1.4
     baseExtraEndDelayFraction: 0
     baseCastStartTimeFraction: 0.3
     baseCastEndTimeFraction: 0.4
@@ -31,7 +31,7 @@ MonoBehaviour:
     hitboxName: PunchHitbox
     effectOriginName: PunchEffectOrigin
     damageCoefficient: 0.5
-    stunTime: 0.55
+    stunTime: 0.5
     knockbackCoefficient: 2
     preAttackMoveShift: 0.5
     preAttackMoveShiftDecay: 16
@@ -57,7 +57,7 @@ MonoBehaviour:
     hitboxName: PunchHitbox
     effectOriginName: PunchEffectOrigin
     damageCoefficient: 0.5
-    stunTime: 0.55
+    stunTime: 0.5
     knockbackCoefficient: 0
     preAttackMoveShift: 0.5
     preAttackMoveShiftDecay: 16
@@ -83,7 +83,7 @@ MonoBehaviour:
     hitboxName: PunchHitbox
     effectOriginName: PunchEffectOrigin
     damageCoefficient: 0.5
-    stunTime: 0.55
+    stunTime: 0.5
     knockbackCoefficient: 0
     preAttackMoveShift: 0.5
     preAttackMoveShiftDecay: 16
@@ -161,7 +161,7 @@ MonoBehaviour:
   block_duration: 0.6
   block_duration_blocking_fraction: 0.7
   Kick_params:
-    baseDuration: 1.2
+    baseDuration: 1.5
     baseExtraEndDelayFraction: 0
     baseCastStartTimeFraction: 0.32
     baseCastEndTimeFraction: 0.5

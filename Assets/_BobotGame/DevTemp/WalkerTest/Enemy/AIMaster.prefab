@@ -50,10 +50,11 @@ MonoBehaviour:
   bodyPrefab: {fileID: 6886800658204874175, guid: a5cb032c3d5a0fd4fb58e91dd3f3a4e5, type: 3}
   dontDestroyOnLoad: 0
   destroyOnBodyDeath: 0
-  reviveOnBodyDeath: 1
+  reviveOnBodyDeath: 0
   isPlayerControlled: 0
   spawnBodyOnStart: 1
   currentBody: {fileID: 0}
+  CachedTeamIndex: 0
   TEMPPlayerIndex: 0
 --- !u!114 &5638254006160183990
 MonoBehaviour:
@@ -78,7 +79,7 @@ MonoBehaviour:
   noTargetOverrideInterestPoint: {fileID: 0}
   teamTargetType: 2
   teamComponent: {fileID: 0}
-  searchDistance: 50
+  searchDistance: 30
   searchIntervalMin: 1
   searchIntervalMax: 2
   chaseTimeMinimunm: 0.5

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayName: dash
   baseCooldown: 1
-  baseStaminaCost: 20
+  baseStaminaCost: 40
   state:
     activeStateName: ActiveStates.Bobots.BasicDash
   stateMachineName: Body
