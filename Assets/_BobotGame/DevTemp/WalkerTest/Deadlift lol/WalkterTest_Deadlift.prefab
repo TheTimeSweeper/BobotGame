@@ -2664,11 +2664,11 @@ PrefabInstance:
     - target: {fileID: 127141495395204661, guid: a5cb032c3d5a0fd4fb58e91dd3f3a4e5, type: 3}
       propertyPath: skillSlots.Array.data[0].skillInfo
       value: 
-      objectReference: {fileID: 11400000, guid: 17170f3cc0656744b863516854523f04, type: 2}
+      objectReference: {fileID: 11400000, guid: 97790971175498048adb3679099a75d4, type: 2}
     - target: {fileID: 127141495395204661, guid: a5cb032c3d5a0fd4fb58e91dd3f3a4e5, type: 3}
       propertyPath: skillSlots.Array.data[2].skillInfo
       value: 
-      objectReference: {fileID: 11400000, guid: 97790971175498048adb3679099a75d4, type: 2}
+      objectReference: {fileID: 11400000, guid: 17170f3cc0656744b863516854523f04, type: 2}
     - target: {fileID: 127141495395204661, guid: a5cb032c3d5a0fd4fb58e91dd3f3a4e5, type: 3}
       propertyPath: skillSlots.Array.data[3].skillInfo
       value: 

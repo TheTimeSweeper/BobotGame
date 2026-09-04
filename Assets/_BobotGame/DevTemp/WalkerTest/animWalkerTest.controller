@@ -623,13 +623,13 @@ AnimatorState:
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
   m_Mirror: 0
-  m_SpeedParameterActive: 0
+  m_SpeedParameterActive: 1
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 2232432395663425169, guid: 3c2d78e6fa3b33c49b6ce175c2728449, type: 3}
   m_Tag: 
-  m_SpeedParameter: 
+  m_SpeedParameter: punch.playbackRate
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 

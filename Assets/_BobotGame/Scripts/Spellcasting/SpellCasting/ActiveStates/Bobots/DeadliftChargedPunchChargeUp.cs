@@ -82,7 +82,10 @@ namespace ActiveStates.Bobots
         public Type StateInfoType => typeof(BobotGameDevStateInfo);
         public BobotGameDevStateInfo StateInfo => AssignedStateInfo as BobotGameDevStateInfo;
 
-        protected override TimedStateParams stateParams => StateInfo.CPunch_ReleaseParams;
+        protected override TimedStateParams stateParams => finalTimedParams;
+        protected TimedStateParams finalTimedParams;
+        protected TimedStateParams timedParams1 => StateInfo.CPunch_ReleaseParams;
+        protected TimedStateParams timedParams2 => StateInfo.CPunch_ReleaseParamsMaxCharge;
         protected override BasicMeleeParams meleeParams => finalMeleeParams;
         protected BasicMeleeParams finalMeleeParams;
         protected BasicMeleeParams meleeParams1 => StateInfo.CPunch_meleeReleaseParams;
@@ -109,14 +112,6 @@ namespace ActiveStates.Bobots
             {
                 chargeAmount = StateInfo.CPunch_InstantPunchCharge;
             }
-            if (chargeAmount < 1)
-            {
-                stateParams.baseExtraEndDelayFraction = 0;
-            }
-            else
-            {
-                stateParams.baseExtraEndDelayFraction = 2;
-            }
             BlendMeleeParams();
 
             base.OnEnter();
@@ -125,19 +120,8 @@ namespace ActiveStates.Bobots
 
         private void BlendMeleeParams()
         {
-            finalMeleeParams = new BasicMeleeParams
-            {
-                hitboxName = chargeAmount < 1 ? meleeParams1.hitboxName : meleeParams2.hitboxName,
-                effectOriginName = chargeAmount < 1 ? meleeParams1.effectOriginName : meleeParams2.effectOriginName,
-                damageCoefficient = Mathf.Lerp(meleeParams1.damageCoefficient, meleeParams2.damageCoefficient, chargeAmount),
-                stunTime = Mathf.Lerp(meleeParams1.stunTime, meleeParams2.stunTime, chargeAmount),
-                knockbackCoefficient = Mathf.Lerp(meleeParams1.knockbackCoefficient, meleeParams2.knockbackCoefficient, chargeAmount),
-                preAttackMoveShift = Mathf.Lerp(meleeParams1.preAttackMoveShift, meleeParams2.preAttackMoveShift, chargeAmount),
-                preAttackMoveShiftDecay = Mathf.Lerp(meleeParams1.preAttackMoveShiftDecay, meleeParams2.preAttackMoveShiftDecay, chargeAmount),
-                attackMoveShift = Mathf.Lerp(meleeParams1.attackMoveShift, meleeParams2.attackMoveShift, chargeAmount),
-                attackMoveShiftDecay = Mathf.Lerp(meleeParams1.attackMoveShiftDecay, meleeParams2.attackMoveShiftDecay, chargeAmount),
-                staminaRecoveryOnHit = Mathf.Lerp(meleeParams1.staminaRecoveryOnHit, meleeParams2.staminaRecoveryOnHit, chargeAmount),
-            };
+            finalTimedParams = timedParams1.CloneBlend(timedParams2, chargeAmount);
+            finalMeleeParams = meleeParams1.CloneBlend(meleeParams2, chargeAmount);
         }
 
         protected override void ModifyOverlapAttack(OverlapAttack overlapAttack)

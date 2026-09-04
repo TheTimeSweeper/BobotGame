@@ -1,6 +1,7 @@
 using ActiveStates.Characters;
 using SpellCasting;
 using SpellCasting.Projectiles;
+using UnityEditor;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "SIBobotGameDev", menuName = "BobotGame/BobotGameStateInfo")]
@@ -33,12 +34,9 @@ public class BobotGameDevStateInfo : ActiveStateInfo
     [Space]
     public GenericTimedState.TimedStateParams CPunch_ReleaseParams = new GenericTimedState.TimedStateParams();
     public BasicMeleeAttack.BasicMeleeParams CPunch_meleeReleaseParams = new BasicMeleeAttack.BasicMeleeParams();
+    public GenericTimedState.TimedStateParams CPunch_ReleaseParamsMaxCharge = new GenericTimedState.TimedStateParams();
     public BasicMeleeAttack.BasicMeleeParams CPunch_meleeReleaseParamsMaxCharge = new BasicMeleeAttack.BasicMeleeParams();
     public float CPunch_InstantPunchCharge = 0.2f;
-    public float CPunch_damageMin;
-    public float CPunch_damageMax;
-    public float CPunch_knockbackMin;
-    public float CPunch_knockbackMax;
     [Header("Deadlift grapple")]
     public ProjectileController Grap_Prefab;
     public float Grap_Speed;

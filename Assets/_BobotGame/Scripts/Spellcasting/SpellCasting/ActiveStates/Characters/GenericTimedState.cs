@@ -7,7 +7,7 @@ namespace ActiveStates.Characters
     public abstract class GenericTimedState : BodyState
     {
         [System.Serializable]
-        public class TimedStateParams
+        public class TimedStateParams : IBlendable<TimedStateParams>, ICloneable<TimedStateParams>
         {
             /// <summary>
             /// total duration of the move
@@ -63,6 +63,51 @@ namespace ActiveStates.Characters
                 {
                     baseCastEndTimeFraction = overrideBaseCastEndTime.Value;
                 }
+            }
+
+            public TimedStateParams Blend(TimedStateParams other, float t)
+            {
+                baseDuration = Mathf.Lerp(baseDuration, other.baseDuration, t);
+                baseExtraEndDelayFraction = Mathf.Lerp(baseExtraEndDelayFraction, other.baseExtraEndDelayFraction, t);
+                baseCastStartTimeFraction = Mathf.Lerp(baseCastStartTimeFraction, other.baseCastStartTimeFraction, t);
+                baseCastEndTimeFraction = Mathf.Lerp(baseCastEndTimeFraction, other.baseCastEndTimeFraction, t);
+                baseOtherStateInterruptTimeFraction = Mathf.Lerp(baseOtherStateInterruptTimeFraction, other.baseOtherStateInterruptTimeFraction, t);
+                baseMovementInterruptTimeFraction = Mathf.Lerp(baseMovementInterruptTimeFraction, other.baseMovementInterruptTimeFraction, t);
+                baseInterruptPriority = t < 1 ? baseInterruptPriority : other.baseInterruptPriority;
+                otherInterruptableInterruptPriority = t < 1 ? otherInterruptableInterruptPriority : other.otherInterruptableInterruptPriority;
+                movementInterruptPriority = t < 1 ? movementInterruptPriority : other.movementInterruptPriority;
+                animationPlayTimeFraction = Mathf.Lerp(animationPlayTimeFraction, other.animationPlayTimeFraction, t);
+                animationLayerName = t < 1 ? animationLayerName : other.animationLayerName;
+                animationStateName = t < 1 ? animationStateName : other.animationStateName;
+                animationPlaybackRateParam = t < 1 ? animationPlaybackRateParam : other.animationPlaybackRateParam;
+                attackSpeedAffected = t < 1 ? attackSpeedAffected : other.attackSpeedAffected;
+                return this;
+            }
+
+            public TimedStateParams Clone()
+            {
+                return new TimedStateParams
+                {
+                    baseDuration = baseDuration,
+                    baseExtraEndDelayFraction = baseExtraEndDelayFraction,
+                    baseCastStartTimeFraction = baseCastStartTimeFraction,
+                    baseCastEndTimeFraction = baseCastEndTimeFraction,
+                    baseOtherStateInterruptTimeFraction = baseOtherStateInterruptTimeFraction,
+                    baseMovementInterruptTimeFraction = baseMovementInterruptTimeFraction,
+                    baseInterruptPriority = baseInterruptPriority,
+                    otherInterruptableInterruptPriority = otherInterruptableInterruptPriority,
+                    movementInterruptPriority = movementInterruptPriority,
+                    animationPlayTimeFraction = animationPlayTimeFraction,
+                    animationLayerName = animationLayerName,
+                    animationStateName = animationStateName,
+                    animationPlaybackRateParam = animationPlaybackRateParam,
+                    attackSpeedAffected = attackSpeedAffected
+                };
+            }
+
+            public TimedStateParams CloneBlend(TimedStateParams other, float t)
+            {
+                return Clone().Blend(other, t);
             }
         }
 

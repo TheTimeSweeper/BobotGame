@@ -10,7 +10,7 @@ namespace ActiveStates.Characters
     public abstract class BasicMeleeAttack : GenericTimedState
     {
         [System.Serializable]
-        public class BasicMeleeParams
+        public class BasicMeleeParams : IBlendable<BasicMeleeParams>, ICloneable<BasicMeleeParams>
         {
             public string hitboxName;
             public string effectOriginName = "";
@@ -25,6 +25,43 @@ namespace ActiveStates.Characters
 
             public BasicMeleeParams() : base()
             {
+            }
+
+            public BasicMeleeParams Blend(BasicMeleeParams other, float t)
+            {
+                hitboxName = t < 1 ? hitboxName : other.hitboxName;
+                effectOriginName = t < 1 ? effectOriginName : other.effectOriginName;
+                damageCoefficient = Mathf.Lerp(damageCoefficient, other.damageCoefficient, t);
+                stunTime = Mathf.Lerp(stunTime, other.stunTime, t);
+                knockbackCoefficient = Mathf.Lerp(knockbackCoefficient, other.knockbackCoefficient, t);
+                preAttackMoveShift = Mathf.Lerp(preAttackMoveShift, other.preAttackMoveShift, t);
+                preAttackMoveShiftDecay = Mathf.Lerp(preAttackMoveShiftDecay, other.preAttackMoveShiftDecay, t);
+                attackMoveShift = Mathf.Lerp(attackMoveShift, other.attackMoveShift, t);
+                attackMoveShiftDecay = Mathf.Lerp(attackMoveShiftDecay, other.attackMoveShiftDecay, t);
+                staminaRecoveryOnHit = Mathf.Lerp(staminaRecoveryOnHit, other.staminaRecoveryOnHit, t);
+                return this;
+            }
+
+            public BasicMeleeParams Clone()
+            {
+                return new BasicMeleeParams
+                {
+                    hitboxName = hitboxName,
+                    effectOriginName = effectOriginName,
+                    damageCoefficient = damageCoefficient,
+                    stunTime = stunTime,
+                    knockbackCoefficient = knockbackCoefficient,
+                    preAttackMoveShift = preAttackMoveShift,
+                    preAttackMoveShiftDecay = preAttackMoveShiftDecay,
+                    attackMoveShift = attackMoveShift,
+                    attackMoveShiftDecay = attackMoveShiftDecay,
+                    staminaRecoveryOnHit = staminaRecoveryOnHit,
+                };
+            }
+
+            public BasicMeleeParams CloneBlend(BasicMeleeParams other, float t)
+            {
+                return Clone().Blend(other, t);
             }
         }
 

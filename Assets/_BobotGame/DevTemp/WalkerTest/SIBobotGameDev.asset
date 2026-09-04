@@ -186,23 +186,23 @@ MonoBehaviour:
     attackMoveShift: 0
     attackMoveShiftDecay: 16
     staminaRecoveryOnHit: 10
-  CPunch_chargeTime: 1.5
+  CPunch_chargeTime: 11
   CPunch_holdGiveupTime: 100
   CPunch_ReleaseParams:
     baseDuration: 0.3
     baseExtraEndDelayFraction: 0
-    baseCastStartTimeFraction: 0
+    baseCastStartTimeFraction: 0.5
     baseCastEndTimeFraction: 1
     baseOtherStateInterruptTimeFraction: 1
     baseMovementInterruptTimeFraction: 1
     baseInterruptPriority: 2
     otherInterruptableInterruptPriority: 1
     movementInterruptPriority: 0
-    animationPlayTimeFraction: 0.3
+    animationPlayTimeFraction: 2.5
     animationLayerName: YayGesture
     animationStateName: ThrowPunch
     animationPlaybackRateParam: punch.playbackRate
-    attackSpeedAffected: 1
+    attackSpeedAffected: 0
   CPunch_meleeReleaseParams:
     hitboxName: KickHitbox
     effectOriginName: PunchEffectOrigin
@@ -214,6 +214,21 @@ MonoBehaviour:
     attackMoveShift: 1
     attackMoveShiftDecay: 16
     staminaRecoveryOnHit: 10
+  CPunch_ReleaseParamsMaxCharge:
+    baseDuration: 1
+    baseExtraEndDelayFraction: 0
+    baseCastStartTimeFraction: 0.34848484
+    baseCastEndTimeFraction: 0.57575756
+    baseOtherStateInterruptTimeFraction: 1
+    baseMovementInterruptTimeFraction: 1
+    baseInterruptPriority: 2
+    otherInterruptableInterruptPriority: 1
+    movementInterruptPriority: 0
+    animationPlayTimeFraction: 1
+    animationLayerName: Body
+    animationStateName: Kick
+    animationPlaybackRateParam: kick.playbackRate
+    attackSpeedAffected: 0
   CPunch_meleeReleaseParamsMaxCharge:
     hitboxName: KickHitbox
     effectOriginName: PunchEffectOrigin
@@ -225,10 +240,6 @@ MonoBehaviour:
     attackMoveShift: 2
     attackMoveShiftDecay: 16
     staminaRecoveryOnHit: 10
-  CPunch_InstantPunchCharge: 0
-  CPunch_damageMin: 0.2
-  CPunch_damageMax: 1.5
-  CPunch_knockbackMin: 150
-  CPunch_knockbackMax: 300
+  CPunch_InstantPunchCharge: 1
   Grap_Prefab: {fileID: 7053902361285992279, guid: a76134462c4a57f49801cd3795749171, type: 3}
   Grap_Speed: 10

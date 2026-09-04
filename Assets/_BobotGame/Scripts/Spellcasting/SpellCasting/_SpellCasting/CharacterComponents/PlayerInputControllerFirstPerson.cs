@@ -89,8 +89,8 @@ namespace SpellCasting
             inputBank.Primary.UpdateInput(Input.GetMouseButton(0));
             inputBank.Block.UpdateInput(Input.GetMouseButton(1));
             inputBank.Dash.UpdateInput(Input.GetKey(KeyCode.Space));
-            inputBank.Crouch.UpdateInput(Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.V));
-            inputBank.Ability.UpdateInput(Input.GetKey(KeyCode.LeftShift));
+            inputBank.Crouch.UpdateInput(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.V));
+            inputBank.Ability.UpdateInput(Input.GetKey(KeyCode.F));
             inputBank.E.UpdateInput(Input.GetKey(KeyCode.E));
         }
 
