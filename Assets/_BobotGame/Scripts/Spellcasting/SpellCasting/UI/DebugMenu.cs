@@ -18,6 +18,9 @@ namespace SpellCasting.UI
         private Toggle jangoToggle;
 
         [SerializeField]
+        private Transform buttonParent;
+
+        [SerializeField]
         private Slider timeScaleSlider;
         [SerializeField]
         private TMP_Text timeScaleText;
@@ -66,7 +69,7 @@ namespace SpellCasting.UI
 
         private void AddFunnyButton(string text, UnityAction onClick)
         {
-            Button NewButton = Instantiate(jango, jango.transform.parent);
+            Button NewButton = Instantiate(jango, buttonParent);
             NewButton.gameObject.SetActive(true);
             NewButton.GetComponentInChildren<TMP_Text>().text = text;
             NewButton.onClick.AddListener(onClick);

@@ -33,7 +33,7 @@ public class VariableStatDrawer : DoubleFloatPropertyDrawer
         //get our value
         VariableNumberStat numberStat = (VariableNumberStat)property.boxedValue;
 
-        return numberStat.UpdateValueWithModifiers();
+        return numberStat.DebugGetModifiedValue();
     }
 
     public override float DrawFirstRect(Rect contentPosition, SerializedProperty property)
@@ -43,11 +43,16 @@ public class VariableStatDrawer : DoubleFloatPropertyDrawer
         //get our value
         VariableNumberStat numberStat = (VariableNumberStat)property.boxedValue;
 
+        //we have changed the value in editor
         if (drawnValue != numberStat.DebugGetBaseValue())
         {
+            //set the base value
             numberStat.DebugOverrideBaseValue(drawnValue);
+            numberStat.DebugSetDirty();
+            numberStat.DebugOverrideModifiedValue(numberStat.UpdateValueWithModifiers());
+
+            property.boxedValue = numberStat;
         }
-        property.boxedValue = numberStat;
 
         return drawnValue;
     }

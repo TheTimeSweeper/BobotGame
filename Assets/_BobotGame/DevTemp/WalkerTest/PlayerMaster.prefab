@@ -53,7 +53,9 @@ MonoBehaviour:
   destroyOnBodyDeath: 0
   reviveOnBodyDeath: 1
   isPlayerControlled: 1
+  spawnBodyOnStart: 0
   currentBody: {fileID: 0}
+  CachedTeamIndex: 0
   TEMPPlayerIndex: 1
 --- !u!114 &6354766419621191687
 MonoBehaviour:
@@ -93,6 +95,7 @@ MonoBehaviour:
   deltaEnds: []
   deltaStarts: []
   cameraController: {fileID: 6354766419621191687}
+  GamePad: 0
 --- !u!114 &2710260517407462347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,7 +135,7 @@ Transform:
   m_GameObject: {fileID: 6476769741860390581}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.98, z: 0}
+  m_LocalPosition: {x: 0, y: 1.98, z: -3.44}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -167,7 +170,7 @@ Transform:
   m_GameObject: {fileID: 7014772740783829779}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.45, z: -12.52}
+  m_LocalPosition: {x: 0, y: -0.45, z: -9.08}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

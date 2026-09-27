@@ -26,19 +26,6 @@ namespace ActiveStates.Bobots
         //    animator.SetFloat("kick.playbackRate", StateInfo.Kick_AnimationSpeed * stateParams.baseCastEndTimeFraction);
         //}
 
-        public override InterruptPriority GetMinimumInterruptPriority()
-        {
-            if (fixedAge >= movementInterruptTime)
-            {
-                return InterruptPriority.MOVEMENT;
-            }
-            if (fixedAge >= otherStateInterruptTime)
-            {
-                return InterruptPriority.STATE_LOW;
-            }
-            return InterruptPriority.STATE_MED;
-        }
-
         protected override void OnCastEnter()
         {
             base.OnCastEnter();

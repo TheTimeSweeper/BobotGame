@@ -3,52 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace SpellCasting
 {
-    public abstract class VariableStatModifier<T>
-    {
-        public T Value;
-        public string ID;
-        public float priority;
-
-        public VariableStatModifier(T value, string iD, float priority)
-        {
-            Value = value;
-            ID = iD;
-            this.priority = priority;
-        }
-
-        public abstract void ModifyStat(ref T originalValue);
-    }
-
-    public class AddStatModifier : VariableStatModifier<float>
-    {
-        public AddStatModifier(float value, string iD, float priority) : base(value, iD, priority) { }
-
-        public override void ModifyStat(ref float originalValue)
-        {
-            originalValue += Value;
-        }
-    }
-
-    public class MultiplyStatModifier : VariableStatModifier<float>
-    {
-        public MultiplyStatModifier(float value, string iD, float priority) : base(value, iD, priority) { }
-
-        public override void ModifyStat(ref float originalValue)
-        {
-            originalValue *= Value;
-        }
-    }
-
-    public class OverrideStatModifier : VariableStatModifier<float>
-    {
-        public OverrideStatModifier(float value, string iD, float priority) : base(value, iD, priority) { }
-
-        public override void ModifyStat(ref float originalValue)
-        {
-            originalValue = Value;
-        }
-    }
-
     [System.Serializable]
     public class VariableNumberStat : VariableStat<float>
     {
@@ -127,6 +81,7 @@ namespace SpellCasting
             UpdateValueWithModifiers();
         }
 
+        [SerializeField, HideInInspector]
         protected bool dirty = true;
 
         [SerializeField]
@@ -162,7 +117,7 @@ namespace SpellCasting
             T modifiedValue = _baseValue;
             for (int i = 0; i < Modifiers.Count; i++)
             {
-                Modifiers[i].ModifyStat(ref modifiedValue);
+                Modifiers[i].ModifyStat(ref modifiedValue, _baseValue);
             }
             return modifiedValue;
         }
@@ -196,9 +151,25 @@ namespace SpellCasting
             _baseValue = value;
             dirty = true;
         }
+
+        public void DebugOverrideModifiedValue(T value)
+        {
+            _lastModifiedValue = value;
+        }
+
         public T DebugGetBaseValue()
         {
             return _baseValue;
+        }
+
+        public T DebugGetModifiedValue()
+        {
+            return _lastModifiedValue;
+        }
+
+        public void DebugSetDirty()
+        {
+            dirty = true;
         }
 
         public virtual void ApplyAddModifier(T value, string id, float priority = BASE_ADD_PRIORITY)
@@ -225,6 +196,62 @@ namespace SpellCasting
                     return;
                 }
             }
+        }
+    }
+    public abstract class VariableStatModifier<T>
+    {
+        public T Value;
+        public string ID;
+        public float priority;
+
+        public VariableStatModifier(T value, string iD, float priority)
+        {
+            Value = value;
+            ID = iD;
+            this.priority = priority;
+        }
+
+        public abstract void ModifyStat(ref T passedInValue, T baseValue);
+    }
+
+    public class AddStatModifier : VariableStatModifier<float>
+    {
+        public AddStatModifier(float value, string iD, float priority) : base(value, iD, priority) { }
+
+        public override void ModifyStat(ref float passedInValue, float baseValue)
+        {
+            passedInValue += Value;
+        }
+    }
+
+    public class MultiplyStatModifier : VariableStatModifier<float>
+    {
+        public MultiplyStatModifier(float value, string iD, float priority) : base(value, iD, priority) { }
+
+        public override void ModifyStat(ref float passedInValue, float baseValue)
+        {
+            passedInValue *= Value;
+        }
+    }
+
+    public class MultiplyStatNonStackingModifier : VariableStatModifier<float>
+    {
+        public MultiplyStatNonStackingModifier(float value, string iD, float priority) : base(value, iD, priority) { }
+
+        public override void ModifyStat(ref float passedInValue, float baseValue)
+        {
+            passedInValue += ((baseValue * Value) - baseValue);
+        }
+    }
+
+
+    public class OverrideStatModifier : VariableStatModifier<float>
+    {
+        public OverrideStatModifier(float value, string iD, float priority) : base(value, iD, priority) { }
+
+        public override void ModifyStat(ref float passedInValue, float baseValue)
+        {
+            passedInValue = Value;
         }
     }
 }

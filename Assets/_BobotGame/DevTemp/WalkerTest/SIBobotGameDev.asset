@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: siBobotGameDev
   m_EditorClassIdentifier: 
   BPC_HitParams:
-    baseDuration: 1.4
+    baseDuration: 1.2
     baseExtraEndDelayFraction: 0
     baseCastStartTimeFraction: 0.3
     baseCastEndTimeFraction: 0.4
@@ -28,13 +28,13 @@ MonoBehaviour:
     animationPlaybackRateParam: punch.playbackRate
     attackSpeedAffected: 1
   BPC_MeleeParams1:
-    hitboxName: PunchHitbox
+    hitboxName: KickHitbox
     effectOriginName: PunchEffectOrigin
     damageCoefficient: 0.5
-    stunTime: 0.5
+    stunTime: 0.6
     knockbackCoefficient: 2
-    preAttackMoveShift: 0.5
-    preAttackMoveShiftDecay: 16
+    preAttackMoveShift: 1.5
+    preAttackMoveShiftDecay: 7
     attackMoveShift: 0
     attackMoveShiftDecay: 16
     staminaRecoveryOnHit: 10
@@ -54,12 +54,12 @@ MonoBehaviour:
     animationPlaybackRateParam: punch.playbackRate
     attackSpeedAffected: 1
   BPC_MeleeParams2:
-    hitboxName: PunchHitbox
+    hitboxName: KickHitbox
     effectOriginName: PunchEffectOrigin
     damageCoefficient: 0.5
-    stunTime: 0.5
+    stunTime: 0.4
     knockbackCoefficient: 0
-    preAttackMoveShift: 0.5
+    preAttackMoveShift: 1
     preAttackMoveShiftDecay: 16
     attackMoveShift: 0
     attackMoveShiftDecay: 16
@@ -80,27 +80,27 @@ MonoBehaviour:
     animationPlaybackRateParam: punch.playbackRate
     attackSpeedAffected: 1
   BPC_MeleeParams3:
-    hitboxName: PunchHitbox
+    hitboxName: KickHitbox
     effectOriginName: PunchEffectOrigin
     damageCoefficient: 0.5
-    stunTime: 0.5
+    stunTime: 0.4
     knockbackCoefficient: 0
-    preAttackMoveShift: 0.5
+    preAttackMoveShift: 1
     preAttackMoveShiftDecay: 16
     attackMoveShift: 0
     attackMoveShiftDecay: 16
     staminaRecoveryOnHit: 10
   DASH_params:
-    baseDuration: 0.5
+    baseDuration: 0.8
     baseExtraEndDelayFraction: 0
-    baseCastStartTimeFraction: 0
+    baseCastStartTimeFraction: 0.1
     baseCastEndTimeFraction: 0.6
-    baseOtherStateInterruptTimeFraction: 0.6
-    baseMovementInterruptTimeFraction: 0.6
+    baseOtherStateInterruptTimeFraction: 0.3
+    baseMovementInterruptTimeFraction: 0.9
     baseInterruptPriority: 4
     otherInterruptableInterruptPriority: 1
     movementInterruptPriority: 0
-    animationPlayTimeFraction: 0.6
+    animationPlayTimeFraction: 2
     animationLayerName: Body
     animationStateName: Dash
     animationPlaybackRateParam: dash.playbackRate
@@ -138,7 +138,7 @@ MonoBehaviour:
       outWeight: 0.24694622
     - serializedVersion: 3
       time: 0.8232393
-      value: 0.118584245
+      value: 0.13600978
       inSlope: -1.0552053
       outSlope: -1.0552053
       tangentMode: 0
@@ -147,7 +147,7 @@ MonoBehaviour:
       outWeight: 0.25530457
     - serializedVersion: 3
       time: 1
-      value: 0.03327942
+      value: 0.08555603
       inSlope: -0.0103783365
       outSlope: -0.0103783365
       tangentMode: 0
@@ -181,8 +181,8 @@ MonoBehaviour:
     damageCoefficient: 1
     stunTime: 0.5
     knockbackCoefficient: 100
-    preAttackMoveShift: 3
-    preAttackMoveShiftDecay: 16
+    preAttackMoveShift: 4
+    preAttackMoveShiftDecay: 10
     attackMoveShift: 0
     attackMoveShiftDecay: 16
     staminaRecoveryOnHit: 10
@@ -232,7 +232,7 @@ MonoBehaviour:
   CPunch_meleeReleaseParamsMaxCharge:
     hitboxName: KickHitbox
     effectOriginName: PunchEffectOrigin
-    damageCoefficient: 1.5
+    damageCoefficient: 2
     stunTime: 1
     knockbackCoefficient: 300
     preAttackMoveShift: 0

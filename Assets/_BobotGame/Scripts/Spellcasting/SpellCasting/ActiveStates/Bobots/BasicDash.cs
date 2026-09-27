@@ -34,7 +34,7 @@ namespace ActiveStates.Bobots
         {
             base.OnCastFixedUpdate();
 
-            fixedMotorDriver.OverrideVelocity = direction * curve.Evaluate(fixedAge / stateParams.baseCastEndTimeFraction) * StateInfo.Dash_DashSpeed;
+            fixedMotorDriver.OverrideVelocity = direction * curve.Evaluate((fixedAge - castStartTime) / stateParams.baseCastEndTimeFraction) * StateInfo.Dash_DashSpeed;
         }
 
         //public override InterruptPriority GetMinimumInterruptPriority()

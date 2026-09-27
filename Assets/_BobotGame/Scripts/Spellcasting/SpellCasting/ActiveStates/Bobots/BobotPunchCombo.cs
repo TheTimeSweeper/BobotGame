@@ -35,6 +35,17 @@ namespace ActiveStates.Bobots
             PlayTimedAnimation();
             //animator.Play(CurrentComboHit < 1 ? "Punch" : "Punch2", 0, 0);
             //animator.SetFloat("punch.playbackRate", StateInfo.BPC_AnimationSpeed / castEndTime);
+
+
+            if (base.fixedMotorDriver.FinalVelocity.magnitude > 10)
+            {
+                _preAttackShift += fixedMotorDriver.FinalVelocity;
+            }
+        }
+
+        protected override void OnCastEnter()
+        {
+            base.OnCastEnter();
         }
 
         protected override void OnCastUpdate()
@@ -48,19 +59,6 @@ namespace ActiveStates.Bobots
         protected override void OnCastExit()
         {
             base.OnCastExit();
-        }
-
-        public override InterruptPriority GetMinimumInterruptPriority()
-        {
-            if (fixedAge >= movementInterruptTime)
-            {
-                return InterruptPriority.MOVEMENT;
-            }
-            if (fixedAge >= otherStateInterruptTime)
-            {
-                return InterruptPriority.STATE_ANY;
-            }
-            return InterruptPriority.STATE_LOW;
         }
     }
 }

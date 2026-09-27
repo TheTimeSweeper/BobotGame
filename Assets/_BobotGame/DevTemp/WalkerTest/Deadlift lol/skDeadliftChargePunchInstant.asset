@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayName: deadliftpunch2
   baseCooldown: -0.03
-  baseStaminaCost: 50
+  baseStaminaCost: 60
   state:
     activeStateName: ActiveStates.Bobots.DeadliftChargedPunchRelease
   stateMachineName: Body

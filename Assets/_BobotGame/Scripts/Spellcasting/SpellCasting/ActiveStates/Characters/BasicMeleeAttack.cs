@@ -69,12 +69,12 @@ namespace ActiveStates.Characters
 
         protected OverlapAttack overlapAttack;
 
-        private Vector3 _preAttackShift;
-        private Vector3 _attackShift;
+        protected Vector3 _preAttackShift;
+        protected Vector3 _attackShift;
 
         public Vector3 aimDirection;
 
-        private Vector3 _startDirection;
+        protected Vector3 _startDirection;
         public override void OnEnter()
         {
             base.OnEnter();

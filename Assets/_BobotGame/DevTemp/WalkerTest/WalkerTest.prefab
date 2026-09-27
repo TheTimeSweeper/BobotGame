@@ -101,7 +101,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 4.41, z: -0.73}
-  m_LocalScale: {x: 0.55806, y: 0.55806, z: 0.55806}
+  m_LocalScale: {x: -0.55806, y: 0.55806, z: 0.55806}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6774297231763159826}
@@ -323,7 +323,7 @@ GameObject:
   - component: {fileID: 7381378172359350487}
   - component: {fileID: 931943619037393915}
   m_Layer: 12
-  m_Name: WalkterTest
+  m_Name: WalkerTest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -435,42 +435,55 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats:
     MaxHealth:
+      dirty: 1
       _baseValue: 100
       _lastModifiedValue: 100
     HealthRegenPercent:
+      dirty: 1
       _baseValue: 0
       _lastModifiedValue: 0
     Damage:
+      dirty: 1
       _baseValue: 40
       _lastModifiedValue: 40
     AttackSpeed:
+      dirty: 1
       _baseValue: 1
       _lastModifiedValue: 1
     StunFactor:
+      dirty: 1
       _baseValue: 1
       _lastModifiedValue: 1
     KnockbackFactor:
+      dirty: 1
       _baseValue: 1
       _lastModifiedValue: 1
     MaxStamina:
+      dirty: 1
       _baseValue: 100
       _lastModifiedValue: 100
     StaminaRegen:
-      _baseValue: 20
+      dirty: 1
+      _baseValue: 5
       _lastModifiedValue: 50
     StaminaCostCoeff:
+      dirty: 1
       _baseValue: 1
       _lastModifiedValue: 0
     CooldownSpeed:
+      dirty: 1
       _baseValue: 1
       _lastModifiedValue: 1
     CastRange:
+      dirty: 0
       _baseValue: 20
       _lastModifiedValue: 20
     MoveSpeed:
+      dirty: 1
       _baseValue: 15
       _lastModifiedValue: 15
     JumpHeight:
+      dirty: 0
       _baseValue: 0
       _lastModifiedValue: 0
   commonComponents: {fileID: 586541723876753461}
@@ -559,7 +572,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   engine: {fileID: 931943619037393915}
   controlledAcceleration: 30
-  idleInertia: 100
+  idleDeceleration: 100
+  physicsDeceleration: 2
 --- !u!114 &127141495395204661
 MonoBehaviour:
   m_ObjectHideFlags: 0

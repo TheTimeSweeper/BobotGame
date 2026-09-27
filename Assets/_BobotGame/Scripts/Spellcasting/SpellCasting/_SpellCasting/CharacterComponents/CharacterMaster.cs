@@ -78,7 +78,7 @@ namespace SpellCasting
 
         private void SpawnBody()
         {
-            currentBody = Instantiate(bodyPrefab, transform.position, transform.rotation);
+            currentBody = Instantiate(bodyPrefab, transform.position- transform.forward * 10, transform.rotation);
             currentBody.CommonComponents.TeamComponent.TeamIndex = CachedTeamIndex;
         }
 

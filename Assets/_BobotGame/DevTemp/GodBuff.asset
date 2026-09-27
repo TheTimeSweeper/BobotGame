@@ -12,46 +12,59 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b073dcf703446694491b27c3a60469e8, type: 3}
   m_Name: GodBuff
   m_EditorClassIdentifier: 
-  buffID: 
+  buffID: GodMode
   pooledEffect: {fileID: 0}
   icon: {fileID: 0}
   statsToChange:
     MaxHealth:
+      dirty: 0
       _baseValue: 1111
       _lastModifiedValue: 1111
     HealthRegenPercent:
-      _baseValue: 0
-      _lastModifiedValue: 0
+      dirty: 0
+      _baseValue: 1111
+      _lastModifiedValue: 1111
     Damage:
+      dirty: 0
       _baseValue: 0
       _lastModifiedValue: 0
     AttackSpeed:
+      dirty: 1
       _baseValue: 0
       _lastModifiedValue: 0
     StunFactor:
+      dirty: 1
       _baseValue: 0
       _lastModifiedValue: 0
     KnockbackFactor:
+      dirty: 1
       _baseValue: 0
       _lastModifiedValue: 0
     MaxStamina:
-      _baseValue: 0
+      dirty: 1
+      _baseValue: 1111
       _lastModifiedValue: 0
     StaminaRegen:
+      dirty: 0
       _baseValue: 1111
       _lastModifiedValue: 1111
     StaminaCostCoeff:
+      dirty: 1
       _baseValue: 0
       _lastModifiedValue: 0
     CooldownSpeed:
-      _baseValue: 0
+      dirty: 1
+      _baseValue: 1
       _lastModifiedValue: 0
     CastRange:
+      dirty: 0
       _baseValue: 0
       _lastModifiedValue: 0
     MoveSpeed:
+      dirty: 1
       _baseValue: 0
       _lastModifiedValue: 0
     JumpHeight:
+      dirty: 0
       _baseValue: 0
       _lastModifiedValue: 0

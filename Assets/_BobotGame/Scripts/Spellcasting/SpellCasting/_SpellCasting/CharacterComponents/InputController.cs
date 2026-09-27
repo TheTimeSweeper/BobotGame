@@ -14,7 +14,7 @@ namespace SpellCasting
         protected InputBank inputBank;
         [SerializeField]
         protected Transform bodyAimOriginPosition;
-        [SerializeField]
+        [SerializeField, Tooltip("Defaults to model transform")]
         protected Transform forwardDirectionTransform;
 
         public Transform forwardDirectionReferenceTransform => forwardDirectionTransform ? forwardDirectionTransform : transform;

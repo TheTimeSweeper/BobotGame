@@ -10,10 +10,13 @@ namespace SpellCasting
         public MotorEngine engine;
 
         [SerializeField]
-        private float controlledAcceleration= 100;
+        private float controlledAcceleration = 30;
 
         [SerializeField]
-        private float idleInertia = 10;
+        private float idleDeceleration = 100;
+
+        [SerializeField]
+        private float physicsDeceleration = 10;
 
         //[Header("Knockback")]
         //[SerializeField]
@@ -29,28 +32,17 @@ namespace SpellCasting
                 DesiredSpeed = value.magnitude;
             }
         }
-        
-        public Vector3 desiredVelocity
-        {
-            get => DesiredDirection* DesiredSpeed;
-            set
-            {
-                {
-                    DesiredDirection = value.normalized;
-                    DesiredSpeed = value.magnitude;
-                }
-            }
-        }
         public Vector3 DesiredDirection { get; set; }
         public float DesiredSpeed { get; set; }
         public Vector3 AddedMotion { get; set; }
         public Vector3 AddedMotion2 { get; set; }
-        public Vector3? OverrideVelocity { get; set; }
+        public Vector3? OverrideVelocity { get; set; }//todo bobot move this to MotorEngine?
+        public Vector3 AppliedVelocity { get; set; }//todo bobot move this to MotorEngine?
         public Vector3 FinalVelocity { get; protected set; }
 
         private Vector3 _deltaPosition;
-        private Vector3 _currentVelocity;
-        private Vector3 _desiredVelocity;
+        private Vector3 _currentControlledVelocity;
+        private Vector3 _currentPhysicsVelocity;
 
         private Vector3 _lastPosition;
 
@@ -95,37 +87,48 @@ namespace SpellCasting
         void FixedUpdate()
         {
             _deltaPosition = transform.position - _lastPosition;
-            if (DesiredDirection.sqrMagnitude > 1) DesiredDirection = DesiredDirection.normalized;
-            _desiredVelocity = DesiredDirection * DesiredSpeed;
-            float lerpValue = DesiredDirection == Vector3.zero ? idleInertia : controlledAcceleration;
-            _currentVelocity = Util.ExpDecayLerp(_currentVelocity, _desiredVelocity, lerpValue, Time.fixedDeltaTime);
 
+
+            //oh no I'm doing exactly what ror2 is doing
             //jam faster deceleration value for fuckin uhh stopping and moving opposite direction
+            float lerpValue = DesiredDirection == Vector3.zero ? idleDeceleration : controlledAcceleration;
+            //oh no I'm gonna need ror2's acceleration adjustment as well.
+            _currentControlledVelocity = Util.ExpDecayLerp(_currentControlledVelocity, DesiredVelocity, lerpValue, Time.fixedDeltaTime);
 
-            Vector3 movement = _currentVelocity;
+
+            _currentPhysicsVelocity = Util.ExpDecayLerp(_currentPhysicsVelocity, Vector3.zero, physicsDeceleration, Time.fixedDeltaTime);
+
+            if (AppliedVelocity != Vector3.zero)
+            {
+                _currentPhysicsVelocity += AppliedVelocity;
+                AppliedVelocity = Vector3.zero;
+            }
+
+            //todo bobot: completely separate is a bit silly on the list it goes
+            Vector3 resultingMovement = _currentControlledVelocity + _currentPhysicsVelocity;
 
             if (OverrideVelocity.HasValue)
             {
-                movement = OverrideVelocity.Value;
+                resultingMovement = OverrideVelocity.Value;
                 OverrideVelocity = null;
             }
 
             if (AddedMotion != Vector3.zero)
             {
-                movement += AddedMotion;
+                resultingMovement += AddedMotion;
                 AddedMotion = Vector3.zero;
             }
 
             //jam list of additions?
             if (AddedMotion2 != Vector3.zero)
             {
-                movement += AddedMotion2;
+                resultingMovement += AddedMotion2;
                 AddedMotion2 = Vector3.zero;
             }
 
-            FinalVelocity = movement;
+            FinalVelocity = resultingMovement;
 
-            engine.FixedMove(movement);
+            engine.FixedMove(resultingMovement);
 
             _lastPosition = transform.position;
         }

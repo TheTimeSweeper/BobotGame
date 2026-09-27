@@ -41,7 +41,7 @@ namespace SpellCasting
 
             if (statsToChange.HealthRegenPercent > 0)
             {
-                body.stats.HealthRegenPercent.ApplyMultiplyModifier(statsToChange.HealthRegenPercent, buffID);
+                body.stats.HealthRegenPercent.ApplyAddModifier(statsToChange.HealthRegenPercent, buffID);
             }
             //todo the rest above
             TryUpdateStat(statsToChange.StaminaRegen, body.stats.StaminaRegen);

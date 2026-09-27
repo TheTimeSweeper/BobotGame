@@ -68,17 +68,17 @@ namespace SpellCasting
 
         private void FixedUpdate()
         {
-            if (_knockbackTime > 0)
-            {
-                _knockbackTime -= Time.deltaTime;
-                //todo bobot a separate kind of knockback that overrides main velocity rather than this, which is nice for littler knockback
-                commonComponents.FixedMotorDriver.AddedMotion2 = _knockback;
-                _knockback = Util.ExpDecayLerp(_knockback, Vector3.zero, 6, Time.deltaTime);
-            }
-            else
-            {
-                _knockback = Vector3.zero;
-            }
+            //if (_knockbackTime > 0)
+            //{
+            //    _knockbackTime -= Time.deltaTime;
+            //    //todo bobot a separate kind of knockback that overrides main velocity rather than this, which is nice for littler knockback
+            //    commonComponents.FixedMotorDriver.AddedMotion2 = _knockback;
+            //    _knockback = Util.ExpDecayLerp(_knockback, Vector3.zero, 6, Time.deltaTime);
+            //}
+            //else
+            //{
+            //    _knockback = Vector3.zero;
+            //}
             _lastStunTimer = _currentStunTimer;
             _currentStunTimer = Mathf.Max(0, _currentStunTimer - Time.deltaTime);
             if(_currentStunTimer > 0)
@@ -107,19 +107,21 @@ namespace SpellCasting
                 return;
             }
 
-            float stunAdded = AddNewStunValue(damagedInfo.DamagingInfo.StunTime * bodyStunFactor);
+            float stunAdded = AddNewStunValueToTimer(damagedInfo.DamagingInfo.StunTime * bodyStunFactor);
 
-            if(_lastStunTimer <= 0 && _currentStunTimer > 0)
-            {
+            //if(_lastStunTimer <= 0 && _currentStunTimer > 0)
+            //{
                 SetHitstunState(damagedInfo, _currentStunTimer, true);
-            }
+            //}
 
             //todo bobot fix magic number for knockback time
             _knockbackTime = stunAdded * knockbackFactor;
-            _knockback += damagedInfo.DamagingInfo.Knockback * knockbackFactor;
+            //_knockback += damagedInfo.DamagingInfo.Knockback * knockbackFactor;
+            commonComponents.FixedMotorDriver.AppliedVelocity += damagedInfo.DamagingInfo.Knockback * knockbackFactor;
+
         }
 
-        private float AddNewStunValue(float stunValueToAdd)
+        private float AddNewStunValueToTimer(float stunValueToAdd)
         {
             float currentStunResistance = stunResistanceCurve.Evaluate(_currentStunResistance / stunResistanceMaxTime);
             float finalStunToAdd = (1 - currentStunResistance) * stunValueToAdd;
