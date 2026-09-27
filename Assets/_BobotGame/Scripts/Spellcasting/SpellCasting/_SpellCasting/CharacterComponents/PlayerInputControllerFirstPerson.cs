@@ -10,36 +10,16 @@ namespace SpellCasting
         [SerializeField]
         protected bool GamePad;
 
-        private Quaternion lastCamRotation;
-        private Vector3 lastCamPosition;
-
-        private Vector3 lastAimPosition;
-
         protected override Vector3 GetAimPosition()
         {
             //todo bobot lol
             cameraController.CameraX.Rotate(Vector3.up, GetXAimAxis(), Space.Self);
             cameraController.CameraY.Rotate(Vector3.right, GetYAimAxis(), Space.Self);
-            if (cameraController.CameraPoint.position == lastCamPosition && cameraController.CameraPoint.rotation == lastCamRotation)
-            {
-                return lastAimPosition;
-            }
-            if (!Util.DebugKeyG)
-            {
-                lastCamPosition = cameraController.CameraPoint.position;
-                lastCamRotation = cameraController.CameraPoint.rotation;
-            }
             if (Physics.Raycast(cameraController.CameraPoint.position, cameraController.CameraPoint.forward, out var raycastHit, maxInputRange, LayerInfo.Hurtbox.layerMask.value))
             {
-                if (Util.DebugKeyG)
-                {
-                    Debug.DrawLine(cameraController.CameraPoint.position, raycastHit.point);
-                }
-                lastAimPosition = raycastHit.point;
                 return raycastHit.point;
             }
             Vector3 defaultPoint = cameraController.CameraPoint.position + (cameraController.CameraPoint.forward * maxInputRange);
-            lastAimPosition = defaultPoint;
             return defaultPoint;
         }
 
@@ -65,11 +45,6 @@ namespace SpellCasting
             {
                 return Input.GetAxis("RightStickX");
             }
-        }
-
-        protected override Vector3 GetGesturePosition()
-        {
-            return Vector3.zero;
         }
 
         protected override void SetbuttonInputs()

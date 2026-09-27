@@ -29,13 +29,5 @@ namespace SpellCasting
         {
             return new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         }
-
-        protected override Vector3 GetGesturePosition()
-        {
-            Vector3 mousePosition = Input.mousePosition;
-            mousePosition.x /= Screen.width;
-            mousePosition.y /= Screen.height;
-            return mousePosition * 100;
-        }
     }
 }

@@ -28,28 +28,11 @@ namespace SpellCasting
         private Vector3 _lastUnrestrictedAimPosition;
         private Vector3 _currentAimPositionDelta;
 
-        private Vector3 _currentGesturePosition;
-        private Vector3 _lastGesturePosition;
-        private Vector3 _gestureDelta;
-
-
-        [SerializeField]
-        private bool debug;
-
-        private Vector3 _debugLastMousePosition;
-
-        public List<Vector3> deltaEnds = new List<Vector3>();
-        public List<Vector3> deltaStarts = new List<Vector3>();
-
-        private int debugstep;
 
         protected virtual void Awake()
         {
             _currentAimPosition = GetAimPosition();
             _lastAimPosition = _currentAimPosition;
-
-            _currentGesturePosition = GetGesturePosition();
-            _lastGesturePosition = _currentGesturePosition;
 
             if (optionalMaster)
             {
@@ -103,14 +86,10 @@ namespace SpellCasting
             if (inputBank != null)
             {
                 UpdateAimPoint();
-                UpdateGesturePosition();
-                GetGestureDelta();
                 //todo bobot figure out aimorigin i'm too tired and just want to raycast
                 inputBank.AimOrigin = bodyAimOriginPosition;
                 inputBank.AimPoint = _currentAimPosition;
                 inputBank.AimDelta = GetAimDelta();
-                inputBank.GestureDelta = _gestureDelta;
-                inputBank.GesturePosition = _currentGesturePosition;
                 //UpdateDebug();
 
                 SetbuttonInputs();
@@ -123,20 +102,6 @@ namespace SpellCasting
         protected virtual Vector3 GetAimDelta()
         {
             return _currentAimPositionDelta;
-        }
-
-        protected virtual Vector3 GetGestureDelta()
-        {
-            return (_currentGesturePosition - _lastGesturePosition);
-        }
-
-        private void UpdateGesturePosition()
-        {
-            Vector3 mousePosition = GetGesturePosition();
-            _currentGesturePosition = mousePosition;
-
-            _gestureDelta = GetGestureDelta();
-            _lastGesturePosition = _currentGesturePosition;
         }
 
         private void UpdateAimPoint()
@@ -165,43 +130,8 @@ namespace SpellCasting
         }
 
         protected abstract void SetbuttonInputs();
-        protected abstract Vector3 GetGesturePosition();
         protected abstract Vector3 GetAimPosition();
         protected abstract Vector3 GetMovementInput();
 
-
-        private void UpdateDebug()
-        {
-            if (Input.GetKeyDown(KeyCode.V))
-            {
-                debugstep++;
-            }
-            if (debugstep < deltaStarts.Count && debugstep > 0)
-            {
-                Debug.DrawLine(Vector3.zero, deltaEnds[debugstep], Color.red);
-                Debug.DrawLine(deltaStarts[debugstep], deltaEnds[debugstep], Color.red);
-            }
-
-            for (int i = 0; i < deltaStarts.Count; i++)
-            {
-                Debug.DrawLine(deltaEnds[i] - Vector3.up, deltaEnds[i], new Color(1, 1, 1, 0.3f));
-                Debug.DrawLine(deltaStarts[i], deltaEnds[i], Color.cyan);
-            }
-
-            if (Input.GetKey(KeyCode.G))
-            {
-                deltaStarts.Add(_debugLastMousePosition);
-                deltaEnds.Add(inputBank.GesturePosition);
-            }
-
-            if (Input.GetKey(KeyCode.H))
-            {
-                deltaStarts.Clear();
-                deltaEnds.Clear();
-                debugstep = -1;
-            }
-
-            _debugLastMousePosition = inputBank.GesturePosition;
-        }
     }
 }

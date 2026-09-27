@@ -14,11 +14,6 @@ namespace SpellCasting
             return default;
         }
 
-        protected override Vector3 GetGesturePosition()
-        {
-            return default;
-        }
-
         protected override Vector3 GetMovementInput()
         {
             return default;

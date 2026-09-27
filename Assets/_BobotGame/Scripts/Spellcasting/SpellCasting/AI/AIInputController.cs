@@ -77,26 +77,6 @@ namespace SpellCasting
             return lerpedPosition;
         }
 
-        protected override Vector3 GetGesturePosition()
-        {
-            Vector3 gesture = default;
-            if(OverrideGesturePosition != Vector3.zero)
-            {
-                //todo bobot restore gestures if needed
-                //float timeSinceLastDeltaTIme = Time.time - _lastFixedTime;
-
-                //Vector3 lerpedPosition = Vector3.Lerp(_lastOverrideGesturePosition, OverrideGesturePosition, timeSinceLastDeltaTIme / Time.fixedDeltaTime);
-
-                //gesture = lerpedPosition;
-            } 
-            else
-            {
-                //gesture = transform.TransformPoint(GetAimPosition());
-            }
-
-            return new Vector3(gesture.x, gesture.z, 0) * gestureSpeedMultiplier;
-        }
-
         protected override Vector3 GetMovementInput()
         {
             return forwardDirectionTransform.InverseTransformDirection(MoveDirection);
