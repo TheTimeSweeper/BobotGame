@@ -76,6 +76,9 @@ namespace SpellCasting
 
         public void InputSkill(InputState inputState)
         {
+            if(skillInfo == null) 
+                return;
+            
             if((!skillInfo.justPress && inputState.Down) || (skillInfo.justPress && inputState.JustPressed(this)))
             {
                 bufferedState = inputState;

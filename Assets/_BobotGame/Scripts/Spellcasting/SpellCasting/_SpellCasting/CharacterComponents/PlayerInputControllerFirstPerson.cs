@@ -4,6 +4,7 @@ namespace SpellCasting
 {
     public class PlayerInputControllerFirstPerson : InputController
     {
+        public static bool TEMP_xLock;
         [SerializeField]
         private CameraController cameraController;
 
@@ -13,12 +14,15 @@ namespace SpellCasting
         protected override Vector3 GetAimPosition()
         {
             //todo bobot lol
-            cameraController.CameraX.Rotate(Vector3.up, GetXAimAxis(), Space.Self);
-            cameraController.CameraY.Rotate(Vector3.right, GetYAimAxis(), Space.Self);
-            if (Physics.Raycast(cameraController.CameraPoint.position, cameraController.CameraPoint.forward, out var raycastHit, maxInputRange, LayerInfo.Hurtbox.layerMask.value))
+            if (!TEMP_xLock)
             {
-                return raycastHit.point;
+                cameraController.CameraX.Rotate(Vector3.up, GetXAimAxis(), Space.Self);
             }
+            cameraController.CameraY.Rotate(Vector3.right, GetYAimAxis(), Space.Self);
+            //if (Physics.Raycast(cameraController.CameraPoint.position, cameraController.CameraPoint.forward, out var raycastHit, maxInputRange, LayerInfo.Hurtbox.layerMask.value))
+            //{
+            //    return raycastHit.point;
+            //}
             Vector3 defaultPoint = cameraController.CameraPoint.position + (cameraController.CameraPoint.forward * maxInputRange);
             return defaultPoint;
         }

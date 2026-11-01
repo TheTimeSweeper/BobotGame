@@ -70,11 +70,11 @@ namespace SpellCasting
         public InputState Ability = new InputState();
         public InputState E = new InputState();
         /// <summary>
-        /// direction relative to forward transform (usually model)
+        /// move direction relative to forward transform (usually model)
         /// </summary>
         public Vector3 LocalMoveDirection { get; set; }
         /// <summary>
-        /// direction relative to aimorigin
+        /// move direction relative to aimorigin
         /// </summary>
         public Vector3 AimMoveDirection { get; set; }
         /// <summary>
