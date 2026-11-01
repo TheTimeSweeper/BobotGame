@@ -40,4 +40,14 @@ public class BobotGameDevStateInfo : ActiveStateInfo
     [Header("Deadlift grapple")]
     public ProjectileController Grap_Prefab;
     public float Grap_Speed;
+
+    [Header("ShieldGuyTober")]
+    public GenericTimedState.TimedStateParams SGT_primary_time;
+    public BasicMeleeAttack.BasicMeleeParams SGT_primary_melee;
+
+    public GenericTimedState.TimedStateParams SGT_Parry_time;
+    public BasicMeleeAttack.BasicMeleeParams SGT_Parry_melee;
+    public float SGT_ParryWindow;
+    public VariableNumberStat SGT_ParryDamage;
+    public float SGT_ParryStun;
 }

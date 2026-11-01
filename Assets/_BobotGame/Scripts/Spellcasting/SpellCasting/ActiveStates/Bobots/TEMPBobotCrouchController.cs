@@ -6,5 +6,6 @@ namespace ActiveStates.Bobots
     {
         public bool isCrouched;
         public bool isBlocking;
+        public bool blockingbothupperandlower;
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace ActiveStates.Characters
 {
+
     //todo bobot skilldefbehaviors
     public abstract class GenericMeleeCombo : BasicMeleeAttack, IComboState
     {

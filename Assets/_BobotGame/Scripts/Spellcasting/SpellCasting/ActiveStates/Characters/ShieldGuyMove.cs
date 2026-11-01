@@ -11,7 +11,9 @@ namespace ActiveStates.Characters
             base.OnFixedUpdate();
             
             Vector3 localMoveDirection = inputBank.LocalMoveDirection;
-            
+
+            gameObject.GetComponent<TEMPBobotCrouchController>().blockingbothupperandlower = true;
+
             if (inputBank.Block.Down)
             {
                 PlayerInputControllerFirstPerson.TEMP_xLock = false;

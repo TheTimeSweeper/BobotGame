@@ -12,5 +12,13 @@ namespace SpellCasting
         public Vector3 Knockback;
         public int elevation;
         public bool wasBlocked;
+
+        public DamagingData(CharacterBody attackerBody_, float damage_, float stun_)
+        {
+            AttackerBody = attackerBody_;
+            AttackerObject = attackerBody_.gameObject;
+            DamageValue = damage_;
+            StunTime = stun_;
+        }
     }
 }

@@ -34,7 +34,7 @@ namespace SpellCasting
                 else
                 {
                     //both bots are at the same elevation, block
-                    if (attackerCrouched.Value == victimCrouchController.isCrouched)
+                    if (attackerCrouched.Value == victimCrouchController.isCrouched || victimCrouchController.blockingbothupperandlower)
                     {
                         shouldBlock = true;
                     }
